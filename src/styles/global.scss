@@ -13,6 +13,15 @@ html, body {
   --text: #{$primary-dark};
   --border: #{rgba($primary-dark, 0.08)};
   --accent: #{$primary};
+
+  /* Media kit global tokens — available to Teleport'd elements */
+  --mk-red: #c8392b;
+  --mk-red-dark: #8a1f14;
+  --mk-gold: #c9a84c;
+  --mk-cream: #f5f2ed;
+  --mk-black: #080808;
+  --mk-dim: rgba(245,242,237,0.6);
+  --mk-dimmer: rgba(245,242,237,0.38);
 }
 
 [data-theme='dark'] {

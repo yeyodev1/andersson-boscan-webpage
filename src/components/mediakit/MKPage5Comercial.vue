@@ -236,6 +236,42 @@ onMounted(() => {
     line-height: 1.4;
   }
 
+  &__cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 28px;
+    background: var(--mk-red);
+    border: 2px solid var(--mk-red);
+    border-radius: 4px;
+    color: var(--mk-cream);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.25s;
+    margin-top: 16px;
+
+    &:hover {
+      background: transparent;
+      color: var(--mk-red);
+      transform: translateY(-2px);
+    }
+
+    &--gold {
+      background: transparent;
+      border-color: var(--mk-gold);
+      color: var(--mk-gold);
+
+      &:hover {
+        background: rgba(201,168,76,0.1);
+        transform: translateY(-2px);
+      }
+    }
+  }
+
   &__reach,
   &__cupos,
   &__spotify-foot {

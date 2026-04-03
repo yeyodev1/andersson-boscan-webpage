@@ -71,7 +71,7 @@ const pages = [
 function scrollTo(index: number) {
   const sections = document.querySelectorAll('.mk-section')
   if (sections[index]) {
-    gsap.to(window, { duration: 1, scrollTo: sections[index], ease: 'power3.inOut' })
+    gsap.to(window, { duration: 0.75, scrollTo: { y: sections[index], offsetY: 64 }, ease: 'power2.inOut' })
   }
 }
 

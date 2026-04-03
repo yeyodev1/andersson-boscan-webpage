@@ -278,5 +278,39 @@ onMounted(() => {
     font-size: 12px;
     color: var(--mk-dimmer);
   }
+
+  &__cta-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 32px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(245,242,237,0.08);
+  }
+
+  &__cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 32px;
+    background: var(--mk-red);
+    border: 2px solid var(--mk-red);
+    border-radius: 4px;
+    color: var(--mk-cream);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.25s;
+    align-self: flex-start;
+
+    &:hover {
+      background: transparent;
+      color: var(--mk-red);
+      transform: translateX(4px);
+    }
+  }
 }
 </style>

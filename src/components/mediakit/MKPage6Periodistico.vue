@@ -14,11 +14,6 @@
         <div class="p6__format p6__format--star">
           <div class="p6__format-head">
             <div class="p6__format-tag">Formato más solicitado · ~500K reproducciones</div>
-            <div class="p6__format-price-wrap">
-              <div class="p6__format-price">$3,000</div>
-              <div class="p6__format-unit">USD · única vez</div>
-              <div class="p6__format-reach">~500K reprod.</div>
-            </div>
           </div>
           <div class="p6__format-title">Diario de Boscán creado para la marca</div>
           <div class="p6__format-desc">
@@ -30,15 +25,15 @@
         <div class="p6__format" v-for="fmt in formats" :key="fmt.tag">
           <div class="p6__format-head">
             <div class="p6__format-tag">{{ fmt.tag }}</div>
-            <div class="p6__format-price-wrap">
-              <div class="p6__format-price">{{ fmt.price }}</div>
-              <div class="p6__format-unit">{{ fmt.unit }}</div>
-            </div>
           </div>
           <div class="p6__format-title">{{ fmt.title }}</div>
           <div class="p6__format-desc">{{ fmt.desc }}</div>
         </div>
       </div>
+
+      <button class="p6__cta-btn" @click="openModal">
+        <i class="fa-solid fa-arrow-right"></i> Solicitar propuesta editorial
+      </button>
     </div>
   </section>
 </template>
@@ -47,31 +42,27 @@
 import { ref, onMounted } from 'vue'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useLeadModal } from '@/composables/useLeadModal'
 
 gsap.registerPlugin(ScrollTrigger)
 
+const { openModal } = useLeadModal()
 const sectionEl = ref<HTMLElement | null>(null)
 const titleEl   = ref<HTMLElement | null>(null)
 
 const formats = [
   {
     tag: 'TikTok patrocinado · 910K seguidores',
-    price: '$2,500',
-    unit: 'por video',
     title: 'TikTok patrocinado Andersson y Moni',
     desc: 'Video original producido para TikTok con mención de marca integrada. 910K seguidores · 766K vistas/día.',
   },
   {
     tag: 'YouTube mención · X post',
-    price: '$1,200',
-    unit: 'YT · $700 X',
     title: 'Mención YouTube / Post en X',
     desc: '60–90 seg en investigación (permanente) o post en X con 404K verificado.',
   },
   {
     tag: 'Instagram · Facebook',
-    price: '$800',
-    unit: 'por post',
     title: 'Post Instagram / Facebook',
     desc: 'Publicación de marca en Instagram (13.7M vistas/sem) o Facebook (42.4M imp./año).',
   },
@@ -86,7 +77,7 @@ onMounted(() => {
   tl.from('.p6__photo', { scale: 1.1, duration: 1.4 })
     .from(titleEl.value, { y: 40, opacity: 0, duration: 0.9 }, '-=1')
     .from('.p6__format', { y: 40, opacity: 0, stagger: 0.15, duration: 0.7 }, '-=0.5')
-    .from('.p6__format-price', { y: 10, opacity: 0, stagger: 0.1, duration: 0.5 }, '-=0.4')
+    .from('.p6__cta-btn', { y: 20, opacity: 0, duration: 0.6 }, '-=0.2')
 })
 </script>
 
@@ -202,25 +193,6 @@ onMounted(() => {
     font-weight: 700;
   }
 
-  &__format-price-wrap {
-    text-align: right;
-    flex-shrink: 0;
-  }
-
-  &__format-price {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 28px;
-    color: var(--mk-cream);
-    line-height: 1;
-  }
-
-  &__format-unit,
-  &__format-reach {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 10px;
-    color: var(--mk-dimmer);
-  }
-
   &__format-title {
     font-family: 'DM Sans', sans-serif;
     font-weight: 700;
@@ -234,6 +206,31 @@ onMounted(() => {
     font-size: 13px;
     color: var(--mk-dim);
     line-height: 1.6;
+  }
+
+  &__cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 32px;
+    padding: 14px 32px;
+    background: var(--mk-red);
+    border: 2px solid var(--mk-red);
+    border-radius: 4px;
+    color: var(--mk-cream);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.25s;
+
+    &:hover {
+      background: transparent;
+      color: var(--mk-red);
+      transform: translateY(-2px);
+    }
   }
 }
 </style>

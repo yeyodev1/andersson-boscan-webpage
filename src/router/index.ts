@@ -13,6 +13,15 @@ const routes: Array<RouteRecordRaw> = [
     },
   },
   {
+    path: '/quienes-somos',
+    name: 'QuienesSomos',
+    component: () => import('../views/QuienesSomosView.vue'),
+    meta: {
+      title: `Quiénes somos — Andersson y Moni Boscán | Media Kit 2026`,
+      description: 'Conoce a Andersson Boscán y Mónica Velásquez — el equipo detrás del programa noticioso más viral de LATAM.',
+    },
+  },
+  {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
     component: () => import('../views/NotFoundView.vue'),

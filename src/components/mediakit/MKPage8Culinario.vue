@@ -235,5 +235,31 @@ onMounted(() => {
     color: rgba(200,57,43,0.7);
     font-weight: 500;
   }
+
+  &__cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 32px;
+    background: var(--mk-red);
+    border: 2px solid var(--mk-red);
+    border-radius: 4px;
+    color: var(--mk-cream);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.25s;
+    margin-top: 24px;
+
+    &:hover {
+      background: transparent;
+      color: var(--mk-red);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(200,57,43,0.25);
+    }
+  }
 }
 </style>
