@@ -22,6 +22,15 @@ const routes: Array<RouteRecordRaw> = [
     },
   },
   {
+    path: '/agendar',
+    name: 'Agendar',
+    component: () => import('../views/AgendarView.vue'),
+    meta: {
+      title: `Agenda tu llamada — Andersson y Moni Boscán | Media Kit 2026`,
+      description: 'Agenda tu llamada estratégica con el equipo de Andersson y Moni Boscán.',
+    },
+  },
+  {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
     component: () => import('../views/NotFoundView.vue'),

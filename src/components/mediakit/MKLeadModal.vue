@@ -163,11 +163,23 @@
               <div v-if="step === 3" key="s3" class="lm-body lm-success">
                 <i class="fa-solid fa-circle-check lm-success-icon"></i>
                 <h2 class="lm-title lm-title--success">¡TODO<br>LISTO!</h2>
-                <p class="lm-subtitle lm-subtitle--success">
-                  En breve alguien del equipo se pondrá en contacto contigo.<br>
-                  ¡Gracias por tu interés!
-                </p>
-                <button class="lm-btn-ghost" @click="forceClose">Cerrar</button>
+                <template v-if="!wasDisqualified">
+                  <p class="lm-subtitle lm-subtitle--success">
+                    Tu perfil califica para una llamada estratégica con Andersson.<br>
+                    ¡Agenda tu espacio ahora!
+                  </p>
+                  <button class="lm-btn-primary" @click="goToAgenda">
+                    Agenda tu llamada <i class="fa-solid fa-calendar-check"></i>
+                  </button>
+                  <button class="lm-btn-ghost lm-btn--sm" @click="forceClose">Ahora no</button>
+                </template>
+                <template v-else>
+                  <p class="lm-subtitle lm-subtitle--success">
+                    Hemos recibido tu información.<br>
+                    ¡Gracias por tu interés en nuestros servicios!
+                  </p>
+                  <button class="lm-btn-ghost" @click="forceClose">Cerrar</button>
+                </template>
               </div>
             </Transition>
 
@@ -183,17 +195,21 @@ import { ref, computed, watch } from 'vue'
 import { onMounted, onUnmounted } from 'vue'
 import axios from 'axios'
 import { gsap } from 'gsap'
+import { useRouter } from 'vue-router'
 import { useLeadModal } from '@/composables/useLeadModal'
+
+const router = useRouter()
 
 const { isOpen, closeModal } = useLeadModal()
 
-const cardEl       = ref<HTMLElement | null>(null)
-const step         = ref(1)
-const loading      = ref(false)
+const cardEl         = ref<HTMLElement | null>(null)
+const step           = ref(1)
+const loading        = ref(false)
 const sendingContact = ref(false)
-const step1Error   = ref('')
-const errorMsg     = ref('')
-const showConfirm  = ref(false)
+const step1Error     = ref('')
+const errorMsg       = ref('')
+const showConfirm    = ref(false)
+const wasDisqualified = ref(false)
 
 // ── PHONE ─────────────────────────────────────────────────────
 const countryDial  = ref('+593')
@@ -226,7 +242,12 @@ const selectedCountry = computed(() =>
   countryCodes.find(c => c.dial === countryDial.value) ?? countryCodes[0]
 )
 
-const fullPhone = computed(() => `${countryDial.value}${phoneNumber.value}`)
+const fullPhone = computed(() => {
+  // Strip leading zero from local number (international convention)
+  // Ecuador: 0995254965 + +593 → +593995254965 (not +5930995254965)
+  const local = phoneNumber.value.replace(/^0+/, '')
+  return `${countryDial.value}${local}`
+})
 
 async function detectCountry() {
   try {
@@ -238,6 +259,39 @@ async function detectCountry() {
     // keep default Ecuador
   }
 }
+
+// ── SMART PHONE PARSER ────────────────────────────────────────
+// If user types/pastes a full number like "+593 995254965" or "00593995254965",
+// auto-detect the country code, update the selector, and keep only the local number.
+function parseFullPhone(raw: string) {
+  // Normalize: remove spaces, dashes, dots, parentheses
+  let normalized = raw.replace(/[\s\-().]/g, '')
+
+  // Handle "00..." international prefix → convert to "+"
+  if (normalized.startsWith('00')) normalized = '+' + normalized.slice(2)
+
+  if (!normalized.startsWith('+')) return // not a full international number, leave as-is
+
+  // Sort dial codes longest-first to avoid "+1" matching before "+1809"
+  const sorted = [...countryCodes].sort((a, b) => b.dial.length - a.dial.length)
+  const match = sorted.find(c => normalized.startsWith(c.dial))
+
+  if (!match) return // unknown country code, leave as-is
+
+  const localRaw = normalized.slice(match.dial.length)
+  const local = localRaw.replace(/^0+/, '') // strip leading zero
+
+  countryDial.value = match.dial
+  phoneNumber.value = local
+}
+
+watch(phoneNumber, (val) => {
+  // Only attempt parse if input looks like a full international number
+  const clean = val.replace(/[\s\-().]/g, '')
+  if (clean.startsWith('+') || clean.startsWith('00')) {
+    parseFullPhone(val)
+  }
+})
 
 // ── FORM DATA ─────────────────────────────────────────────────
 const form = ref({
@@ -297,26 +351,56 @@ function forceClose() {
 }
 
 // ── SCORE ─────────────────────────────────────────────────────
-function calcScore(): { score: number; pipeline: string; tag: string } {
+// Disqualify ONLY if presupuesto = menos_500 (budget below minimum service $1,500)
+// sin_urgencia with good budget still qualifies → Nurture pipeline
+function calcScore(): { score: number; pipeline: string; tag: string; disqualified: boolean; disqualify_reason: string } {
+  const p  = form.value.presupuesto
+  const tr = form.value.tiempo_respuesta
+
+  if (p === 'menos_500') {
+    return {
+      score: 0,
+      pipeline: 'Descalificado',
+      tag: 'mk-descalificado',
+      disqualified: true,
+      disqualify_reason: 'Presupuesto menor a $500 — por debajo del mínimo de servicios ($1,500)',
+    }
+  }
+
   let score = 0
-  const p = form.value.presupuesto
-  const t = form.value.tipo_cliente
   if (p === 'mas_3000')       score += 40
   else if (p === '1500_3000') score += 30
   else if (p === '500_1500')  score += 20
-  else if (p === 'menos_500') score += 5
-  if (t === 'marca')           score += 20
-  else if (t === 'agencia')    score += 15
+  else if (p === 'menos_500') score += 10  // low budget but has urgency — still qualifies
+
+  const t = form.value.tipo_cliente
+  if (t === 'marca')            score += 20
+  else if (t === 'agencia')     score += 15
   else if (t === 'emprendedor') score += 10
-  const tr = form.value.tiempo_respuesta
+
   if (tr === 'inmediato')        score += 20
   else if (tr === '1_2_dias')    score += 15
   else if (tr === 'esta_semana') score += 10
+  // sin_urgencia = 0 pts (but not disqualified unless combined with menos_500)
+
   let pipeline = 'Nurture'
   let tag = 'mk-lead-frio'
   if (score >= 60)      { pipeline = 'Ventas Activas'; tag = 'mk-lead-caliente' }
   else if (score >= 35) { pipeline = 'Seguimiento';    tag = 'mk-lead-tibio' }
-  return { score, pipeline, tag }
+
+  return { score, pipeline, tag, disqualified: false, disqualify_reason: '' }
+}
+
+// ── NAVIGATE TO AGENDA ───────────────────────────────────────
+function goToAgenda() {
+  const params = new URLSearchParams({
+    firstName: form.value.nombre,
+    lastName:  form.value.apellido,
+    email:     form.value.correo,
+    phone:     fullPhone.value,
+  })
+  forceClose()
+  router.push(`/agendar?${params.toString()}`)
 }
 
 // ── STEP 1 → fire webhook contact ────────────────────────────
@@ -353,7 +437,8 @@ async function goToStep2() {
 async function handleSubmit() {
   errorMsg.value = ''
   loading.value = true
-  const { score, pipeline, tag } = calcScore()
+  const { score, pipeline, tag, disqualified, disqualify_reason } = calcScore()
+  wasDisqualified.value = disqualified
   const tipo = form.value.tipo_cliente === 'otro' && form.value.tipo_cliente_otro
     ? `otro: ${form.value.tipo_cliente_otro}`
     : form.value.tipo_cliente
@@ -361,19 +446,39 @@ async function handleSubmit() {
     await axios.post(
       import.meta.env.VITE_GHL_WEBHOOK_OPPORTUNITY as string,
       {
+        // ── Identificación del contacto (para buscar en GHL) ──
         firstName:            form.value.nombre,
         lastName:             form.value.apellido,
         email:                form.value.correo,
         phone:                fullPhone.value,
-        tiempo_respuesta:     form.value.tiempo_respuesta,
+
+        // ── Datos de calificación ──────────────────────────────
         tipo_cliente:         tipo,
         objetivo:             form.value.objetivo,
         presupuesto:          form.value.presupuesto,
-        source:               'Media Kit 2026 — Step 2',
-        page_url:             window.location.href,
+        tiempo_respuesta:     form.value.tiempo_respuesta,
+
+        // ── Datos de oportunidad para GHL ─────────────────────
+        opportunityName:      `${form.value.nombre} ${form.value.apellido} — Media Kit`,
+        pipelineName:         pipeline,          // "Ventas Activas" | "Seguimiento" | "Nurture"
+        pipelineStage:        pipeline === 'Ventas Activas' ? 'Nuevo Lead Caliente'
+                            : pipeline === 'Seguimiento'    ? 'Nuevo Lead Tibio'
+                            :                                 'Lead Frío',
+        opportunityStatus:    'open',
+        monetaryValue:        form.value.presupuesto === 'mas_3000'    ? 3000
+                            : form.value.presupuesto === '1500_3000'   ? 1500
+                            : form.value.presupuesto === '500_1500'    ? 500
+                            :                                             0,
+
+        // ── Tags y scoring ────────────────────────────────────
+        tags:                 [tag, 'media-kit-2026', `presupuesto-${form.value.presupuesto}`],
         qualification_score:  score,
-        pipeline,
-        tag,
+        disqualified,
+        disqualify_reason,
+
+        // ── Metadata ─────────────────────────────────────────
+        source:               'Media Kit 2026 — Andersson y Moni',
+        page_url:             window.location.href,
         timestamp:            new Date().toISOString(),
       }
     )
@@ -833,6 +938,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   align-items: center;
   gap: 8px;
   &:hover { border-color: rgba(245,242,237,0.4); color: #f5f2ed; }
+  &.lm-btn--sm { font-size: 11px; padding: 8px 16px; margin-top: 8px; }
 }
 
 .lm-btn-row {
