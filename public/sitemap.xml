@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <url>
+    <loc>https://anderssonboscan.com/</loc>
+    <lastmod>2026-04-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://anderssonboscan.com/" />
+    <image:image>
+      <image:loc>https://anderssonboscan.com/images/p1-cover.png</image:loc>
+      <image:title>Media Kit 2026 — Andersson y Moni Boscán</image:title>
+      <image:caption>Portada del Media Kit oficial de Andersson y Moni Boscán y Mónica Velásquez — EUREKA Media EC 2026</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://anderssonboscan.com/images/p2-photo.png</image:loc>
+      <image:title>Andersson y Moni Boscán — Perfil</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://anderssonboscan.com/images/p3-hero.png</image:loc>
+      <image:title>Audiencia — 88 Millones de Impresiones Mensuales</image:title>
+    </image:image>
+  </url>
+
+</urlset>
