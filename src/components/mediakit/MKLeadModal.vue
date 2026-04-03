@@ -476,6 +476,19 @@ async function handleSubmit() {
         disqualified,
         disqualify_reason,
 
+        // ── Nota resumen para el contacto en GHL ─────────────
+        lead_summary: [
+          `📋 LEAD MEDIA KIT 2026`,
+          `Tipo de cliente: ${tipo}`,
+          `Objetivo: ${form.value.objetivo || 'No especificado'}`,
+          `Presupuesto: ${form.value.presupuesto}`,
+          `Urgencia: ${form.value.tiempo_respuesta}`,
+          `Score de calificación: ${score}/100`,
+          `Estado: ${disqualified ? '❌ Descalificado — ' + disqualify_reason : '✅ Calificado — ' + pipeline}`,
+          `Fuente: Media Kit Web — ${window.location.href}`,
+          `Fecha: ${new Date().toLocaleString('es-EC', { timeZone: 'America/Guayaquil' })}`,
+        ].join('\n'),
+
         // ── Metadata ─────────────────────────────────────────
         source:               'Media Kit 2026 — Andersson y Moni',
         page_url:             window.location.href,
