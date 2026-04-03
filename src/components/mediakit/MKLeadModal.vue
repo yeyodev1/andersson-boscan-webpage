@@ -459,7 +459,7 @@ async function handleSubmit() {
         tiempo_respuesta:     form.value.tiempo_respuesta,
 
         // ── Datos de oportunidad para GHL ─────────────────────
-        opportunityName:      `${form.value.nombre} ${form.value.apellido} — Media Kit`,
+        opportunityName:      `${form.value.nombre} ${form.value.apellido} — Media Kit ${new Date().toLocaleDateString('es-EC', { day: '2-digit', month: '2-digit', year: '2-digit' })}`,
         pipelineName:         pipeline,          // "Ventas Activas" | "Seguimiento" | "Nurture"
         pipelineStage:        pipeline === 'Ventas Activas' ? 'Nuevo Lead Caliente'
                             : pipeline === 'Seguimiento'    ? 'Nuevo Lead Tibio'
