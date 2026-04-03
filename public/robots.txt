@@ -1,5 +1,5 @@
 # robots.txt — Andersson y Moni Boscán | EUREKA Media EC
-# https://anderssonboscan.com/
+# https://boscanymoni.com/
 
 User-agent: *
 Allow: /
@@ -7,7 +7,7 @@ Disallow: /api/
 Disallow: /*.json$
 
 # Sitemaps
-Sitemap: https://anderssonboscan.com/sitemap.xml
+Sitemap: https://boscanymoni.com/sitemap.xml
 
 # AI Crawlers — permitidos con contexto completo en /llms.txt
 User-agent: GPTBot

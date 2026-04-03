@@ -18,7 +18,32 @@ Copy `.env.example` to `.env` and set:
 
 ```
 VITE_API_BASE_URL=http://localhost:8100/api
+VITE_GHL_WEBHOOK_CONTACT=<GHL contact webhook URL>
+VITE_GHL_WEBHOOK_OPPORTUNITY=<GHL opportunity webhook URL>
 ```
+
+## Domains
+
+- **Primary**: `https://boscanymoni.com`
+- Aliases: `monivelasquezv.com`, `anderssonboscan.ec`, `andersson-boscan.netlify.app`
+- Always use `boscanymoni.com` as canonical in SEO files (sitemap, robots, llms.txt, og:url)
+
+## Routes
+
+| Path | View | Notes |
+|------|------|-------|
+| `/` | `MediaKitView.vue` | 10-section media kit |
+| `/quienes-somos` | `QuienesSomosView.vue` | Standalone about page |
+| `/agendar` | `AgendarView.vue` | GHL calendar embed (qualified leads only) |
+
+## GHL Integration
+
+- **Contact webhook** (`VITE_GHL_WEBHOOK_CONTACT`): fires on Step 1 of lead modal
+- **Opportunity webhook** (`VITE_GHL_WEBHOOK_OPPORTUNITY`): fires on Step 2 with full scoring payload
+- **Calendar widget ID**: `nTTnsK8xbyunduMneyc3`
+- **Booking detected via**: `postMessage` array `['msgsndr-booking-complete', {...}]`
+- **Disqualification**: only if `presupuesto === 'menos_500'`
+- **Pipeline**: "Media Kit Andersson y Moni" — stages: Nuevo Lead Caliente, Nuevo Lead Tibio, Lead Frío, Cita Agendada, Negociando, Ganado, Perdido
 
 ## Architecture
 

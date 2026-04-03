@@ -4,24 +4,40 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 
   <url>
-    <loc>https://anderssonboscan.com/</loc>
-    <lastmod>2026-04-02</lastmod>
+    <loc>https://boscanymoni.com/</loc>
+    <lastmod>2026-04-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://anderssonboscan.com/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://boscanymoni.com/" />
     <image:image>
-      <image:loc>https://anderssonboscan.com/images/p1-cover.png</image:loc>
+      <image:loc>https://boscanymoni.com/images/p1-cover.png</image:loc>
       <image:title>Media Kit 2026 — Andersson y Moni Boscán</image:title>
       <image:caption>Portada del Media Kit oficial de Andersson y Moni Boscán y Mónica Velásquez — EUREKA Media EC 2026</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://anderssonboscan.com/images/p2-photo.png</image:loc>
+      <image:loc>https://boscanymoni.com/images/p2-photo.png</image:loc>
       <image:title>Andersson y Moni Boscán — Perfil</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://anderssonboscan.com/images/p3-hero.png</image:loc>
+      <image:loc>https://boscanymoni.com/images/p3-hero.png</image:loc>
       <image:title>Audiencia — 88 Millones de Impresiones Mensuales</image:title>
     </image:image>
+  </url>
+
+  <url>
+    <loc>https://boscanymoni.com/quienes-somos</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://boscanymoni.com/quienes-somos" />
+  </url>
+
+  <url>
+    <loc>https://boscanymoni.com/agendar</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://boscanymoni.com/agendar" />
   </url>
 
 </urlset>

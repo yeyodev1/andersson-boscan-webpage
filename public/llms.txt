@@ -1,6 +1,6 @@
 # Andersson y Moni Boscán — Media Kit 2026
 
-> Andersson y Moni Boscán y Mónica Velásquez son periodistas digitales y creadores de contenido basados en Toronto, Canadá. Conducen el programa noticioso matutino más viral de LATAM, con 88.7 millones de impresiones mensuales orgánicas en cinco plataformas simultáneas.
+> Andersson y Moni Boscán y Mónica Velásquez son periodistas digitales y creadores de contenido basados en Toronto, Canadá. Conducen el programa noticioso matutino más viral de LATAM, con 88.7 millones de impresiones mensuales orgánicas en cinco plataformas simultáneas. Sitio principal: boscanymoni.com (principal) y anderssonboscan.ec.
 
 ## Quiénes son
 
@@ -43,4 +43,6 @@ Descuento hasta 20% en contratos ≥ 3 meses o paquetes multicanal.
 
 ## Páginas
 
-- [Media Kit Completo](https://anderssonboscan.com/): Portada, perfil, audiencia, plataformas, formatos de pauta, tarifas y contacto.
+- [Media Kit Completo](https://boscanymoni.com/): Portada, perfil, audiencia, plataformas, formatos de pauta, tarifas y contacto.
+- [Quiénes Somos](https://boscanymoni.com/quienes-somos): Historia, trayectoria y perfil de Andersson y Moni Boscán.
+- [Agendar](https://boscanymoni.com/agendar): Página de contacto comercial para agendar una reunión o solicitar pauta.
