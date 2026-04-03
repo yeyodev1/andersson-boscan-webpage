@@ -10,6 +10,11 @@
       </h2>
       <div class="p10__rule" ref="ruleEl"></div>
 
+      <button class="p10__cta-btn" @click="openModal">
+        <i class="fa-solid fa-rocket"></i>
+        Comenzar mi campaña ahora
+      </button>
+
       <div class="p10__emails" ref="emailsEl">
         <div class="p10__email-row" v-for="contact in contacts" :key="contact.who">
           <div class="p10__email-who"><i class="fa-solid fa-user"></i> {{ contact.who }}</div>
@@ -41,9 +46,12 @@
 import { ref, onMounted } from 'vue'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
+import { useLeadModal } from '@/composables/useLeadModal'
 
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
 
+const { openModal } = useLeadModal()
 const sectionEl = ref<HTMLElement | null>(null)
 const bgEl      = ref<HTMLElement | null>(null)
 const labelEl   = ref<HTMLElement | null>(null)
@@ -77,6 +85,7 @@ onMounted(() => {
   tl.from(labelEl.value, { y: 20, opacity: 0, duration: 0.6 })
     .from(titleEl.value, { y: 60, opacity: 0, duration: 1, ease: 'power4.out' }, '-=0.3')
     .from(ruleEl.value, { scaleX: 0, transformOrigin: 'left', duration: 0.9 }, '-=0.5')
+    .from('.p10__cta-btn', { y: 30, opacity: 0, duration: 0.8 }, '-=0.3')
     .from('.p10__email-row', { y: 30, opacity: 0, stagger: 0.15, duration: 0.7 }, '-=0.5')
     .from(subEl.value, { y: 15, opacity: 0, duration: 0.6 }, '-=0.3')
     .from(brandEl.value, { opacity: 0, duration: 0.8 }, '-=0.2')
@@ -147,6 +156,32 @@ onMounted(() => {
     height: 3px;
     background: linear-gradient(to right, transparent, var(--mk-red), transparent);
     margin-bottom: 48px;
+  }
+
+  &__cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 20px 48px;
+    background: var(--mk-red);
+    border: 2px solid var(--mk-red);
+    border-radius: 4px;
+    color: var(--mk-cream);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(18px, 2.5vw, 26px);
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 48px;
+
+    i { font-size: 0.85em; }
+
+    &:hover {
+      background: transparent;
+      color: var(--mk-red);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(200,57,43,0.4);
+    }
   }
 
   &__emails {

@@ -28,6 +28,31 @@
           · Mejor contenido noticioso · TikTok Awards Latam
         </div>
       </div>
+
+      <div class="p2__social-section" ref="socialEl">
+        <div class="p2__social-intro">Las redes hablan por ellos.</div>
+        <div class="p2__social-cards">
+          <div class="p2__social-person">
+            <div class="p2__social-name">Andersson Boscán</div>
+            <div class="p2__social-links">
+              <a href="https://www.instagram.com/anderssonboscan/?hl=es" target="_blank" rel="noopener" class="p2__social-link p2__social-link--ig">
+                <i class="fa-brands fa-instagram"></i><span>@anderssonboscan</span>
+              </a>
+              <a href="https://www.youtube.com/@anderssonboscan" target="_blank" rel="noopener" class="p2__social-link p2__social-link--yt">
+                <i class="fa-brands fa-youtube"></i><span>@anderssonboscan</span>
+              </a>
+            </div>
+          </div>
+          <div class="p2__social-person">
+            <div class="p2__social-name">Moni Velásquez</div>
+            <div class="p2__social-links">
+              <a href="https://www.instagram.com/monivelasquezv/" target="_blank" rel="noopener" class="p2__social-link p2__social-link--ig">
+                <i class="fa-brands fa-instagram"></i><span>@monivelasquezv</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 </template>
@@ -44,6 +69,7 @@ const photoColEl = ref<HTMLElement | null>(null)
 const labelEl    = ref<HTMLElement | null>(null)
 const titleEl    = ref<HTMLElement | null>(null)
 const awardsEl   = ref<HTMLElement | null>(null)
+const socialEl   = ref<HTMLElement | null>(null)
 
 const stats = [
   {
@@ -78,6 +104,7 @@ onMounted(() => {
     .from(titleEl.value, { y: 50, opacity: 0, duration: 0.9 }, '-=0.5')
     .from('.p2__stat', { y: 30, opacity: 0, stagger: 0.15, duration: 0.7 }, '-=0.5')
     .from(awardsEl.value, { y: 20, opacity: 0, duration: 0.6 }, '-=0.3')
+    .from(socialEl.value, { y: 20, opacity: 0, duration: 0.6 }, '-=0.2')
 })
 </script>
 
@@ -215,6 +242,77 @@ onMounted(() => {
     font-size: 13px;
     color: var(--mk-dimmer);
     line-height: 1.7;
+  }
+
+  &__social-section {
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(245,242,237,0.08);
+  }
+
+  &__social-intro {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(14px, 1.6vw, 17px);
+    color: var(--mk-dim);
+    margin-bottom: 18px;
+  }
+
+  &__social-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__social-person {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__social-name {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--mk-dimmer);
+  }
+
+  &__social-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  &__social-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 14px;
+    border-radius: 100px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    border: 1px solid;
+
+    i { font-size: 13px; }
+
+    &--ig {
+      color: #e1306c;
+      border-color: rgba(225,48,108,0.3);
+      background: rgba(225,48,108,0.05);
+      &:hover { background: rgba(225,48,108,0.14); border-color: #e1306c; transform: translateY(-2px); }
+    }
+
+    &--yt {
+      color: #ff4444;
+      border-color: rgba(255,68,68,0.3);
+      background: rgba(255,68,68,0.05);
+      &:hover { background: rgba(255,68,68,0.14); border-color: #ff4444; transform: translateY(-2px); }
+    }
   }
 }
 </style>

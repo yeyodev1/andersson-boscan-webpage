@@ -19,10 +19,9 @@
           <li>Reporte mensual de alcance e impresiones</li>
           <li>Solo 5 marcas simultáneas · exclusividad de categoría</li>
         </ul>
-        <div class="p5__price-box">
-          <div class="p5__price">$3,000</div>
-          <div class="p5__price-unit">USD / mes · mínimo 6 meses</div>
-        </div>
+        <button class="p5__cta-btn" @click="openModal">
+          <i class="fa-solid fa-arrow-right"></i> Solicitar propuesta
+        </button>
         <div class="p5__reach">~10M impresiones estimadas por mes</div>
         <div class="p5__cupos"><i class="fa-solid fa-triangle-exclamation"></i> Solo quedan 5 cupos disponibles</div>
       </div>
@@ -42,10 +41,9 @@
           <li>Sin competencia — eres el único auspiciante del mes</li>
           <li>+5,341 nuevos seguidores en 90 días — canal en explosión</li>
         </ul>
-        <div class="p5__price-box p5__price-box--gold">
-          <div class="p5__price p5__price--gold">$1,200</div>
-          <div class="p5__price-unit">USD / mes</div>
-        </div>
+        <button class="p5__cta-btn p5__cta-btn--gold" @click="openModal">
+          <i class="fa-solid fa-arrow-right"></i> Solicitar propuesta
+        </button>
         <div class="p5__spotify-foot">85K reproducciones mensuales verificadas</div>
       </div>
     </div>
@@ -56,8 +54,11 @@
 import { ref, onMounted } from 'vue'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useLeadModal } from '@/composables/useLeadModal'
 
 gsap.registerPlugin(ScrollTrigger)
+
+const { openModal } = useLeadModal()
 
 const sectionEl   = ref<HTMLElement | null>(null)
 const bgEl        = ref<HTMLElement | null>(null)
@@ -85,7 +86,7 @@ onMounted(() => {
   tl.from(iaColEl.value, { x: -50, opacity: 0, duration: 1 })
     .from(separatorEl.value, { scaleY: 0, transformOrigin: 'top', duration: 0.8 }, '-=0.5')
     .from(spotifyColEl.value, { x: 50, opacity: 0, duration: 1 }, '-=0.7')
-    .from('.p5__price-box', { scale: 0.9, opacity: 0, stagger: 0.15, duration: 0.6 }, '-=0.5')
+    .from('.p5__cta-btn', { y: 20, opacity: 0, stagger: 0.15, duration: 0.6 }, '-=0.5')
     .from('.p5__badge', { y: -10, opacity: 0, stagger: 0.1, duration: 0.5 }, 0.2)
 })
 </script>

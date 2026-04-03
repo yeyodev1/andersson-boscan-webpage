@@ -40,3 +40,14 @@ Vue 3 + TypeScript SPA using Composition API, Pinia, Vue Router 4, and Axios. Pa
 2. Add a Pinia store in `src/stores/` if state is needed
 3. Add views in `src/views/` and register routes in `src/router/index.ts` with `meta: { requiresAuth: true }` for protected routes
 4. Define shared types in `src/types/index.ts`
+
+# CLAUDE.md - Token Efficient Rules
+
+1. Think before acting. Read existing files before writing code.
+2. Be concise in output but thorough in reasoning.
+3. Prefer editing over rewriting whole files.
+4. Do not re-read files you have already read unless the file may have changed.
+5. Test your code before declaring done.
+6. No sycophantic openers or closing fluff.
+7. Keep solutions simple and direct.
+8. User instructions always override this file.

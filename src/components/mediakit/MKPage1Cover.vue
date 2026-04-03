@@ -11,6 +11,17 @@
       </h1>
       <p class="p1__tagline" ref="taglineEl">"Cuento historias que otros no." — Andersson y Moni Boscán</p>
 
+      <div class="p1__ctas" ref="ctasEl">
+        <button class="p1__cta p1__cta--ghost" @click="scrollToSection('perfil')">
+          <i class="fa-solid fa-users"></i>
+          Quiero saber quiénes son
+        </button>
+        <button class="p1__cta p1__cta--solid" @click="scrollToSection('form')">
+          <i class="fa-solid fa-handshake"></i>
+          Quiero publicidad con ustedes
+        </button>
+      </div>
+
       <div class="p1__stats">
         <div class="p1__stat" v-for="(stat, i) in stats" :key="stat.label" :class="{ 'p1__stat--last': i === stats.length - 1 }">
           <div class="p1__stat-icon-wrap">
@@ -43,17 +54,27 @@
 import { ref, onMounted } from 'vue'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
+import { useLeadModal } from '@/composables/useLeadModal'
 
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
 
+const { openModal } = useLeadModal()
 const sectionEl = ref<HTMLElement | null>(null)
 const bgEl = ref<HTMLElement | null>(null)
 const ruleEl = ref<HTMLElement | null>(null)
 const eyebrowEl = ref<HTMLElement | null>(null)
 const titleEl = ref<HTMLElement | null>(null)
 const taglineEl = ref<HTMLElement | null>(null)
+const ctasEl = ref<HTMLElement | null>(null)
 const footEl = ref<HTMLElement | null>(null)
 const scrollHintEl = ref<HTMLElement | null>(null)
+
+function scrollToSection(target: 'perfil' | 'form') {
+  if (target === 'form') { openModal(); return }
+  const el = document.querySelector('.p2')
+  if (el) gsap.to(window, { duration: 1, scrollTo: el, ease: 'power3.inOut' })
+}
 
 const stats = [
   { number: '88.7M', label: 'Alcance mensual',   icon: 'fa-solid fa-globe' },
@@ -71,6 +92,7 @@ onMounted(() => {
     .from(eyebrowEl.value, { y: 20, opacity: 0, duration: 0.6 }, '-=0.6')
     .from(titleEl.value, { y: 60, opacity: 0, duration: 1, ease: 'power4.out' }, '-=0.3')
     .from(taglineEl.value, { y: 20, opacity: 0, duration: 0.7 }, '-=0.5')
+    .from(ctasEl.value, { y: 20, opacity: 0, duration: 0.7 }, '-=0.3')
     .from('.p1__stat', { y: 30, opacity: 0, stagger: 0.1, duration: 0.6 }, '-=0.4')
     .from(footEl.value, { y: 20, opacity: 0, duration: 0.6 }, '-=0.3')
     .from(scrollHintEl.value, { opacity: 0, duration: 0.8 }, '-=0.2')
@@ -319,6 +341,57 @@ onMounted(() => {
     width: 1px;
     height: 60px;
     background: linear-gradient(to bottom, var(--mk-red), transparent);
+  }
+
+  // ── CTAs ─────────────────────────────────────────────────────
+  &__ctas {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+
+  &__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    border-radius: 4px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    i { font-size: 13px; }
+
+    &--ghost {
+      background: transparent;
+      border: 1px solid rgba(245,242,237,0.35);
+      color: var(--mk-cream);
+
+      &:hover {
+        border-color: var(--mk-gold);
+        color: var(--mk-gold);
+        background: rgba(201,168,76,0.07);
+        transform: translateY(-2px);
+      }
+    }
+
+    &--solid {
+      background: var(--mk-red);
+      border: 1px solid var(--mk-red);
+      color: var(--mk-cream);
+
+      &:hover {
+        background: #a82d22;
+        border-color: #a82d22;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(200,57,43,0.35);
+      }
+    }
   }
 }
 </style>

@@ -1,5 +1,7 @@
 <template>
   <div class="mk-root">
+    <MKHeader :active-section="activeSection" />
+
     <!-- Navigation dots -->
     <nav class="mk-nav" aria-label="Secciones">
       <button
@@ -22,8 +24,10 @@
     <MKPage6Periodistico ref="s5" />
     <MKPage7Pymes   ref="s6" />
     <MKPage8Culinario ref="s7" />
-    <MKPage9Tarifas ref="s8" />
+    <MKPage9Form    ref="s8" />
     <MKPage10CTA    ref="s9" />
+    <MKFooter />
+    <MKLeadModal />
   </div>
 </template>
 
@@ -41,8 +45,11 @@ import MKPage5Comercial from '@/components/mediakit/MKPage5Comercial.vue'
 import MKPage6Periodistico from '@/components/mediakit/MKPage6Periodistico.vue'
 import MKPage7Pymes from '@/components/mediakit/MKPage7Pymes.vue'
 import MKPage8Culinario from '@/components/mediakit/MKPage8Culinario.vue'
-import MKPage9Tarifas from '@/components/mediakit/MKPage9Tarifas.vue'
+import MKPage9Form from '@/components/mediakit/MKPage9Form.vue'
 import MKPage10CTA from '@/components/mediakit/MKPage10CTA.vue'
+import MKHeader from '@/components/mediakit/MKHeader.vue'
+import MKFooter from '@/components/mediakit/MKFooter.vue'
+import MKLeadModal from '@/components/mediakit/MKLeadModal.vue'
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
 
@@ -57,7 +64,7 @@ const pages = [
   { label: 'Periodístico' },
   { label: 'PYMEs' },
   { label: 'Culinario' },
-  { label: 'Tarifas' },
+  { label: 'Publicidad' },
   { label: 'Contacto' },
 ]
 
@@ -99,6 +106,7 @@ onUnmounted(() => {
   background: #080808;
   color: #f5f2ed;
   min-height: 100vh;
+  padding-top: 0; /* header is fixed/overlay on hero */
   --mk-red: #c8392b;
   --mk-red-dark: #8a1f14;
   --mk-gold: #c9a84c;

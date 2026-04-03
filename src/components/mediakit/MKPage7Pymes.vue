@@ -27,15 +27,11 @@
         </div>
       </div>
 
-      <div class="p7__price-wrap" ref="priceWrapEl">
-        <div class="p7__price-bar">
-          <div class="p7__price-n">$1,500</div>
-          <div class="p7__price-txt">
-            <div class="p7__price-unit">USD · Reel + automatización incluida</div>
-            <div class="p7__price-label">Para PYMEs · Leads directos a WhatsApp</div>
-          </div>
-        </div>
-        <div class="p7__reach">~200K reproducciones estimadas · CPL $3–$8 vs $15–$45 Meta Ads</div>
+      <div class="p7__cta-wrap" ref="priceWrapEl">
+        <div class="p7__reach">~200K reproducciones estimadas · CPL significativamente menor vs Meta Ads</div>
+        <button class="p7__cta-btn" @click="openModal">
+          <i class="fa-solid fa-arrow-right"></i> Consultar disponibilidad
+        </button>
       </div>
     </div>
   </section>
@@ -43,6 +39,8 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
+import { useLeadModal } from '@/composables/useLeadModal'
+const { openModal } = useLeadModal()
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 

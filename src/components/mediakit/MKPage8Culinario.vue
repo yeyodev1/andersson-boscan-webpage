@@ -16,16 +16,16 @@
 
       <div class="p8__right" ref="rightEl">
         <div class="p8__option" v-for="opt in options" :key="opt.label" :class="{ 'p8__option--gold': opt.gold }">
+
           <div class="p8__opt-label" :style="opt.gold ? { color: 'var(--mk-gold)' } : {}">{{ opt.label }}</div>
           <div class="p8__opt-row">
             <div class="p8__opt-desc">{{ opt.desc }}</div>
-            <div class="p8__opt-pricing">
-              <div class="p8__opt-price" :class="{ 'p8__opt-price--gold': opt.gold }">{{ opt.price }}</div>
-              <div class="p8__opt-unit">{{ opt.unit }}</div>
-            </div>
           </div>
           <div class="p8__opt-reach">{{ opt.reach }}</div>
         </div>
+        <button class="p8__cta-btn" @click="openModal">
+          <i class="fa-solid fa-arrow-right"></i> Me interesa este formato
+        </button>
       </div>
     </div>
   </section>
@@ -35,9 +35,11 @@
 import { ref, onMounted } from 'vue'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useLeadModal } from '@/composables/useLeadModal'
 
 gsap.registerPlugin(ScrollTrigger)
 
+const { openModal } = useLeadModal()
 const sectionEl = ref<HTMLElement | null>(null)
 const bgEl      = ref<HTMLElement | null>(null)
 const leftEl    = ref<HTMLElement | null>(null)
@@ -46,16 +48,12 @@ const options = [
   {
     label: 'Opción A · Video único',
     desc: '1 video al mes con mención de marca. Publicado en ambos canales YT + TikTok.',
-    price: '$2,000',
-    unit: 'USD / mes',
     reach: '+1M reproducciones totales promedio por video',
     gold: false,
   },
   {
     label: 'Opción B · Paquete mensual · Mínimo 6 meses',
     desc: '2 videos al mes con mención de marca. Mayor exposición y presencia continua.',
-    price: '$2,000',
-    unit: 'USD / mes · 2 videos',
     reach: '+2M reproducciones totales promedio al mes',
     gold: true,
   },
