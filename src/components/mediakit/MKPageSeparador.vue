@@ -31,6 +31,11 @@
         y contenido culinario en ambos canales.
         Todo desde <strong>88.7 millones</strong> de alcance mensual.
       </p>
+
+      <button class="mk-sep__cta" ref="ctaEl" @click="openModal">
+        <i class="fa-solid fa-rocket"></i>
+        Quiero publicidad con ustedes
+      </button>
     </div>
 
     <!-- Bottom ticker (reverse) -->
@@ -48,13 +53,17 @@
 import { ref, onMounted } from 'vue'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useLeadModal } from '@/composables/useLeadModal'
 
 gsap.registerPlugin(ScrollTrigger)
+
+const { openModal } = useLeadModal()
 
 const sepEl  = ref<HTMLElement | null>(null)
 const titleEl = ref<HTMLElement | null>(null)
 const tagsEl  = ref<HTMLElement | null>(null)
 const bodyEl  = ref<HTMLElement | null>(null)
+const ctaEl   = ref<HTMLElement | null>(null)
 
 const tags = [
   { text: 'Periodismo Viral',    icon: 'fa-solid fa-newspaper',  mod: '' },
@@ -68,7 +77,7 @@ onMounted(() => {
   const words = Array.from(titleEl.value?.querySelectorAll('.mk-sep__word') ?? [])
   const tagEls = Array.from(tagsEl.value?.querySelectorAll('.mk-sep__tag') ?? [])
 
-  gsap.set([...words, ...tagEls, bodyEl.value].filter(Boolean), { autoAlpha: 0, y: 30 })
+  gsap.set([...words, ...tagEls, bodyEl.value, ctaEl.value].filter(Boolean), { autoAlpha: 0, y: 30 })
 
   ScrollTrigger.create({
     trigger: sepEl.value,
@@ -85,6 +94,9 @@ onMounted(() => {
       })
       gsap.to(bodyEl.value, {
         autoAlpha: 1, y: 0, duration: 0.6, ease: 'power2.out', delay: 0.7,
+      })
+      gsap.to(ctaEl.value, {
+        autoAlpha: 1, y: 0, duration: 0.6, ease: 'power2.out', delay: 0.95,
       })
     },
   })
@@ -213,12 +225,38 @@ onMounted(() => {
   line-height: 1.75;
   color: rgba(245, 242, 237, 0.55);
   max-width: 480px;
-  margin: 0 auto;
+  margin: 0 auto 32px;
   visibility: hidden; /* controlled by GSAP */
 
   strong {
     color: var(--mk-cream, #f5f2ed);
     font-weight: 600;
+  }
+}
+
+.mk-sep__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 36px;
+  background: var(--mk-red, #c8392b);
+  border: 2px solid var(--mk-red, #c8392b);
+  border-radius: 4px;
+  color: var(--mk-cream, #f5f2ed);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: background 0.25s, color 0.25s, transform 0.25s;
+  visibility: hidden; /* controlled by GSAP */
+
+  i { font-size: 0.9em; }
+
+  &:hover {
+    background: transparent;
+    color: var(--mk-red, #c8392b);
+    transform: translateY(-2px);
   }
 }
 </style>
