@@ -15,10 +15,10 @@
           <div class="p6__format-head">
             <div class="p6__format-tag">Formato más solicitado · ~500K reproducciones</div>
           </div>
-          <div class="p6__format-title">Diario de Boscán creado para la marca</div>
+          <div class="p6__format-title">Diario de Boscán para la Marca</div>
           <div class="p6__format-desc">
-            Andersson y Moni construye un relato periodístico real donde tu marca aparece de forma sutil
-            y orgánica. No parece publicidad — porque no lo es.
+            El viral diario intro de Andersson relata una historia donde tu marca aparece de forma sutil.
+            No parece publicidad — porque no lo es.
           </div>
         </div>
 
@@ -52,19 +52,19 @@ const titleEl   = ref<HTMLElement | null>(null)
 
 const formats = [
   {
-    tag: 'TikTok patrocinado · 910K seguidores',
-    title: 'TikTok patrocinado Andersson y Moni',
-    desc: 'Video original producido para TikTok con mención de marca integrada. 910K seguidores · 766K vistas/día.',
+    tag: 'TikTok patrocinado · 926K seguidores',
+    title: 'TikTok Patrocinado',
+    desc: 'Video 30–90 seg. Audiencia 18–35 años. Mayor viralidad de todo el portafolio. Guion desarrollado por nuestro equipo y aprobado por el tuyo.',
   },
   {
-    tag: 'YouTube mención · X post',
-    title: 'Mención YouTube / Post en X',
-    desc: '60–90 seg en investigación (permanente) o post en X con 404K verificado.',
+    tag: 'YouTube · Video Dedicado',
+    title: 'Video Dedicado YouTube',
+    desc: 'Video completo en el que explicamos algo a la audiencia, alineado a los valores de la marca.',
   },
   {
-    tag: 'Instagram · Facebook',
-    title: 'Post Instagram / Facebook',
-    desc: 'Publicación de marca en Instagram (13.7M vistas/sem) o Facebook (42.4M imp./año).',
+    tag: 'Instagram · Facebook · X',
+    title: 'Mención Stories',
+    desc: 'Recomendamos tu producto o servicio si se ajusta a nuestra audiencia. Orgánico, creíble y directo.',
   },
 ]
 
@@ -196,14 +196,14 @@ onMounted(() => {
   &__format-title {
     font-family: 'DM Sans', sans-serif;
     font-weight: 700;
-    font-size: 15px;
+    font-size: 17px;
     color: var(--mk-cream);
     margin-bottom: 6px;
   }
 
   &__format-desc {
     font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
+    font-size: 15px;
     color: var(--mk-dim);
     line-height: 1.6;
   }

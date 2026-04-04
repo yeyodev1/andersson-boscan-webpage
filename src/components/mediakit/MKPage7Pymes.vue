@@ -9,9 +9,9 @@
       <div class="p7__label">Para PYMEs · Resultado medible</div>
       <h2 class="p7__title" ref="titleEl">PUBLICIDAD REAL<br>LEADS REALES</h2>
       <p class="p7__body">
-        El único formato donde el cliente recibe contactos directos — no impresiones. Andersson y Moni
-        menciona tu negocio a la mitad de un Reel y la audiencia se convierte en clientes potenciales
-        automáticamente.
+        El único formato donde el cliente recibe contactos directos — no impresiones.
+        Andersson y Moni menciona tu marca en el Reel y pide comentar una palabra clave.
+        El comentario activa la automatización: cada persona recibe al instante un DM con el link de tu negocio.
       </p>
 
       <div class="p7__flow" ref="flowEl">
@@ -28,7 +28,7 @@
       </div>
 
       <div class="p7__cta-wrap" ref="priceWrapEl">
-        <div class="p7__reach">~200K reproducciones estimadas · CPL significativamente menor vs Meta Ads</div>
+        <div class="p7__reach">100K+ reproducciones · 200–500 leads directos · CPL de $3–$8 vs $15–$45 de Meta Ads</div>
         <button class="p7__cta-btn" @click="openModal">
           <i class="fa-solid fa-arrow-right"></i> Consultar disponibilidad
         </button>
@@ -56,19 +56,25 @@ const steps = [
     n: '01',
     icon: 'fa-brands fa-instagram',
     title: 'Andersson y Moni menciona tu marca en el Reel',
-    sub: 'A la mitad del video pide comentar una palabra clave específica de tu campaña.',
+    sub: 'Pide a la audiencia comentar una palabra clave específica de tu campaña.',
   },
   {
     n: '02',
     icon: 'fa-solid fa-bolt',
     title: 'El comentario activa la automatización',
-    sub: 'Cada persona que comenta la palabra recibe al instante un mensaje directo automático.',
+    sub: 'Cada persona que comenta recibe al instante un DM automático con el link de tu negocio o WhatsApp.',
   },
   {
     n: '03',
     icon: 'fa-brands fa-whatsapp',
-    title: 'El lead llega a tu WhatsApp o sitio web',
-    sub: 'El DM automático contiene el link de tu negocio. Tú recibes el contacto calificado.',
+    title: 'El lead llega directo a tu WhatsApp o sitio web',
+    sub: 'Sin fricción. Tú recibes el contacto calificado — sin intermediarios.',
+  },
+  {
+    n: '04',
+    icon: 'fa-solid fa-chart-bar',
+    title: '200–500 leads directos por campaña',
+    sub: 'CPL de $3–$8 vs $15–$45 del promedio de Meta Ads. Pagas por personas que ya quieren saber más.',
   },
 ]
 
@@ -182,7 +188,7 @@ onMounted(() => {
 
   &__body {
     font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
+    font-size: 16px;
     color: var(--mk-dim);
     line-height: 1.7;
     margin-bottom: 40px;
@@ -219,14 +225,14 @@ onMounted(() => {
   &__step-title {
     font-family: 'DM Sans', sans-serif;
     font-weight: 700;
-    font-size: 14px;
+    font-size: 16px;
     color: var(--mk-cream);
     margin-bottom: 6px;
   }
 
   &__step-sub {
     font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
+    font-size: 15px;
     color: var(--mk-dim);
     line-height: 1.6;
   }

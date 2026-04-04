@@ -9,8 +9,8 @@
         <div class="p5__badge"><i class="fa-solid fa-robot"></i> El espacio estrella — solo 5 cupos</div>
         <h2 class="p5__title">COMERCIAL IA<br>ULTRAREALISTA<br>EN EL PROGRAMA</h2>
         <p class="p5__body">
-          Producción cinematográfica generada con inteligencia artificial, integrada en el programa de mañanas.
-          Tu marca frente a 500,000 personas todos los días en 5 plataformas simultáneas. Mínimo 6 meses.
+          Nos encargamos de la idea creativa y de producir con IA un comercial cinematográfico con Moni y Boscán como protagonistas.
+          Tu marca frente a 500,000 personas todos los días en 5 plataformas simultáneas. Contrato mínimo de 6 meses.
         </p>
         <ul class="p5__list">
           <li>Producción completa del comercial con IA incluida</li>
@@ -39,12 +39,12 @@
         <ul class="p5__list">
           <li>Mención exclusiva al inicio de cada episodio</li>
           <li>Sin competencia — eres el único auspiciante del mes</li>
-          <li>+5,341 nuevos seguidores en 90 días — canal en explosión</li>
+          <li>+150K reproducciones mes verificadas</li>
         </ul>
         <button class="p5__cta-btn p5__cta-btn--gold" @click="openModal">
           <i class="fa-solid fa-arrow-right"></i> Solicitar propuesta
         </button>
-        <div class="p5__spotify-foot">85K reproducciones mensuales verificadas</div>
+        <div class="p5__spotify-foot">85,000 oyentes que escuchan completo — 100,460 horas de consumo en 90 días</div>
       </div>
     </div>
   </section>
@@ -180,7 +180,7 @@ onMounted(() => {
 
   &__body {
     font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
+    font-size: 16px;
     color: var(--mk-dim);
     line-height: 1.7;
   }
@@ -193,7 +193,7 @@ onMounted(() => {
 
     li {
       font-family: 'DM Sans', sans-serif;
-      font-size: 13px;
+      font-size: 15px;
       color: var(--mk-dim);
       padding-left: 18px;
       position: relative;

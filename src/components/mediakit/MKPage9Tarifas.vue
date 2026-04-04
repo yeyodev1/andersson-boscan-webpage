@@ -2,15 +2,14 @@
   <section class="mk-section p9" ref="sectionEl">
     <!-- Left: Pricing table -->
     <div class="p9__left" ref="leftEl">
-      <div class="p9__eyebrow">Resumen de tarifas</div>
+      <div class="p9__eyebrow">Formatos disponibles</div>
       <h2 class="p9__title">TODOS LOS<br>FORMATOS,<br>UN VISTAZO</h2>
 
       <table class="p9__table" ref="tableEl">
         <thead>
           <tr>
             <th>Formato</th>
-            <th>Alcance</th>
-            <th class="right">USD</th>
+            <th>Alcance estimado</th>
           </tr>
         </thead>
         <tbody>
@@ -20,15 +19,11 @@
               <div class="p9__tf-reach-sub">{{ row.sub }}</div>
             </td>
             <td class="p9__tf-reach">{{ row.reach }}</td>
-            <td class="right">
-              <div class="p9__tf-price">{{ row.price }}</div>
-              <div class="p9__tf-unit">{{ row.unit }}</div>
-            </td>
           </tr>
         </tbody>
       </table>
 
-      <div class="p9__discount">Paquetes multicanal y contratos ≥3 meses con hasta 20% de descuento.</div>
+      <div class="p9__discount">Contáctanos para recibir una propuesta personalizada para tu marca.</div>
     </div>
 
     <!-- Right: Why your brand belongs here -->
@@ -59,16 +54,15 @@ const leftEl    = ref<HTMLElement | null>(null)
 const rightEl   = ref<HTMLElement | null>(null)
 
 const tableRows = [
-  { name: 'Comercial IA en programa',    sub: '5 plataformas · 22 ep/mes',          reach: '~10M imp.', price: '$3,000', unit: '/mes · mín. 6',   highlight: true },
-  { name: 'Diario Boscán para la marca', sub: '~500K reproducciones',                reach: '~500K',     price: '$3,000', unit: 'única vez',        highlight: false },
-  { name: 'TikTok patrocinado',          sub: '910K seg. · 766K vistas/día',         reach: '~200K',     price: '$2,500', unit: 'por video',        highlight: false },
-  { name: 'Video culinario cruzado',     sub: 'Ambos canales YT + TikTok',           reach: '+1M reprod.',price: '$2,000', unit: '/mes · 1 video',  highlight: false },
-  { name: 'Video culinario paquete',     sub: '2 videos/mes · mín. 6 meses',         reach: '+2M reprod.',price: '$2,000', unit: '/mes · 2 videos', highlight: false },
-  { name: 'Reel + Leads automatizados',  sub: 'Para PYMEs · leads directo',          reach: '~200K',     price: '$1,500', unit: 'única vez',        highlight: false },
-  { name: 'Podcast Spotify exclusivo',   sub: '85K oyentes · 22 ep/mes',             reach: '85K oy.',   price: '$1,200', unit: '/mes',             highlight: false },
-  { name: 'Mención YouTube',            sub: 'Investigación 60–90 seg (permanente)',  reach: '57M totales',price: '$1,200', unit: 'única vez',        highlight: false },
-  { name: 'Post en X verificado',        sub: '404K seguidores verificados',          reach: '404K',      price: '$700',   unit: 'por post',         highlight: false },
-  { name: 'Post Instagram/Facebook',     sub: '13.7M vistas/sem · 42.4M imp./año',   reach: '42.4M',     price: '$700',   unit: 'por post',         highlight: false },
+  { name: 'Comercial IA en programa ⭐',  sub: '5 plataformas · 22 ep/mes · mín. 6 meses · cupos limitados', reach: '~10M imp./mes',   highlight: true },
+  { name: 'Diario de Boscán para la Marca', sub: '~500K reproducciones',                                     reach: '~500K reprod.',   highlight: false },
+  { name: 'TikTok Patrocinado',          sub: '926K seg. · audiencia 18–35 años',                            reach: '~200K reprod.',   highlight: false },
+  { name: 'Video Dedicado YouTube',      sub: 'Video completo alineado a valores de marca',                   reach: '100K vistas/día', highlight: false },
+  { name: 'Video culinario · Ambos canales', sub: 'Andersson + Mónica · 1 video/mes',                        reach: '+1M reprod.',     highlight: false },
+  { name: 'Video culinario · Paquete mensual', sub: '2 videos/mes · mín. 6 meses',                           reach: '+2M reprod.',     highlight: false },
+  { name: 'Plan PYMEs · Leads automatizados', sub: '100K+ reproducciones · 200–500 leads directos',          reach: 'Leads directos',  highlight: false },
+  { name: 'Auspiciante Podcast Spotify', sub: '85K oyentes · 22 ep/mes · mención exclusiva',                 reach: '+150K reprod.',   highlight: false },
+  { name: 'Mención Stories',             sub: 'Instagram · Facebook · ajustado a tu audiencia',              reach: 'Orgánico',        highlight: false },
 ]
 
 const whyItems = [

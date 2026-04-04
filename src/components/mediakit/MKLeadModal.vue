@@ -26,7 +26,7 @@
           <div class="lm-card" :class="{ blurred: showConfirm }" ref="cardEl">
 
             <!-- Steps indicator -->
-            <div class="lm-steps" v-if="step < 3">
+            <div class="lm-steps" v-if="step < 3 && !showQualifyGate">
               <div class="lm-step" :class="{ active: step >= 1, done: step > 1 }"><span>1</span></div>
               <div class="lm-step-line" :class="{ done: step > 1 }"></div>
               <div class="lm-step" :class="{ active: step >= 2 }"><span>2</span></div>
@@ -34,7 +34,7 @@
 
             <!-- ── STEP 1 ── -->
             <Transition name="slide-up" mode="out-in">
-              <div v-if="step === 1" key="s1" class="lm-body">
+              <div v-if="step === 1 && !showQualifyGate" key="s1" class="lm-body">
                 <div class="lm-eyebrow">Paso 1 de 2</div>
                 <h2 class="lm-title">CUÉNTANOS<br>SOBRE TI</h2>
                 <p class="lm-subtitle">Solo nos tomará un momento</p>
@@ -73,9 +73,83 @@
               </div>
             </Transition>
 
+            <!-- ── QUALIFY GATE ── -->
+            <Transition name="slide-up" mode="out-in">
+              <div v-if="showQualifyGate" key="sq" class="lm-body lm-qualify">
+                <div class="lm-qualify-icon">
+                  <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <h2 class="lm-title lm-title--qualify">ANTES<br>DE CONTINUAR</h2>
+                <p class="lm-qualify-intro">
+                  Andersson y Moni trabajan con marcas comprometidas.<br>
+                  Por respeto a tu tiempo y al nuestro, necesitamos que leas esto:
+                </p>
+
+                <div class="lm-qualify-requirements">
+                  <div class="lm-qualify-req">
+                    <i class="fa-solid fa-dollar-sign lm-qualify-req-icon"></i>
+                    <div>
+                      <div class="lm-qualify-req-title">Inversión mínima: <strong>$1.000 / mes</strong></div>
+                      <div class="lm-qualify-req-sub">Este es el presupuesto mínimo para trabajar con nosotros. No hay excepciones.</div>
+                    </div>
+                  </div>
+                  <div class="lm-qualify-req">
+                    <i class="fa-solid fa-calendar-days lm-qualify-req-icon"></i>
+                    <div>
+                      <div class="lm-qualify-req-title">Compromiso mínimo: <strong>6 meses</strong></div>
+                      <div class="lm-qualify-req-sub">Los resultados de branding y pauta toman tiempo. No trabajamos con compromisos menores.</div>
+                    </div>
+                  </div>
+                  <div class="lm-qualify-req lm-qualify-req--warning">
+                    <i class="fa-solid fa-triangle-exclamation lm-qualify-req-icon"></i>
+                    <div>
+                      <div class="lm-qualify-req-title">Si los números no son reales…</div>
+                      <div class="lm-qualify-req-sub">Si el presupuesto que indiques no refleja tu realidad, no podremos ayudarte. Andersson revisa cada solicitud personalmente — y quienes no son honestos son bloqueados de futuros proyectos. <em>(Sí, en serio.)</em></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="lm-qualify-confirm">
+                  <div class="lm-qualify-confirm-label">
+                    <i class="fa-solid fa-keyboard"></i>
+                    Para continuar, escribe exactamente esto:
+                  </div>
+                  <div class="lm-qualify-phrase">
+                    Estoy siendo honesto, <strong>{{ form.nombre }}</strong>
+                  </div>
+                  <div class="lm-qualify-input-wrap">
+                    <input
+                      v-model="qualifyInput"
+                      type="text"
+                      class="lm-input lm-qualify-input"
+                      :placeholder="`Estoy siendo honesto, ${form.nombre}`"
+                      :class="{ 'lm-qualify-input--ok': qualifyPhraseMatch, 'lm-qualify-input--err': qualifyInput.length > 5 && !qualifyPhraseMatch }"
+                      @keydown.tab.prevent="qualifyInput = qualifyExpectedPhrase"
+                      spellcheck="false"
+                      autocomplete="off"
+                    />
+                    <i v-if="qualifyPhraseMatch" class="fa-solid fa-circle-check lm-qualify-check"></i>
+                  </div>
+                  <p class="lm-qualify-hint">Tip: presiona <kbd>Tab</kbd> para autocompletar</p>
+
+                  <button
+                    class="lm-btn-primary"
+                    :disabled="!qualifyPhraseMatch"
+                    @click="acceptQualifyGate"
+                  >
+                    <span v-if="qualifyPhraseMatch">Continuar <i class="fa-solid fa-arrow-right"></i></span>
+                    <span v-else>Escribe la frase para continuar</span>
+                  </button>
+                  <button class="lm-btn-ghost lm-btn--sm" @click="forceClose">
+                    No es el momento para mí
+                  </button>
+                </div>
+              </div>
+            </Transition>
+
             <!-- ── STEP 2 ── -->
             <Transition name="slide-up" mode="out-in">
-              <div v-if="step === 2" key="s2" class="lm-body">
+              <div v-if="step === 2 && !showQualifyGate" key="s2" class="lm-body">
                 <div class="lm-eyebrow">Paso 2 de 2</div>
                 <h2 class="lm-title">UN PASO<br>MÁS</h2>
                 <p class="lm-subtitle">Para darte la mejor propuesta</p>
@@ -202,14 +276,16 @@ const router = useRouter()
 
 const { isOpen, closeModal } = useLeadModal()
 
-const cardEl         = ref<HTMLElement | null>(null)
-const step           = ref(1)
-const loading        = ref(false)
-const sendingContact = ref(false)
-const step1Error     = ref('')
-const errorMsg       = ref('')
-const showConfirm    = ref(false)
+const cardEl          = ref<HTMLElement | null>(null)
+const step            = ref(1)
+const loading         = ref(false)
+const sendingContact  = ref(false)
+const step1Error      = ref('')
+const errorMsg        = ref('')
+const showConfirm     = ref(false)
 const wasDisqualified = ref(false)
+const showQualifyGate = ref(false)
+const qualifyInput    = ref('')
 
 // ── PHONE ─────────────────────────────────────────────────────
 const countryDial  = ref('+593')
@@ -308,6 +384,14 @@ const form = ref({
 const hasData = computed(() =>
   form.value.nombre || form.value.apellido || form.value.correo ||
   phoneNumber.value || form.value.tipo_cliente || form.value.objetivo || form.value.presupuesto
+)
+
+const qualifyExpectedPhrase = computed(() =>
+  `Estoy siendo honesto, ${form.value.nombre}`
+)
+
+const qualifyPhraseMatch = computed(() =>
+  qualifyInput.value.trim().toLowerCase() === qualifyExpectedPhrase.value.trim().toLowerCase()
 )
 
 // ── OPTIONS ───────────────────────────────────────────────────
@@ -430,6 +514,11 @@ async function goToStep2() {
   } finally {
     sendingContact.value = false
   }
+  showQualifyGate.value = true
+}
+
+function acceptQualifyGate() {
+  showQualifyGate.value = false
   step.value = 2
 }
 
@@ -509,6 +598,8 @@ function resetForm() {
   step1Error.value = ''
   errorMsg.value = ''
   showConfirm.value = false
+  showQualifyGate.value = false
+  qualifyInput.value = ''
   phoneNumber.value = ''
   Object.assign(form.value, {
     nombre: '', apellido: '', correo: '',
@@ -923,9 +1014,9 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   border-radius: 6px;
   color: #f5f2ed;
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
   letter-spacing: 0.06em;
-  padding: 16px;
+  padding: 20px;
   cursor: pointer;
   transition: all 0.25s;
   display: flex;
@@ -935,6 +1026,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   margin-top: 8px;
   &:hover:not(:disabled) { background: transparent; color: #c8392b; }
   &:disabled { opacity: 0.55; cursor: not-allowed; }
+  &.lm-btn--lg { padding: 22px; font-size: clamp(1.3rem, 2.8vw, 1.6rem); }
 }
 
 .lm-btn-ghost {
@@ -943,15 +1035,15 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   border-radius: 6px;
   color: rgba(245,242,237,0.55);
   font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
-  padding: 12px 20px;
+  font-size: 14px;
+  padding: 14px 22px;
   cursor: pointer;
   transition: all 0.2s;
   display: inline-flex;
   align-items: center;
   gap: 8px;
   &:hover { border-color: rgba(245,242,237,0.4); color: #f5f2ed; }
-  &.lm-btn--sm { font-size: 11px; padding: 8px 16px; margin-top: 8px; }
+  &.lm-btn--sm { font-size: 12px; padding: 9px 18px; margin-top: 8px; }
 }
 
 .lm-btn-row {
@@ -973,6 +1065,174 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   color: #c9a84c;
   margin-bottom: 16px;
 }
+
+// ── QUALIFY GATE ──────────────────────────────────────────────
+.lm-qualify {
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.lm-qualify-icon {
+  font-size: 2.8rem;
+  color: #c9a84c;
+  margin-bottom: 8px;
+}
+
+.lm-title--qualify {
+  color: #f5f2ed;
+  margin-bottom: 12px;
+}
+
+.lm-qualify-intro {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  color: rgba(245,242,237,0.6);
+  line-height: 1.6;
+  margin: 0 0 24px;
+}
+
+.lm-qualify-requirements {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 28px;
+  border: 1px solid rgba(245,242,237,0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.lm-qualify-req {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 18px 20px;
+  border-bottom: 1px solid rgba(245,242,237,0.07);
+  background: rgba(245,242,237,0.02);
+  &:last-child { border-bottom: none; }
+
+  &--warning {
+    background: rgba(200,57,43,0.06);
+    border-left: 3px solid #c8392b;
+  }
+}
+
+.lm-qualify-req-icon {
+  font-size: 1.2rem;
+  color: #c9a84c;
+  margin-top: 3px;
+  flex-shrink: 0;
+  width: 20px;
+  text-align: center;
+
+  .lm-qualify-req--warning & { color: #c8392b; }
+}
+
+.lm-qualify-req-title {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #f5f2ed;
+  margin-bottom: 4px;
+
+  strong {
+    color: #c9a84c;
+    font-size: 16px;
+  }
+
+  .lm-qualify-req--warning & strong { color: #e87a6e; }
+}
+
+.lm-qualify-req-sub {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  color: rgba(245,242,237,0.45);
+  line-height: 1.55;
+
+  em { color: rgba(245,242,237,0.35); font-style: italic; }
+}
+
+.lm-qualify-confirm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.lm-qualify-confirm-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(245,242,237,0.4);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  i { color: #c9a84c; }
+}
+
+.lm-qualify-phrase {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  color: rgba(245,242,237,0.55);
+  background: rgba(245,242,237,0.04);
+  border: 1px dashed rgba(245,242,237,0.12);
+  border-radius: 6px;
+  padding: 12px 16px;
+  letter-spacing: 0.01em;
+
+  strong { color: #c9a84c; font-weight: 700; }
+}
+
+.lm-qualify-input-wrap {
+  position: relative;
+}
+
+.lm-qualify-input {
+  background: #0d0d0d;
+  border: 1px solid rgba(245,242,237,0.15) !important;
+  border-radius: 6px;
+  padding: 14px 44px 14px 16px !important;
+  font-size: 15px !important;
+  transition: border-color 0.25s, box-shadow 0.25s;
+
+  &--ok {
+    border-color: #2ecc71 !important;
+    box-shadow: 0 0 0 2px rgba(46,204,113,0.12);
+  }
+
+  &--err {
+    border-color: rgba(200,57,43,0.5) !important;
+  }
+}
+
+.lm-qualify-check {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #2ecc71;
+  font-size: 16px;
+}
+
+.lm-qualify-hint {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  color: rgba(245,242,237,0.28);
+  margin: 0;
+
+  kbd {
+    font-family: monospace;
+    background: rgba(245,242,237,0.08);
+    border: 1px solid rgba(245,242,237,0.15);
+    border-radius: 3px;
+    padding: 1px 5px;
+    font-size: 10px;
+    color: rgba(245,242,237,0.45);
+  }
+}
+
+.lm-btn-ghost.lm-btn--sm { align-self: center; }
 
 // ── TRANSITIONS ───────────────────────────────────────────────
 .modal-fade-enter-active, .modal-fade-leave-active { transition: opacity 0.3s ease; }

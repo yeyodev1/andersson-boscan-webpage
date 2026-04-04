@@ -5,25 +5,27 @@
     <div class="p1__top-rule" ref="ruleEl"></div>
 
     <div class="p1__content" ref="contentEl">
-      <div class="p1__eyebrow" ref="eyebrowEl">Media Kit · EUREKA Media EC · 2026</div>
+      <div class="p1__eyebrow" ref="eyebrowEl">Media Kit · Eurekaproductions · 2026</div>
       <h1 class="p1__title" ref="titleEl">
         BOSCÁN<span class="amp"> &amp; </span><span class="moni">LA MONI</span>
       </h1>
       <p class="p1__tagline" ref="taglineEl">"Cuento historias que otros no." — Andersson y Moni Boscán</p>
 
       <div class="p1__ctas" ref="ctasEl">
-        <button class="p1__cta p1__cta--ghost" @click="scrollToSection('perfil')">
-          <i class="fa-solid fa-users"></i>
-          Quiero saber quiénes son
-        </button>
         <button class="p1__cta p1__cta--solid" @click="scrollToSection('form')">
           <i class="fa-solid fa-handshake"></i>
           Quiero publicidad con ustedes
         </button>
       </div>
 
-      <div class="p1__stats">
-        <div class="p1__stat" v-for="(stat, i) in stats" :key="stat.label" :class="{ 'p1__stat--last': i === stats.length - 1 }">
+      <div class="p1__stats" ref="statsEl">
+        <div
+          class="p1__stat"
+          v-for="(stat, i) in stats"
+          :key="stat.label"
+          :class="{ 'p1__stat--last': i === stats.length - 1 }"
+          @click="openModal"
+        >
           <div class="p1__stat-icon-wrap">
             <i :class="stat.icon" class="p1__stat-icon"></i>
           </div>
@@ -60,15 +62,16 @@ import { useLeadModal } from '@/composables/useLeadModal'
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
 
 const { openModal } = useLeadModal()
-const sectionEl = ref<HTMLElement | null>(null)
-const bgEl = ref<HTMLElement | null>(null)
-const ruleEl = ref<HTMLElement | null>(null)
-const eyebrowEl = ref<HTMLElement | null>(null)
-const titleEl = ref<HTMLElement | null>(null)
-const taglineEl = ref<HTMLElement | null>(null)
-const ctasEl = ref<HTMLElement | null>(null)
-const footEl = ref<HTMLElement | null>(null)
+const sectionEl   = ref<HTMLElement | null>(null)
+const bgEl        = ref<HTMLElement | null>(null)
+const ruleEl      = ref<HTMLElement | null>(null)
+const eyebrowEl   = ref<HTMLElement | null>(null)
+const titleEl     = ref<HTMLElement | null>(null)
+const taglineEl   = ref<HTMLElement | null>(null)
+const ctasEl      = ref<HTMLElement | null>(null)
+const footEl      = ref<HTMLElement | null>(null)
 const scrollHintEl = ref<HTMLElement | null>(null)
+const statsEl     = ref<HTMLElement | null>(null)
 
 function scrollToSection(target: 'perfil' | 'form') {
   if (target === 'form') { openModal(); return }
@@ -79,7 +82,7 @@ function scrollToSection(target: 'perfil' | 'form') {
 const stats = [
   { number: '88.7M', label: 'Alcance mensual',   icon: 'fa-solid fa-globe' },
   { number: '500K',  label: 'Reprod. diarias',   icon: 'fa-solid fa-play' },
-  { number: '910K',  label: 'TikTok AB',         icon: 'fa-brands fa-tiktok' },
+  { number: '926K',  label: 'TikTok AB',         icon: 'fa-brands fa-tiktok' },
   { number: '404K',  label: 'X verificado',      icon: 'fa-brands fa-x-twitter' },
   { number: '9',     label: 'Formatos de pauta', icon: 'fa-solid fa-layer-group' },
 ]
@@ -93,9 +96,27 @@ onMounted(() => {
     .from(titleEl.value, { y: 60, opacity: 0, duration: 1, ease: 'power4.out' }, '-=0.3')
     .from(taglineEl.value, { y: 20, opacity: 0, duration: 0.7 }, '-=0.5')
     .from(ctasEl.value, { y: 20, opacity: 0, duration: 0.7 }, '-=0.3')
-    .from('.p1__stat', { y: 30, opacity: 0, stagger: 0.1, duration: 0.6 }, '-=0.4')
     .from(footEl.value, { y: 20, opacity: 0, duration: 0.6 }, '-=0.3')
     .from(scrollHintEl.value, { opacity: 0, duration: 0.8 }, '-=0.2')
+
+  // Stats animate in only on scroll
+  if (statsEl.value) {
+    gsap.set(statsEl.value.querySelectorAll('.p1__stat'), { y: 20, opacity: 0 })
+    ScrollTrigger.create({
+      trigger: statsEl.value,
+      start: 'top 92%',
+      once: true,
+      onEnter: () => {
+        gsap.to(statsEl.value!.querySelectorAll('.p1__stat'), {
+          y: 0,
+          opacity: 1,
+          stagger: 0.08,
+          duration: 0.55,
+          ease: 'power3.out',
+        })
+      },
+    })
+  }
 
   // Scroll hint loop
   gsap.to('.p1__scroll-line', {
@@ -209,14 +230,18 @@ onMounted(() => {
     grid-template-columns: repeat(5, 1fr);
     gap: 0;
     margin-bottom: 40px;
-    border-top: 1px solid rgba(245,242,237,0.1);
-    border-bottom: 1px solid rgba(245,242,237,0.1);
+    border-top: 1px solid rgba(245,242,237,0.06);
+    border-bottom: 1px solid rgba(245,242,237,0.06);
     width: 100%;
     min-width: 0;
+    opacity: 0.72;
+    transition: opacity 0.3s ease;
+
+    &:hover { opacity: 0.9; }
 
     @media (max-width: 1024px) {
       grid-template-columns: 1fr 1fr;
-      border-top: 1px solid rgba(245,242,237,0.1);
+      border-top: 1px solid rgba(245,242,237,0.06);
       border-bottom: none;
       gap: 0;
     }
@@ -227,15 +252,17 @@ onMounted(() => {
     align-items: center;
     gap: 12px;
     padding: 16px 12px;
-    border-right: 1px solid rgba(245,242,237,0.1);
+    border-right: 1px solid rgba(245,242,237,0.06);
     min-width: 0;
+    cursor: default;
+    user-select: none;
 
     &:last-child { border-right: none; }
 
     @media (max-width: 1024px) {
       padding: 16px 14px;
       border-right: none;
-      border-bottom: 1px solid rgba(245,242,237,0.1);
+      border-bottom: 1px solid rgba(245,242,237,0.06);
 
       // 5th card spans full row
       &--last { grid-column: 1 / -1; }
@@ -246,8 +273,8 @@ onMounted(() => {
     width: 34px;
     height: 34px;
     border-radius: 8px;
-    background: rgba(201,168,76,0.08);
-    border: 1px solid rgba(201,168,76,0.18);
+    background: rgba(201,168,76,0.04);
+    border: 1px solid rgba(201,168,76,0.1);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -256,7 +283,7 @@ onMounted(() => {
 
   &__stat-icon {
     font-size: 13px;
-    color: var(--mk-gold);
+    color: rgba(201,168,76,0.55);
   }
 
   &__stat-body {
@@ -269,7 +296,7 @@ onMounted(() => {
   &__stat-n {
     font-family: 'Bebas Neue', sans-serif;
     font-size: clamp(18px, 2.2vw, 30px);
-    color: var(--mk-cream);
+    color: rgba(245,242,237,0.75);
     line-height: 1;
     letter-spacing: 0.02em;
   }
@@ -279,9 +306,8 @@ onMounted(() => {
     font-size: 9px;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--mk-gold);
+    color: rgba(201,168,76,0.5);
     margin-top: 3px;
-    opacity: 0.8;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -349,23 +375,24 @@ onMounted(() => {
     gap: 16px;
     margin-bottom: 40px;
     flex-wrap: wrap;
+    justify-content: center;
   }
 
   &__cta {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    padding: 14px 28px;
+    gap: 12px;
+    padding: 20px 44px;
     border-radius: 4px;
     font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
+    font-size: 17px;
     font-weight: 700;
     letter-spacing: 0.06em;
     text-transform: uppercase;
     cursor: pointer;
     transition: all 0.3s ease;
 
-    i { font-size: 13px; }
+    i { font-size: 16px; }
 
     &--ghost {
       background: transparent;

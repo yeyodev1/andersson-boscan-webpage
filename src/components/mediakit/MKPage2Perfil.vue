@@ -6,9 +6,9 @@
     </div>
 
     <div class="p2__content" ref="contentEl">
-      <div class="p2__label" ref="labelEl">Por qué todos hablan de ellos</div>
+      <div class="p2__label" ref="labelEl">Por qué las marcas los eligen</div>
       <h2 class="p2__title" ref="titleEl">
-        EL PROGRAMA<br>MÁS VIRAL<br>DE LATAM
+        EL PROGRAMA DE NOTICIAS<br>MÁS VIRAL<br>DE ECUADOR
       </h2>
 
       <div class="p2__stats" ref="statsEl">
@@ -22,10 +22,10 @@
       </div>
 
       <div class="p2__awards" ref="awardsEl">
-        <div class="p2__awards-label">Reconocimientos</div>
+        <div class="p2__awards-label">Presencia</div>
         <div class="p2__awards-text">
-          Premio Nacional de Periodismo Digital · Candidato Emmy Latino
-          · Mejor contenido noticioso · TikTok Awards Latam
+          Lunes a viernes en YouTube · Facebook · Instagram · TikTok · Spotify
+          · 22 episodios al mes, sin interrupciones, desde Toronto, Canadá
         </div>
       </div>
 
@@ -73,19 +73,19 @@ const socialEl   = ref<HTMLElement | null>(null)
 
 const stats = [
   {
-    num: '#1',
-    title: 'Programa noticioso matutino más seguido',
-    sub: 'Lunes a viernes en YouTube, Facebook, Instagram, TikTok y Spotify. 22 episodios al mes sin interrupciones.',
+    num: '1.07M',
+    title: 'Vistas por día solo en TikTok',
+    sub: 'Con un 95.4% de audiencia recurrente. No es tráfico de paso: es una comunidad que vuelve todos los días.',
   },
   {
-    num: '766K',
-    title: 'Vistas diarias en TikTok',
-    sub: 'Tasa de alcance del 84% diario — uno de los ratios más altos del periodismo latinoamericano.',
+    num: '3.04M',
+    title: 'Horas de reproducción en YouTube en 90 días',
+    sub: 'Promedio de 20 minutos por vista, cuando la industria celebra 2. Audiencia que no salta, que termina lo que empieza.',
   },
   {
-    num: '13.7M',
-    title: 'Vistas semanales en Instagram',
-    sub: 'Alcance orgánico que multiplica 70× la base de seguidores. Sin publicidad pagada.',
+    num: '1.4M',
+    title: 'Personas alcanzadas por día',
+    sub: 'Sumando TikTok, YouTube y Facebook combinados — sin publicidad pagada.',
   },
 ]
 
@@ -211,14 +211,14 @@ onMounted(() => {
   &__stat-title {
     font-family: 'DM Sans', sans-serif;
     font-weight: 700;
-    font-size: 15px;
+    font-size: 17px;
     color: var(--mk-cream);
     margin-bottom: 6px;
   }
 
   &__stat-sub {
     font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
+    font-size: 15px;
     color: var(--mk-dim);
     line-height: 1.6;
   }

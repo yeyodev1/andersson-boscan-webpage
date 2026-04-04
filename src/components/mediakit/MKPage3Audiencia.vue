@@ -6,7 +6,7 @@
       <div class="p3__hero-text" ref="heroTextEl">
         <div class="p3__eyebrow">Audiencia</div>
         <h2 class="p3__hero-title">
-          88 MILLONES DE IMPRESIONES<br>CADA MES
+          45 MILLONES DE VISTAS MENSUALES<br>LO QUE TU INVERSIÓN ALCANZA
         </h2>
       </div>
     </div>
@@ -35,12 +35,12 @@ const heroTextEl = ref<HTMLElement | null>(null)
 const gridEl     = ref<HTMLElement | null>(null)
 
 const cards = [
-  { number: '500K',  label: 'Reprod./día programa',   sub: 'Combinado YT + FB + IG + TikTok + Spotify. Lun a Vie.', icon: 'fa-solid fa-tv' },
-  { number: '766K',  label: 'Vistas/día TikTok',      sub: '84% tasa alcance diario. Excepcional en su categoría.', icon: 'fa-brands fa-tiktok' },
-  { number: '13.7M', label: 'Vistas/sem Instagram',   sub: '4% engagement rate. 70× su base de seguidores.', icon: 'fa-brands fa-instagram' },
-  { number: '1M+',   label: 'Reprod. video culinario',sub: 'Publicación cruzada en ambos canales. Doble audiencia.', icon: 'fa-solid fa-utensils' },
-  { number: '85K',   label: 'Oyentes/mes Spotify',    sub: '94,900 hs consumo en 90 días. Audiencia que escucha completo.', icon: 'fa-brands fa-spotify' },
-  { number: '57M',   label: 'Vistas totales YouTube', sub: '191K suscriptores · 2.93M vistas/mes. Motor de credibilidad.', icon: 'fa-brands fa-youtube' },
+  { number: '1.07M',  label: 'Vistas/día TikTok',        sub: '95.4% audiencia recurrente · pico de 3.6M en un solo día.', icon: 'fa-brands fa-tiktok' },
+  { number: '100K',   label: 'Vistas/día YouTube',        sub: 'CTR del 9.93% · promedio de 20 min por vista. Audiencia que termina lo que empieza.', icon: 'fa-brands fa-youtube' },
+  { number: '317K',   label: 'Espectadores/día Facebook', sub: '1.55M interacciones en 65 días.', icon: 'fa-brands fa-facebook' },
+  { number: '47.5K',  label: 'Clics directos Instagram',  sub: 'Clics directos en enlace en 65 días. Tráfico real.', icon: 'fa-brands fa-instagram' },
+  { number: '100K+',  label: 'Horas en Spotify / 90 días',sub: '100,460 horas de consumo — escuchan completo. 85,000 oyentes.', icon: 'fa-brands fa-spotify' },
+  { number: '+390K',  label: 'Nuevos seguidores / 90 días',sub: 'En todas las plataformas combinadas — sin publicidad pagada.', icon: 'fa-solid fa-users' },
 ]
 
 onMounted(() => {
@@ -205,7 +205,7 @@ onMounted(() => {
 
   &__card-s {
     font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
+    font-size: 15px;
     color: var(--mk-dim);
     line-height: 1.6;
     margin-bottom: 16px;

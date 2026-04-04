@@ -31,7 +31,7 @@
       <div class="p4__overlay p4__overlay--r"></div>
       <div class="p4__content">
         <div class="p4__who">Mónica Velásquez</div>
-        <div class="p4__handle">@MONICAVELASQUEZ</div>
+        <div class="p4__handle">@MONIVELASQUEZV</div>
         <div class="p4__bars">
           <div class="p4__bar-row" v-for="p in platformsRight" :key="p.name">
             <div class="p4__bar-name"><i :class="p.icon"></i> {{ p.name }}</div>
@@ -62,19 +62,18 @@ const rightEl   = ref<HTMLElement | null>(null)
 const dividerEl = ref<HTMLElement | null>(null)
 
 const platformsLeft = [
-  { name: 'TikTok',      n: '910K',  label: 'seguidores',   width: 100, icon: 'fa-brands fa-tiktok' },
-  { name: 'YouTube',     n: '191K',  label: 'suscriptores', width: 21,  icon: 'fa-brands fa-youtube' },
-  { name: 'Instagram',   n: '191K',  label: 'seguidores',   width: 21,  icon: 'fa-brands fa-instagram' },
+  { name: 'TikTok',      n: '926K',  label: 'seguidores',   width: 100, icon: 'fa-brands fa-tiktok' },
   { name: 'X (Twitter)', n: '404K',  label: 'verificado',   width: 44,  icon: 'fa-brands fa-x-twitter' },
-  { name: 'Facebook',    n: '100K+', label: 'seguidores',   width: 11,  icon: 'fa-brands fa-facebook' },
+  { name: 'Facebook',    n: '289K',  label: 'seguidores',   width: 31,  icon: 'fa-brands fa-facebook' },
+  { name: 'YouTube',     n: '198K',  label: 'suscriptores', width: 21,  icon: 'fa-brands fa-youtube' },
+  { name: 'Instagram',   n: '190K',  label: 'seguidores',   width: 21,  icon: 'fa-brands fa-instagram' },
   { name: 'Spotify',     n: '85K',   label: 'oyentes/mes',  width: 9,   icon: 'fa-brands fa-spotify' },
 ]
 
 const platformsRight = [
-  { name: 'TikTok',    n: '420K', label: 'seguidores',   width: 100, icon: 'fa-brands fa-tiktok' },
-  { name: 'YouTube',   n: '85K',  label: 'suscriptores', width: 20,  icon: 'fa-brands fa-youtube' },
-  { name: 'Instagram', n: '95K',  label: 'seguidores',   width: 23,  icon: 'fa-brands fa-instagram' },
-  { name: 'Facebook',  n: '60K',  label: 'seguidores',   width: 14,  icon: 'fa-brands fa-facebook' },
+  { name: 'Instagram', n: '114K', label: 'seguidores',   width: 100, icon: 'fa-brands fa-instagram' },
+  { name: 'TikTok',    n: '126K', label: 'seguidores',   width: 100, icon: 'fa-brands fa-tiktok' },
+  { name: 'Facebook',  n: '76K',  label: 'seguidores',   width: 67,  icon: 'fa-brands fa-facebook' },
 ]
 
 onMounted(() => {

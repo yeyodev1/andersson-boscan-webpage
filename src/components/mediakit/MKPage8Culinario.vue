@@ -8,8 +8,7 @@
         <div class="p8__badge">Andersson y Moni + Mónica · Ambos canales</div>
         <h2 class="p8__title">CONTENIDO<br>CULINARIO</h2>
         <p class="p8__desc">
-          El formato más inesperado: dos periodistas de investigación que también cocinan.
-          Publicado simultáneamente en los canales de Andersson y Moni y Mónica.
+          Dos periodistas de investigación que también cocinan. Publicado simultáneamente en ambos canales.
           Una marca, dos audiencias, más de un millón de reproducciones.
         </p>
       </div>

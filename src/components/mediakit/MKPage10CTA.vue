@@ -36,7 +36,7 @@
       </div>
 
       <div class="p10__footer-brand" ref="brandEl">
-        Andersson y Moni Boscán · Mónica Velásquez · EUREKA Media EC · Media Kit 2026
+        Andersson y Moni Boscán · Mónica Velásquez · Eurekaproductions · Media Kit 2026
       </div>
     </div>
   </section>
