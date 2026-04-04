@@ -37,7 +37,21 @@
             </div>
             <div class="pv__field">
               <label class="pv__label">Teléfono</label>
-              <input v-model="gform.telefono" class="pv__input" type="tel" placeholder="+593 999 000 000" />
+              <div class="pv__phone-wrap">
+                <div class="pv__phone-flag">{{ selectedCountry?.flag }}</div>
+                <select v-model="countryDial" class="pv__phone-select">
+                  <option v-for="c in countryCodes" :key="c.country + c.dial" :value="c.dial">
+                    {{ c.flag }} {{ c.name }} ({{ c.dial }})
+                  </option>
+                </select>
+                <span class="pv__phone-dial">{{ countryDial }}</span>
+                <input
+                  v-model="phoneNumber"
+                  type="tel"
+                  class="pv__phone-input"
+                  placeholder="Número celular"
+                />
+              </div>
             </div>
             <div class="pv__field pv__field--confirm">
               <label class="pv__label pv__label--confirm">
@@ -152,14 +166,17 @@
     </Transition>
 
   </div>
+
+  <MKLeadModal />
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, computed, watch, onMounted } from 'vue'
 import axios from 'axios'
+import { useLeadModal } from '@/composables/useLeadModal'
+import MKLeadModal from '@/components/mediakit/MKLeadModal.vue'
 
-const router = useRouter()
+const { openModalStep2 } = useLeadModal()
 const STORAGE_KEY = 'mk_contact_given'
 
 const unlocked       = ref(false)
@@ -171,21 +188,82 @@ const gform = ref({
   nombre:   '',
   apellido: '',
   correo:   '',
-  telefono: '',
   empresa:  '',
 })
 
+// ── PHONE ────────────────────────────────────────────────────────
+const countryDial = ref('+593')
+const phoneNumber = ref('')
+
+interface Country { country: string; dial: string; flag: string; name: string }
+const countryCodes: Country[] = [
+  { country: 'EC', dial: '+593', flag: '🇪🇨', name: 'Ecuador' },
+  { country: 'CO', dial: '+57',  flag: '🇨🇴', name: 'Colombia' },
+  { country: 'VE', dial: '+58',  flag: '🇻🇪', name: 'Venezuela' },
+  { country: 'MX', dial: '+52',  flag: '🇲🇽', name: 'México' },
+  { country: 'US', dial: '+1',   flag: '🇺🇸', name: 'EE.UU.' },
+  { country: 'CA', dial: '+1',   flag: '🇨🇦', name: 'Canadá' },
+  { country: 'ES', dial: '+34',  flag: '🇪🇸', name: 'España' },
+  { country: 'AR', dial: '+54',  flag: '🇦🇷', name: 'Argentina' },
+  { country: 'CL', dial: '+56',  flag: '🇨🇱', name: 'Chile' },
+  { country: 'PE', dial: '+51',  flag: '🇵🇪', name: 'Perú' },
+  { country: 'PA', dial: '+507', flag: '🇵🇦', name: 'Panamá' },
+  { country: 'CR', dial: '+506', flag: '🇨🇷', name: 'Costa Rica' },
+  { country: 'GT', dial: '+502', flag: '🇬🇹', name: 'Guatemala' },
+  { country: 'DO', dial: '+1',   flag: '🇩🇴', name: 'R. Dominicana' },
+  { country: 'BO', dial: '+591', flag: '🇧🇴', name: 'Bolivia' },
+  { country: 'PY', dial: '+595', flag: '🇵🇾', name: 'Paraguay' },
+  { country: 'UY', dial: '+598', flag: '🇺🇾', name: 'Uruguay' },
+  { country: 'PR', dial: '+1',   flag: '🇵🇷', name: 'Puerto Rico' },
+]
+
+const selectedCountry = computed(() =>
+  countryCodes.find(c => c.dial === countryDial.value) ?? countryCodes[0]
+)
+
+const fullPhone = computed(() => {
+  const local = phoneNumber.value.replace(/^0+/, '')
+  return `${countryDial.value}${local}`
+})
+
+function parseFullPhone(raw: string) {
+  let normalized = raw.replace(/[\s\-().]/g, '')
+  if (normalized.startsWith('00')) normalized = '+' + normalized.slice(2)
+  if (!normalized.startsWith('+')) return
+  const sorted = [...countryCodes].sort((a, b) => b.dial.length - a.dial.length)
+  const match = sorted.find(c => normalized.startsWith(c.dial))
+  if (!match) return
+  countryDial.value = match.dial
+  phoneNumber.value = normalized.slice(match.dial.length).replace(/^0+/, '')
+}
+
+watch(phoneNumber, (val) => {
+  const clean = val.replace(/[\s\-().]/g, '')
+  if (clean.startsWith('+') || clean.startsWith('00')) parseFullPhone(val)
+})
+
+async function detectCountry() {
+  try {
+    const res = await fetch('https://ipapi.co/json/')
+    const data = await res.json()
+    const match = countryCodes.find(c => c.country === data.country_code)
+    if (match) countryDial.value = match.dial
+  } catch { /* keep Ecuador */ }
+}
+
+// ─────────────────────────────────────────────────────────────────
 const empresaOk = computed(() => gform.value.empresa.trim().length >= 3)
 
 const canSubmit = computed(() =>
   gform.value.nombre.trim() &&
   gform.value.apellido.trim() &&
   gform.value.correo.trim() &&
-  gform.value.telefono.trim() &&
+  phoneNumber.value.trim() &&
   empresaOk.value
 )
 
 onMounted(() => {
+  detectCountry()
   const stored = localStorage.getItem(STORAGE_KEY)
   if (stored) {
     try {
@@ -194,7 +272,7 @@ onMounted(() => {
       if (data.nombre)   gform.value.nombre   = data.nombre
       if (data.apellido) gform.value.apellido = data.apellido
       if (data.correo)   gform.value.correo   = data.correo
-      if (data.telefono) gform.value.telefono = data.telefono
+      if (data.telefono) parseFullPhone(data.telefono)
       unlocked.value = true
     } catch {
       unlocked.value = true
@@ -203,19 +281,8 @@ onMounted(() => {
 })
 
 function goToMeeting() {
-  const contact = storedContact.value ?? {
-    nombre:   gform.value.nombre,
-    apellido: gform.value.apellido,
-    correo:   gform.value.correo,
-    telefono: gform.value.telefono,
-  }
-  const params = new URLSearchParams({
-    firstName: contact.nombre   || '',
-    lastName:  contact.apellido || '',
-    email:     contact.correo   || '',
-    phone:     contact.telefono || '',
-  })
-  router.push(`/agendar?${params.toString()}`)
+  // Open lead modal at Step 2 — contact already captured, skip Step 1
+  openModalStep2()
 }
 
 async function submitGate() {
@@ -228,7 +295,7 @@ async function submitGate() {
         firstName:  gform.value.nombre,
         lastName:   gform.value.apellido,
         email:      gform.value.correo,
-        phone:      gform.value.telefono,
+        phone:      fullPhone.value,
         empresa:    gform.value.empresa,
         source:     'Página de Tarifas 2026',
         page_url:   window.location.href,
@@ -245,7 +312,7 @@ async function submitGate() {
     nombre:   gform.value.nombre,
     apellido: gform.value.apellido,
     correo:   gform.value.correo,
-    telefono: gform.value.telefono,
+    telefono: fullPhone.value,
   }))
 
   unlocked.value = true
@@ -485,6 +552,63 @@ const pricingRows = [
     color: #2ecc71;
     font-size: 16px;
     pointer-events: none;
+  }
+
+  // ── Phone widget ──────────────────────────────────────────────
+  &__phone-wrap {
+    display: flex;
+    align-items: center;
+    background: #0d0d0d;
+    border: 1px solid rgba(245,242,237,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    transition: border-color 0.2s;
+    &:focus-within { border-color: #c9a84c; }
+  }
+
+  &__phone-flag {
+    font-size: 18px;
+    padding: 0 0 0 14px;
+    flex-shrink: 0;
+    pointer-events: none;
+    line-height: 1;
+  }
+
+  &__phone-select {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 100px;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 2;
+  }
+
+  &__phone-dial {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(245,242,237,0.55);
+    padding: 0 4px 0 6px;
+    flex-shrink: 0;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  &__phone-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    border-left: 1px solid rgba(245,242,237,0.08);
+    color: #f5f2ed;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    padding: 14px 16px;
+    outline: none;
+    margin-left: 4px;
+    &::placeholder { color: rgba(245,242,237,0.22); }
   }
 
   &__error {

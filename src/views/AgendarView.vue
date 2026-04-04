@@ -60,10 +60,7 @@
 
     <!-- ── CALENDAR ── -->
     <div v-show="!booked && !redirecting" class="ag-inner">
-      <div class="ag-topbar">
-        <span class="ag-logo">BOSCÁN &amp; LA MONI</span>
-        <button class="ag-back" @click="router.push('/')">← Volver al Media Kit</button>
-      </div>
+      <MKHeader :active-section="-1" />
 
       <section class="ag-hero">
         <p class="ag-eyebrow">SIGUIENTE PASO</p>
@@ -100,6 +97,7 @@
 import { computed, ref, onMounted, onUnmounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import MKFooter from '@/components/mediakit/MKFooter.vue'
+import MKHeader from '@/components/mediakit/MKHeader.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -311,37 +309,8 @@ const calendarUrl = computed(() => {
   width: 100%;
   max-width: 1100px;
   margin: 0 auto;
-  padding: 2rem 1.25rem 4rem;
+  padding: 5rem 1.25rem 4rem; /* top offset for fixed MKHeader */
   box-sizing: border-box;
-}
-
-.ag-topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 3rem;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-}
-
-.ag-logo {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.4rem;
-  letter-spacing: 0.12em;
-  color: var(--mk-gold, #c9a84c);
-}
-
-.ag-back {
-  background: transparent;
-  border: none;
-  color: var(--mk-cream, #f5f2ed);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.9rem;
-  cursor: pointer;
-  opacity: 0.7;
-  transition: opacity 0.2s;
-  padding: 0;
-  &:hover { opacity: 1; }
 }
 
 .ag-hero {

@@ -239,6 +239,19 @@
                   >{{ opt.label }}</button>
                 </div>
 
+                <!-- Missing fields hint -->
+                <Transition name="slide-up">
+                  <div v-if="!step2Complete" class="lm-step2-missing">
+                    <div class="lm-step2-missing-title">
+                      <i class="fa-solid fa-circle-exclamation"></i>
+                      Faltan {{ step2Missing.length }} {{ step2Missing.length === 1 ? 'pregunta' : 'preguntas' }} por responder:
+                    </div>
+                    <ul class="lm-step2-missing-list">
+                      <li v-for="m in step2Missing" :key="m">{{ m }}</li>
+                    </ul>
+                  </div>
+                </Transition>
+
                 <div v-if="errorMsg" class="lm-error">
                   <i class="fa-solid fa-triangle-exclamation"></i> {{ errorMsg }}
                 </div>
@@ -247,7 +260,12 @@
                   <button class="lm-btn-ghost" @click="step = 1">
                     <i class="fa-solid fa-arrow-left"></i> Volver
                   </button>
-                  <button class="lm-btn-primary" @click="handleSubmit" :disabled="loading">
+                  <button
+                    class="lm-btn-primary"
+                    @click="handleSubmit"
+                    :disabled="loading || !step2Complete"
+                    :title="step2Complete ? '' : 'Responde todas las preguntas para continuar'"
+                  >
                     <span v-if="!loading">Enviar solicitud <i class="fa-solid fa-paper-plane"></i></span>
                     <span v-else><i class="fa-solid fa-circle-notch fa-spin"></i> Enviando…</span>
                   </button>
@@ -297,7 +315,7 @@ import { useLeadModal } from '@/composables/useLeadModal'
 
 const router = useRouter()
 
-const { isOpen, closeModal } = useLeadModal()
+const { isOpen, startStep2, closeModal } = useLeadModal()
 
 const cardEl          = ref<HTMLElement | null>(null)
 const step            = ref(1)
@@ -420,6 +438,18 @@ const qualifyPhraseMatch = computed(() => {
   return qualifyInput.value.trim().toLowerCase() === qualifyExpectedPhrase.value.trim().toLowerCase()
 })
 
+// ── STEP 2 VALIDATION ─────────────────────────────────────────
+const step2Missing = computed(() => {
+  const missing: string[] = []
+  if (!form.value.tipo_cliente) missing.push('¿Cómo te describes?')
+  if (form.value.tipo_cliente === 'otro' && !form.value.tipo_cliente_otro.trim()) missing.push('Cuéntanos un poco más sobre ti')
+  if (!form.value.tiempo_respuesta) missing.push('¿Cuándo quieres recibir respuesta?')
+  if (!form.value.objetivo) missing.push('¿Cuál es tu objetivo principal?')
+  if (!form.value.presupuesto) missing.push('¿Presupuesto mensual aproximado?')
+  return missing
+})
+const step2Complete = computed(() => step2Missing.value.length === 0)
+
 // ── OPTIONS ───────────────────────────────────────────────────
 const tiempoOpts = [
   { value: 'inmediato',    label: 'Lo antes posible' },
@@ -443,10 +473,9 @@ const objetivoOpts = [
 ]
 
 const presupuestoOpts = [
-  { value: 'menos_500',  label: '< $500' },
-  { value: '500_1500',   label: '$500 – $1.5k' },
-  { value: '1500_3000',  label: '$1.5k – $3k' },
-  { value: 'mas_3000',   label: '$3k+' },
+  { value: 'menos_1000', label: 'Menos de $1,000/mes' },
+  { value: '1000_3000',  label: '$1,000 – $3,000/mes' },
+  { value: 'mas_3000',   label: 'Más de $3,000/mes' },
 ]
 
 // ── CLOSE LOGIC ───────────────────────────────────────────────
@@ -461,27 +490,24 @@ function forceClose() {
 }
 
 // ── SCORE ─────────────────────────────────────────────────────
-// Disqualify ONLY if presupuesto = menos_500 (budget below minimum service $1,500)
-// sin_urgencia with good budget still qualifies → Nurture pipeline
+// Disqualify if presupuesto = menos_1000 (below our $1,000/month minimum)
 function calcScore(): { score: number; pipeline: string; tag: string; disqualified: boolean; disqualify_reason: string } {
   const p  = form.value.presupuesto
   const tr = form.value.tiempo_respuesta
 
-  if (p === 'menos_500') {
+  if (p === 'menos_1000') {
     return {
       score: 0,
       pipeline: 'Descalificado',
       tag: 'mk-descalificado',
       disqualified: true,
-      disqualify_reason: 'Presupuesto menor a $500 — por debajo del mínimo de servicios ($1,500)',
+      disqualify_reason: 'Presupuesto menor a $1,000/mes — por debajo del mínimo de servicios',
     }
   }
 
   let score = 0
-  if (p === 'mas_3000')       score += 40
-  else if (p === '1500_3000') score += 30
-  else if (p === '500_1500')  score += 20
-  else if (p === 'menos_500') score += 10  // low budget but has urgency — still qualifies
+  if (p === 'mas_3000')      score += 40
+  else if (p === '1000_3000') score += 25
 
   const t = form.value.tipo_cliente
   if (t === 'marca')            score += 20
@@ -596,9 +622,8 @@ async function handleSubmit() {
                             :                                 'Lead Frío',
         opportunityStatus:    'open',
         monetaryValue:        form.value.presupuesto === 'mas_3000'    ? 3000
-                            : form.value.presupuesto === '1500_3000'   ? 1500
-                            : form.value.presupuesto === '500_1500'    ? 500
-                            :                                             0,
+                            : form.value.presupuesto === '1000_3000'  ? 1000
+                            :                                            0,
 
         // ── Tags y scoring ────────────────────────────────────
         tags:                 [tag, 'media-kit-2026', `presupuesto-${form.value.presupuesto}`],
@@ -652,8 +677,28 @@ function resetForm() {
 
 watch(isOpen, (val) => {
   if (val) {
-    resetForm()
+    resetForm()      // reset step/flags first
     detectCountry()
+
+    // Pre-fill from localStorage if available
+    try {
+      const stored = localStorage.getItem('mk_contact_given')
+      if (stored) {
+        const data = JSON.parse(stored)
+        if (data.nombre)   form.value.nombre   = data.nombre
+        if (data.apellido) form.value.apellido = data.apellido
+        if (data.correo)   form.value.correo   = data.correo
+        if (data.telefono) parseFullPhone(data.telefono)
+      }
+    } catch { /* keep blank */ }
+
+    // Jump to step 2 if triggered from /precios CTA
+    if (startStep2.value) {
+      showQualifyGate.value = false
+      step.value = 2
+      startStep2.value = false
+    }
+
     setTimeout(() => {
       if (cardEl.value) {
         gsap.fromTo(cardEl.value,
@@ -1046,6 +1091,39 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   align-items: center;
   gap: 8px;
   margin-bottom: 16px;
+}
+
+// ── STEP 2 MISSING FIELDS ─────────────────────────────────────
+.lm-step2-missing {
+  background: rgba(201,168,76,0.07);
+  border: 1px solid rgba(201,168,76,0.25);
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin-bottom: 16px;
+}
+
+.lm-step2-missing-title {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: #c9a84c;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 8px;
+  i { font-size: 13px; }
+}
+
+.lm-step2-missing-list {
+  margin: 0;
+  padding: 0 0 0 20px;
+  list-style: disc;
+  li {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    color: rgba(201,168,76,0.8);
+    line-height: 1.8;
+  }
 }
 
 // ── BUTTONS ───────────────────────────────────────────────────
