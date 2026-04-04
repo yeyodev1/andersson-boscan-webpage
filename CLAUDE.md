@@ -35,6 +35,27 @@ VITE_GHL_WEBHOOK_OPPORTUNITY=<GHL opportunity webhook URL>
 | `/` | `MediaKitView.vue` | 10-section media kit |
 | `/quienes-somos` | `QuienesSomosView.vue` | Standalone about page |
 | `/agendar` | `AgendarView.vue` | GHL calendar embed (qualified leads only) |
+| `/precios` | `PreciosView.vue` | Full pricing table — gated behind contact form; skips gate if `mk_contact_given` in localStorage |
+
+## Header Rule
+
+**Only `MediaKitView` uses `<MKHeader />`**. All other views (AgendarView, PreciosView, QuienesSomosView) have their own minimal topbar. Never add MKHeader to sub-pages — causes double header collision.
+
+## Lead Capture Flow
+
+1. **Modal Step 1** → contact info → fires `VITE_GHL_WEBHOOK_CONTACT` → stores `mk_contact_given` in localStorage
+2. **Qualify Gate** → friendlier tone; user types `"Estoy interesado, [nombre]"`; auto-filled if returning visitor; offers "Solo quiero ver precios" escape to `/precios`
+3. **Modal Step 2** → qualification form → fires `VITE_GHL_WEBHOOK_OPPORTUNITY`
+4. **Success (Step 3)** → CTA to `/agendar`
+
+**localStorage key:** `mk_contact_given` — JSON `{ nombre, apellido, correo, telefono }` — shared between modal, `/precios` gate, and `/agendar` guard
+
+## AgendarView Guard
+
+On mount `/agendar` checks:
+1. Query params present (`firstName`/`email`/`phone`) → load calendar pre-filled
+2. No params but localStorage exists → `router.replace('/agendar?firstName=...') ` (auto-fill from storage)
+3. Neither → show friendly redirect screen for 3s then push to `/`
 
 ## GHL Integration
 

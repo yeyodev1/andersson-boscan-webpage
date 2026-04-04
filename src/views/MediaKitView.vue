@@ -20,6 +20,7 @@
     <MKPage2Perfil  ref="s1" />
     <MKPage3Audiencia ref="s2" />
     <MKPage4Plataformas ref="s3" />
+    <MKPageSeparador />
     <MKPage5Comercial ref="s4" />
     <MKPage6Periodistico ref="s5" />
     <MKPage7Pymes   ref="s6" />
@@ -41,6 +42,7 @@ import MKPage1Cover from '@/components/mediakit/MKPage1Cover.vue'
 import MKPage2Perfil from '@/components/mediakit/MKPage2Perfil.vue'
 import MKPage3Audiencia from '@/components/mediakit/MKPage3Audiencia.vue'
 import MKPage4Plataformas from '@/components/mediakit/MKPage4Plataformas.vue'
+import MKPageSeparador from '@/components/mediakit/MKPageSeparador.vue'
 import MKPage5Comercial from '@/components/mediakit/MKPage5Comercial.vue'
 import MKPage6Periodistico from '@/components/mediakit/MKPage6Periodistico.vue'
 import MKPage7Pymes from '@/components/mediakit/MKPage7Pymes.vue'

@@ -77,71 +77,94 @@
             <Transition name="slide-up" mode="out-in">
               <div v-if="showQualifyGate" key="sq" class="lm-body lm-qualify">
                 <div class="lm-qualify-icon">
-                  <i class="fa-solid fa-shield-halved"></i>
+                  <i class="fa-solid fa-handshake"></i>
                 </div>
-                <h2 class="lm-title lm-title--qualify">ANTES<br>DE CONTINUAR</h2>
+                <h2 class="lm-title lm-title--qualify">CASI<br>LISTO</h2>
                 <p class="lm-qualify-intro">
-                  Andersson y Moni trabajan con marcas comprometidas.<br>
-                  Por respeto a tu tiempo y al nuestro, necesitamos que leas esto:
+                  Para asegurarnos de que podemos ayudarte bien, queremos contarte
+                  cómo trabajamos antes de continuar.
                 </p>
 
                 <div class="lm-qualify-requirements">
                   <div class="lm-qualify-req">
                     <i class="fa-solid fa-dollar-sign lm-qualify-req-icon"></i>
                     <div>
-                      <div class="lm-qualify-req-title">Inversión mínima: <strong>$1.000 / mes</strong></div>
-                      <div class="lm-qualify-req-sub">Este es el presupuesto mínimo para trabajar con nosotros. No hay excepciones.</div>
+                      <div class="lm-qualify-req-title">Inversión desde <strong>$1.000 / mes</strong></div>
+                      <div class="lm-qualify-req-sub">Nuestros formatos están diseñados para marcas con presupuesto publicitario real. El mínimo de trabajo es de $1.000/mes.</div>
                     </div>
                   </div>
                   <div class="lm-qualify-req">
                     <i class="fa-solid fa-calendar-days lm-qualify-req-icon"></i>
                     <div>
-                      <div class="lm-qualify-req-title">Compromiso mínimo: <strong>6 meses</strong></div>
-                      <div class="lm-qualify-req-sub">Los resultados de branding y pauta toman tiempo. No trabajamos con compromisos menores.</div>
-                    </div>
-                  </div>
-                  <div class="lm-qualify-req lm-qualify-req--warning">
-                    <i class="fa-solid fa-triangle-exclamation lm-qualify-req-icon"></i>
-                    <div>
-                      <div class="lm-qualify-req-title">Si los números no son reales…</div>
-                      <div class="lm-qualify-req-sub">Si el presupuesto que indiques no refleja tu realidad, no podremos ayudarte. Andersson revisa cada solicitud personalmente — y quienes no son honestos son bloqueados de futuros proyectos. <em>(Sí, en serio.)</em></div>
+                      <div class="lm-qualify-req-title">Resultados en <strong>6 meses o más</strong></div>
+                      <div class="lm-qualify-req-sub">El branding y la pauta toman tiempo. Trabajamos con marcas que entienden que la consistencia genera resultados.</div>
                     </div>
                   </div>
                 </div>
 
                 <div class="lm-qualify-confirm">
-                  <div class="lm-qualify-confirm-label">
-                    <i class="fa-solid fa-keyboard"></i>
-                    Para continuar, escribe exactamente esto:
-                  </div>
-                  <div class="lm-qualify-phrase">
-                    Estoy siendo honesto, <strong>{{ form.nombre }}</strong>
-                  </div>
-                  <div class="lm-qualify-input-wrap">
-                    <input
-                      v-model="qualifyInput"
-                      type="text"
-                      class="lm-input lm-qualify-input"
-                      :placeholder="`Estoy siendo honesto, ${form.nombre}`"
-                      :class="{ 'lm-qualify-input--ok': qualifyPhraseMatch, 'lm-qualify-input--err': qualifyInput.length > 5 && !qualifyPhraseMatch }"
-                      @keydown.tab.prevent="qualifyInput = qualifyExpectedPhrase"
-                      spellcheck="false"
-                      autocomplete="off"
-                    />
-                    <i v-if="qualifyPhraseMatch" class="fa-solid fa-circle-check lm-qualify-check"></i>
-                  </div>
-                  <p class="lm-qualify-hint">Tip: presiona <kbd>Tab</kbd> para autocompletar</p>
+                  <!-- Desktop: escribir la frase -->
+                  <template v-if="!isMobile">
+                    <div class="lm-qualify-confirm-label">
+                      <i class="fa-solid fa-pen-to-square"></i>
+                      Para continuar, escribe exactamente esto:
+                    </div>
+                    <div class="lm-qualify-phrase">
+                      Estoy interesado, <strong>{{ form.nombre }}</strong>
+                    </div>
+                    <div class="lm-qualify-input-wrap">
+                      <input
+                        v-model="qualifyInput"
+                        type="text"
+                        class="lm-input lm-qualify-input"
+                        :placeholder="`Estoy interesado, ${form.nombre}`"
+                        :class="{ 'lm-qualify-input--ok': qualifyPhraseMatch, 'lm-qualify-input--err': qualifyInput.length > 5 && !qualifyPhraseMatch }"
+                        @keydown.tab.prevent="qualifyInput = qualifyExpectedPhrase"
+                        spellcheck="false"
+                        autocomplete="off"
+                      />
+                      <i v-if="qualifyPhraseMatch" class="fa-solid fa-circle-check lm-qualify-check"></i>
+                    </div>
+                    <p class="lm-qualify-hint">Tip: presiona <kbd>Tab</kbd> para autocompletar el texto</p>
+                  </template>
+
+                  <!-- Mobile: tap para confirmar -->
+                  <template v-else>
+                    <div class="lm-qualify-confirm-label">
+                      <i class="fa-solid fa-hand-pointer"></i>
+                      Confirma que entiendes las condiciones:
+                    </div>
+                    <button
+                      class="lm-qualify-tap-btn"
+                      :class="{ 'lm-qualify-tap-btn--active': qualifyTapped }"
+                      @click="qualifyTapped = !qualifyTapped"
+                    >
+                      <i :class="qualifyTapped ? 'fa-solid fa-circle-check' : 'fa-regular fa-circle'"></i>
+                      <span>Entiendo: mínimo $1.000/mes · 6 meses de compromiso</span>
+                    </button>
+                  </template>
 
                   <button
                     class="lm-btn-primary"
                     :disabled="!qualifyPhraseMatch"
                     @click="acceptQualifyGate"
                   >
-                    <span v-if="qualifyPhraseMatch">Continuar <i class="fa-solid fa-arrow-right"></i></span>
-                    <span v-else>Escribe la frase para continuar</span>
+                    <span v-if="qualifyPhraseMatch">Continuar con mi solicitud <i class="fa-solid fa-arrow-right"></i></span>
+                    <span v-else>{{ isMobile ? 'Confirma para continuar' : 'Escribe la frase para continuar' }}</span>
                   </button>
-                  <button class="lm-btn-ghost lm-btn--sm" @click="forceClose">
-                    No es el momento para mí
+                </div>
+
+                <div class="lm-qualify-divider">
+                  <span>o si solo quieres explorar</span>
+                </div>
+
+                <div class="lm-qualify-curious">
+                  <p class="lm-qualify-curious-text">
+                    ¿Solo estás curioseando? Sin problema.
+                    Mira nuestras tarifas sin compromiso.
+                  </p>
+                  <button class="lm-btn-ghost" @click="goToPrecios">
+                    <i class="fa-solid fa-table-list"></i> Solo quiero ver los precios
                   </button>
                 </div>
               </div>
@@ -284,8 +307,10 @@ const step1Error      = ref('')
 const errorMsg        = ref('')
 const showConfirm     = ref(false)
 const wasDisqualified = ref(false)
-const showQualifyGate = ref(false)
-const qualifyInput    = ref('')
+const showQualifyGate  = ref(false)
+const qualifyInput     = ref('')
+const qualifyTapped    = ref(false)
+const isMobile         = ref(false)
 
 // ── PHONE ─────────────────────────────────────────────────────
 const countryDial  = ref('+593')
@@ -387,12 +412,13 @@ const hasData = computed(() =>
 )
 
 const qualifyExpectedPhrase = computed(() =>
-  `Estoy siendo honesto, ${form.value.nombre}`
+  `Estoy interesado, ${form.value.nombre}`
 )
 
-const qualifyPhraseMatch = computed(() =>
-  qualifyInput.value.trim().toLowerCase() === qualifyExpectedPhrase.value.trim().toLowerCase()
-)
+const qualifyPhraseMatch = computed(() => {
+  if (isMobile.value) return qualifyTapped.value
+  return qualifyInput.value.trim().toLowerCase() === qualifyExpectedPhrase.value.trim().toLowerCase()
+})
 
 // ── OPTIONS ───────────────────────────────────────────────────
 const tiempoOpts = [
@@ -514,12 +540,27 @@ async function goToStep2() {
   } finally {
     sendingContact.value = false
   }
+  // Mark contact as given so /precios page skips the gate
+  localStorage.setItem('mk_contact_given', JSON.stringify({
+    nombre:   form.value.nombre,
+    apellido: form.value.apellido,
+    correo:   form.value.correo,
+    telefono: fullPhone.value,
+  }))
+  isMobile.value = window.innerWidth < 768
+  qualifyInput.value = ''
+  qualifyTapped.value = false
   showQualifyGate.value = true
 }
 
 function acceptQualifyGate() {
   showQualifyGate.value = false
   step.value = 2
+}
+
+function goToPrecios() {
+  forceClose()
+  router.push('/precios')
 }
 
 // ── STEP 2 → fire webhook opportunity ────────────────────────
@@ -600,6 +641,7 @@ function resetForm() {
   showConfirm.value = false
   showQualifyGate.value = false
   qualifyInput.value = ''
+  qualifyTapped.value = false
   phoneNumber.value = ''
   Object.assign(form.value, {
     nombre: '', apellido: '', correo: '',
@@ -1230,6 +1272,83 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
     font-size: 10px;
     color: rgba(245,242,237,0.45);
   }
+}
+
+.lm-qualify-tap-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 16px 18px;
+  background: rgba(245,242,237,0.03);
+  border: 2px solid rgba(245,242,237,0.12);
+  border-radius: 10px;
+  color: rgba(245,242,237,0.6);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s;
+  line-height: 1.4;
+
+  i {
+    font-size: 20px;
+    flex-shrink: 0;
+    color: rgba(245,242,237,0.3);
+    transition: color 0.2s;
+  }
+
+  &--active {
+    border-color: #2ecc71;
+    background: rgba(46,204,113,0.06);
+    color: #f5f2ed;
+
+    i { color: #2ecc71; }
+  }
+}
+
+.lm-qualify-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0 16px;
+
+  &::before, &::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(245,242,237,0.07);
+  }
+
+  span {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(245,242,237,0.25);
+    white-space: nowrap;
+  }
+}
+
+.lm-qualify-curious {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  background: rgba(245,242,237,0.02);
+  border: 1px solid rgba(245,242,237,0.06);
+  border-radius: 10px;
+}
+
+.lm-qualify-curious-text {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  color: rgba(245,242,237,0.4);
+  text-align: center;
+  margin: 0;
+  line-height: 1.5;
 }
 
 .lm-btn-ghost.lm-btn--sm { align-self: center; }

@@ -22,6 +22,15 @@ const routes: Array<RouteRecordRaw> = [
     },
   },
   {
+    path: '/precios',
+    name: 'Precios',
+    component: () => import('../views/PreciosView.vue'),
+    meta: {
+      title: `Tarifas 2026 — Andersson y Moni Boscán | Media Kit`,
+      description: 'Tabla de tarifas y formatos de pauta de Andersson y Moni Boscán. Accede a precios y formatos disponibles para tu marca.',
+    },
+  },
+  {
     path: '/agendar',
     name: 'Agendar',
     component: () => import('../views/AgendarView.vue'),

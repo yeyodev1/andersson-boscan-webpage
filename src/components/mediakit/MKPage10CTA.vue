@@ -14,11 +14,18 @@
         <i class="fa-solid fa-rocket"></i>
         Comenzar mi campaña ahora
       </button>
+      <router-link to="/precios" class="p10__precios-link">
+        <i class="fa-solid fa-table-list"></i> Ver tabla de tarifas completa
+      </router-link>
 
       <div class="p10__emails" ref="emailsEl">
+        <p class="p10__emails-label">Escríbenos directamente</p>
         <div class="p10__email-row" v-for="contact in contacts" :key="contact.who">
-          <div class="p10__email-who"><i class="fa-solid fa-user"></i> {{ contact.who }}</div>
-          <a :href="`mailto:${contact.email}`" class="p10__email"><i class="fa-solid fa-envelope"></i> {{ contact.email }}</a>
+          <div class="p10__email-who">{{ contact.who }}</div>
+          <a :href="`mailto:${contact.email}`" class="p10__email">
+            <i class="fa-solid fa-envelope"></i>
+            {{ contact.email }}
+          </a>
         </div>
       </div>
 
@@ -172,7 +179,7 @@ onMounted(() => {
     letter-spacing: 0.08em;
     cursor: pointer;
     transition: all 0.3s ease;
-    margin-bottom: 48px;
+    margin-bottom: 16px;
 
     i { font-size: 0.85em; }
 
@@ -184,45 +191,80 @@ onMounted(() => {
     }
   }
 
+  &__precios-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: rgba(245,242,237,0.4);
+    text-decoration: none;
+    margin-bottom: 48px;
+    transition: color 0.2s;
+    border-bottom: 1px solid rgba(245,242,237,0.15);
+    padding-bottom: 2px;
+
+    &:hover { color: var(--mk-gold); border-color: var(--mk-gold); }
+    i { font-size: 12px; }
+  }
+
   &__emails {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 0;
     margin-bottom: 40px;
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 8px;
+    overflow: hidden;
+    background: rgba(201,168,76,0.04);
+  }
+
+  &__emails-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(201,168,76,0.6);
+    font-weight: 700;
+    padding: 14px 24px 0;
+    margin: 0;
   }
 
   &__email-row {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-    padding: 16px 24px;
-    border: 1px solid rgba(245,242,237,0.1);
-    border-radius: 4px;
-    background: rgba(245,242,237,0.03);
-    transition: border-color 0.3s, background 0.3s;
+    flex-direction: column;
+    gap: 6px;
+    padding: 16px 24px 20px;
+    border-bottom: 1px solid rgba(201,168,76,0.12);
+    transition: background 0.2s;
 
-    &:hover {
-      border-color: rgba(200,57,43,0.4);
-      background: rgba(200,57,43,0.05);
-    }
+    &:last-child { border-bottom: none; }
+
+    &:hover { background: rgba(201,168,76,0.06); }
   }
 
   &__email-who {
     font-family: 'DM Sans', sans-serif;
     font-weight: 700;
-    font-size: 14px;
-    color: var(--mk-dim);
-    letter-spacing: 0.05em;
+    font-size: 12px;
+    color: rgba(245,242,237,0.45);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
   }
 
   &__email {
     font-family: 'DM Sans', sans-serif;
-    font-size: 15px;
+    font-size: clamp(17px, 3.5vw, 22px);
+    font-weight: 500;
     color: var(--mk-gold);
     text-decoration: none;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.01em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
     transition: color 0.2s;
+
+    i { font-size: 0.75em; opacity: 0.7; }
 
     &:hover { color: var(--mk-cream); }
   }

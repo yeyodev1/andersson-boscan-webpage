@@ -6,8 +6,13 @@
     </div>
 
     <div class="p7__content" ref="contentEl">
-      <div class="p7__label">Para PYMEs · Resultado medible</div>
-      <h2 class="p7__title" ref="titleEl">PUBLICIDAD REAL<br>LEADS REALES</h2>
+      <div class="p7__badge-wrap" ref="badgeEl">
+        <span class="p7__badge-dot"></span>
+        <span class="p7__label">Para PYMEs</span>
+        <span class="p7__badge-sep">·</span>
+        <span class="p7__badge-sub">Resultado medible</span>
+      </div>
+      <h2 class="p7__title" ref="titleEl">PUBLICIDAD REAL<br><span class="p7__title-accent">LEADS REALES</span></h2>
       <p class="p7__body">
         El único formato donde el cliente recibe contactos directos — no impresiones.
         Andersson y Moni menciona tu marca en el Reel y pide comentar una palabra clave.
@@ -50,6 +55,7 @@ const sectionEl  = ref<HTMLElement | null>(null)
 const titleEl    = ref<HTMLElement | null>(null)
 const flowEl     = ref<HTMLElement | null>(null)
 const priceWrapEl = ref<HTMLElement | null>(null)
+const badgeEl    = ref<HTMLElement | null>(null)
 
 const steps = [
   {
@@ -97,7 +103,8 @@ onMounted(() => {
   })
 
   tl.from('.p7__photo-col', { x: -60, opacity: 0, duration: 1 })
-    .from(titleEl.value, { y: 40, opacity: 0, duration: 0.9 }, '-=0.7')
+    .from(badgeEl.value, { y: 20, opacity: 0, duration: 0.6 }, '-=0.7')
+    .from(titleEl.value, { y: 40, opacity: 0, duration: 0.9 }, '-=0.5')
     .from('.p7__body', { y: 20, opacity: 0, duration: 0.6 }, '-=0.5')
     .from('.p7__step', {
       y: 30, opacity: 0, stagger: 0.2, duration: 0.7,
@@ -168,14 +175,63 @@ onMounted(() => {
     }
   }
 
+  /* Badge / label row */
+  &__badge-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    background: rgba(201, 168, 76, 0.08);
+    border: 1px solid rgba(201, 168, 76, 0.25);
+    border-radius: 100px;
+    padding: 7px 16px 7px 10px;
+  }
+
+  &__badge-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--mk-gold);
+    flex-shrink: 0;
+    position: relative;
+    animation: p7-dot-pulse 1.8s ease-in-out infinite;
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 1.5px solid var(--mk-gold);
+      animation: p7-ring-pulse 1.8s ease-in-out infinite;
+    }
+  }
+
   &__label {
     font-family: 'DM Sans', sans-serif;
     font-size: 11px;
-    letter-spacing: 0.35em;
+    letter-spacing: 0.25em;
     text-transform: uppercase;
     color: var(--mk-gold);
     font-weight: 700;
-    margin-bottom: 16px;
+  }
+
+  &__badge-sep {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    color: rgba(201, 168, 76, 0.4);
+  }
+
+  &__badge-sub {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(201, 168, 76, 0.65);
+    font-weight: 500;
+  }
+
+  &__title-accent {
+    color: var(--mk-red);
   }
 
   &__title {
@@ -318,5 +374,16 @@ onMounted(() => {
       transform: translateX(4px);
     }
   }
+}
+
+@keyframes p7-dot-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.6; transform: scale(0.85); }
+}
+
+@keyframes p7-ring-pulse {
+  0%   { transform: scale(1); opacity: 0.7; }
+  70%  { transform: scale(2.2); opacity: 0; }
+  100% { transform: scale(2.2); opacity: 0; }
 }
 </style>

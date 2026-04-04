@@ -1,6 +1,30 @@
 <template>
   <div class="ag-root">
-    <MKHeader />
+
+    <!-- ── REDIRECT NOTICE (no data) ── -->
+    <Transition name="ag-success-fade">
+      <div v-if="redirecting" class="ag-success">
+        <div class="ag-success__inner">
+          <div class="ag-success__icon" style="border-color:rgba(201,168,76,0.3);color:#c9a84c;">
+            <i class="fa-solid fa-circle-info"></i>
+          </div>
+          <p class="ag-success__eyebrow">UN MOMENTO</p>
+          <h1 class="ag-success__title" style="font-size:clamp(2rem,5vw,3.5rem)">PRIMERO<br>COMPLETA TU PERFIL</h1>
+          <p class="ag-success__sub">
+            Para agendar una llamada, necesitamos conocerte un poco.
+            Te redirigimos al inicio en unos segundos…
+          </p>
+          <div class="ag-success__actions">
+            <button class="ag-btn-primary" @click="router.push('/')">
+              <i class="fa-solid fa-house"></i> Ir al inicio ahora
+            </button>
+          </div>
+        </div>
+        <div class="ag-success__bg-lines" aria-hidden="true">
+          <span v-for="n in 6" :key="n" />
+        </div>
+      </div>
+    </Transition>
 
     <!-- ── SUCCESS SCREEN ── -->
     <Transition name="ag-success-fade">
@@ -35,9 +59,9 @@
     </Transition>
 
     <!-- ── CALENDAR ── -->
-    <div v-show="!booked" class="ag-inner">
+    <div v-show="!booked && !redirecting" class="ag-inner">
       <div class="ag-topbar">
-        <span class="ag-logo">EUREKA MEDIA EC</span>
+        <span class="ag-logo">BOSCÁN &amp; LA MONI</span>
         <button class="ag-back" @click="router.push('/')">← Volver al Media Kit</button>
       </div>
 
@@ -68,14 +92,13 @@
       </div>
     </div>
 
-    <MKFooter v-show="!booked" />
+    <MKFooter v-show="!booked && !redirecting" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed, ref, onMounted, onUnmounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import MKHeader from '@/components/mediakit/MKHeader.vue'
 import MKFooter from '@/components/mediakit/MKFooter.vue'
 
 const route = useRoute()
@@ -84,6 +107,7 @@ const iframeEl    = ref<HTMLIFrameElement | null>(null); void iframeEl
 const iframeHeight = ref(820)
 const booked      = ref(false)
 const bookedName  = ref('')
+const redirecting = ref(false)
 
 function triggerBooked(name: string | null) {
   bookedName.value = name ?? ((route.query.firstName as string) ?? '')
@@ -107,7 +131,33 @@ function onMessage(e: MessageEvent) {
   }
 }
 
-onMounted(() => window.addEventListener('message', onMessage))
+onMounted(() => {
+  window.addEventListener('message', onMessage)
+
+  const hasQueryData = !!(route.query.firstName || route.query.email || route.query.phone)
+  const stored = localStorage.getItem('mk_contact_given')
+
+  if (!hasQueryData && !stored) {
+    // No contact data at all — redirect to home
+    redirecting.value = true
+    setTimeout(() => router.push('/'), 3000)
+    return
+  }
+
+  // If we have localStorage data but no query params, pre-fill from storage
+  if (!hasQueryData && stored) {
+    try {
+      const data = JSON.parse(stored)
+      const params = new URLSearchParams({
+        firstName: data.nombre   || '',
+        lastName:  data.apellido || '',
+        email:     data.correo   || '',
+        phone:     data.telefono || '',
+      })
+      router.replace(`/agendar?${params.toString()}`)
+    } catch { /* keep going without prefill */ }
+  }
+})
 onUnmounted(() => window.removeEventListener('message', onMessage))
 
 const calendarUrl = computed(() => {
