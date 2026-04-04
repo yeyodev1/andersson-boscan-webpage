@@ -95,13 +95,6 @@
               <span class="qs__social-stat">YouTube · 500K reprod/día</span>
             </div>
           </a>
-          <a href="https://www.youtube.com/@cafelaposta" target="_blank" rel="noopener" class="qs__social qs__social--yt">
-            <i class="fa-brands fa-youtube"></i>
-            <div class="qs__social-info">
-              <span class="qs__social-handle">@cafelaposta</span>
-              <span class="qs__social-stat">YouTube · Café La Posta</span>
-            </div>
-          </a>
           <a href="https://x.com/AnderssonBoscan" target="_blank" rel="noopener" class="qs__social qs__social--x">
             <i class="fa-brands fa-x-twitter"></i>
             <div class="qs__social-info">
