@@ -79,7 +79,7 @@
           :style="{ height: iframeHeight + 'px' }"
           class="ag-iframe"
           frameborder="0"
-          scrolling="no"
+          scrolling="yes"
         />
         <!-- Fallback manual trigger -->
         <p class="ag-fallback-hint">
@@ -102,7 +102,7 @@ import MKHeader from '@/components/mediakit/MKHeader.vue'
 const route = useRoute()
 const router = useRouter()
 const iframeEl    = ref<HTMLIFrameElement | null>(null); void iframeEl
-const iframeHeight = ref(820)
+const iframeHeight = ref(1100)
 const booked      = ref(false)
 const bookedName  = ref('')
 const redirecting = ref(false)
@@ -118,7 +118,7 @@ function onMessage(e: MessageEvent) {
 
   // GHL height resize (object format)
   if (typeof e.data === 'object' && !Array.isArray(e.data) && e.data.type === 'booking-app' && e.data.height) {
-    iframeHeight.value = Math.max(700, e.data.height + 40)
+    iframeHeight.value = Math.max(900, e.data.height + 120)
     return
   }
 
@@ -361,6 +361,8 @@ const calendarUrl = computed(() => {
   border-radius: 8px;
   transition: height 0.3s ease;
   background: #fff;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch; /* smooth scroll on iOS */
 }
 
 .ag-fallback-hint {
