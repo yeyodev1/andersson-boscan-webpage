@@ -49,6 +49,15 @@ const routes: Array<RouteRecordRaw> = [
     },
   },
   {
+    path: '/politica-de-privacidad',
+    name: 'PoliticaPrivacidad',
+    component: () => import('../views/PoliticaPrivacidadView.vue'),
+    meta: {
+      title: `Política de Privacidad — Andersson y Moni Boscán`,
+      description: 'Política de privacidad y protección de datos.',
+    },
+  },
+  {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
     component: () => import('../views/NotFoundView.vue'),
