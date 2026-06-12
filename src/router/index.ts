@@ -4,6 +4,15 @@ const BASE_TITLE = 'Andersson y Moni Boscán — Media Kit 2026'
 
 const routes: Array<RouteRecordRaw> = [
   {
+    path: '/login',
+    name: 'Login',
+    component: () => import('../views/LoginView.vue'),
+    meta: {
+      title: `Iniciar Sesión — Andersson y Moni Boscán`,
+      description: 'Inicia sesión para acceder a funciones exclusivas.',
+    },
+  },
+  {
     path: '/',
     name: 'MediaKit',
     component: () => import('../views/MediaKitView.vue'),
@@ -58,6 +67,15 @@ const routes: Array<RouteRecordRaw> = [
     },
   },
   {
+    path: '/integraciones',
+    name: 'Integraciones',
+    component: () => import('../views/IntegracionesView.vue'),
+    meta: {
+      title: `Panel de Integraciones — Andersson y Moni Boscán`,
+      description: 'Gestiona tus integraciones externas.',
+    },
+  },
+  {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
     component: () => import('../views/NotFoundView.vue'),
@@ -95,9 +113,9 @@ router.beforeEach((to, _from, next) => {
     return next({ path: '/login', replace: true })
   }
 
-  if (to.path === '/login' && hasToken) {
-    return next({ path: '/', replace: true })
-  }
+  // if (to.path === '/login' && hasToken) {
+  //   return next({ path: '/', replace: true })
+  // }
 
   next()
 })
