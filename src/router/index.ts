@@ -40,6 +40,15 @@ const routes: Array<RouteRecordRaw> = [
     },
   },
   {
+    path: '/terminos-y-condiciones',
+    name: 'TerminosCondiciones',
+    component: () => import('../views/TerminosCondicionesView.vue'),
+    meta: {
+      title: `Términos y Condiciones — Andersson y Moni Boscán`,
+      description: 'Términos y condiciones de uso y privacidad.',
+    },
+  },
+  {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
     component: () => import('../views/NotFoundView.vue'),
