@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { tiktokService } from '../services/TiktokService'
 
 const route = useRoute()
 const router = useRouter()
@@ -46,22 +47,13 @@ const deleteAccount = async () => {
   if (!accountToDelete.value) return
 
   try {
-    const backendUrl = window.location.hostname.includes('localhost')
-      ? `http://localhost:8101/api/tiktok/accounts/${accountToDelete.value}`
-      : `https://testing-storybrand-backapp.bakano.ec/api/tiktok/accounts/${accountToDelete.value}`
+    await tiktokService.deleteAccount(accountToDelete.value)
     
-    const res = await fetch(backendUrl, { method: 'DELETE' })
-    const json = await res.json()
-    
-    if (json.success) {
-      showToastNotification('🗑️ Cuenta eliminada correctamente')
-      await loadSavedAccounts()
-    } else {
-      showToastNotification('❌ Error al eliminar la cuenta')
-    }
-  } catch (err) {
+    showToastNotification('🗑️ Cuenta eliminada correctamente')
+    await loadSavedAccounts()
+  } catch (err: any) {
     console.error('Error deleting account:', err)
-    showToastNotification('❌ Error de red al eliminar')
+    showToastNotification('❌ Error al eliminar la cuenta')
   } finally {
     showDeleteModal.value = false
     accountToDelete.value = null
@@ -71,15 +63,8 @@ const deleteAccount = async () => {
 const loadSavedAccounts = async () => {
   loadingAccounts.value = true
   try {
-    const backendUrl = window.location.hostname.includes('localhost')
-      ? 'http://localhost:8101/api/tiktok/accounts'
-      : 'https://testing-storybrand-backapp.bakano.ec/api/tiktok/accounts'
-    
-    const res = await fetch(backendUrl)
-    const json = await res.json()
-    if (json.success && json.data) {
-      savedAccounts.value = json.data
-    }
+    const accounts = await tiktokService.getAccounts()
+    savedAccounts.value = accounts
   } catch (err) {
     console.error('Error loading accounts:', err)
   } finally {
@@ -113,25 +98,7 @@ const exchangeCodeForToken = async (code: string) => {
   try {
     const redirectUri = `${window.location.origin}/integraciones`
     
-    // Determinar la URL del backend según el entorno
-    const backendUrl = window.location.hostname.includes('localhost')
-      ? 'http://localhost:8101/api/tiktok/token'
-      : 'https://testing-storybrand-backapp.bakano.ec/api/tiktok/token'
-      
-    const response = await fetch(backendUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        client_key: CLIENT_KEY,
-        client_secret: CLIENT_SECRET,
-        code: code,
-        redirect_uri: redirectUri
-      })
-    })
-
-    const data = await response.json()
+    const data = await tiktokService.exchangeToken(code, CLIENT_KEY, CLIENT_SECRET, redirectUri)
     rawResponse.value = data
 
     if (data.error) {

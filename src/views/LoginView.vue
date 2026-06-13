@@ -2,6 +2,8 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
+import { authService } from '../services/AuthService'
+
 const router = useRouter()
 
 const email = ref('')
@@ -14,22 +16,7 @@ const handleLogin = async () => {
   errorMsg.value = null
 
   try {
-    const response = await fetch('https://testing-storybrand-backapp.bakano.ec/api/auth/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        email: email.value,
-        password: password.value
-      })
-    })
-
-    const data = await response.json()
-
-    if (!response.ok) {
-      throw new Error(data.error || 'Ocurrió un error al iniciar sesión')
-    }
+    const data = await authService.login(email.value, password.value)
 
     // Guardarlo en localStorage
     localStorage.setItem('access_token', data.token)
@@ -39,7 +26,7 @@ const handleLogin = async () => {
     // No establecemos loading a false aquí porque el componente se va a desmontar
 
   } catch (error: any) {
-    errorMsg.value = error.message
+    errorMsg.value = error.message || 'Ocurrió un error al iniciar sesión'
     loading.value = false // Solo apagar el loading si hubo error
   }
 }
