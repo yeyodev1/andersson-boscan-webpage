@@ -33,6 +33,41 @@ const handleLogout = () => {
   router.push('/login')
 }
 
+// Estado para Eliminar Cuenta
+const showDeleteModal = ref(false)
+const accountToDelete = ref<string | null>(null)
+
+const confirmDeleteAccount = (openId: string) => {
+  accountToDelete.value = openId
+  showDeleteModal.value = true
+}
+
+const deleteAccount = async () => {
+  if (!accountToDelete.value) return
+
+  try {
+    const backendUrl = window.location.hostname.includes('localhost')
+      ? `http://localhost:8101/api/tiktok/accounts/${accountToDelete.value}`
+      : `https://testing-storybrand-backapp.bakano.ec/api/tiktok/accounts/${accountToDelete.value}`
+    
+    const res = await fetch(backendUrl, { method: 'DELETE' })
+    const json = await res.json()
+    
+    if (json.success) {
+      showToastNotification('🗑️ Cuenta eliminada correctamente')
+      await loadSavedAccounts()
+    } else {
+      showToastNotification('❌ Error al eliminar la cuenta')
+    }
+  } catch (err) {
+    console.error('Error deleting account:', err)
+    showToastNotification('❌ Error de red al eliminar')
+  } finally {
+    showDeleteModal.value = false
+    accountToDelete.value = null
+  }
+}
+
 const loadSavedAccounts = async () => {
   loadingAccounts.value = true
   try {
@@ -62,7 +97,7 @@ const loginWithTikTok = () => {
   
   let url = 'https://www.tiktok.com/v2/auth/authorize/'
   url += `?client_key=${CLIENT_KEY}`
-  url += '&scope=user.info.basic'
+  url += '&scope=user.info.basic,video.upload'
   url += '&response_type=code'
   url += `&redirect_uri=${encodeURIComponent(redirectUri)}`
   url += `&state=${csrfState}`
@@ -173,6 +208,18 @@ onMounted(() => {
     </div>
   </div>
 
+  <!-- Modal de Confirmación de Eliminar Cuenta -->
+  <div v-if="showDeleteModal" class="modal-overlay" @click.self="showDeleteModal = false">
+    <div class="modal-content">
+      <h3>¿Eliminar cuenta?</h3>
+      <p>Esta acción desvinculará la cuenta de TikTok de tu panel. ¿Estás seguro?</p>
+      <div class="modal-actions">
+        <button @click="showDeleteModal = false" class="btn-cancel">Cancelar</button>
+        <button @click="deleteAccount" class="btn-danger"><i class="fa-solid fa-trash"></i> Eliminar</button>
+      </div>
+    </div>
+  </div>
+
   <main class="dashboard-container">
     <header class="app-header">
       <div class="logo">Andersson Boscán Admin</div>
@@ -234,9 +281,14 @@ onMounted(() => {
                       <span class="display-name" v-if="account.display_name">{{ account.display_name }}</span>
                     </div>
                   </div>
-                  <button @click="copyToClipboard(account.access_token)" class="copy-btn copy-btn-primary">
-                    <i class="fa-regular fa-copy"></i> <span>Copiar Token</span>
-                  </button>
+                  <div class="account-actions">
+                    <button @click="copyToClipboard(account.access_token)" class="copy-btn copy-btn-primary" title="Copiar Token">
+                      <i class="fa-regular fa-copy"></i> <span>Copiar Token</span>
+                    </button>
+                    <button @click="confirmDeleteAccount(account.open_id)" class="delete-btn" title="Eliminar cuenta">
+                      <i class="fa-solid fa-trash"></i>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -683,37 +735,67 @@ onMounted(() => {
       }
     }
 
-    .copy-btn {
-      flex-shrink: 0;
-      display: inline-flex;
+    .account-actions {
+      display: flex;
       align-items: center;
       gap: 0.5rem;
-      white-space: nowrap;
-      background-color: rgba(254, 44, 85, 0.15);
-      color: #fe2c55;
-      border: 1px solid rgba(254, 44, 85, 0.3);
-      border-radius: 8px;
-      padding: 0.6rem 1rem;
-      font-size: 0.9rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s ease;
+      flex-shrink: 0;
 
-      &:hover {
-        background-color: rgba(254, 44, 85, 0.8);
-        color: #ffffff;
+      .copy-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        white-space: nowrap;
+        background-color: rgba(254, 44, 85, 0.15);
+        color: #fe2c55;
+        border: 1px solid rgba(254, 44, 85, 0.3);
+        border-radius: 8px;
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover {
+          background-color: rgba(254, 44, 85, 0.8);
+          color: #ffffff;
+        }
+        
+        &:active {
+          background-color: #fe2c55;
+          transform: scale(0.95);
+        }
+        
+        /* Si la pantalla es muy pequeña, esconder el texto y dejar solo el icono */
+        @media (max-width: 480px) {
+          padding: 0.6rem;
+          span {
+            display: none;
+          }
+        }
       }
-      
-      &:active {
-        background-color: #fe2c55;
-        transform: scale(0.95);
-      }
-      
-      /* Si la pantalla es muy pequeña, esconder el texto y dejar solo el icono */
-      @media (max-width: 480px) {
+
+      .delete-btn {
+        background-color: rgba(255, 255, 255, 0.05);
+        color: #a0a0a0;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
         padding: 0.6rem;
-        span {
-          display: none;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:hover {
+          background-color: rgba(254, 44, 85, 0.15);
+          color: #fe2c55;
+          border-color: rgba(254, 44, 85, 0.3);
+        }
+        
+        &:active {
+          transform: scale(0.95);
         }
       }
     }

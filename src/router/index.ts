@@ -73,6 +73,7 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       title: `Panel de Integraciones — Andersson y Moni Boscán`,
       description: 'Gestiona tus integraciones externas.',
+      requiresAuth: true
     },
   },
   {
@@ -113,9 +114,9 @@ router.beforeEach((to, _from, next) => {
     return next({ path: '/login', replace: true })
   }
 
-  // if (to.path === '/login' && hasToken) {
-  //   return next({ path: '/', replace: true })
-  // }
+  if (to.path === '/login' && hasToken) {
+    return next({ path: '/integraciones', replace: true })
+  }
 
   next()
 })
