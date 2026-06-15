@@ -82,7 +82,7 @@ const loginWithTikTok = () => {
   
   let url = 'https://www.tiktok.com/v2/auth/authorize/'
   url += `?client_key=${CLIENT_KEY}`
-  url += '&scope=user.info.basic,video.upload'
+  url += '&scope=user.info.basic,video.upload,video.publish'
   url += '&response_type=code'
   url += `&redirect_uri=${encodeURIComponent(redirectUri)}`
   url += `&state=${csrfState}`
