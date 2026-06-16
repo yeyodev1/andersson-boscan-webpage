@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { tiktokService } from '../services/TiktokService'
+import { instagramService, type InstagramAccount } from '../services/InstagramService'
 
 const route = useRoute()
 const router = useRouter()
@@ -16,6 +17,17 @@ const accessToken = ref<string | null>(null)
 const showLogoutModal = ref(false)
 const rawResponse = ref<any>(null)
 const savedAccounts = ref<any[]>([])
+
+// Estado para Instagram
+const igLoading = ref(false)
+const igErrorMsg = ref<string | null>(null)
+const igAccounts = ref<InstagramAccount[]>([])
+const igClientId = ref('')
+const igClientSecret = ref('')
+const igShortLivedToken = ref('')
+
+const igShowForm = ref(false)
+const igAccountToDelete = ref<string | null>(null)
 
 // Estado para Toast Notification
 const showToast = ref(false)
@@ -60,11 +72,37 @@ const deleteAccount = async () => {
   }
 }
 
+const confirmDeleteIgAccount = (accountId: string) => {
+  igAccountToDelete.value = accountId
+  showDeleteModal.value = true
+}
+
+const deleteIgAccount = async () => {
+  if (!igAccountToDelete.value) return
+
+  try {
+    await instagramService.deleteAccount(igAccountToDelete.value)
+    
+    showToastNotification('🗑️ Cuenta de Instagram eliminada')
+    await loadSavedAccounts()
+  } catch (err: any) {
+    console.error('Error deleting IG account:', err)
+    showToastNotification('❌ Error al eliminar la cuenta de Instagram')
+  } finally {
+    showDeleteModal.value = false
+    igAccountToDelete.value = null
+  }
+}
+
 const loadSavedAccounts = async () => {
   loadingAccounts.value = true
   try {
-    const accounts = await tiktokService.getAccounts()
-    savedAccounts.value = accounts
+    const [tiktokAccs, igAccs] = await Promise.all([
+      tiktokService.getAccounts(),
+      instagramService.getAccounts()
+    ])
+    savedAccounts.value = tiktokAccs
+    igAccounts.value = igAccs
   } catch (err) {
     console.error('Error loading accounts:', err)
   } finally {
@@ -115,6 +153,38 @@ const exchangeCodeForToken = async (code: string) => {
     loading.value = false
     // Limpiar la URL para no dejar el código visible
     router.replace({ path: '/integraciones' })
+  }
+}
+
+const handleInstagramConnect = async () => {
+  if (!igClientId.value || !igClientSecret.value || !igShortLivedToken.value) {
+    igErrorMsg.value = "Por favor ingresa todos los campos requeridos."
+    return
+  }
+
+  igLoading.value = true
+  igErrorMsg.value = null
+
+  try {
+    const response = await instagramService.exchangeToken(
+      igShortLivedToken.value, 
+      igClientId.value, 
+      igClientSecret.value
+    )
+    
+    if (response.error) {
+      igErrorMsg.value = response.error
+    } else {
+      showToastNotification('✅ Cuenta de Instagram conectada con éxito')
+      igShortLivedToken.value = ''
+      igShowForm.value = false
+      await loadSavedAccounts()
+    }
+  } catch (error: any) {
+    console.error('Error al conectar Instagram:', error)
+    igErrorMsg.value = error.response?.data?.error || error.message || 'Error al conectar'
+  } finally {
+    igLoading.value = false
   }
 }
 
@@ -179,10 +249,11 @@ onMounted(() => {
   <div v-if="showDeleteModal" class="modal-overlay" @click.self="showDeleteModal = false">
     <div class="modal-content">
       <h3>¿Eliminar cuenta?</h3>
-      <p>Esta acción desvinculará la cuenta de TikTok de tu panel. ¿Estás seguro?</p>
+      <p>Esta acción desvinculará la cuenta de tu panel. ¿Estás seguro?</p>
       <div class="modal-actions">
         <button @click="showDeleteModal = false" class="btn-cancel">Cancelar</button>
-        <button @click="deleteAccount" class="btn-danger"><i class="fa-solid fa-trash"></i> Eliminar</button>
+        <button v-if="accountToDelete" @click="deleteAccount" class="btn-danger"><i class="fa-solid fa-trash"></i> Eliminar TikTok</button>
+        <button v-if="igAccountToDelete" @click="deleteIgAccount" class="btn-danger"><i class="fa-solid fa-trash"></i> Eliminar Instagram</button>
       </div>
     </div>
   </div>
@@ -270,7 +341,93 @@ onMounted(() => {
           </div>
         </div>
         
-        <!-- Aquí pueden ir más tarjetas de integración en el futuro -->
+        <!-- Tarjeta de Instagram -->
+        <div class="integration-card">
+          <div class="card-header">
+            <div class="brand-info">
+              <svg class="brand-icon instagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style="fill: #E1306C">
+                <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/>
+              </svg>
+              <h3>Instagram</h3>
+            </div>
+            <span class="status-badge" :class="{ 'connected': igAccounts.length > 0 }">
+              {{ igAccounts.length > 0 ? `${igAccounts.length} Cuentas` : 'No conectado' }}
+            </span>
+          </div>
+
+          <div class="card-body">
+            <p class="description" v-if="igAccounts.length === 0 && !igLoading && !loadingAccounts && !igShowForm">
+              Conecta tu cuenta de Instagram Business para automatizar publicaciones.
+            </p>
+
+            <div v-if="igLoading || loadingAccounts" class="loading-state">
+              <div class="spinner"></div>
+              <p>{{ igLoading ? 'Obteniendo Token Largo...' : 'Cargando cuentas...' }}</p>
+            </div>
+
+            <div v-if="igErrorMsg" class="error-message">
+              <strong>Error:</strong> {{ igErrorMsg }}
+              <p class="small-note">Verifica la consola para más detalles.</p>
+            </div>
+
+            <!-- Formulario Manual para Instagram -->
+            <div v-if="igShowForm && !igLoading" class="ig-form">
+              <div class="form-group">
+                <label>App ID (Facebook Dev)</label>
+                <input v-model="igClientId" type="text" placeholder="Ej: 123456789012" class="form-input" />
+              </div>
+              <div class="form-group">
+                <label>App Secret (Facebook Dev)</label>
+                <input v-model="igClientSecret" type="password" placeholder="Tu App Secret" class="form-input" />
+              </div>
+              <div class="form-group">
+                <label>Short-Lived Token (Graph API Explorer)</label>
+                <textarea v-model="igShortLivedToken" placeholder="Pega aquí tu token de corta duración..." class="form-input textarea" rows="4"></textarea>
+              </div>
+              
+              <div class="form-actions">
+                <button @click="igShowForm = false" class="btn-cancel">Cancelar</button>
+                <button @click="handleInstagramConnect" class="btn-primary">Obtener Long Token</button>
+              </div>
+            </div>
+
+            <!-- Panel de éxito con Múltiples Cuentas Instagram -->
+            <div v-if="igAccounts.length > 0 && !loadingAccounts && !igShowForm" class="success-state">
+              <div class="success-header">
+                <div class="success-icon"><i class="fa-solid fa-check"></i></div>
+                <h4>Cuentas Vinculadas</h4>
+              </div>
+              
+              <div class="accounts-list">
+                <div v-for="account in igAccounts" :key="account.ig_account_id" class="account-row">
+                  <div class="account-profile">
+                    <img v-if="account.profile_picture_url" :src="account.profile_picture_url" alt="Avatar" class="avatar-img" />
+                    <div v-else class="avatar-placeholder"><i class="fa-brands fa-instagram"></i></div>
+                    <div class="account-info">
+                      <span class="username">@{{ account.username }}</span>
+                      <span class="display-name">{{ account.followers_count }} seguidores</span>
+                    </div>
+                  </div>
+                  <div class="account-actions">
+                    <button @click="copyToClipboard(account.access_token)" class="copy-btn copy-btn-primary" title="Copiar Long Token">
+                      <i class="fa-regular fa-copy"></i> <span>Copiar Token</span>
+                    </button>
+                    <button @click="confirmDeleteIgAccount(account.ig_account_id)" class="delete-btn" title="Eliminar cuenta">
+                      <i class="fa-solid fa-trash"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="actions-footer" v-if="!igShowForm && !igLoading">
+              <button @click="igShowForm = true" class="btn-primary btn-large">
+                <span v-if="igAccounts.length > 0"><i class="fa-solid fa-arrows-rotate"></i> Conectar otra cuenta</span>
+                <span v-else>Conectar con Short Token</span>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </main>
@@ -790,6 +947,76 @@ onMounted(() => {
   &:hover {
     background-color: #e62045;
     transform: translateY(-2px);
+  }
+}
+
+/* Instagram Form Styles */
+.ig-form {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+
+  .form-group {
+    margin-bottom: 1.2rem;
+    
+    label {
+      display: block;
+      color: #a0a0a0;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .form-input {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: white;
+      padding: 0.8rem 1rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      
+      &:focus {
+        outline: none;
+        border-color: #E1306C;
+        box-shadow: 0 0 0 2px rgba(225, 48, 108, 0.2);
+      }
+
+      &.textarea {
+        resize: vertical;
+        min-height: 80px;
+        font-family: monospace;
+        font-size: 0.85rem;
+      }
+    }
+  }
+
+  .form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+
+    button {
+      flex: 1;
+      padding: 0.8rem;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+    }
+
+    .btn-cancel {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      &:hover { background: rgba(255, 255, 255, 0.2); }
+    }
+
+    .btn-primary {
+      background: #E1306C;
+      color: white;
+      &:hover { background: #C13584; }
+    }
   }
 }
 </style>
