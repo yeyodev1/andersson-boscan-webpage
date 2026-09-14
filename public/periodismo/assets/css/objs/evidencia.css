@@ -1,0 +1,25 @@
+/* sobre de evidencia (Progen): kraft, solapa triangular con botón y cordel, etiqueta roja EVIDENCIA a la izquierda */
+.obj--evidencia { --obg: #C9A46B; --ofg: #1B1510; --oacc: #C8102E; border-radius: 0; padding-top: 74px;
+  background-image: linear-gradient(90deg, rgba(255,255,255,.06) 0 1px, transparent 1px 6px), linear-gradient(0deg, rgba(70,45,10,.06) 0 1px, transparent 1px 9px), linear-gradient(160deg, #D2AE76, #C39E63 55%, #B8925A); }
+/* solapa cerrada (triángulo) con la sombra de su borde */
+.obj--evidencia::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 74px; z-index: 2; clip-path: polygon(0 0, 100% 0, 50% 100%); background: linear-gradient(180deg, #BE995F, #AC8850); filter: drop-shadow(0 2px 2px rgba(40,25,5,.35)); }
+/* botón, cordel en ocho y etiqueta roja: un solo SVG de fondo sobre la solapa */
+.obj--evidencia .obj__cuerpo { position: relative; padding-top: 88px; }
+.obj--evidencia .obj__cuerpo::before { content: ""; position: absolute; left: 50%; top: -22px; width: 60px; height: 96px; margin-left: -30px; z-index: 3; pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 96'><path d='M30 10c-11 0-11 13 0 15s11 15 0 17-11 13 0 15 11 15 0 17-11 13 0 15' fill='none' stroke='%236E4B2A' stroke-width='2' stroke-linecap='round'/><circle cx='30' cy='12' r='8' fill='%23E8DCBF' stroke='%238D7650' stroke-width='2'/><circle cx='30' cy='12' r='2' fill='%237A6240'/><circle cx='30' cy='72' r='8' fill='%23E8DCBF' stroke='%238D7650' stroke-width='2'/><circle cx='30' cy='72' r='2' fill='%237A6240'/></svg>"); background-repeat: no-repeat; background-size: 60px 96px; }
+.obj--evidencia .obj__cuerpo::after { content: "Evidencia"; position: absolute; left: 18px; top: 18px; z-index: 3; font-family: 'Archivo Black', 'Arial Black', sans-serif; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: #FFF; background: var(--oacc); padding: 7px 12px 6px; border: 1.5px solid #1B1510; box-shadow: 3px 3px 0 #1B1510; transform: rotate(-2deg); }
+.obj--evidencia .obj__img { aspect-ratio: 16 / 8; filter: grayscale(1) contrast(1.2); mix-blend-mode: multiply; opacity: .78; margin-top: 4px; }
+.obj--evidencia h3 { text-transform: uppercase; font-size: clamp(20px, 1.6vw, 26px); letter-spacing: -.005em; line-height: 1; }
+.obj--evidencia .obj__anio { font-family: 'Archivo Black', sans-serif; font-weight: 400; }
+.obj--evidencia .obj__tema { color: var(--oacc); opacity: 1; font-weight: 600; }
+/* banda roja "no consta en el expediente" cruzando la esquina inferior */
+.obj--evidencia .obj__abrir { position: relative; }
+.obj--evidencia .obj__abrir::before { content: "No consta en el expediente"; position: absolute; right: -30px; bottom: -26px; padding: 5px 40px; background: var(--oacc); color: #FFF; font-family: 'Archivo Black', 'Arial Black', sans-serif; font-size: 9px; letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; transform: rotate(-7deg); pointer-events: none; box-shadow: 0 4px 8px -4px rgba(0,0,0,.5); }
+/* la banda no debe desbordar el objeto en pantallas angostas */
+.obj--evidencia { overflow: clip; overflow-clip-margin: 46px; }
+/* el enlace necesita aire debajo para que la banda no lo tape */
+.obj--evidencia .obj__abrir { display: block; padding-bottom: 44px; }
+/* la cámara se sube para no montarse sobre la banda */
+.obj--evidencia .recuerdo { left: -40px; right: auto; bottom: 14px; }
+/* en pantalla angosta la cámara vuelve adentro para no salirse del teléfono */
+@media (max-width: 560px) { .obj--evidencia .recuerdo { left: auto; right: 10px; bottom: 66px; } }

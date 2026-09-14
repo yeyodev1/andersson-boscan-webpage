@@ -1,0 +1,239 @@
+/* EPICRISIS · Los neonatos del Hospital Universitario: hoja de epicrisis con pestaña de historia clínica y censo de termocunas.
+   Blanco quirúrgico, azul pálido de bata, gris de acero y un solo rojo oscuro. Sora (display, números) + Noto Serif (texto). */
+.fmt--epicrisis { --bg: #F7F9FB; --bg-2: #E8EEF3; --fg: #1B232E; --mute: #5E6A77; --acc: #8A1C1C; --acc-2: #5B7085; --line-x: rgba(27,35,46,.16);
+  --acero: #8492A1; --bata: #CBDAE6; --bata-2: #DCE6EE; --papel: #FFFFFF; --hueco: #E4ECF3;
+  --f-display: 'Sora', system-ui, sans-serif; --f-body: 'Noto Serif', Georgia, serif; --f-mono: 'Sora', system-ui, sans-serif; --f-label: 'Sora', system-ui, sans-serif; --radius: 3px; }
+.fmt--epicrisis::after { opacity: 0; }
+.fmt--epicrisis .topbar { background: rgba(247,249,251,.9); }
+.fmt--epicrisis .footer { background: #1B232E; }
+.fmt--epicrisis .htitle, .fmt--epicrisis .cap__title, .fmt--epicrisis .fmod__head h2 { font-weight: 800; letter-spacing: -.035em; }
+.fmt--epicrisis .htitle em, .fmt--epicrisis .cap__title em, .fmt--epicrisis .fmod__head h2 em { font-style: normal; font-weight: 300; color: var(--acc); }
+.fmt--epicrisis .kicker, .fmt--epicrisis .hkicker, .fmt--epicrisis .cap__num { font-weight: 600; letter-spacing: .18em; }
+.fmt--epicrisis .mono, .fmt--epicrisis .fnav a b, .fmt--epicrisis .ftl__f, .fmt--epicrisis .hito b, .fmt--epicrisis .hstats b, .fmt--epicrisis .censo__n b { font-variant-numeric: tabular-nums lining-nums; }
+
+/* ---------- Portada: la hoja de epicrisis ---------- */
+.hero--epicrisis { --bg: #E4ECF3; padding: 132px 0 64px; min-height: 0; display: block; background: var(--bg); }
+.fmt--epicrisis .hero__art { inset: 0; }
+.fmt--epicrisis .hero__art img { opacity: .55; filter: grayscale(.85) contrast(1.05); mask-image: linear-gradient(180deg, transparent 0, #000 40%); -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 40%); }
+.epi { position: relative; background: var(--papel); border: 1px solid var(--line-x); padding: 34px 44px 30px 76px;
+  box-shadow: 0 2px 4px rgba(27,35,46,.06), 0 44px 70px -40px rgba(27,35,46,.5);
+  background-image: linear-gradient(90deg, transparent 56px, rgba(138,28,28,.5) 56px, rgba(138,28,28,.5) 57px, transparent 57px); }
+.epi::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 40px; pointer-events: none;
+  background: radial-gradient(circle at 20px 36px, var(--hueco) 6px, rgba(27,35,46,.22) 6.5px, transparent 7.5px) 0 0 / 40px 72px repeat-y; }
+.epi__tab { position: absolute; right: 48px; top: -36px; height: 36px; display: flex; align-items: center; gap: 14px; padding: 0 20px; background: var(--bata); border: 1px solid var(--line-x); border-bottom: 0; border-radius: 8px 8px 0 0;
+  font-family: var(--f-label); font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--mute); white-space: nowrap; }
+.epi__tab::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--acc); flex: none; }
+.epi__tab b { color: var(--fg); font-weight: 600; letter-spacing: .1em; }
+.epi__head { display: grid; gap: 22px 40px; grid-template-columns: 1fr; padding-bottom: 22px; margin-bottom: 34px; border-bottom: 2px solid var(--fg); }
+@media (min-width: 900px) { .epi__head { grid-template-columns: 210px minmax(0, 1fr); align-items: start; } }
+.epi__doc b { display: block; font-family: var(--f-display); font-weight: 800; font-size: 26px; letter-spacing: .14em; text-transform: uppercase; line-height: 1; }
+.epi__doc span { display: block; margin-top: 8px; font-family: var(--f-label); font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--mute); line-height: 1.5; }
+.epi__ficha { display: grid; gap: 14px 28px; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
+.epi__f span { display: block; font-family: var(--f-label); font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--mute); margin-bottom: 5px; }
+.epi__f b { display: block; font-family: var(--f-body); font-weight: 400; font-size: 14.5px; line-height: 1.35; padding-bottom: 5px; border-bottom: 1px dotted rgba(27,35,46,.45); }
+.epi__f:last-child b { color: var(--acc); font-weight: 600; }
+.epi__grid { display: grid; gap: 40px; grid-template-columns: 1fr; }
+@media (min-width: 1000px) { .epi__grid { grid-template-columns: minmax(0, 1.2fr) minmax(320px, .8fr); gap: clamp(36px, 5vw, 80px); align-items: start; } }
+.hero--epicrisis .hkicker { color: var(--mute); }
+.hero--epicrisis .hkicker::before { background: var(--acc); }
+.hero--epicrisis .htitle { font-size: clamp(42px, 6.4vw, 96px); line-height: .94; text-transform: uppercase; letter-spacing: -.03em; max-width: 12ch; margin-bottom: 22px; }
+.hero--epicrisis .hdeck { font-size: clamp(15.5px, 1.15vw, 18px); line-height: 1.52; max-width: 62ch; color: #2C3541; }
+.hero--epicrisis .hby { border-top-color: var(--line-x); margin-bottom: 0; }
+.epi__censo { padding: 22px 0 0; border-top: 1px solid var(--line-x); }
+@media (min-width: 1000px) { .epi__censo { border-top: 0; padding: 6px 0 0 32px; border-left: 1px solid var(--line-x); } }
+.epi__censo-h { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 18px; font-family: var(--f-label); font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--mute); }
+.epi__censo-h b { font-family: var(--f-display); font-size: 15px; letter-spacing: 0; text-transform: none; color: var(--fg); font-weight: 700; }
+.epi__foot { margin-top: 34px; padding-top: 22px; border-top: 1px solid var(--line-x); }
+.hero--epicrisis .hstats { text-shadow: none; gap: 14px 36px; }
+.hero--epicrisis .hstats b { font-family: var(--f-display); font-weight: 800; font-size: clamp(26px, 2.6vw, 38px); color: var(--fg); background: none; padding: 0; }
+.hero--epicrisis .hstats > div:nth-child(2) b, .hero--epicrisis .hstats > div:nth-child(4) b { color: var(--acc); }
+.hero--epicrisis .hstats > div:nth-child(3) b { color: var(--acc-2); }
+.hero--epicrisis .hstats span { color: var(--mute); }
+
+/* ---------- Termocunas (CSS puro) ---------- */
+.cunas { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px 10px; }
+.cuna { position: relative; display: grid; }
+.cuna__domo { position: relative; display: block; aspect-ratio: 5 / 3.4; box-sizing: border-box; border: 1.5px solid var(--acero); border-radius: 48% 48% 5px 5px / 68% 68% 5px 5px; background: linear-gradient(180deg, #FFFFFF, #EEF3F7); }
+.cuna__domo::after { content: ""; position: absolute; left: 14%; right: 14%; bottom: 13%; height: 20%; border-radius: 2px; background: var(--bata); }
+.cuna__base { position: relative; display: block; height: 9px; margin: 0 14%; border-top: 2px solid var(--acero); }
+.cuna__base::before, .cuna__base::after { content: ""; position: absolute; top: 0; width: 2px; height: 9px; background: var(--acero); }
+.cuna__base::before { left: 12%; } .cuna__base::after { right: 12%; }
+.cuna__n { display: block; text-align: center; font-family: var(--f-label); font-size: 9.5px; letter-spacing: .1em; color: var(--mute); margin-top: 3px; font-variant-numeric: tabular-nums; }
+.cuna--rec .cuna__domo, .cuna--kpc .cuna__domo { background: linear-gradient(180deg, #DCE6EE, #BFCFDD); border-color: var(--acc-2); }
+.cuna--rec .cuna__domo::after, .cuna--kpc .cuna__domo::after { background: #FFFFFF; }
+.cuna--rec .cuna__base, .cuna--kpc .cuna__base { border-top-color: var(--acc-2); }
+.cuna--rec .cuna__base::before, .cuna--rec .cuna__base::after, .cuna--kpc .cuna__base::before, .cuna--kpc .cuna__base::after { background: var(--acc-2); }
+.cuna--kpc .cuna__domo::before { content: "KPC"; position: absolute; right: -6px; top: -8px; z-index: 1; padding: 2px 4px 1px; border-radius: 2px; background: var(--acc); color: #fff; font-family: var(--f-label); font-size: 8px; font-weight: 700; letter-spacing: .08em; line-height: 1.2; }
+.cuna--dis .cuna__domo { border-style: dashed; border-color: var(--acc); background: transparent; }
+.cuna--dis .cuna__domo::after { display: none; }
+.cuna--dis .cuna__n { color: var(--acc); font-weight: 600; }
+.cunas--hero .cuna { opacity: 0; animation: cunaIn .6s var(--ease-out) forwards; animation-delay: calc(.5s + var(--i) * 55ms); }
+@keyframes cunaIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.cunas__leg { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 6px; font-family: var(--f-label); font-size: 11.5px; line-height: 1.35; color: var(--mute); }
+.cunas__leg li { display: flex; align-items: center; gap: 10px; }
+.cunas__leg i { flex: none; width: 18px; height: 12px; box-sizing: border-box; border-radius: 9px 9px 2px 2px; border: 1.5px solid var(--acero); }
+.leg--rec i { background: #BFCFDD; border-color: var(--acc-2); }
+.leg--kpc i { background: #BFCFDD; border-color: var(--acc-2); box-shadow: inset 0 -4px 0 var(--acc); }
+.leg--dis i { border-style: dashed; border-color: var(--acc); }
+
+/* ---------- Navegación, claves, cuerpo ---------- */
+.fmt--epicrisis .fnav { background: rgba(247,249,251,.94); border-color: var(--line-x); }
+.fmt--epicrisis .fnav a { font-size: 12px; font-weight: 600; letter-spacing: .06em; padding: 15px 16px 13px; }
+.fmt--epicrisis .fnav a b { color: var(--acc); font-weight: 700; }
+.fmt--epicrisis .fnav a:hover, .fmt--epicrisis .fnav a.is-active { border-bottom-color: var(--acc); color: var(--fg); }
+.fmt--epicrisis .claves li { border-top-color: var(--acc-2); font-size: 15px; }
+.fmt--epicrisis .claves li::before { color: var(--acc); font-weight: 600; }
+.fmt--epicrisis .cap__num { color: var(--acc); font-size: 11px; }
+.fmt--epicrisis .cap__title { font-size: clamp(30px, 3.8vw, 54px); line-height: 1.02; }
+.fmt--epicrisis .ftext { font-size: clamp(16.5px, 1.2vw, 18.5px); line-height: 1.68; color: #232C38; }
+.fmt--epicrisis .cap:first-child .ftext > p:first-of-type::first-letter { font-family: var(--f-display); font-weight: 800; color: var(--acc); font-size: 4.2em; padding-right: .14em; }
+.fmt--epicrisis .fcita p { font-family: var(--f-body); font-style: italic; font-weight: 400; font-size: clamp(21px, 2.2vw, 31px); line-height: 1.28; color: var(--fg); }
+.fmt--epicrisis .fcita::before { font-family: var(--f-display); font-weight: 800; opacity: .16; }
+.fmt--epicrisis .fcita cite { color: var(--mute); font-weight: 600; }
+.fmt--epicrisis .fdato b { font-weight: 800; color: var(--acc); background: none; }
+.fmt--epicrisis .fdato span { font-family: var(--f-body); font-style: italic; color: var(--mute); }
+.fmt--epicrisis .estado::before { background: var(--acc); }
+.fmt--epicrisis .estado--amarillo::before { background: #B98A1E; }
+.fmt--epicrisis .estado b { font-weight: 700; font-size: 24px; line-height: 1.15; }
+.fmt--epicrisis .estado p { color: var(--mute); font-family: var(--f-body); font-size: 13.5px; }
+
+/* ---------- Módulos genéricos ---------- */
+.fmt--epicrisis .fmod__head .kicker { color: var(--mute); }
+.fmt--epicrisis .fmod__head h2 { font-size: clamp(26px, 3.2vw, 44px); }
+.fmt--epicrisis .ftl { border-left: 2px solid var(--bata); }
+.fmt--epicrisis .ftl li::before { background: var(--acc-2); }
+.fmt--epicrisis .ftl__f { font-weight: 600; font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--acc); }
+.fmt--epicrisis .ftl b { font-weight: 700; font-size: 19px; }
+.fmt--epicrisis .ftl p { font-family: var(--f-body); font-size: 14px; }
+.fmt--epicrisis .fper { border-bottom-color: var(--line-x); }
+.fmt--epicrisis .fper .badge { color: var(--acc-2); border-color: var(--acc-2); }
+.fmt--epicrisis .fper h3 { font-weight: 700; font-size: 19px; }
+.fmt--epicrisis .fper p { font-family: var(--f-body); font-size: 13.5px; }
+.fmt--epicrisis .fper__foto { border-color: var(--acc-2); }
+.fmt--epicrisis .fresp li { border-left-color: var(--acc-2); }
+.fmt--epicrisis .fresp b { color: var(--acc); }
+.fmt--epicrisis .fresp p { font-size: 15px; }
+.fmt--epicrisis .preguntas li { font-family: var(--f-body); font-size: clamp(17px, 1.4vw, 20px); }
+.fmt--epicrisis .preguntas li::before { font-weight: 700; }
+.fmt--epicrisis .cierre { padding: 26px 28px 22px 36px; background: var(--papel); border: 1px solid var(--line-x); box-shadow: 0 24px 40px -32px rgba(27,35,46,.45);
+  background-image: linear-gradient(90deg, transparent 20px, rgba(138,28,28,.45) 20px, rgba(138,28,28,.45) 21px, transparent 21px); }
+.fmt--epicrisis .cierre__lineas li { border-bottom: 1px dotted rgba(27,35,46,.4); font-size: 14px; }
+.fmt--epicrisis .cierre__lineas b { font-weight: 700; font-size: 15.5px; }
+.fmt--epicrisis .cierre__fecha { color: var(--mute); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; }
+.fmt--epicrisis .despues { background: var(--bg-2); }
+.fmt--epicrisis .hito::before { background: var(--acc); }
+.fmt--epicrisis .hito b { font-weight: 600; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }
+.fmt--epicrisis .hito h3 { font-weight: 700; font-size: 21px; }
+.fmt--epicrisis .hito p { font-family: var(--f-body); }
+.fmt--epicrisis .fcred dt { color: var(--acc); }
+.fmt--epicrisis .vid__meta h3 { font-weight: 600; }
+
+/* ---------- Módulo característico: censo de la sala ---------- */
+.fmod--censo { padding-top: 8px; }
+.censo { display: grid; gap: 40px; grid-template-columns: 1fr; }
+@media (min-width: 960px) { .censo { grid-template-columns: minmax(0, 1.05fr) minmax(300px, .95fr); gap: clamp(40px, 5vw, 80px); align-items: start; } }
+.censo__conteo { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-bottom: 26px; padding-bottom: 22px; border-bottom: 2px solid var(--fg); }
+.censo__n b { display: block; font-family: var(--f-display); font-weight: 800; font-size: clamp(44px, 5.4vw, 76px); line-height: .95; letter-spacing: -.04em; color: var(--fg); }
+.censo__n--rec b { color: var(--acc-2); }
+.censo__n--kpc b { color: var(--acc); }
+.censo__n span { display: block; margin-top: 8px; font-family: var(--f-label); font-size: 11.5px; line-height: 1.4; color: var(--mute); }
+.cunas--mod { gap: 16px 14px; }
+.cunas--mod .cuna__n { font-size: 10.5px; }
+.censo .cuna { opacity: 0; transform: translateY(8px); transition: opacity .5s var(--ease-out), transform .5s var(--ease-out); transition-delay: calc(var(--i) * 55ms); }
+.censo.in .cuna { opacity: 1; transform: none; }
+.cunas--mod + .cunas__leg { margin-top: 20px; font-size: 12.5px; }
+.censo__evo-h { display: grid; gap: 6px; margin-bottom: 8px; padding-bottom: 12px; border-bottom: 2px solid var(--fg); }
+.censo__evo-h span { font-family: var(--f-label); font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--mute); }
+.censo__evo-h b { font-family: var(--f-display); font-weight: 700; font-size: 17px; }
+.censo__sec { list-style: none; margin: 0; padding: 0; position: relative; }
+.censo__sec::before { content: ""; position: absolute; left: 5px; top: 24px; bottom: 24px; width: 2px; background: var(--bata); }
+.censo__sec li { position: relative; display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 14px; padding: 16px 0 16px 26px; border-bottom: 1px dotted rgba(27,35,46,.4); }
+.censo__sec li:last-child { border-bottom: 0; }
+.censo__sec li::before { content: ""; position: absolute; left: 0; top: 22px; width: 12px; height: 12px; box-sizing: border-box; border-radius: 50%; background: var(--acc-2); border: 2px solid var(--bg); }
+.censo__sec li:last-child::before { background: var(--acc); }
+.censo__sec time { font-family: var(--f-label); font-weight: 600; font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--acc); padding-top: 4px; }
+.censo__sec small { display: block; font-family: var(--f-label); font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--mute); margin-bottom: 4px; }
+.censo__sec b { display: block; font-family: var(--f-display); font-weight: 700; font-size: 17px; line-height: 1.2; margin-bottom: 6px; }
+.censo__sec p { margin: 0; font-family: var(--f-body); font-size: 14px; line-height: 1.5; color: var(--mute); }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 640px) {
+  .hero--epicrisis { padding: 104px 0 44px; }
+  .epi { padding: 24px 18px 22px 46px; background-image: linear-gradient(90deg, transparent 34px, rgba(138,28,28,.5) 34px, rgba(138,28,28,.5) 35px, transparent 35px); }
+  .epi::before { width: 26px; background: radial-gradient(circle at 13px 30px, var(--hueco) 4.5px, rgba(27,35,46,.22) 5px, transparent 6px) 0 0 / 26px 60px repeat-y; }
+  .epi__tab { right: 12px; top: -30px; height: 30px; padding: 0 12px; gap: 10px; font-size: 9.5px; }
+  .epi__tab b { display: none; }
+  .epi__doc b { font-size: 20px; }
+  .epi__ficha { gap: 12px 20px; }
+  .hero--epicrisis .htitle { font-size: clamp(36px, 10.5vw, 48px); }
+  .cunas { gap: 8px 6px; }
+  .cuna__base { height: 7px; } .cuna__base::before, .cuna__base::after { height: 7px; }
+  .censo__conteo { gap: 10px; }
+  .censo__n b { font-size: clamp(38px, 11vw, 48px); }
+  .censo__sec li { grid-template-columns: 1fr; gap: 4px; }
+}
+@media (prefers-reduced-motion: reduce) { .cunas--hero .cuna, .censo .cuna { opacity: 1; transform: none; animation: none; transition: none; } }
+
+/* ================================================================
+   La hoja clínica no se queda en la portada: encabezado de servicio,
+   numeración de hoja, pulsera en las citas y fila de termocunas
+   ================================================================ */
+.fmt--epicrisis {
+  --termocuna: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='46' height='36' viewBox='0 0 46 36'%3E%3Cpath d='M7 25V18C7 8 39 8 39 18v7z' fill='%23EEF3F7' stroke='%238492A1' stroke-width='1.4' stroke-linejoin='round'/%3E%3Crect x='12.5' y='19.5' width='21' height='4' rx='1' fill='%23CBDAE6'/%3E%3Cpath d='M12 27h22M15 27v6M31 27v6' fill='none' stroke='%238492A1' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+/* --- Cada capítulo, una hoja del expediente clínico --- */
+.fmt--epicrisis .cap[data-n] { position: relative; padding-top: 46px; }
+.fmt--epicrisis .cap[data-n]::before {
+  content: "Servicio de neonatología · Hospital Universitario"; position: absolute; left: 0; right: 0; top: var(--hojatop, 0px);
+  padding: 8px 116px 7px 14px; box-sizing: border-box;
+  background: var(--bata-2); border: 1px solid var(--line-x); border-left: 3px solid var(--acc);
+  font-family: var(--f-label); font-weight: 600; font-size: 9.5px; letter-spacing: .16em; text-transform: uppercase; color: #3A4653;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.fmt--epicrisis .cap[data-n]::after {
+  content: "Hoja n.º " attr(data-n); position: absolute; right: 14px; top: calc(var(--hojatop, 0px) + 8px); z-index: 2;
+  font-family: var(--f-label); font-weight: 700; font-size: 9.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--acc);
+}
+.fmt--epicrisis .cap__num { display: inline-flex; align-items: center; gap: 8px; padding: 5px 12px 4px; border: 1px solid var(--acc-2); border-radius: 999px; font-size: 9.5px; color: var(--acc-2); }
+.fmt--epicrisis .cap__num::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--acc); flex: none; }
+
+/* --- Separador: la fila de termocunas de la sala --- */
+.fmt--epicrisis .cap + .cap {
+  --hojatop: 96px; border-top: 0; margin-top: 26px; padding-top: 142px;
+  background-image: var(--termocuna); background-repeat: repeat-x; background-position: left 26px; background-size: auto 36px;
+}
+
+/* --- Citas: pulsera de identificación --- */
+.fmt--epicrisis .fcita { position: relative; margin: 52px 0 44px; padding: 34px 26px 22px; border-left: 0; background: var(--papel); border: 1px solid var(--line-x); box-shadow: 0 20px 34px -30px rgba(27,35,46,.55); }
+.fmt--epicrisis .fcita::before {
+  content: "Sala de neonatología · cita textual"; opacity: 1; position: absolute; left: 22px; top: -13px; z-index: 2;
+  display: inline-flex; align-items: center; height: 26px; padding: 0 32px 0 30px; border-radius: 999px;
+  background: radial-gradient(circle 3.5px at 15px 50%, var(--papel) 95%, transparent 96%), radial-gradient(circle 3.5px at calc(100% - 15px) 50%, var(--papel) 95%, transparent 96%), var(--bata);
+  border: 1px solid var(--acc-2); color: #24303C;
+  font-family: var(--f-label); font-weight: 600; font-size: 9.5px; line-height: 1; letter-spacing: .18em; text-transform: uppercase;
+}
+.fmt--epicrisis .fcita cite { display: block; margin-top: 14px; padding-top: 11px; border-top: 1px dotted rgba(27,35,46,.4); font-size: 11px; }
+
+/* --- Módulos y datos con etiqueta de servicio --- */
+.fmt--epicrisis .fmod__head .kicker { display: inline-flex; align-items: center; gap: 8px; padding: 5px 13px 4px; border: 1px solid var(--acc-2); border-radius: 999px; font-size: 9.5px; letter-spacing: .16em; text-transform: uppercase; color: #3A4653; background: var(--bata-2); }
+.fmt--epicrisis .fmod__head .kicker::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--acc); flex: none; }
+.fmt--epicrisis .fdato { position: relative; padding-top: 28px; grid-template-columns: minmax(0, 1fr); gap: 8px 0; }
+.fmt--epicrisis .fdato::before { content: "Registro de la sala"; position: absolute; left: 0; top: 6px; font-family: var(--f-label); font-weight: 600; font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: var(--mute); }
+.fmt--epicrisis .fdato b { font-size: clamp(34px, 4.6vw, 68px); }
+
+/* --- Cronología y después: la hoja de evolución --- */
+.fmt--epicrisis .ftl li { border-bottom: 1px dotted rgba(27,35,46,.28); }
+.fmt--epicrisis .ftl li:last-child { border-bottom: 0; }
+.fmt--epicrisis .cierre li[data-estado="abierto"] b, .fmt--epicrisis .cierre li[data-estado="pendiente"] b { color: #8A6508; }
+.fmt--epicrisis .cierre li[data-estado="condena"] b, .fmt--epicrisis .cierre li[data-estado="si"] b { color: #1F5C37; }
+.fmt--epicrisis .hito { position: relative; padding-top: 26px; }
+.fmt--epicrisis .hito::after { content: "Hoja de evolución"; position: absolute; left: 0; top: 6px; font-family: var(--f-label); font-weight: 600; font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: var(--mute); }
+
+@media (max-width: 760px) {
+  .fmt--epicrisis .cap[data-n]::before { content: "Servicio de neonatología"; padding-right: 88px; font-size: 8.5px; letter-spacing: .12em; }
+  .fmt--epicrisis .cap[data-n]::after { right: 10px; font-size: 8.5px; letter-spacing: .12em; }
+  .fmt--epicrisis .cap[data-n] { padding-top: 52px; }
+  .fmt--epicrisis .cap + .cap { --hojatop: 92px; padding-top: 144px; }
+  .fmt--epicrisis .fcita::before { left: 14px; font-size: 8.5px; letter-spacing: .12em; padding: 0 26px 0 26px; }
+}

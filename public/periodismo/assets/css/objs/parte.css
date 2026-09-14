@@ -1,0 +1,17 @@
+/* hoja de parte naval (Narcomilicos): perforación superior, membrete de la Armada, foto en duotono azul, sello circular */
+.obj--parte { padding-top: 14px; background-image: radial-gradient(circle at 50% 0, var(--mesa) 4.5px, transparent 5px), linear-gradient(180deg, transparent 13px, rgba(11,31,58,.28) 13px, rgba(11,31,58,.28) 14px, transparent 14px); background-size: 22px 14px, 100% 100%; background-position: 0 0, 0 0; background-repeat: repeat-x, no-repeat; }
+.obj--parte::before { content: "Armada del Ecuador"; position: absolute; left: 22px; top: 24px; z-index: 3; font-family: 'Allerta Stencil', 'Arial Narrow', sans-serif; font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: #0B1F3A; padding-bottom: 6px; border-bottom: 3px double #0B1F3A; max-width: calc(100% - 44px); }
+.obj--parte .obj__img { aspect-ratio: 16 / 9; margin-top: 44px; filter: grayscale(1) contrast(1.15) brightness(.95); mix-blend-mode: multiply; opacity: .92; background: #0B1F3A; }
+.obj--parte .obj__cuerpo { padding-top: 84px; position: relative; }
+.obj--parte .obj__cuerpo::before { content: ""; position: absolute; left: 22px; right: 22px; top: 22px; height: 8px; background: repeating-linear-gradient(90deg, #FFC71F 0 34px, transparent 34px 42px); }
+.obj--parte .obj__cuerpo::after { content: "Simulado"; position: absolute; right: 18px; bottom: 16px; width: 92px; height: 92px; display: grid; place-items: center; text-align: center; border-radius: 50%; border: 3px double #0B1F3A; font-family: 'Allerta Stencil', 'Arial Narrow', sans-serif; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #0B1F3A; opacity: .8; transform: rotate(-12deg); pointer-events: none; }
+.obj--parte h3 { text-transform: uppercase; font-size: clamp(24px, 2vw, 32px); letter-spacing: .01em; line-height: .98; }
+.obj--parte .obj__anio { font-family: 'Allerta Stencil', 'Arial Narrow', sans-serif; font-weight: 400; letter-spacing: .02em; }
+.obj--parte p { max-width: calc(100% - 96px); }
+.obj--parte .obj__sub { max-width: 100%; }
+/* la cinta adhesiva de la esquina tapaba el membrete: lo corremos a su derecha */
+.obj--parte::before { left: 62px; top: 22px; white-space: nowrap; font-size: 9.5px; }
+/* sello más pequeño para que no invada el texto */
+.obj--parte .obj__cuerpo::after { width: 76px; height: 76px; font-size: 9px; right: 14px; bottom: 12px; }
+.obj--parte p { max-width: calc(100% - 84px); }
+.obj--parte::before { left: 60px; top: 18px; max-width: none; overflow: visible; font-size: 10px; background: rgba(247,247,244,.94); color: #0B1F3A; padding: 5px 9px 4px; border-bottom: 0; box-shadow: 0 1px 3px rgba(0,0,0,.25); }

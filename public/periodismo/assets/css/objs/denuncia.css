@@ -1,0 +1,12 @@
+/* formulario de denuncia: papel bond, casillas marcadas con bolígrafo azul, sello de recibido */
+.obj--denuncia { --obg: #FAFAF7; --ofg: #1E2229; --oacc: #1E3D9B; border-top: 6px solid var(--oacc); background-image: linear-gradient(90deg, transparent 0 32px, rgba(30,61,155,.22) 32px 33px, transparent 33px), repeating-linear-gradient(transparent 0 29px, rgba(30,34,41,.13) 29px 30px); background-position: 0 0, 0 8px; }
+.obj--denuncia .obj__img { display: none; }
+.obj--denuncia::before { content: "Violencia física\A Amenazas de muerte\A Uso de datos personales"; position: absolute; left: 44px; top: 14px; z-index: 1; padding-left: 24px; white-space: pre; font-family: 'Public Sans', 'IBM Plex Sans', system-ui, sans-serif; font-size: 10.5px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; line-height: 22px; color: var(--ofg);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='66' viewBox='0 0 16 66'><g fill='none' stroke='%231E3D9B' stroke-width='1.6'><rect x='1' y='4.5' width='13' height='13' fill='white'/><rect x='1' y='26.5' width='13' height='13' fill='white'/><rect x='1' y='48.5' width='13' height='13' fill='white'/><path d='M3.5 11l3 3.5 6-7.5M3.5 33l3 3.5 6-7.5M3.5 55l3 3.5 6-7.5' stroke-width='2'/></g></svg>"); background-repeat: no-repeat; background-position: 0 0; }
+.obj--denuncia::after { content: "Recibido"; position: absolute; right: 22px; bottom: 26px; z-index: 1; font-family: 'Public Sans', 'IBM Plex Sans', system-ui, sans-serif; font-size: 12px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; color: var(--oacc); border: 2.5px solid var(--oacc); border-radius: 3px; padding: 7px 10px 6px 13px; transform: rotate(-9deg); opacity: .9; }
+.obj--denuncia .obj__cuerpo { padding-top: 100px; padding-left: 46px; padding-bottom: 64px; }
+.obj--denuncia h3 { font-family: 'Zilla Slab', 'Iowan Old Style', Georgia, serif; font-weight: 700; text-transform: uppercase; letter-spacing: -.01em; line-height: 1; }
+.obj--denuncia .obj__sub { font-style: italic; color: var(--oacc); }
+@media (max-width: 480px) { .obj--denuncia .obj__cuerpo { padding-top: 96px; padding-left: 40px; } .obj--denuncia::before { left: 40px; } }
+/* la cinta adhesiva de la esquina tapaba el membrete: lo corremos a su derecha */
+.obj--denuncia::before { left: 62px; }

@@ -1,0 +1,18 @@
+/* casete de escucha: carcasa negra azulada, etiqueta hueso con franjas cian y roja, ventana con dos carretes (Los audios de alias Willy) */
+.obj--escucha { display: flex; flex-direction: column; border-radius: 10px; padding: 14px 14px 22px; box-shadow: var(--sombra), inset 0 1px 0 rgba(255,255,255,.08), inset 0 0 0 1px rgba(0,0,0,.6); background-image: linear-gradient(180deg, rgba(255,255,255,.05), transparent 30%); }
+.obj--escucha::before { content: "A"; position: absolute; left: 30px; top: 30px; z-index: 4; width: 34px; height: 34px; border-radius: 50%; border: 2px solid var(--oacc); color: var(--oacc); display: grid; place-items: center; font-family: var(--ofont); font-weight: 700; font-size: 18px; line-height: 1; }
+.obj--escucha::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 22px; background: radial-gradient(circle at 18% 60%, #EDE8DC 3.5px, transparent 4.5px), radial-gradient(circle at 34% 60%, #EDE8DC 3.5px, transparent 4.5px), radial-gradient(circle at 66% 60%, #EDE8DC 3.5px, transparent 4.5px), radial-gradient(circle at 82% 60%, #EDE8DC 3.5px, transparent 4.5px), radial-gradient(circle at 50% 60%, var(--oacc) 3px, transparent 4px); opacity: .8; }
+.obj--escucha .obj__cuerpo { order: 1; position: relative; background: #EDE8DC; color: #0B1220; border-radius: 6px; padding: 84px 20px 18px; margin: 0 0 14px; border-top: 10px solid #22D3EE; box-shadow: inset 0 6px 0 #FF3B4A, inset 0 0 0 1px rgba(11,18,32,.12); --oacc: #0A6F86; }
+.obj--escucha .obj__cuerpo h3 { color: #0B1220; }
+.obj--escucha .obj__cuerpo::before, .obj--escucha .obj__cuerpo::after { content: ""; position: absolute; top: calc(100% + 14px + 25px); width: 100px; height: 100px; border-radius: 50%; z-index: 3; box-sizing: border-box; border: 8px solid #EDE8DC; background: radial-gradient(circle, #0B1220 0 16%, #EDE8DC 16% 24%, transparent 24% 62%, rgba(237,232,220,.25) 62% 100%), repeating-conic-gradient(#EDE8DC 0 14deg, transparent 14deg 60deg); box-shadow: 0 0 0 3px rgba(11,18,32,.9), 0 0 0 4px rgba(237,232,220,.25), 0 6px 14px -4px rgba(0,0,0,.7); animation: reel 9s linear infinite; }
+.obj--escucha .obj__cuerpo::before { left: 20%; margin-left: -50px; }
+.obj--escucha .obj__cuerpo::after { right: 20%; margin-right: -50px; animation-duration: 12s; }
+@keyframes reel { to { transform: rotate(360deg); } }
+.obj--escucha .obj__img { order: 2; height: 150px; aspect-ratio: auto; width: 100%; object-fit: cover; object-position: center 40%; border-radius: 10px; border: 3px solid rgba(237,232,220,.22); box-sizing: border-box; filter: grayscale(1) contrast(1.25) brightness(.55); }
+.obj--escucha .obj__abrir { color: #0A6F86; }
+.obj--escucha .obj__sub { color: #0B1220; }
+.obj--escucha .postit { order: 0; }
+@media (max-width: 480px) { .obj--escucha .obj__cuerpo::before, .obj--escucha .obj__cuerpo::after { width: 84px; height: 84px; margin-left: -42px; margin-right: -42px; top: calc(100% + 14px + 33px); } .obj--escucha .obj__img { height: 150px; } }
+@media (prefers-reduced-motion: reduce) { .obj--escucha .obj__cuerpo::before, .obj--escucha .obj__cuerpo::after { animation: none; } }
+/* margen para el post-it pegado sobre el borde superior */
+.obj--escucha .obj__cuerpo { padding-top: 126px; }

@@ -1,1 +1,6 @@
-/* /index.html 200
+# El sitio de investigaciones es estático (public/periodismo/); tiene que
+# resolverse antes del fallback de la SPA.
+/periodismo      /periodismo/index.html   200
+/periodismo/     /periodismo/index.html   200
+
+/*               /index.html              200

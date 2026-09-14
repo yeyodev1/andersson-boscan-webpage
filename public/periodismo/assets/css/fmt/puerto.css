@@ -1,0 +1,40 @@
+/* PUERTO · Danubio: patio de contenedores, azul noche, naranja de carga, amarillo de seguridad, escáner */
+.fmt--puerto { --bg: #0D1B2A; --bg-2: #142638; --fg: #EEF2F6; --mute: #93A3B5; --acc: #F26419; --acc-2: #FFD100; --line-x: rgba(238,242,246,.14);
+  --f-display: 'Anton', 'Arial Narrow', sans-serif; --f-body: 'Source Serif 4', Georgia, serif; --f-mono: 'IBM Plex Mono', ui-monospace, monospace; --f-label: 'IBM Plex Sans', system-ui, sans-serif; }
+.fmt--puerto::after { mix-blend-mode: screen; opacity: .05; }
+.fmt--puerto .topbar { background: rgba(13,27,42,.85); }
+.fmt--puerto .footer { background: #08111B; }
+.fmt--puerto .htitle, .fmt--puerto .cap__title, .fmt--puerto .fmod__head h2 { font-weight: 400; text-transform: uppercase; letter-spacing: .01em; }
+.fmt--puerto .htitle em, .fmt--puerto .cap__title em, .fmt--puerto .fmod__head h2 em { font-style: normal; color: var(--acc); }
+.hero--puerto { padding: 120px 0 0; min-height: 100svh; background: linear-gradient(180deg, #0D1B2A, #0A1622); }
+.hero--puerto .htitle { font-size: clamp(68px, 13vw, 210px); line-height: .86; }
+.hero--puerto .hdeck { color: #D5DEE8; }
+.hero--puerto .hstats b { color: var(--acc-2); }
+.muelle { position: relative; margin-top: 48px; height: 220px; background: linear-gradient(180deg, transparent 60%, #08111B 60%); display: flex; align-items: flex-end; gap: 14px; padding: 0 var(--gutter) 24px; overflow: hidden; }
+.box { width: 260px; height: 120px; background: var(--acc); color: #0D1B2A; padding: 14px 16px; display: grid; align-content: space-between; position: relative; box-shadow: inset 0 -8px 0 rgba(0,0,0,.2), inset 4px 0 0 rgba(255,255,255,.2); opacity: 0; transform: translateY(30px); animation: rise .8s var(--ease-out) forwards; animation-delay: calc(.6s + var(--i) * .2s); }
+.box::before { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(90deg, transparent 0 10px, rgba(0,0,0,.08) 10px 12px); }
+.box:nth-child(3) { background: #2F6FB0; color: #fff; } .box:nth-child(4) { background: #C8C8C8; }
+.box b { font-size: 26px; position: relative; } .box span { font-family: var(--f-label); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; position: relative; }
+.scan { position: absolute; top: 0; bottom: 0; width: 3px; background: var(--acc-2); box-shadow: 0 0 24px 6px rgba(255,209,0,.6); animation: scan 4s ease-in-out 1.6s infinite alternate; }
+@keyframes scan { from { left: 5%; } to { left: 95%; } }
+.fmt--puerto .fnav { background: rgba(13,27,42,.94); }
+.fmt--puerto .fnav a { font-family: var(--f-display); font-size: 16px; letter-spacing: .06em; }
+.fmt--puerto .fnav a b { color: var(--acc-2); }
+.fmt--puerto .cap__title { font-size: clamp(40px, 5.6vw, 84px); }
+.fmt--puerto .cap__num { color: var(--acc-2); }
+.fmt--puerto .ftext { color: #E1E8F0; }
+.fmt--puerto .estado, .fmt--puerto .fper, .fmt--puerto .fresp li, .fmt--puerto .hito { background: var(--bg-2); }
+.patio { position: relative; display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); padding: 20px; background: #08111B; border: 1px solid var(--line-x); overflow: hidden; }
+.patio__scan { position: absolute; top: 0; bottom: 0; width: 2px; background: var(--acc-2); box-shadow: 0 0 20px 4px rgba(255,209,0,.5); left: -2%; }
+.patio.in .patio__scan { animation: scan 5s ease-in-out infinite alternate; }
+.contenedor { padding: 18px; background: var(--acc); color: #0D1B2A; box-shadow: inset 0 -8px 0 rgba(0,0,0,.2); }
+.contenedor:nth-child(3) { background: #2F6FB0; color: #fff; } .contenedor:nth-child(4) { background: #C8C8C8; } .contenedor:nth-child(5) { background: var(--acc-2); }
+.contenedor__precio { display: block; font-size: 30px; font-weight: 600; margin-bottom: 8px; }
+.contenedor h3 { font-family: var(--f-display); text-transform: uppercase; font-size: 22px; margin: 0 0 6px; line-height: 1; }
+.contenedor p { margin: 0 0 8px; font-family: var(--f-label); font-size: 13.5px; line-height: 1.45; }
+.contenedor small { font-family: var(--f-mono); font-size: 11px; opacity: .8; }
+.fmt--puerto .fcita p { font-family: var(--f-display); font-style: normal; text-transform: uppercase; font-size: clamp(26px, 3.2vw, 44px); line-height: 1.02; letter-spacing: .01em; }
+.fmt--puerto .fdato b { color: var(--acc-2); }
+.fmt--puerto .cierre { background: #08111B; }
+.fmt--puerto .cierre__lineas li { border-bottom-color: rgba(238,242,246,.14); }
+.fmt--puerto .cierre::after { content: ""; display: block; margin-top: 18px; height: 36px; background: repeating-linear-gradient(90deg, var(--acc) 0 44px, transparent 44px 52px); width: calc(9 * 52px); max-width: 100%; box-shadow: inset 0 -6px 0 rgba(0,0,0,.25); }

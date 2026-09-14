@@ -1,0 +1,445 @@
+/* ACTA · Órdenes desde la Judicatura.
+   El despacho del juez a puerta cerrada: papel de oficio con membrete y sello seco de la balanza,
+   el mazo, la grabadora encendida sobre el escritorio y el cordón que sale hacia Carondelet.
+   Tinta azul institucional para lo que firma el Estado, rojo vino para la presión, gris de sello para lo que se archiva.
+   Frank Ruhl Libre (titulares y texto) + Space Mono (folios, sellos, marcas). Sin cursivas: un acta no las usa. */
+
+.fmt--acta {
+  --bg: #E7E3D4; --bg-2: #DED9C7; --fg: #141826; --mute: #565D6E;
+  --acc: #8E1F33; --acc-2: #1E3C86; --line-x: rgba(20,24,38,.17);
+  --papel: #F8F3E4; --papel-2: #EDE8D8; --sello: #6B7280;
+  --noche: #121828; --noche-2: #1B2237; --crema: #F2EDDE; --tinta-clara: #97B0E8; --vino-claro: #E5A3AE;
+  --grano: .11; --radius: 0;
+  --f-display: 'Frank Ruhl Libre', 'Iowan Old Style', Georgia, serif;
+  --f-body: 'Frank Ruhl Libre', 'Iowan Old Style', Georgia, serif;
+  --f-mono: 'Space Mono', ui-monospace, 'Courier New', monospace;
+  --f-label: 'Frank Ruhl Libre', Georgia, serif;
+}
+.fmt--acta { background: var(--bg); }
+.fmt--acta ::selection { background: var(--acc-2); color: #fff; }
+.fmt--acta .topbar { background: color-mix(in srgb, var(--papel) 90%, transparent); border-color: var(--line-x); }
+.fmt--acta .footer { background: var(--noche); color: var(--crema); }
+
+/* Todo lo que en un expediente va sellado, foliado, fechado o tipografiado: Space Mono */
+.fmt--acta .kicker, .fmt--acta .hkicker, .fmt--acta .hby, .fmt--acta .hstats span, .fmt--acta .fcita cite,
+.fmt--acta .fper .badge, .fmt--acta .fresp b, .fmt--acta .margen span, .fmt--acta .fcred dt, .fmt--acta .vid__rol,
+.fmt--acta .vid__meta small, .fmt--acta .vid__meta a, .fmt--acta .cierre__panel h3, .fmt--acta .leyenda,
+.fmt--acta .retrato figcaption small, .fmt--acta .sello, .fmt--acta .fnav a, .fmt--acta .cierre__fecha,
+.fmt--acta .ftl__f, .fmt--acta .hito b, .fmt--acta .claves li::before, .fmt--acta .preguntas li::before,
+.fmt--acta .cap__num, .fmt--acta .chips span, .fmt--acta .fper__cred, .fmt--acta .tablewrap th { font-family: var(--f-mono); }
+.fmt--acta .kicker, .fmt--acta .hkicker { color: var(--acc-2); font-size: 10.5px; letter-spacing: .2em; font-weight: 700; }
+.fmt--acta .hkicker::before { background: var(--acc); height: 2px; width: 30px; }
+/* Un acta no lleva cursivas: lo destacado va en vino */
+.fmt--acta em, .fmt--acta .htitle em, .fmt--acta .cap__title em, .fmt--acta .fmod__head h2 em,
+.fmt--acta .fdato span, .fmt--acta .fcita p { font-style: normal; }
+.fmt--acta .htitle em, .fmt--acta .cap__title em, .fmt--acta .fmod__head h2 em { color: var(--acc); }
+
+/* ---------------------------------------------------------------- Portada: el despacho a puerta cerrada */
+.hero--acta { padding: 96px 0 52px; min-height: auto; align-items: start; display: block;
+  background: radial-gradient(120% 80% at 78% 8%, #222C45 0%, var(--noche) 58%, #0C111D 100%); color: var(--crema); }
+.fmt--acta .hero__art { inset: 0; }
+.fmt--acta .hero__art img { width: 100%; height: 100%; object-fit: cover; opacity: .3; filter: grayscale(1) contrast(1.25) brightness(.75); }
+.fmt--acta .hero__art::after { background:
+  linear-gradient(90deg, var(--noche) 0%, color-mix(in srgb, var(--noche) 78%, transparent) 52%, color-mix(in srgb, var(--noche) 40%, transparent) 100%),
+  linear-gradient(180deg, var(--noche) 0%, color-mix(in srgb, var(--noche) 45%, transparent) 34%, color-mix(in srgb, var(--noche) 88%, transparent) 100%) !important; }
+.hero--acta__grid { position: relative; z-index: 2; display: grid; gap: 40px; grid-template-columns: 1fr; align-items: start; }
+@media (min-width: 1040px) { .hero--acta__grid { grid-template-columns: minmax(0, 1.16fr) minmax(280px, .84fr); gap: clamp(34px, 4vw, 66px); } }
+.hero--acta__stats { position: relative; z-index: 2; margin-top: 42px; padding-top: 22px; border-top: 1px solid rgba(242,237,222,.22); }
+
+/* La foja: papel de oficio sobre el escritorio */
+.foja { position: relative; background: var(--papel); color: var(--fg);
+  padding: 34px clamp(22px, 3.4vw, 46px) 36px clamp(52px, 6vw, 92px);
+  box-shadow: 0 1px 0 rgba(0,0,0,.35), 0 34px 60px -26px rgba(0,0,0,.75); }
+.foja::before, .acta::before, .fmt--acta .fmain::before, .fmt--acta .cierre::before {
+  content: ""; position: absolute; top: 0; bottom: 0; left: clamp(32px, 3.6vw, 58px); width: 6px;
+  border-left: 1.5px solid var(--acc); border-right: 1px solid var(--acc-2); opacity: .45; pointer-events: none; }
+.foja::after, .acta::after {
+  content: ""; position: absolute; top: 0; bottom: 0; left: 12px; width: 22px; pointer-events: none;
+  background: radial-gradient(circle at 50% calc(50% - 54px), var(--noche) 7px, rgba(20,24,38,.28) 7.6px, transparent 9.4px),
+              radial-gradient(circle at 50% calc(50% + 54px), var(--noche) 7px, rgba(20,24,38,.28) 7.6px, transparent 9.4px); }
+.folio { position: absolute; right: 0; top: 2px; font-family: var(--f-mono); font-weight: 700; font-size: 10.5px;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--acc-2); border: 1.5px solid var(--acc-2);
+  padding: 4px 8px 3px; transform: rotate(-2deg); background: var(--papel); white-space: nowrap; }
+
+/* Membrete con sello seco */
+.foja__membrete, .acta__cab { position: relative; display: grid; grid-template-columns: auto minmax(0, 1fr);
+  gap: 18px; align-items: center; padding-right: 84px; padding-bottom: 16px; margin-bottom: 26px;
+  border-bottom: 2px solid var(--fg); }
+.foja__inst b { display: block; font-family: var(--f-mono); font-weight: 700; font-size: 12px; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--fg); line-height: 1.3; }
+.foja__inst span { display: block; font-family: var(--f-mono); font-size: 10px; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--sello); margin-top: 6px; line-height: 1.45; }
+.escudo { width: 92px; height: 92px; flex: none; opacity: .9; }
+.escudo__ring { fill: none; stroke: var(--sello); stroke-width: 1.3; }
+.escudo__ring--gruesa { stroke: var(--acc-2); stroke-width: 2.4; opacity: .8; }
+.escudo__t { font-family: var(--f-mono); font-weight: 700; font-size: 6.6px; letter-spacing: .06em; fill: var(--acc-2); }
+.escudo__bal { fill: none; stroke: var(--acc); stroke-width: 2; stroke-linecap: round; }
+.escudo__eje { fill: var(--acc); stroke: none; }
+
+/* Titular */
+.hero--acta .htitle { font-family: var(--f-display); font-weight: 900; text-transform: uppercase;
+  font-size: clamp(42px, 6vw, 92px); line-height: .9; letter-spacing: -.025em; max-width: 15ch; margin: 0 0 20px; color: var(--fg); }
+.hero--acta .hdeck { font-size: clamp(17px, 1.25vw, 19.5px); line-height: 1.52; max-width: 62ch; color: #262B38; margin-bottom: 24px; }
+.fmt--acta .hby { font-size: 10px; letter-spacing: .14em; color: var(--sello); border-top: 1px solid var(--line-x); padding-top: 14px; margin-bottom: 22px; }
+.fmt--acta .hby b { color: var(--fg); font-weight: 700; }
+
+/* Razón, rúbrica y sello de la foja */
+.foja__razon, .acta__razon { position: relative; margin-top: 26px; padding-top: 18px; border-top: 3px double var(--fg);
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px 34px; align-items: end; }
+.rlabel { grid-column: 1 / -1; font-family: var(--f-mono); font-weight: 700; font-size: 10.5px; letter-spacing: .28em;
+  text-transform: uppercase; color: var(--acc); }
+.foja__razon p, .acta__razon p { margin: 0; font-size: 16.5px; line-height: 1.5; max-width: 58ch; color: #262B38; }
+.firma { display: grid; gap: 4px; justify-items: start; }
+.firma__svg { width: 180px; height: 48px; display: block; }
+.firma__svg path { fill: none; stroke: var(--acc-2); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.firma span { font-family: var(--f-mono); font-size: 9.5px; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--sello); border-top: 1px solid var(--fg); padding-top: 6px; min-width: 180px; }
+.sello-razon { position: absolute; right: 0; top: -34px; display: grid; justify-items: center; padding: 8px 15px 7px;
+  border: 3px double var(--sello); color: var(--sello); font-family: var(--f-mono); text-transform: uppercase;
+  background: color-mix(in srgb, var(--papel) 55%, transparent); transform: rotate(-8deg);
+  opacity: 0; animation: sellar .5s var(--ease-out) 1.1s forwards;
+  mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='g'><feTurbulence baseFrequency='.6' numOctaves='2'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 4 -1.1'/></filter><rect width='100%' height='100%' fill='white'/><rect width='100%' height='100%' filter='url(%23g)' opacity='.5'/></svg>");
+  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='g'><feTurbulence baseFrequency='.6' numOctaves='2'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 4 -1.1'/></filter><rect width='100%' height='100%' fill='white'/><rect width='100%' height='100%' filter='url(%23g)' opacity='.5'/></svg>"); }
+.sello-razon b { font-size: 14px; font-weight: 700; letter-spacing: .3em; }
+.sello-razon span { font-size: 9px; letter-spacing: .14em; margin-top: 3px; }
+@keyframes sellar { from { opacity: 0; transform: rotate(-8deg) scale(2.2); } 70% { opacity: 1; transform: rotate(-8deg) scale(.96); } to { opacity: 1; transform: rotate(-8deg) scale(1); } }
+.acta .sello-razon { animation: none; opacity: 0; transform: rotate(-8deg) scale(1.6); transition: opacity .35s var(--ease-out) .9s, transform .35s var(--ease-out) .9s; }
+.acta.in .sello-razon { opacity: 1; transform: rotate(-8deg) scale(1); }
+
+/* El escritorio: mazo, grabadora, cordón y palacio */
+.escritorio { position: relative; display: grid; gap: 22px; align-self: stretch; align-content: space-between; color: var(--crema); }
+.escritorio__luz { position: absolute; left: -14%; top: -18%; width: 128%; height: 62%; pointer-events: none;
+  background: radial-gradient(50% 50% at 50% 50%, rgba(255,214,150,.16), transparent 70%); }
+.escritorio__cab { position: relative; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 14px; align-items: center;
+  padding-bottom: 14px; border-bottom: 1px solid rgba(242,237,222,.2); }
+.escritorio__cab b { display: block; font-family: var(--f-mono); font-weight: 700; font-size: 11px; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--crema); }
+.escritorio__cab span { display: block; font-size: 14px; line-height: 1.4; color: #B9C1D4; margin-top: 5px; }
+.mazo { width: 82px; height: 48px; flex: none; }
+.mazo__g { fill: rgba(229,163,174,.12); stroke: var(--vino-claro); stroke-width: 3.4; stroke-linecap: round; stroke-linejoin: round; }
+.mazo__base { fill: none; stroke: rgba(242,237,222,.6); stroke-width: 3.4; stroke-linecap: round; }
+
+.graba { position: relative; margin: 0; }
+.graba__cuerpo { position: relative; padding: 14px 16px 12px; background: linear-gradient(180deg, #2B3245, #1A2032);
+  border: 1px solid rgba(242,237,222,.16); box-shadow: inset 0 1px 0 rgba(242,237,222,.14), 0 18px 30px -18px #000; }
+.graba__top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+.graba__marca { font-family: var(--f-mono); font-size: 9.5px; letter-spacing: .2em; text-transform: uppercase; color: #97A1B8; }
+.graba__rec { display: inline-flex; align-items: center; gap: 7px; font-family: var(--f-mono); font-weight: 700; font-size: 9.5px;
+  letter-spacing: .24em; text-transform: uppercase; color: var(--vino-claro); }
+.graba__rec i { width: 9px; height: 9px; border-radius: 50%; background: #E0475F; box-shadow: 0 0 10px #E0475F; animation: rec 1.6s steps(1, end) infinite; }
+@keyframes rec { 0%, 55% { opacity: 1; } 56%, 100% { opacity: .25; } }
+.graba__reels { position: relative; display: flex; align-items: center; justify-content: space-between; padding: 4px 10px 10px; }
+.graba__cinta { position: absolute; left: 22%; right: 22%; top: 50%; height: 2px; background: #4B5468; }
+.reel { position: relative; width: 52px; height: 52px; border-radius: 50%; border: 2px solid #6A748C;
+  background: radial-gradient(circle at 50% 50%, #3A4258 0 34%, #232B3C 35% 100%); display: grid; place-items: center;
+  animation: gira 3.6s linear infinite; }
+.reel--b { animation-duration: 5.4s; }
+.reel i { position: absolute; width: 2px; height: 20px; background: #7E88A0; transform-origin: 50% 50%; }
+.reel i:nth-child(1) { transform: rotate(0deg); } .reel i:nth-child(2) { transform: rotate(60deg); } .reel i:nth-child(3) { transform: rotate(120deg); }
+.reel::after { content: ""; width: 11px; height: 11px; border-radius: 50%; background: #E7E3D4; }
+@keyframes gira { to { transform: rotate(360deg); } }
+.graba__vu { display: flex; align-items: flex-end; gap: 3px; height: 26px; padding: 0 2px; }
+.graba__vu i { flex: 1; background: linear-gradient(180deg, #E5A3AE, #5A6480); height: 30%;
+  animation: vu 1.1s ease-in-out infinite alternate; animation-delay: calc(var(--i) * -.13s); }
+@keyframes vu { from { height: 16%; } to { height: 100%; } }
+.graba__pie { margin-top: 10px; padding-top: 9px; border-top: 1px solid rgba(242,237,222,.14); }
+.graba__pie b { font-family: var(--f-mono); font-weight: 700; font-size: 10.5px; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--crema); }
+.graba figcaption { margin-top: 10px; font-size: 13.5px; line-height: 1.45; color: #AEB7CC; }
+
+.cordon { position: relative; display: grid; gap: 12px; padding-top: 6px; }
+.cordon__svg { width: 100%; height: 64px; display: block; }
+.cordon__svg path { fill: none; stroke: var(--tinta-clara); stroke-width: 2.4; stroke-linecap: round; opacity: .85; }
+.cordon__frase { margin: 0; font-family: var(--f-display); font-weight: 500; font-size: clamp(16px, 1.4vw, 19px);
+  line-height: 1.34; color: var(--crema); border-left: 3px solid var(--acc); padding-left: 14px; }
+.palacio { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 18px; align-items: center; }
+.palacio__svg { width: 104px; height: 60px; order: 2; }
+.palacio__meta { order: 1; text-align: right; }
+.palacio__meta .sello-chico { transform: rotate(3deg); }
+.palacio__svg .pl-f { fill: rgba(242,237,222,.14); stroke: rgba(242,237,222,.7); stroke-width: 2; }
+.palacio__svg .pl-l { fill: none; stroke: rgba(242,237,222,.7); stroke-width: 2; stroke-linecap: round; }
+.palacio__svg .pl-c { fill: none; stroke: rgba(242,237,222,.55); stroke-width: 2.4; }
+.palacio__meta b { display: block; font-family: var(--f-mono); font-weight: 700; font-size: 11.5px; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--crema); }
+.palacio__meta span { display: block; font-family: var(--f-mono); font-size: 9.5px; letter-spacing: .1em; color: #8F99B0; margin: 5px 0 8px; }
+.sello-chico { display: inline-block; font-family: var(--f-mono); font-weight: 700; font-size: 9.5px; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--vino-claro); border: 2px solid currentColor; padding: 4px 8px 3px;
+  transform: rotate(-4deg); font-style: normal; }
+.escritorio__campos { display: grid; gap: 14px; margin: 0; padding-top: 16px; border-top: 1px solid rgba(242,237,222,.2); }
+.escritorio__campos dt { font-family: var(--f-mono); font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: #8F99B0; margin-bottom: 5px; }
+.escritorio__campos dd { margin: 0; font-size: 15px; line-height: 1.4; color: var(--crema); }
+
+/* Cifras de portada sobre el escritorio oscuro */
+.fmt--acta .hstats { text-shadow: none; gap: 16px 44px; }
+.fmt--acta .hstats b { font-family: var(--f-display); font-weight: 900; color: var(--crema);
+  background: linear-gradient(transparent 62%, rgba(142,31,51,.85) 62%, rgba(142,31,51,.85) 92%, transparent 92%); }
+.fmt--acta .hstats span { color: #9BA4BA; font-size: 10px; letter-spacing: .16em; }
+.fmt--acta .hstats > div + div::before { background: rgba(242,237,222,.2); }
+
+/* ---------------------------------------------------------------- Índice: el lomo del expediente */
+.fmt--acta .fnav { background: color-mix(in srgb, var(--noche) 94%, transparent); border-block: 1px solid rgba(242,237,222,.16); }
+.fmt--acta .fnav a { font-size: 10px; font-weight: 700; letter-spacing: .16em; padding: 15px 16px 13px; color: #9BA4BA; }
+.fmt--acta .fnav a b { color: var(--tinta-clara); font-weight: 700; font-size: 10px; }
+.fmt--acta .fnav a:hover, .fmt--acta .fnav a.is-active { color: var(--crema); border-bottom-color: var(--acc); }
+
+/* ---------------------------------------------------------------- En cuatro frases: los considerandos */
+.fmt--acta .claves { padding: 62px 0 10px; }
+.fmt--acta .claves li { font-size: 16px; line-height: 1.52; border-top: 2px solid var(--fg); padding-top: 13px; }
+.fmt--acta .claves li::before { content: "Considerando " counter(k, decimal-leading-zero); color: var(--acc-2);
+  font-weight: 700; font-size: 9.5px; letter-spacing: .16em; text-transform: uppercase; }
+
+/* ---------------------------------------------------------------- Estado: boleta al margen del expediente */
+.fmt--acta .fbody { padding: 54px 0 46px; }
+.fmt--acta .estado::before { width: 100%; height: 3px; background: var(--acc); }
+.fmt--acta .estado--amarillo::before { background: #B07A12; }
+.fmt--acta .estado .kicker { display: block; margin-bottom: 10px; }
+.fmt--acta .estado b { font-family: var(--f-display); font-weight: 700; font-size: 25px; line-height: 1.14; letter-spacing: -.01em; }
+.fmt--acta .estado p { font-size: 14.5px; line-height: 1.55; color: #3B4252; }
+.fmt--acta .estado::after { content: "Causa abierta"; display: inline-block; margin-top: 16px; font-family: var(--f-mono);
+  font-weight: 700; font-size: 9.5px; letter-spacing: .22em; text-transform: uppercase; color: var(--sello);
+  border: 2px double var(--sello); padding: 5px 9px 4px; transform: rotate(-3deg); }
+
+/* ---------------------------------------------------------------- El cuerpo: una foja larga, foliada */
+.fmt--acta .fmain { position: relative; background: var(--papel);
+  padding: 50px clamp(20px, 3.2vw, 48px) 58px clamp(50px, 6vw, 96px);
+  border: 1px solid rgba(20,24,38,.1); box-shadow: 0 1px 0 rgba(20,24,38,.12), 0 30px 60px -38px rgba(20,24,38,.7); }
+.fmt--acta .fmain::before { left: clamp(30px, 3.8vw, 62px); opacity: .38; }
+.fmt--acta .cap { position: relative; padding-bottom: 44px; }
+.fmt--acta .cap[data-n]::before { content: "Fs. " attr(data-n); position: absolute; right: 0; top: 0;
+  font-family: var(--f-mono); font-weight: 700; font-size: 9.5px; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--sello); border-bottom: 1px solid var(--sello); padding-bottom: 3px; }
+.fmt--acta .cap + .cap { border-top: 1px dashed rgba(20,24,38,.28); padding-top: 52px; margin-top: 28px; }
+.fmt--acta .cap[data-n] + .cap[data-n]::before { top: 52px; }
+.fmt--acta .cap__num { display: inline-block; color: var(--acc-2); border: 1.5px solid var(--acc-2);
+  padding: 4px 9px 3px; font-size: 9.5px; font-weight: 700; letter-spacing: .2em; margin-bottom: 14px; }
+.fmt--acta .cap__title { font-family: var(--f-display); font-weight: 900; text-transform: uppercase;
+  font-size: clamp(28px, 3.4vw, 47px); line-height: .96; letter-spacing: -.025em; max-width: 17ch; }
+.fmt--acta .ftext { font-size: clamp(17.5px, 1.25vw, 19.5px); line-height: 1.66; color: #1D2231; }
+/* Capitular: una sola letra sellada al abrir cada foja (no en cada bloque de texto) */
+.fmt--acta .cap .ftext > p:first-of-type::first-letter,
+.fmt--acta .cap:first-child .ftext > p:first-of-type::first-letter {
+  font-family: inherit; font-weight: inherit; font-size: inherit; line-height: inherit; float: none;
+  color: inherit; background: none; border: 0; padding: 0; margin: 0; }
+.fmt--acta .cap > .ftext:first-of-type > p:first-of-type::first-letter {
+  font-family: var(--f-display); font-weight: 900; font-size: 3.1em; line-height: .86; float: left;
+  color: var(--acc); background: rgba(30,60,134,.06); border: 1px solid rgba(30,60,134,.34);
+  padding: .12em .16em .06em; margin: .1em .18em 0 0; }
+
+/* Citas: lo que consta en el audio */
+.fmt--acta .fcita { position: relative; margin: 46px 0; padding: 4px 0 6px 26px; border-left: 4px solid var(--acc); max-width: 720px; }
+.fmt--acta .fcita::before { display: none; }
+.fmt--acta .fcita p { font-family: var(--f-display); font-weight: 500; font-size: clamp(21px, 2.1vw, 30px);
+  line-height: 1.26; letter-spacing: -.012em; color: var(--fg); }
+.fmt--acta .fcita p::before { content: "\201C"; } .fmt--acta .fcita p::after { content: "\201D"; }
+.fmt--acta .fcita cite { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--acc-2); border-top: 1px solid var(--acc-2); padding-top: 8px; }
+
+/* Datos: el número subrayado a doble raya */
+.fmt--acta .fdato { margin: 40px 0; }
+.fmt--acta .fdatos2 .fdato { margin: 0; }
+.fmt--acta .fdato b { font-family: var(--f-display); font-weight: 900; color: var(--acc); background: none;
+  padding: 0 0 4px; margin: 0; border-bottom: 4px double var(--acc-2); line-height: 1; }
+.fmt--acta .fdato span { font-family: var(--f-display); font-weight: 400; font-size: clamp(16px, 1.35vw, 19px);
+  color: #2A3040; line-height: 1.38; }
+.fmt--acta .fdato--texto b { border-bottom-width: 3px; font-weight: 700; }
+.fmt--acta .margen { border-left: 2px solid var(--acc); padding-left: 16px; font-size: 14.5px; line-height: 1.55; color: #3B4252; }
+.fmt--acta .margen span { color: var(--acc); font-size: 9.5px; letter-spacing: .2em; }
+@media (min-width: 1500px) { .fmt--acta .margen { float: none; width: auto; margin: 0 0 1.6em; } }
+.fmt--acta .ffoto figcaption { font-family: var(--f-mono); font-size: 10.5px; letter-spacing: .06em; color: var(--sello); }
+.fmt--acta .fmod__head h2 { font-family: var(--f-display); font-weight: 900; text-transform: uppercase;
+  font-size: clamp(25px, 2.8vw, 39px); line-height: .98; letter-spacing: -.025em; }
+.fmt--acta .fmod__head .kicker { margin-bottom: 10px; }
+.fmt--acta .fmod__head { padding-bottom: 12px; border-bottom: 2px solid var(--fg); }
+
+/* ---------------------------------------------------------------- Módulo: la grabación foliada */
+.acta { position: relative; background: var(--papel-2); color: var(--fg);
+  padding: 30px clamp(18px, 2.6vw, 38px) 34px clamp(48px, 5.4vw, 84px);
+  border: 1px solid rgba(20,24,38,.14); box-shadow: 0 1px 0 rgba(20,24,38,.12), 0 24px 44px -30px rgba(20,24,38,.7); }
+.acta::before { left: clamp(28px, 3.2vw, 50px); }
+.acta::after { background:
+  radial-gradient(circle at 50% calc(50% - 54px), var(--papel) 7px, rgba(20,24,38,.24) 7.6px, transparent 9.4px),
+  radial-gradient(circle at 50% calc(50% + 54px), var(--papel) 7px, rgba(20,24,38,.24) 7.6px, transparent 9.4px); }
+.acta__cab { margin-bottom: 18px; }
+.acta__cab .escudo { width: 76px; height: 76px; }
+.acta__campos { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px 26px; margin: 0 0 16px; }
+.acta__campos dt { font-family: var(--f-mono); font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: var(--acc-2); margin-bottom: 4px; }
+.acta__campos dd { margin: 0; font-size: 15.5px; line-height: 1.38; color: #262B38; }
+.acta__aviso { margin: 0 0 22px; padding-top: 12px; border-top: 1px solid var(--line-x); font-family: var(--f-mono);
+  font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--sello); }
+.acta__ints { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--fg); }
+.acta__int { display: grid; grid-template-columns: 58px minmax(0, 1fr); gap: 16px; padding: 20px 0;
+  border-bottom: 1px solid rgba(20,24,38,.16); }
+.acta__fs { padding-top: 4px; text-align: right; }
+.acta__fs i { display: block; font-family: var(--f-mono); font-size: 8.5px; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--sello); font-style: normal; }
+.acta__fs b { display: block; font-family: var(--f-mono); font-weight: 700; font-size: 14px; color: var(--acc-2); margin-top: 2px; }
+.acta__head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; margin-bottom: 8px; }
+.acta__quien { font-family: var(--f-display); font-weight: 700; font-size: 19px; line-height: 1.2;
+  text-decoration: underline; text-decoration-color: var(--acc-2); text-decoration-thickness: 1.5px; text-underline-offset: 4px; }
+.acta__mom { font-family: var(--f-mono); font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: var(--sello); }
+.acta__modo { margin-left: auto; font-family: var(--f-mono); font-style: normal; font-weight: 700; font-size: 8.5px;
+  letter-spacing: .18em; text-transform: uppercase; color: var(--sello); border: 1.5px solid currentColor; padding: 3px 7px 2px; }
+.acta__modo--textual { color: var(--acc); transform: rotate(-2deg); }
+.acta__t { margin: 0; font-size: 18px; line-height: 1.52; color: #1D2231; }
+.acta__t--textual { font-family: var(--f-display); font-weight: 500; font-size: clamp(19px, 1.7vw, 23px); line-height: 1.34;
+  padding-left: 16px; border-left: 4px solid var(--acc); }
+.acta__t--textual::before { content: "\201C"; } .acta__t--textual::after { content: "\201D"; }
+.acta__t--resumen { color: #3B4252; }
+.acta__t u, .acta__nota u, .acta__margen u { text-decoration-color: var(--acc-2); text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
+.acta__nota { margin: 10px 0 0; font-family: var(--f-mono); font-size: 11px; line-height: 1.6; color: var(--sello); }
+.acta__nota::before { content: "Nota al margen · "; color: var(--acc-2); font-weight: 700; }
+.acta__razon { margin-top: 24px; }
+.acta__margen { position: relative; margin: 28px 0 0; padding: 16px 18px 17px; border: 2px solid var(--acc);
+  color: var(--acc); font-size: 16px; line-height: 1.46; background: rgba(142,31,51,.04); transform: rotate(-.6deg); }
+.acta__margen::before { content: ""; position: absolute; left: 50%; top: -13px; width: 84px; height: 22px; margin-left: -42px;
+  background: rgba(235,228,205,.85); border: 1px solid rgba(20,24,38,.08); transform: rotate(-3deg); }
+.acta__margen b { display: block; font-family: var(--f-mono); font-weight: 700; font-size: 9px; letter-spacing: .22em;
+  text-transform: uppercase; margin-bottom: 8px; }
+.acta__margen u { text-decoration-color: var(--acc); }
+
+/* ---------------------------------------------------------------- Módulos genéricos vestidos de expediente */
+/* Cronología: libro de ingresos */
+.fmt--acta .ftl { border-left: 2px solid rgba(30,60,134,.3); }
+.fmt--acta .ftl li::before { background: var(--acc); width: 9px; height: 9px; border-radius: 0; transform: rotate(45deg); left: -6.5px; }
+.fmt--acta .ftl__f { font-size: 10.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--acc-2);
+  border: 1px solid rgba(30,60,134,.4); padding: 5px 8px 4px; display: inline-block;
+  justify-self: start; align-self: start; }
+.fmt--acta .ftl li { grid-template-columns: 128px 1fr; }
+.fmt--acta .ftl b { font-family: var(--f-display); font-weight: 700; font-size: 21px; }
+.fmt--acta .ftl p, .fmt--acta .fper p, .fmt--acta .fcifras span { font-size: 15px; line-height: 1.5; color: #3B4252; }
+/* Comparecientes: fichas del expediente */
+.fmt--acta .fpers { gap: 22px 26px; }
+.fmt--acta .fper { padding: 16px 0 20px; border: 0; border-top: 2px solid var(--fg); border-bottom: 0; }
+.fmt--acta .fper .badge { font-size: 9px; font-weight: 700; letter-spacing: .16em; color: var(--acc);
+  border: 1.5px solid currentColor; padding: 4px 7px 3px; }
+.fmt--acta .fper h3 { font-family: var(--f-display); font-weight: 700; font-size: 22px; line-height: 1.1; margin-top: 10px; }
+.fmt--acta .fper__foto { border: 1.5px solid var(--acc-2); }
+.fmt--acta .fper__foto--sin { color: var(--acc-2); font-family: var(--f-mono); }
+.fmt--acta .fper__cred { font-size: 9.5px; letter-spacing: .04em; color: var(--sello); }
+/* Descargos: cada uno con su línea de firma */
+.fmt--acta .fresp { gap: 24px; }
+.fmt--acta .fresp li { border-left: 3px solid var(--acc-2); padding: 2px 0 2px 18px; }
+.fmt--acta .fresp b { font-size: 10px; font-weight: 700; letter-spacing: .18em; color: var(--acc-2); margin-bottom: 8px; }
+.fmt--acta .fresp p { font-size: 16.5px; line-height: 1.52; color: #262B38; }
+/* Cifras */
+.fmt--acta .fcifras { grid-template-columns: repeat(auto-fit, minmax(142px, 1fr)); gap: 18px 20px; }
+.fmt--acta .fcifras > div { border-top: 3px double var(--fg); padding-top: 14px; }
+.fmt--acta .fcifras b { font-family: var(--f-display); font-weight: 900; color: var(--acc);
+  font-size: clamp(30px, 2.9vw, 44px); letter-spacing: -.03em; }
+/* Diligencias pendientes: casilleros sin marcar */
+.fmt--acta .preguntas { border-top: 3px double var(--fg); }
+.fmt--acta .preguntas li { font-family: var(--f-display); font-weight: 400; grid-template-columns: 40px 1fr; }
+.fmt--acta .preguntas li::before { content: "\25A1"; font-size: 17px; color: var(--acc-2); padding-top: 2px; }
+/* Cierre: la razón final, con el sello seco de fondo */
+.fmt--acta .cierre { position: relative; background: var(--papel); border: 1px solid rgba(20,24,38,.14);
+  padding: 30px clamp(20px, 2.6vw, 34px) 26px clamp(48px, 5.4vw, 82px);
+  box-shadow: 0 1px 0 rgba(20,24,38,.12), 0 24px 44px -30px rgba(20,24,38,.7); }
+.fmt--acta .cierre::before { left: clamp(28px, 3.2vw, 50px); }
+.fmt--acta .cierre::after { content: ""; position: absolute; right: 14px; bottom: 14px; width: 168px; height: 168px;
+  opacity: .1; pointer-events: none; z-index: 0;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='none' stroke='%238E1F33' stroke-width='2'><circle cx='60' cy='60' r='57'/><circle cx='60' cy='60' r='52'/><circle cx='60' cy='60' r='36'/><path d='M60 45 V79'/><path d='M48 79 H72'/><path d='M52 83 H68'/><path d='M45 51 H75'/><path d='M45 51 V57'/><path d='M75 51 V57'/><path d='M38 57 A7 7 0 0 0 52 57'/><path d='M68 57 A7 7 0 0 0 82 57'/></g></svg>") center / contain no-repeat; }
+.fmt--acta .cierre__lineas { position: relative; z-index: 1; }
+.fmt--acta .cierre__lineas li { font-size: 15.5px; border-bottom: 1px dashed rgba(30,60,134,.3); padding: 13px 0;
+  grid-template-columns: minmax(120px, .85fr) minmax(0, 1.15fr); gap: 12px 24px; }
+.fmt--acta .cierre__lineas b { font-family: var(--f-display); font-weight: 700; font-size: 16.5px; line-height: 1.28; }
+.fmt--acta .cierre li[data-estado="abierto"] b, .fmt--acta .cierre li[data-estado="pendiente"] b { color: #8A6A12; }
+.fmt--acta .cierre li[data-estado="si"] b, .fmt--acta .cierre li[data-estado="condena"] b { color: #23663F; }
+.fmt--acta .cierre__fecha, .fmt--acta .cierre__sello { position: relative; z-index: 1; }
+.fmt--acta .cierre__fecha { font-size: 9.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--sello); }
+.fmt--acta .sello { font-family: var(--f-mono); font-weight: 700; color: var(--sello); border-color: var(--sello);
+  font-size: 11px; letter-spacing: .26em; }
+.fmt--acta .cierre__sello { right: 24px; top: -20px; background: color-mix(in srgb, var(--papel) 70%, transparent); }
+/* Videos */
+.fmt--acta .vid { background: var(--noche); color: var(--crema); }
+.fmt--acta .vid__meta { border-top-color: var(--acc); }
+.fmt--acta .vid__meta h3 { font-family: var(--f-display); font-weight: 700; }
+.fmt--acta .vid__rol { color: var(--tinta-clara); font-size: 9.5px; letter-spacing: .18em; }
+.fmt--acta .vid__meta small, .fmt--acta .vid__meta a { font-size: 10px; letter-spacing: .1em; }
+.fmt--acta .tablewrap th { font-size: 9.5px; letter-spacing: .18em; color: var(--acc-2); border-bottom-color: var(--fg); }
+
+/* ---------------------------------------------------------------- Qué pasó después: vuelta al despacho oscuro */
+.fmt--acta .despues { background: var(--noche); color: var(--crema); border-top: 0; padding: 76px 0; position: relative; }
+.fmt--acta .despues::before { content: ""; position: absolute; right: 4%; top: 40px; width: 168px; height: 168px; opacity: .13; pointer-events: none;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 70'><g fill='none' stroke='%23F2EDDE' stroke-width='4' stroke-linecap='round'><rect x='12' y='16' width='30' height='20' rx='3'/><path d='M27 36 L64 56'/><rect x='58' y='50' width='30' height='9' rx='4.5'/><path d='M62 66 H112'/></g></svg>") center / contain no-repeat; }
+.fmt--acta .despues .wrap { position: relative; z-index: 1; }
+.fmt--acta .despues .fmod__head { border-bottom-color: rgba(242,237,222,.3); }
+.fmt--acta .despues .fmod__head h2 { color: var(--crema); }
+.fmt--acta .despues .fmod__head h2 em { color: var(--vino-claro); }
+.fmt--acta .despues .kicker { color: var(--tinta-clara); }
+.fmt--acta .hito { border-top: 1px solid rgba(242,237,222,.28); padding-top: 18px; }
+.fmt--acta .hito::before { background: var(--acc); height: 3px; width: 46px; }
+.fmt--acta .hito b { color: var(--tinta-clara); font-size: 10px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
+.fmt--acta .hito h3 { font-family: var(--f-display); font-weight: 700; font-size: 22px; color: var(--crema); }
+.fmt--acta .hito p { font-size: 14.5px; line-height: 1.55; color: #AEB7CC; }
+
+/* ---------------------------------------------------------------- Créditos y pie */
+.fmt--acta .creditos { padding: 68px 0 72px; }
+.fmt--acta .fcred { font-size: 15px; }
+.fmt--acta .fcred dt { color: var(--acc-2); font-size: 9.5px; letter-spacing: .16em; }
+.fmt--acta .ffuentes { font-size: 14.5px; }
+.fmt--acta .ffuentes a { text-decoration-color: var(--acc); }
+.fmt--acta .fnota { font-size: 13px; line-height: 1.6; color: #4A5162; border-top: 1px solid var(--line-x); padding-top: 16px; }
+.fmt--acta .footer a { color: var(--crema); }
+
+/* ---------------------------------------------------------------- Móvil */
+@media (max-width: 1039px) {
+  .escritorio { max-width: 560px; }
+}
+@media (max-width: 760px) {
+  .hero--acta { padding: 78px 0 40px; }
+  .foja { padding: 26px 18px 28px 52px; }
+  .foja::before, .acta::before, .fmt--acta .fmain::before, .fmt--acta .cierre::before { left: 32px; width: 5px; }
+  .foja::after, .acta::after { left: 8px; width: 18px;
+    background: radial-gradient(circle at 50% calc(50% - 46px), var(--noche) 5.5px, rgba(20,24,38,.28) 6px, transparent 7.6px),
+                radial-gradient(circle at 50% calc(50% + 46px), var(--noche) 5.5px, rgba(20,24,38,.28) 6px, transparent 7.6px); }
+  .acta::after { background: radial-gradient(circle at 50% calc(50% - 46px), var(--papel) 5.5px, rgba(20,24,38,.24) 6px, transparent 7.6px),
+                radial-gradient(circle at 50% calc(50% + 46px), var(--papel) 5.5px, rgba(20,24,38,.24) 6px, transparent 7.6px); }
+  .foja__membrete, .acta__cab { grid-template-columns: 1fr; gap: 12px; padding-right: 0; padding-top: 30px; }
+  .escudo { width: 66px; height: 66px; }
+  .acta__cab .escudo { width: 62px; height: 62px; }
+  .folio { top: 0; }
+  .hero--acta .htitle { font-size: clamp(34px, 10.5vw, 54px); max-width: 100%; }
+  .hero--acta .hdeck { font-size: 16.5px; }
+  .foja__razon, .acta__razon { grid-template-columns: 1fr; }
+  .foja__razon p, .acta__razon p { font-size: 15.5px; }
+  .sello-razon { position: static; justify-self: start; margin-top: 8px; transform: rotate(-4deg); animation: none; opacity: 1; }
+  .acta .sello-razon { opacity: 1; transform: rotate(-4deg); }
+  .firma__svg, .firma span { width: 150px; min-width: 150px; }
+  .hero--acta__stats { margin-top: 32px; }
+  .fmt--acta .hstats { gap: 14px 26px; }
+  .fmt--acta .hstats b { font-size: 28px; }
+  .escritorio__campos dd { font-size: 14px; }
+  .fmt--acta .fmain { padding: 34px 15px 40px 44px; }
+  .fmt--acta .fmain::before { left: 26px; }
+  .fmt--acta .cap[data-n]::before { position: static; display: block; margin-bottom: 10px; border-bottom: 0; }
+  .fmt--acta .cap[data-n] + .cap[data-n]::before { top: auto; }
+  .fmt--acta .cap__title { font-size: clamp(26px, 8vw, 34px); max-width: 100%; }
+  .fmt--acta .ftext { font-size: 17px; }
+  .fmt--acta .cap > .ftext:first-of-type > p:first-of-type::first-letter { font-size: 2.6em; }
+  .fmt--acta .fcita p { font-size: 20px; }
+  .fmt--acta .fdato b { font-size: 40px; }
+  .acta { padding: 24px 14px 26px 30px; }
+  .acta::before { left: 14px; }
+  .acta::after { display: none; }
+  .acta__margen { margin-top: 26px; padding: 14px 14px 15px; }
+  .acta__campos { grid-template-columns: 1fr; gap: 12px; }
+  .acta__int { grid-template-columns: 1fr; gap: 6px; padding: 18px 0; }
+  .acta__fs { display: flex; gap: 6px; align-items: baseline; text-align: left; padding-top: 0; }
+  .acta__fs b { margin-top: 0; }
+  .acta__modo { margin-left: 0; }
+  .acta__t, .acta__t--textual { font-size: 17px; }
+  .acta__margen { transform: none; margin-top: 30px; }
+  .fmt--acta .ftl li { grid-template-columns: 1fr; gap: 8px; }
+  .fmt--acta .cierre { padding: 24px 15px 22px 44px; }
+  .fmt--acta .cierre::before { left: 26px; }
+  .fmt--acta .cierre::after { width: 108px; height: 108px; opacity: .07; }
+  .fmt--acta .cierre__sello { position: static; display: inline-block; margin-bottom: 14px; }
+  .fmt--acta .despues { padding: 56px 0; }
+  .fmt--acta .despues::before { display: none; }
+}
+
+/* Movimiento reducido: el sello de razon se queda puesto */
+@media (prefers-reduced-motion: reduce) {
+  .sello-razon, .acta .sello-razon { opacity: 1 !important; transform: rotate(-8deg) !important; }
+  .reel { transform: none !important; }
+}

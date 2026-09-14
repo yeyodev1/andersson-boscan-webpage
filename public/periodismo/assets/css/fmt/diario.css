@@ -1,0 +1,112 @@
+/* DIARIO · Ucrania: bitácora de guerra en papel periódico, azul y amarillo como única tinta de color, mapa fijo */
+.fmt--diario { --bg: #F4F1E8; --bg-2: #EBE7DA; --fg: #14161A; --mute: #626873; --acc: #0057B8; --acc-2: #E5B800; --line-x: rgba(20,22,26,.16);
+  --f-display: 'Playfair Display', Georgia, serif; --f-body: 'PT Serif', Georgia, serif; --f-mono: 'IBM Plex Mono', ui-monospace, monospace; --f-label: 'IBM Plex Sans', system-ui, sans-serif; }
+.fmt--diario .htitle, .fmt--diario .cap__title, .fmt--diario .fmod__head h2 { font-weight: 900; letter-spacing: -.025em; }
+.fmt--diario .htitle em { font-style: italic; font-weight: 400; color: var(--acc); }
+.hero--diario { padding: 80px 0 30px; min-height: 0; border-bottom: 3px double var(--fg); }
+.masthead { display: grid; grid-template-columns: 1fr max-content 1fr; align-items: baseline; gap: 20px; border-block: 1px solid var(--fg); padding: 8px 0; font-family: var(--f-label); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--mute); margin-bottom: 40px; }
+.masthead b { font-family: var(--f-display); font-weight: 900; font-size: 22px; letter-spacing: 0; text-transform: none; color: var(--fg); }
+.masthead span:last-child { text-align: right; }
+.hero--diario .hero__in { display: grid; gap: 30px; grid-template-columns: 1fr; }
+@media (min-width: 1000px) { .hero--diario .hero__in { grid-template-columns: 1.3fr 1fr; align-items: end; } .hero--diario .hkicker, .hero--diario .htitle { grid-column: 1 / -1; } }
+.hero--diario .htitle { font-size: clamp(56px, 9vw, 140px); }
+.hero--diario .hdeck { columns: 1; font-size: 17px; line-height: 1.5; }
+@media (min-width: 700px) { .hero--diario .hdeck { columns: 2; column-gap: 28px; column-rule: 1px solid var(--line-x); max-width: none; } }
+.hero--diario .hstats { grid-column: 1 / -1; }
+.hero--diario .hstats b { color: var(--acc); }
+.fmt--diario .fnav { background: rgba(244,241,232,.95); }
+.fmt--diario .fnav a { font-family: var(--f-display); text-transform: none; letter-spacing: 0; font-size: 15px; font-style: italic; }
+.fmt--diario .cap__title { font-size: clamp(34px, 4.4vw, 62px); }
+.fmt--diario .ftext { font-size: clamp(16.5px, 1.15vw, 18px); }
+.fmt--diario .ftext p:first-of-type { font-weight: 700; }
+.diario { display: grid; gap: 32px; grid-template-columns: 1fr; }
+@media (min-width: 1000px) { .diario { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+.diario__map { position: static; }
+@media (min-width: 1000px) { .diario__map { position: sticky; top: 130px; align-self: start; } }
+.ua { width: 100%; height: auto; display: block; background: var(--bg-2); border: 1px solid var(--line-x); }
+.ua__land { fill: #E2DDCE; stroke: var(--fg); stroke-width: 1.2; }
+.ua__crimea { fill: #D8D2C1; stroke: var(--fg); stroke-width: 1; stroke-dasharray: 3 3; }
+.ua__cities g circle { fill: var(--bg); stroke: var(--fg); stroke-width: 1.5; transition: fill .4s, r .4s, stroke .4s; }
+.ua__cities g text { font-family: var(--f-label); font-size: 12px; fill: var(--mute); text-anchor: middle; transition: fill .4s, font-weight .4s; }
+.ua__cities g.is-on circle { fill: var(--acc-2); stroke: var(--acc); r: 9; filter: drop-shadow(0 0 8px rgba(229,184,0,.8)); }
+.ua__cities g.is-on text { fill: var(--acc); font-weight: 700; }
+.diario__ents { display: grid; gap: 40px; padding: 10px 0 20vh; }
+.entrada { border-top: 3px solid var(--fg); padding-top: 14px; opacity: .78; transition: opacity .4s; }
+.entrada.is-on { opacity: 1; }
+.entrada header { display: flex; justify-content: space-between; align-items: baseline; font-family: var(--f-label); font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--mute); margin-bottom: 8px; }
+.entrada__dia { font-family: var(--f-display); font-weight: 900; font-size: 28px; color: var(--acc); letter-spacing: 0; text-transform: none; }
+.entrada h3 { font-family: var(--f-display); font-size: 26px; line-height: 1.1; margin: 0 0 10px; }
+.entrada p { margin: 0 0 10px; font-size: 15.5px; line-height: 1.6; }
+.entrada__v { font-family: var(--f-label); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--acc); text-decoration: none; border-bottom: 2px solid var(--acc-2); }
+.fmt--diario .fdato b { color: var(--acc); }
+.fmt--diario .estado { background: #fff; border-left-color: var(--acc-2); }
+.fmt--diario .cierre { background: #fff; border-top: 3px double var(--fg); }
+
+/* ---------------------------------------------------------------- el podcast como hilo
+   Diario de un corresponsal: la cobertura se sostuvo en audio, un episodio por día. */
+.hero--diario .masthead b { font-style: italic; }
+@media (min-width: 1000px) {
+  .hero--diario .hero__in { grid-template-columns: 1.15fr .85fr; align-items: start; column-gap: clamp(32px, 4vw, 64px); }
+  .hero--diario .hkicker, .hero--diario .htitle, .hero--diario .hstats { grid-column: 1 / -1; }
+  .hero--diario .hdeck, .hero--diario .hby { grid-column: 1; }
+  .hero--diario .pod--hero { grid-column: 2; grid-row: 3 / span 2; }
+}
+.hero--diario .hdeck { max-width: 60ch; }
+@media (min-width: 700px) { .hero--diario .hdeck { columns: 1; max-width: 60ch; } }
+.hero--diario .hstats { margin-top: 12px; }
+
+.pod { font-family: var(--f-label); }
+.pod--hero { margin: 0; min-width: 0; background: #FBF9F2; border: 1px solid var(--fg); box-shadow: 7px 7px 0 rgba(20,22,26,.1); align-self: start; }
+.pod__head { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-bottom: 1px solid var(--fg); background: var(--fg); color: #FBF9F2; }
+.pod__mic { flex: none; width: 30px; height: 30px; display: grid; place-items: center; border-radius: 50%; background: var(--acc); }
+.pod__mic svg { width: 17px; height: 17px; fill: #FBF9F2; }
+.pod__head b { display: block; font-family: var(--f-display); font-weight: 700; font-style: italic; font-size: 19px; line-height: 1.1; }
+.pod__head span { display: block; font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: #C7C3B6; margin-top: 3px; }
+.pod__lista { list-style: none; margin: 0; padding: 0; }
+.pod__ep { padding: 14px 16px; border-bottom: 1px solid var(--line-x); min-width: 0; }
+.pod__ep:last-child { border-bottom: 0; }
+.pod__ep .pod__cab { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 4px; }
+.pod__dia { font-family: var(--f-display); font-weight: 900; font-size: 17px; color: var(--acc); }
+.pod__ep time { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--mute); }
+.pod__lugar { font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--fg);
+  padding: 2px 7px; border: 1px solid var(--line-x); background: var(--bg-2); }
+.pod__ep h3 { font-family: var(--f-display); font-size: 19px; line-height: 1.15; margin: 0 0 8px; }
+.pod__t { font-family: var(--f-body); font-size: 15px; line-height: 1.55; margin: 0 0 12px; max-width: 62ch; }
+.pod__barra { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.pod__play { flex: none; font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; padding: 6px 11px;
+  border: 1px solid var(--acc); color: var(--acc); text-decoration: none; white-space: nowrap; }
+a.pod__play:hover { background: var(--acc); color: var(--bg); }
+.pod__play--sin { border-style: dashed; border-color: var(--mute); color: var(--mute); }
+.pod__onda { flex: 1 1 auto; min-width: 0; display: flex; align-items: center; justify-content: flex-start; gap: 3px; height: 26px; overflow: hidden; }
+.pod__onda b { flex: 0 0 3px; height: var(--h); background: var(--acc-2); opacity: .6; border-radius: 2px; }
+.pod__ep--min .pod__onda { height: 18px; }
+.pod__ver { display: inline-block; margin-top: 10px; font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--acc); text-decoration: none; border-bottom: 2px solid var(--acc-2); }
+.pod__pie, .pod__aviso { font-size: 12px; line-height: 1.5; color: var(--mute); margin: 0; }
+.pod__pie { padding: 12px 16px; border-top: 1px solid var(--fg); background: var(--bg-2); }
+
+/* el módulo: la lista completa, con más aire */
+.pod--mod { border-top: 3px double var(--fg); border-bottom: 3px double var(--fg); background: #FBF9F2; }
+.pod--mod .pod__lista { display: grid; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 900px) { .pod--mod .pod__lista { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+.pod--mod .pod__ep { padding: 20px 22px; border-bottom: 1px solid var(--line-x); }
+@media (min-width: 900px) { .pod--mod .pod__ep:nth-child(odd) { border-right: 1px solid var(--line-x); } }
+.pod--mod .pod__dia { font-size: 24px; }
+.pod--mod .pod__ep h3 { font-size: 23px; }
+.pod__aviso { padding: 16px 22px; border-top: 1px solid var(--fg); background: var(--bg-2); font-style: italic; }
+.fmt--diario .fmod--podcast .fmod__head h2 em { font-weight: 400; }
+@media (max-width: 480px) {
+  .pod__ep { padding: 12px 13px; }
+  .pod--mod .pod__ep { padding: 16px 14px; }
+  .pod__barra { flex-wrap: wrap; gap: 8px; }
+  .pod__onda { flex-basis: 100%; }
+}
+/* la entradilla en negrita solo abre el capítulo, no cada bloque partido por un módulo */
+.fmt--diario .ftext ~ .ftext p:first-of-type { font-weight: 400; }
+.fmt--diario .cap:first-child .ftext ~ .ftext > p:first-of-type::first-letter { font-size: inherit; float: none; padding: 0; color: inherit; font-family: inherit; line-height: inherit; }
+/* la cabecera en móvil: el nombre del podcast no cabe en la columna central */
+@media (max-width: 760px) {
+  .masthead { grid-template-columns: 1fr; gap: 4px; padding: 10px 0; }
+  .masthead b { font-size: 19px; line-height: 1.15; }
+  .masthead span:last-child { text-align: left; }
+}

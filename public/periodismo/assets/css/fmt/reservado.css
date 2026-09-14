@@ -1,0 +1,271 @@
+/* RESERVADO · ConspiraIn: informe de inteligencia desclasificado. Papel gris frío, tachón negro, sello carmín, azul institucional apagado.
+   Big Shoulders Display (display y etiquetas) + EB Garamond (texto). */
+.fmt--reservado { --bg: #E4E7EA; --bg-2: #D8DCE0; --fg: #15171A; --mute: #59626C; --acc: #B0122B; --acc-2: #3B5170; --line-x: rgba(21,23,26,.16);
+  --hoja: #EEF0F2; --tachon: #101214; --grano: .12;
+  --f-display: 'Big Shoulders Display', 'Arial Narrow', sans-serif; --f-body: 'EB Garamond', 'Iowan Old Style', Georgia, serif;
+  --f-mono: 'IBM Plex Mono', ui-monospace, monospace; --f-label: 'Big Shoulders Display', 'Arial Narrow', sans-serif; }
+.fmt--reservado .topbar { background: rgba(228,231,234,.9); }
+.fmt--reservado .footer { background: #15171A; }
+.fmt--reservado ::selection { background: var(--tachon); color: var(--hoja); }
+
+/* Tipografía: titulares condensados en mayúsculas, texto Garamond un punto más grande */
+.fmt--reservado .htitle, .fmt--reservado .cap__title, .fmt--reservado .fmod__head h2 { font-weight: 800; text-transform: uppercase; letter-spacing: -.005em; line-height: .9; }
+.fmt--reservado .htitle em, .fmt--reservado .cap__title em, .fmt--reservado .fmod__head h2 em { font-style: normal; color: var(--acc); }
+.fmt--reservado .ftext { font-size: clamp(18.5px, 1.35vw, 21px); line-height: 1.58; }
+.fmt--reservado .cap:first-child .ftext > p:first-of-type::first-letter { font-weight: 900; color: var(--tachon); }
+.fmt--reservado .hkicker, .fmt--reservado .hby, .fmt--reservado .hstats span, .fmt--reservado .fper .badge, .fmt--reservado .fcita cite, .fmt--reservado .fresp b, .fmt--reservado .vid__rol, .fmt--reservado .fcred dt, .fmt--reservado .fmod__head .kicker { font-family: var(--f-label); font-weight: 700; }
+.fmt--reservado .hkicker { font-size: 13.5px; letter-spacing: .16em; color: var(--acc-2); }
+.fmt--reservado .hkicker::before { background: var(--acc-2); }
+.fmt--reservado .hby { font-size: 13px; letter-spacing: .12em; }
+.fmt--reservado .hby b { font-weight: 800; }
+/* Kickers como franjas de clasificación: barra negra con texto claro */
+.fmt--reservado .kicker { display: inline-block; font-family: var(--f-label); font-weight: 700; font-size: 12.5px; letter-spacing: .2em; text-transform: uppercase; background: var(--tachon); color: var(--hoja); padding: 5px 10px 3px; }
+.fmt--reservado .objecion .kicker { border: 0; transform: none; }
+
+/* ---------- Portada: la hoja del informe ---------- */
+.hero--reservado { padding: 92px 0 56px; min-height: 0; align-items: start; background: linear-gradient(180deg, #C6CBD1 0%, #D3D8DD 55%, var(--bg) 100%); }
+.hero--reservado .hero__art { inset: auto 0 0 0; height: 62%; }
+.hero--reservado .hero__art img { opacity: .34; filter: grayscale(1) contrast(1.2); mix-blend-mode: multiply; mask-image: linear-gradient(180deg, transparent 0%, #000 55%); -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 55%); }
+.hoja { position: relative; max-width: 1080px; margin: 0 auto; background: var(--hoja); color: var(--fg); padding: clamp(24px, 4vw, 52px) clamp(20px, 5.5vw, 76px) clamp(22px, 3vw, 36px);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.8), 0 1px 2px rgba(21,23,26,.18), 0 44px 80px -44px rgba(21,23,26,.65); }
+/* perforaciones de archivo en el margen izquierdo */
+.hoja::before { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(circle at 16px 34%, var(--bg-2) 6px, rgba(21,23,26,.12) 6.5px, transparent 8px), radial-gradient(circle at 16px 66%, var(--bg-2) 6px, rgba(21,23,26,.12) 6.5px, transparent 8px); }
+.hoja__membrete { display: grid; grid-template-columns: 46px 1fr auto; gap: 8px 16px; align-items: center; padding-bottom: 16px; border-bottom: 3px double var(--fg); margin-bottom: 20px; }
+.hoja__escudo { width: 44px; height: 44px; border-radius: 50%; background: radial-gradient(circle, var(--acc-2) 0 6px, transparent 7px), repeating-conic-gradient(from 0deg, var(--acc-2) 0 3deg, transparent 3deg 12deg);
+  box-shadow: inset 0 0 0 4px var(--hoja), inset 0 0 0 6px var(--acc-2), inset 0 0 0 9px var(--hoja), inset 0 0 0 10px var(--acc-2); }
+.hoja__ent b { display: block; font-family: var(--f-display); font-weight: 800; font-size: clamp(16px, 1.8vw, 21px); letter-spacing: .06em; text-transform: uppercase; line-height: 1; }
+.hoja__ent span { display: block; font-family: var(--f-mono); font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--mute); margin-top: 5px; }
+.hoja__num { text-align: right; }
+.hoja__num span { display: block; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--acc-2); }
+.hoja__num b { display: block; font-weight: 500; font-size: 15px; letter-spacing: .06em; margin-top: 2px; }
+.hoja__clas { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; margin: 4px 0 20px; }
+.sello--res { position: relative; font-family: var(--f-display); font-weight: 900; font-size: clamp(24px, 3.4vw, 38px); letter-spacing: .24em; text-indent: .24em; line-height: 1; padding: 8px 14px 5px; border: 4px double var(--acc); color: var(--acc); transform: rotate(-3deg); }
+.hoja .sello--anim { animation: res-sellar .5s var(--ease-out) .7s forwards; }
+@keyframes res-sellar { from { opacity: 0; transform: rotate(-3deg) scale(2.2); } 70% { opacity: 1; transform: rotate(-3deg) scale(.96); } to { opacity: 1; transform: rotate(-3deg) scale(1); } }
+.sello--res::after { content: ""; position: absolute; left: -5%; right: -5%; top: 50%; height: 24%; min-height: 8px; background: var(--tachon); transform: translateY(-50%) scaleX(0); transform-origin: 0 50%; animation: res-tachar .4s var(--ease-out) 1.45s forwards; }
+@keyframes res-tachar { to { transform: translateY(-50%) scaleX(1); } }
+.hoja__descl { font-family: var(--f-label); font-weight: 700; font-size: 13px; letter-spacing: .18em; text-transform: uppercase; color: var(--acc-2); border: 2px solid var(--acc-2); padding: 6px 10px 4px; opacity: 0; transform: rotate(2deg) translateY(8px); animation: res-descl .5s var(--ease-out) 1.95s forwards; }
+@keyframes res-descl { to { opacity: 1; transform: rotate(2deg) translateY(0); } }
+.hoja__campos { display: grid; grid-template-columns: max-content minmax(0, 1fr) max-content minmax(0, 1fr); gap: 8px 16px; padding: 12px 0; border-block: 1px solid var(--line-x); margin-bottom: 30px; font-size: 12.5px; }
+.hoja__campos span { font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--acc-2); padding-top: 2px; }
+.hoja__campos b { font-weight: 500; min-width: 0; overflow-wrap: anywhere; }
+.hero--reservado .htitle { font-size: clamp(54px, 8.8vw, 132px); max-width: 15ch; margin-bottom: 22px; }
+.hero--reservado .hdeck { font-size: clamp(17.5px, 1.4vw, 21.5px); max-width: 68ch; margin-bottom: 26px; }
+.hero--reservado .hby { border-top: 1px solid var(--line-x); }
+.hero--reservado .hstats { border-top: 2px solid var(--fg); padding-top: 18px; gap: 14px 36px; }
+.hero--reservado .hstats b { font-weight: 800; }
+.hero--reservado .hstats span { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--mute); }
+/* Nómina: nombres bajo barras negras que se retiran al cargar */
+.hoja__nomina { margin: 0 0 26px; padding-top: 16px; border-top: 1px solid var(--line-x); opacity: 0; animation: res-in .6s var(--ease-out) .5s forwards; }
+@keyframes res-in { to { opacity: 1; } }
+.hoja__lbl { display: block; font-family: var(--f-label); font-weight: 700; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--acc-2); margin-bottom: 12px; }
+.hoja__nombres { display: flex; flex-wrap: wrap; gap: 8px 10px; }
+.tachon { position: relative; display: inline-block; overflow: hidden; font-family: var(--f-display); font-weight: 700; font-size: 19px; line-height: 1.08; text-transform: uppercase; letter-spacing: .04em; padding: 6px 9px 6px; color: var(--fg); background: rgba(21,23,26,.06); }
+.tachon i { position: absolute; inset: 0; background: var(--tachon); }
+.hoja .tachon i { animation: res-destachar .6s var(--ease-out) forwards; animation-delay: calc(2.3s + var(--i) * .13s); }
+@keyframes res-destachar { to { transform: translateX(102%); } }
+@media (max-width: 760px) {
+  .hero--reservado { padding-top: 76px; }
+  .hoja { padding: 22px 18px 20px 26px; }
+  .hoja::before { background: radial-gradient(circle at 11px 30%, var(--bg-2) 4.5px, rgba(21,23,26,.12) 5px, transparent 6.5px), radial-gradient(circle at 11px 70%, var(--bg-2) 4.5px, rgba(21,23,26,.12) 5px, transparent 6.5px); }
+  .hoja__membrete { grid-template-columns: 40px 1fr; }
+  .hoja__escudo { width: 38px; height: 38px; }
+  .hoja__num { grid-column: 2; text-align: left; }
+  .hoja__campos { grid-template-columns: max-content minmax(0, 1fr); }
+  .hero--reservado .htitle { font-size: clamp(46px, 13vw, 80px); }
+  .sello--res { font-size: 22px; padding: 7px 12px 4px; }
+  .tachon { font-size: 17px; }
+}
+
+/* ---------- Navegación de capítulos ---------- */
+.fmt--reservado .fnav { top: 60px; background: rgba(228,231,234,.95); border-block: 1px solid var(--fg); }
+.fmt--reservado .fnav a { font-size: 14px; font-weight: 700; letter-spacing: .12em; padding: 14px 16px 11px; border-bottom-width: 3px; }
+.fmt--reservado .fnav a b { color: var(--acc); font-size: 11.5px; }
+.fmt--reservado .fnav a:hover, .fmt--reservado .fnav a.is-active { color: var(--fg); border-bottom-color: var(--tachon); }
+
+/* ---------- En cuatro frases, estado ---------- */
+.fmt--reservado .claves li { font-size: 17.5px; line-height: 1.45; border-top-color: var(--tachon); }
+.fmt--reservado .claves li::before { color: var(--acc-2); }
+.fmt--reservado .estado .kicker { margin-bottom: 12px; }
+.fmt--reservado .estado b { font-weight: 800; text-transform: uppercase; font-size: 30px; line-height: .95; letter-spacing: 0; }
+.fmt--reservado .estado p { font-family: var(--f-body); font-size: 15.5px; line-height: 1.5; color: var(--fg); }
+.fmt--reservado .estado--amarillo::before { background: var(--acc-2); }
+
+/* ---------- Capítulos ---------- */
+.fmt--reservado .cap + .cap { border-top: 3px double var(--fg); }
+.fmt--reservado .cap__num { font-family: var(--f-label); font-weight: 700; font-size: 12.5px; letter-spacing: .2em; background: var(--tachon); color: var(--hoja); padding: 5px 10px 3px; margin-bottom: 14px; }
+.fmt--reservado .cap__title { font-size: clamp(40px, 5.6vw, 84px); max-width: 16ch; }
+.fmt--reservado .fcita { max-width: 760px; margin: 40px 0; }
+.fmt--reservado .fcita p { font-family: var(--f-body); font-style: italic; font-weight: 500; font-size: clamp(24px, 2.6vw, 36px); line-height: 1.2; letter-spacing: 0; }
+.fmt--reservado .fcita::before { font-family: var(--f-body); color: var(--acc-2); opacity: .3; }
+.fmt--reservado .fcita cite { font-size: 12.5px; letter-spacing: .14em; color: var(--acc-2); }
+.fmt--reservado .fdato b { font-weight: 900; color: var(--acc); }
+.fmt--reservado .fdato span { font-family: var(--f-body); font-style: italic; font-size: clamp(17px, 1.5vw, 21px); }
+.fmt--reservado .margen { font-family: var(--f-body); font-size: 15px; border-left-color: var(--acc-2); }
+.fmt--reservado .margen span { font-family: var(--f-label); font-weight: 700; color: var(--acc-2); }
+
+/* ---------- Módulo característico: la cúpula (organigrama con tachones) ---------- */
+.cupula { position: relative; border-top: 3px double var(--fg); }
+.cupula__nivel { position: relative; display: grid; grid-template-columns: 168px minmax(0, 1fr); gap: 0; padding: 22px 0 24px; border-bottom: 1px solid var(--line-x); }
+.cupula__nivel::before { content: ""; position: absolute; left: 168px; top: 0; bottom: 0; width: 2px; background: var(--fg); }
+.cupula__nivel:last-child::before { bottom: auto; height: 40px; }
+.cupula__lbl { padding-right: 22px; }
+.cupula__lbl b { display: block; font-family: var(--f-mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--acc); margin-bottom: 6px; }
+.cupula__lbl span { display: block; font-family: var(--f-display); font-weight: 800; font-size: 21px; line-height: 1; text-transform: uppercase; letter-spacing: .02em; }
+.cupula__fila { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); padding: 16px 0 0 20px; margin-top: 8px; border-top: 2px solid var(--fg); }
+.cnodo { position: relative; padding: 14px 16px 16px; background: var(--hoja); border: 1px solid var(--line-x); border-top: 2px solid var(--fg); box-shadow: 0 1px 2px rgba(21,23,26,.08); }
+.cnodo::before { content: ""; position: absolute; left: 22px; top: -18px; width: 2px; height: 17px; background: var(--fg); }
+.cnodo__area { display: inline-block; font-family: var(--f-label); font-weight: 700; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--acc-2); border: 1.5px solid var(--acc-2); padding: 3px 7px 1px; margin-bottom: 10px; }
+.cnodo[data-area="direccion"] { border-top: 4px solid var(--acc); }
+.cnodo[data-area="direccion"] .cnodo__area { color: var(--acc); border-color: var(--acc); }
+.cnodo h3.tachon { display: block; width: max-content; max-width: 100%; margin: 0 0 6px -6px; font-size: 22px; padding: 5px 6px 3px; background: rgba(21,23,26,.06); }
+.cnodo__cargo { display: block; font-family: var(--f-body); font-style: italic; font-size: 16.5px; line-height: 1.3; color: var(--fg); margin-bottom: 8px; }
+.cnodo p { margin: 0; font-family: var(--f-body); font-size: 15.5px; line-height: 1.45; color: var(--mute); }
+.cupula .tachon i { transform: none; transition: transform .6s var(--ease-out); transition-delay: calc(var(--i) * 150ms + .25s); }
+.cupula__nivel.in .tachon i { transform: translateX(102%); }
+.cupula__nota { margin: 18px 0 0; font-family: var(--f-body); font-size: 15px; line-height: 1.5; color: var(--mute); max-width: 70ch; }
+@media (max-width: 760px) {
+  .cupula__nivel { grid-template-columns: 1fr; padding: 18px 0 20px; }
+  .cupula__nivel::before { left: 0; }
+  .cupula__lbl { padding: 0 0 0 16px; }
+  .cupula__fila { padding-left: 16px; margin-top: 12px; grid-template-columns: 1fr; }
+  .cnodo::before { left: 20px; }
+}
+
+/* ---------- Módulos genéricos ---------- */
+.fmt--reservado .fmod__head h2 { font-size: clamp(30px, 3.6vw, 50px); }
+.fmt--reservado .fcifras > div { border-top-color: var(--tachon); }
+.fmt--reservado .fcifras b { font-weight: 900; }
+.fmt--reservado .fcifras span { font-family: var(--f-body); font-size: 15px; color: var(--fg); }
+.fmt--reservado .ftl { border-left-color: var(--fg); }
+.fmt--reservado .ftl li::before { border-radius: 0; background: var(--tachon); }
+.fmt--reservado .ftl__f { color: var(--acc-2); }
+.fmt--reservado .ftl b { font-weight: 800; text-transform: uppercase; font-size: 21px; }
+.fmt--reservado .ftl p { font-family: var(--f-body); font-size: 15.5px; color: var(--fg); }
+.fmt--reservado .fper { border-bottom-color: var(--fg); }
+.fmt--reservado .fper .badge { color: var(--acc-2); border-color: var(--acc-2); font-size: 11.5px; letter-spacing: .16em; }
+.fmt--reservado .fper h3 { font-weight: 800; text-transform: uppercase; font-size: 23px; letter-spacing: .01em; }
+.fmt--reservado .fper p { font-family: var(--f-body); font-size: 15.5px; color: var(--fg); }
+.fmt--reservado .fper__foto { border-radius: 2px; border-color: var(--fg); }
+.fmt--reservado .fper__foto--sin { border-style: dashed; font-weight: 800; color: var(--acc-2); }
+.fmt--reservado .preguntas { border-top-color: var(--tachon); }
+.fmt--reservado .preguntas li { font-family: var(--f-body); font-weight: 500; font-size: clamp(19px, 1.6vw, 23px); }
+.fmt--reservado .preguntas li::before { color: var(--acc); }
+.fmt--reservado .fresp li { border-left: 2px solid var(--acc-2); }
+.fmt--reservado .fresp b { color: var(--acc-2); font-size: 13px; letter-spacing: .14em; }
+.fmt--reservado .fresp p { font-size: 16.5px; }
+.fmt--reservado .cierre { background: var(--hoja); border: 1px solid var(--fg); outline: 1px solid var(--fg); outline-offset: 4px; padding: 26px 28px 22px; }
+.fmt--reservado .cierre__lineas li { font-family: var(--f-body); font-size: 16.5px; border-bottom-color: var(--line-x); }
+.fmt--reservado .cierre__lineas b { font-family: var(--f-display); font-weight: 800; text-transform: uppercase; font-size: 16px; letter-spacing: .04em; }
+.fmt--reservado .cierre li[data-estado="abierto"] b, .fmt--reservado .cierre li[data-estado="pendiente"] b { color: var(--acc-2); }
+.fmt--reservado .cierre__fecha { color: var(--mute); }
+.fmt--reservado .xvideos .vid__meta h3 { font-weight: 700; font-size: 18px; text-transform: uppercase; }
+
+/* ---------- Después, créditos ---------- */
+.fmt--reservado .despues { background: var(--bg-2); border-top: 3px double var(--fg); }
+.fmt--reservado .hito { border-top-color: var(--fg); }
+.fmt--reservado .hito::before { background: var(--acc-2); }
+.fmt--reservado .hito b { color: var(--acc-2); }
+.fmt--reservado .hito h3 { font-weight: 800; text-transform: uppercase; font-size: 23px; }
+.fmt--reservado .hito p { font-family: var(--f-body); font-size: 15.5px; color: var(--fg); }
+.fmt--reservado .fcred { font-family: var(--f-body); font-size: 15.5px; }
+.fmt--reservado .fcred dt { color: var(--acc-2); font-size: 12px; letter-spacing: .16em; }
+.fmt--reservado .ffuentes { font-family: var(--f-body); font-size: 15px; }
+.fmt--reservado .fnota { font-family: var(--f-body); font-size: 14px; }
+.fmt--reservado .footer h4 { color: #B9BCC2; }
+
+/* ---------- Movimiento reducido: sin barras, todo legible ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .fmt--reservado .tachon i, .fmt--reservado .sello--res::after { display: none; }
+  .fmt--reservado .hoja__descl, .fmt--reservado .hoja__nomina { opacity: 1; transform: none; }
+}
+
+/* ================================================================
+   El informe no termina en la portada: hoja gris perforada, folios,
+   sellos y barras de tachón que se retiran al bajar
+   ================================================================ */
+
+/* --- El cuerpo es la hoja del informe, archivada y perforada --- */
+.fmt--reservado .fbody {
+  background: var(--hoja);
+  background-image: radial-gradient(circle at 20px 44px, var(--bg-2) 6.5px, rgba(21,23,26,.16) 7px, transparent 8.5px);
+  background-repeat: repeat-y; background-position: left top; background-size: 40px 210px;
+  border: 1px solid var(--line-x); box-shadow: inset 0 1px 0 rgba(255,255,255,.8), 0 1px 2px rgba(21,23,26,.14), 0 40px 70px -46px rgba(21,23,26,.6);
+  padding: 44px clamp(22px, 4vw, 60px) 40px clamp(50px, 6vw, 88px); margin-top: 44px; margin-bottom: 64px;
+}
+.fmt--reservado .fbody::selection { background: var(--tachon); }
+
+/* --- Cada capítulo, un folio del expediente --- */
+.fmt--reservado .cap[data-n] { position: relative; padding-top: 44px; }
+.fmt--reservado .cap[data-n]::before {
+  content: "Secretaría Nacional de Inteligencia · Informe UCSI-2018-06-25 · Desclasificado";
+  position: absolute; left: 0; right: 0; top: var(--foliotop, 0px); box-sizing: border-box;
+  padding: 0 116px 7px 0; border-bottom: 3px double var(--fg);
+  font-family: var(--f-mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--mute);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.fmt--reservado .cap[data-n]::after {
+  content: "Folio " attr(data-n); position: absolute; right: 0; top: var(--foliotop, 0px); z-index: 2;
+  font-family: var(--f-mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--acc);
+}
+.fmt--reservado .cap + .cap { --foliotop: 46px; border-top: 0; margin-top: 26px; padding-top: 94px; }
+.fmt--reservado .cap + .cap .cap__head { position: relative; }
+
+/* --- Barras de tachón en los intertítulos: se retiran al bajar --- */
+@supports (animation-timeline: view()) {
+  .fmt--reservado .cap__title, .fmt--reservado .fmod__head h2 { position: relative; }
+  .fmt--reservado .cap__title::after, .fmt--reservado .fmod__head h2::after {
+    content: ""; position: absolute; inset: -.06em -.14em -.1em -.14em; background: var(--tachon); pointer-events: none;
+    animation: res-destachar-scroll linear both; animation-timeline: view(); animation-range: cover 14% cover 42%;
+  }
+  @keyframes res-destachar-scroll { from { clip-path: inset(0 0 0 0); } to { clip-path: inset(0 0 0 100%); } }
+  @media (prefers-reduced-motion: reduce) {
+    .fmt--reservado .cap__title::after, .fmt--reservado .fmod__head h2::after { display: none; }
+  }
+}
+
+/* --- Sellos: reservado tachado arriba, desclasificado al cierre --- */
+.fmt--reservado .fside { overflow: visible; max-height: none; }
+.fmt--reservado .estado { position: relative; padding-right: 0; margin-bottom: 44px; }
+.fmt--reservado .estado::after {
+  content: "Reservado"; position: absolute; right: 0; bottom: -26px; z-index: 2;
+  font-family: var(--f-display); font-weight: 900; font-size: 19px; letter-spacing: .22em; text-indent: .22em; line-height: 1;
+  padding: 7px 12px 4px; border: 3px double var(--acc); color: var(--acc); text-transform: uppercase; transform: rotate(-4deg);
+  background-image: linear-gradient(var(--tachon), var(--tachon));
+  background-repeat: no-repeat; background-position: -4px 50%; background-size: calc(100% + 8px) 15%;
+}
+.fmt--reservado .cierre { position: relative; }
+.fmt--reservado .cierre::before {
+  content: "Desclasificado"; position: absolute; right: 18px; top: -18px; z-index: 3;
+  font-family: var(--f-display); font-weight: 900; font-size: 17px; letter-spacing: .2em; text-indent: .2em; line-height: 1;
+  padding: 7px 12px 4px; border: 3px double var(--acc-2); color: var(--acc-2); background: var(--hoja);
+  text-transform: uppercase; transform: rotate(3deg);
+}
+
+/* --- Citas: extracto del informe con pestaña de clasificación --- */
+.fmt--reservado .fcita { position: relative; border-left: 0; padding: 34px 24px 20px; margin: 52px 0 46px; background: var(--hoja); border: 1px solid var(--fg); box-shadow: 4px 4px 0 rgba(21,23,26,.10); }
+.fmt--reservado .fcita::before {
+  content: "Extracto del informe"; opacity: 1; position: absolute; left: 0; top: 0; font-size: 11px; line-height: 1.2;
+  font-family: var(--f-label); font-weight: 700; letter-spacing: .2em; text-transform: uppercase;
+  background: var(--tachon); color: var(--hoja); padding: 7px 12px 5px;
+}
+.fmt--reservado .fcita cite { display: block; margin-top: 14px; padding-top: 11px; border-top: 1px solid var(--line-x); }
+
+/* --- Datos: cifra levantada del informe --- */
+.fmt--reservado .fdato { position: relative; padding-top: 30px; grid-template-columns: minmax(0, 1fr); gap: 8px 0; }
+.fmt--reservado .fdato::before { content: "Dato del informe"; position: absolute; left: 0; top: 6px; font-family: var(--f-mono); font-size: 9.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--acc-2); }
+.fmt--reservado .fdato b { font-size: clamp(36px, 4.8vw, 72px); }
+
+/* --- Después: cada hito, un anexo --- */
+.fmt--reservado .hito { position: relative; padding-top: 30px; }
+.fmt--reservado .hito::after { content: "Anexo"; position: absolute; left: 22px; top: 8px; font-family: var(--f-mono); font-size: 9.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--mute); }
+
+@media (max-width: 760px) {
+  .fmt--reservado .fbody { padding: 32px 18px 32px 40px; background-size: 30px 180px;
+    background-image: radial-gradient(circle at 15px 36px, var(--bg-2) 5px, rgba(21,23,26,.16) 5.5px, transparent 7px); }
+  .fmt--reservado .cap[data-n]::before { content: "Informe UCSI-2018-06-25"; padding-right: 74px; font-size: 9px; letter-spacing: .1em; }
+  .fmt--reservado .cap[data-n]::after { font-size: 9px; letter-spacing: .1em; }
+  .fmt--reservado .estado::after { position: static; display: inline-block; margin-top: 14px; }
+  .fmt--reservado .cierre::before { right: 10px; font-size: 14px; }
+}

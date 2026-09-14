@@ -1,0 +1,180 @@
+/* ESQUELA · La dinastía Briones: página de obituarios (borde negro grueso, filete doble), negro de luto,
+   blanco tiza, dorado viejo como único acento. Cinzel (display) + Cardo (texto). */
+.fmt--esquela { --bg: #0B0B0C; --bg-2: #141416; --fg: #EDE9E0; --mute: #A19C90; --acc: #B8963E; --acc-2: #D9BB63; --line-x: rgba(237,233,224,.16);
+  --tiza: #EDE9E0; --luto: #0B0B0C; --oro-tinta: #7E652A;
+  --f-display: 'Cinzel', 'Trajan Pro', Georgia, serif; --f-body: 'Cardo', 'Iowan Old Style', Georgia, serif; --f-mono: 'Cinzel', Georgia, serif; --f-label: 'Cardo', Georgia, serif; --radius: 0; }
+.fmt--esquela::after { mix-blend-mode: screen; opacity: .05; }
+.fmt--esquela .topbar { background: rgba(11,11,12,.9); border-color: var(--line-x); }
+.fmt--esquela .footer { background: #050506; border-top: 3px double var(--acc); }
+.fmt--esquela .mono, .fmt--esquela .cap__num, .fmt--esquela .ftl__f, .fmt--esquela .hito b, .fmt--esquela .fnav a b, .fmt--esquela .cierre__fecha { font-family: var(--f-display); font-variant-numeric: lining-nums; }
+.fmt--esquela .kicker, .fmt--esquela .hkicker, .fmt--esquela .cap__num, .fmt--esquela .hby, .fmt--esquela .hstats span, .fmt--esquela .fnav a, .fmt--esquela .fper .badge, .fmt--esquela .fcita cite, .fmt--esquela .fresp b, .fmt--esquela .margen span, .fmt--esquela .cierre__panel h3, .fmt--esquela .fcred dt, .fmt--esquela .footer h4 { font-family: var(--f-display); font-weight: 400; letter-spacing: .18em; }
+.fmt--esquela .htitle, .fmt--esquela .cap__title, .fmt--esquela .fmod__head h2 { font-weight: 700; text-transform: uppercase; letter-spacing: .02em; line-height: 1; }
+.fmt--esquela .htitle em, .fmt--esquela .cap__title em, .fmt--esquela .fmod__head h2 em { font-style: normal; font-weight: 400; color: var(--acc); }
+.cruz { font-style: normal; color: var(--acc); font-family: 'Cardo', Georgia, serif; }
+
+/* Portada: la página de obituarios */
+.hero--esquela { padding: 100px 0 44px; min-height: 0; align-items: start; background: var(--bg); }
+.fmt--esquela .hero__art img { opacity: .2; filter: grayscale(1) contrast(1.15) brightness(.9); mask-image: linear-gradient(180deg, transparent 0, #000 30%, #000 100%); -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 30%, #000 100%); }
+.pagina { position: relative; z-index: 1; background: var(--tiza); color: var(--luto); padding: 12px; box-shadow: 0 40px 80px -30px rgba(0,0,0,.9), 0 0 0 1px rgba(237,233,224,.08); animation: pagIn 1.1s var(--ease-out) both;
+  --fg: #0B0B0C; --mute: #5C574D; --acc: #7E652A; --line-x: rgba(11,11,12,.22); --bg: #EDE9E0; }
+@keyframes pagIn { from { opacity: 0; transform: translateY(26px); } }
+.pagina__marco { border: 11px solid var(--luto); padding: 5px; }
+.pagina__filete { border: 3px double var(--luto); padding: clamp(18px, 3vw, 40px) clamp(18px, 3.4vw, 46px) clamp(20px, 3vw, 36px); }
+.pagina__cab { display: flex; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-bottom: 12px; margin-bottom: clamp(22px, 3vw, 36px); border-bottom: 1px solid var(--luto); font-family: var(--f-display); font-size: 11px; letter-spacing: .24em; text-transform: uppercase; color: var(--luto); }
+.pagina__cab span:first-child { font-weight: 700; }
+.pagina__cab span:last-child { color: var(--mute); }
+.pagina__grid { display: grid; gap: 36px; grid-template-columns: 1fr; }
+@media (min-width: 1000px) { .pagina__grid { grid-template-columns: minmax(0, 1.25fr) minmax(300px, .75fr); gap: clamp(36px, 4.5vw, 72px); } }
+.pagina .hkicker { color: var(--acc); margin-bottom: 20px; font-size: 11px; }
+.pagina .hkicker::before { background: var(--luto); width: 28px; height: 1px; }
+.pagina .htitle { font-size: clamp(40px, 6.6vw, 98px); margin: 0 0 22px; max-width: 12ch; color: var(--luto); }
+.pagina .hdeck { font-size: clamp(17px, 1.35vw, 20.5px); line-height: 1.5; color: #1E1C19; max-width: 58ch; }
+.pagina .hby { border-top: 1px solid var(--luto); color: var(--mute); margin-bottom: 0; font-size: 11px; }
+.pagina .hby b { color: var(--luto); font-weight: 400; }
+.esquelas { position: relative; border-top: 1px solid var(--luto); padding-top: 18px; align-self: start; }
+@media (min-width: 1000px) { .esquelas { border-top: 0; padding-top: 0; padding-left: clamp(24px, 3vw, 44px); border-left: 3px double var(--luto); } }
+.esquelas__t { font-family: var(--f-display); font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--luto); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--line-x); }
+.esquelas__t em { font-style: normal; color: var(--acc); }
+.esquelas ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.esquelas li { display: grid; grid-template-columns: 22px 1fr; grid-template-rows: auto auto auto; column-gap: 12px; padding: 12px 0 13px; border-bottom: 1px solid var(--line-x); opacity: 0; animation: rise .8s var(--ease-out) forwards; animation-delay: calc(.6s + var(--i) * .16s); }
+.esquelas li:last-child { border-bottom: 0; }
+.esquelas li .cruz { grid-row: 1 / span 3; font-size: 20px; line-height: 1; padding-top: 2px; }
+.esquelas li b { font-family: var(--f-display); font-weight: 700; font-size: 15px; letter-spacing: .04em; text-transform: uppercase; line-height: 1.25; color: var(--luto); }
+.esq__f { font-family: var(--f-display); font-size: 12px; letter-spacing: .1em; color: var(--acc); margin-top: 4px; }
+.esq__l { font-family: var(--f-body); font-style: italic; font-size: 14px; color: var(--mute); }
+@media (max-width: 999px) { .esquelas ol { grid-template-columns: 1fr 1fr; column-gap: 24px; } .esquelas li { padding: 10px 0 11px; } }
+@media (max-width: 560px) { .esquelas ol { grid-template-columns: 1fr; } }
+.hero--esquela .hstats { margin-top: 34px; padding-top: 22px; border-top: 1px solid var(--line-x); text-shadow: none; }
+.hero--esquela .hstats b { color: var(--acc); font-weight: 400; font-size: clamp(30px, 3.2vw, 48px); background: none; padding: 0; }
+.hero--esquela .hstats span { color: var(--mute); font-size: 10.5px; }
+
+/* Navegación de capítulos */
+.fmt--esquela .fnav { background: rgba(11,11,12,.94); border-block: 1px solid var(--line-x); }
+.fmt--esquela .fnav a { font-size: 11.5px; letter-spacing: .14em; padding: 15px 18px 13px; }
+.fmt--esquela .fnav a b { color: var(--acc); font-size: 11px; }
+.fmt--esquela .fnav a:hover, .fmt--esquela .fnav a.is-active { border-bottom-color: var(--acc); color: var(--fg); }
+
+/* En cuatro frases, estado, capítulos, texto */
+.fmt--esquela .claves li { border-top: 3px double var(--acc); font-size: 16px; }
+.fmt--esquela .claves li::before { color: var(--acc); font-family: var(--f-display); }
+.fmt--esquela .estado b { font-family: var(--f-display); font-weight: 700; font-size: 24px; text-transform: uppercase; letter-spacing: .02em; line-height: 1.15; }
+.fmt--esquela .estado p { font-family: var(--f-body); font-size: 15px; color: var(--mute); }
+.fmt--esquela .cap__head { padding-top: 18px; border-top: 3px double var(--acc); }
+.fmt--esquela .cap__num { color: var(--acc); font-size: 11px; }
+.fmt--esquela .cap__title { font-size: clamp(28px, 3.8vw, 54px); }
+.fmt--esquela .cap + .cap { border-top: 0; }
+.fmt--esquela .ftext { font-size: clamp(18.5px, 1.35vw, 21px); line-height: 1.6; color: #DDD8CE; }
+.fmt--esquela .cap:first-child .ftext > p:first-of-type::first-letter { font-family: var(--f-display); font-weight: 700; color: var(--acc); font-size: 4.2em; padding-right: .14em; }
+.fmt--esquela .margen { border-left-color: var(--acc); font-family: var(--f-body); font-size: 15px; }
+.fmt--esquela .fcita p { font-family: var(--f-body); font-style: italic; font-weight: 400; font-size: clamp(24px, 2.5vw, 36px); line-height: 1.25; color: var(--fg); }
+.fmt--esquela .fcita::before { color: var(--acc); opacity: .5; font-family: 'Cardo', Georgia, serif; }
+.fmt--esquela .fdato b { color: var(--acc); font-weight: 400; background: none; padding: 0; margin: 0; }
+.fmt--esquela .fdato span { font-family: var(--f-body); font-style: italic; color: var(--fg); }
+.fmt--esquela .fdatos2 .fdato { border-top: 1px solid var(--line-x); padding-top: 16px; }
+.fmt--esquela .ffoto figcaption, .fmt--esquela .fper p, .fmt--esquela .hito p, .fmt--esquela .ftl p, .fmt--esquela .fresp p, .fmt--esquela .fnota, .fmt--esquela .ffuentes, .fmt--esquela .fcred { font-family: var(--f-body); }
+.fmt--esquela .fper p, .fmt--esquela .hito p, .fmt--esquela .ftl p { font-size: 15px; }
+
+/* Módulos genéricos sobre negro */
+.fmt--esquela .fmod__head { padding-top: 18px; border-top: 3px double var(--acc); }
+.fmt--esquela .fmod__head h2 { font-size: clamp(26px, 3.2vw, 44px); }
+.fmt--esquela .ftl { border-left-color: var(--line-x); }
+.fmt--esquela .ftl li::before { background: var(--acc); }
+.fmt--esquela .ftl b { font-family: var(--f-display); font-weight: 700; font-size: 16px; letter-spacing: .03em; text-transform: uppercase; }
+.fmt--esquela .ftl__f { color: var(--acc); font-size: 12px; letter-spacing: .06em; }
+.fmt--esquela .fper h3 { font-family: var(--f-display); font-weight: 700; font-size: 16px; letter-spacing: .03em; text-transform: uppercase; line-height: 1.25; }
+.fmt--esquela .fper .badge { color: var(--acc); border-color: var(--acc); font-size: 10px; }
+.fmt--esquela .fper__foto { border-color: var(--acc); }
+.fmt--esquela .fper__foto--sin { color: var(--acc); }
+.fmt--esquela .fresp li { border-left-color: var(--acc); }
+.fmt--esquela .fresp b { color: var(--acc); }
+.fmt--esquela .preguntas { border-top: 3px double var(--acc); }
+.fmt--esquela .preguntas li { font-family: var(--f-body); font-size: clamp(19px, 1.6vw, 24px); }
+.fmt--esquela .preguntas li::before { font-family: var(--f-display); color: var(--acc); }
+.fmt--esquela .cierre { background: var(--bg-2); padding: 26px 28px; border-top: 3px double var(--acc); }
+.fmt--esquela .cierre__lineas li { border-bottom-color: var(--line-x); font-size: 15px; }
+.fmt--esquela .cierre__lineas b { font-family: var(--f-display); font-weight: 400; font-size: 14px; letter-spacing: .04em; }
+.fmt--esquela .cierre li[data-estado="muerte"] b { color: var(--fg); }
+.fmt--esquela .cierre li[data-estado="muerte"] b::before { content: "\2720  "; color: var(--acc); }
+.fmt--esquela .cierre li[data-estado="abierto"] b, .fmt--esquela .cierre li[data-estado="pendiente"] b { color: var(--acc-2); }
+.fmt--esquela .cierre li[data-estado="no"] b { color: var(--mute); }
+.fmt--esquela .fcifras > div { border-top: 3px double var(--acc); }
+.fmt--esquela .fcifras b { color: var(--acc); font-weight: 400; }
+.fmt--esquela .chips span { border-color: var(--acc); color: var(--fg); font-family: var(--f-body); font-size: 14px; }
+.fmt--esquela .vid__meta h3 { font-family: var(--f-body); font-size: 17px; }
+.fmt--esquela .despues { background: var(--bg-2); }
+.fmt--esquela .hito { border-top-color: var(--line-x); }
+.fmt--esquela .hito::before { background: var(--acc); }
+.fmt--esquela .hito h3 { font-family: var(--f-display); font-weight: 700; font-size: 17px; letter-spacing: .03em; text-transform: uppercase; line-height: 1.25; }
+.fmt--esquela .tablewrap th { border-bottom-color: var(--acc); color: var(--acc); }
+.fmt--esquela .tablewrap td { border-bottom-color: var(--line-x); }
+.fmt--esquela .ffuentes a { text-decoration-color: var(--acc); }
+.fmt--esquela .sello { color: var(--acc); }
+.fmt--esquela .footer .wordmark { color: var(--fg); }
+
+/* Módulo característico: el linaje */
+.linaje { display: grid; gap: 34px; }
+.lin__intro { margin: 0; max-width: 60ch; font-family: var(--f-body); font-style: italic; font-size: clamp(17px, 1.3vw, 20px); line-height: 1.45; color: var(--fg); }
+.lin__leyenda { display: flex; flex-wrap: wrap; gap: 8px 26px; font-family: var(--f-body); font-size: 14px; color: var(--mute); margin-top: -14px; }
+.lin__leyenda span { display: inline-flex; align-items: center; gap: 10px; }
+.lin__sw { width: 22px; height: 14px; display: inline-block; }
+.lin__sw--muerte { background: var(--tiza); box-shadow: inset 0 0 0 3px var(--luto), inset 0 0 0 4px var(--tiza); }
+.lin__sw--vivo { border: 1px solid var(--acc); }
+.lin__arbol { display: grid; grid-template-columns: 1fr; gap: 18px; }
+.lin__origen { text-align: center; }
+.lin__origen span { display: inline-block; font-family: var(--f-display); font-size: 12px; letter-spacing: .22em; text-transform: uppercase; color: var(--acc); border: 1px solid var(--acc); padding: 9px 16px 8px; }
+.lin__brk { display: none; }
+.lin__card { position: relative; background: transparent; }
+.lin__in { position: relative; height: 100%; padding: 18px 18px 20px; display: grid; align-content: start; gap: 8px; }
+.lin__card--muerte { background: var(--tiza); color: var(--luto); padding: 6px; }
+.lin__card--muerte .lin__in { border: 4px solid var(--luto); outline: 1px solid var(--luto); outline-offset: -8px; padding: 22px 22px 24px; }
+.lin__card--vivo .lin__in { border: 1px solid var(--acc); color: var(--fg); }
+.lin__par { font-family: var(--f-display); font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--acc); }
+.lin__card h3 { margin: 0; font-family: var(--f-display); font-weight: 700; font-size: 17px; letter-spacing: .03em; text-transform: uppercase; line-height: 1.25; }
+.lin__rol { margin: 0; font-family: var(--f-body); font-size: 14.5px; line-height: 1.5; }
+.lin__card--muerte .lin__rol { color: #3B3730; }
+.lin__card--vivo .lin__rol { color: var(--mute); }
+.lin__muerte { display: grid; grid-template-columns: 20px 1fr; column-gap: 10px; margin-top: 6px; padding-top: 12px; border-top: 1px solid rgba(11,11,12,.25); }
+.lin__muerte .cruz { grid-row: 1 / span 3; font-size: 19px; line-height: 1; color: var(--oro-tinta); }
+.lin__muerte b { font-family: var(--f-display); font-weight: 700; font-size: 13px; letter-spacing: .08em; color: var(--luto); }
+.lin__muerte span { font-family: var(--f-body); font-style: italic; font-size: 14px; color: #5C574D; }
+.lin__muerte p { margin: 4px 0 0; font-family: var(--f-body); font-size: 14px; line-height: 1.45; color: #1E1C19; }
+.lin__card--vivo .lin__muerte { display: none; }
+.lin__sub { padding-top: 14px; border-top: 1px solid var(--line-x); }
+.lin__red { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+.lin__barco { position: relative; margin-top: 6px; background: var(--luto); color: var(--fg); padding: 6px; border: 1px solid var(--acc); }
+.lin__barco__in { border: 3px double var(--acc); padding: clamp(22px, 3vw, 36px); display: grid; gap: 10px; }
+.lin__barco h3 { margin: 2px 0 0; font-family: var(--f-display); font-weight: 700; font-size: clamp(36px, 5vw, 72px); letter-spacing: .06em; text-transform: uppercase; line-height: 1; color: var(--fg); }
+.lin__matricula { font-family: var(--f-display); font-weight: 400; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--acc); }
+.lin__barco p { margin: 6px 0 4px; max-width: 70ch; font-family: var(--f-body); font-size: 16.5px; line-height: 1.55; color: #DDD8CE; }
+/* Árbol en escritorio: rejilla genealógica con líneas doradas */
+@media (min-width: 880px) {
+  .lin__arbol { grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: 28px; row-gap: 0;
+    grid-template-areas: ". origen origen origen" ". brk brk brk" "carla flavio michelle orlando" "dante . nina ."; }
+  .lin__origen { grid-area: origen; position: relative; padding-bottom: 26px; }
+  .lin__origen::after { content: ""; position: absolute; left: 50%; bottom: 0; width: 1px; height: 26px; background: var(--acc); }
+  .lin__brk { display: block; grid-area: brk; height: 38px; margin-inline: calc((100% - 56px) / 6); border-top: 1px solid var(--acc); border-inline: 1px solid var(--acc); }
+  .lin__card[data-id="carla"] { grid-area: carla; } .lin__card[data-id="flavio"] { grid-area: flavio; } .lin__card[data-id="michelle"] { grid-area: michelle; }
+  .lin__card[data-id="orlando"] { grid-area: orlando; } .lin__card[data-id="dante"] { grid-area: dante; } .lin__card[data-id="nina"] { grid-area: nina; }
+  .lin__card[data-id="dante"], .lin__card[data-id="nina"] { margin-top: 38px; }
+  .lin__card[data-id="dante"]::before, .lin__card[data-id="nina"]::before { content: ""; position: absolute; left: 50%; top: -38px; width: 1px; height: 38px; background: var(--acc); }
+  .lin__card[data-id="carla"]::after, .lin__card[data-id="michelle"]::before { content: ""; position: absolute; top: 50%; width: 28px; border-top: 3px double var(--acc); }
+  .lin__card[data-id="carla"]::after { right: -28px; } .lin__card[data-id="michelle"]::before { left: -28px; }
+  .lin__card[data-id="flavio"] .lin__in { border-width: 6px; }
+}
+@media (max-width: 879px) {
+  .lin__arbol { border-left: 1px solid var(--acc); padding-left: 18px; }
+  .lin__origen { text-align: left; }
+  .lin__card[data-id="flavio"] { order: 1; } .lin__card[data-id="carla"] { order: 2; } .lin__card[data-id="dante"] { order: 3; }
+  .lin__card[data-id="michelle"] { order: 4; } .lin__card[data-id="nina"] { order: 5; } .lin__card[data-id="orlando"] { order: 6; }
+  .lin__card::before { content: ""; position: absolute; left: -19px; top: 26px; width: 12px; height: 1px; background: var(--acc); }
+}
+@media (max-width: 640px) {
+  .pagina { padding: 8px; }
+  .pagina__marco { border-width: 8px; padding: 4px; }
+  .pagina__filete { padding: 18px 16px 20px; }
+  .pagina .htitle { font-size: clamp(36px, 10.5vw, 48px); }
+  .pagina__cab { font-size: 9.5px; letter-spacing: .18em; }
+  .hero--esquela { padding-top: 84px; }
+  .lin__in { padding: 16px; } .lin__card--muerte .lin__in { padding: 18px 16px 20px; }
+  .lin__barco h3 { font-size: 34px; letter-spacing: .04em; }
+}

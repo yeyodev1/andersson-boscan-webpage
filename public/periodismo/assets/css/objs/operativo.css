@@ -1,0 +1,23 @@
+/* mapa doblado con pin (Operativo · La caída de Fito) */
+.obj--operativo { --obg: #D8CDA8; --ofg: #1F2519; --oacc: #E8600F; padding: 0;
+  background-color: var(--obg);
+  background-image:
+    radial-gradient(circle at 26% 78px, transparent 0 13px, rgba(232,96,15,.9) 13px 14.5px, transparent 14.5px 27px, rgba(232,96,15,.55) 27px 28.5px, transparent 28.5px 42px, rgba(232,96,15,.3) 42px 43.5px, transparent 43.5px),
+    linear-gradient(90deg, rgba(255,255,255,.14) 0 33.2%, rgba(0,0,0,.14) 33.2% 33.7%, rgba(255,255,255,.5) 33.7% 34.1%, transparent 34.1% 66.3%, rgba(255,255,255,.5) 66.3% 66.7%, rgba(0,0,0,.14) 66.7% 67.2%, rgba(0,0,0,.05) 67.2%),
+    linear-gradient(180deg, transparent 0 49.6%, rgba(0,0,0,.13) 49.6% 50.1%, rgba(255,255,255,.45) 50.1% 50.6%, transparent 50.6%),
+    repeating-radial-gradient(ellipse 70% 45% at 8% 12%, transparent 0 22px, rgba(31,37,25,.16) 22px 23px),
+    repeating-radial-gradient(ellipse 60% 50% at 92% 96%, transparent 0 26px, rgba(31,37,25,.13) 26px 27px),
+    linear-gradient(rgba(31,37,25,.13) 1px, transparent 1px), linear-gradient(90deg, rgba(31,37,25,.13) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 30px 30px, 30px 30px; }
+.obj--operativo .obj__img { display: none; }
+.obj--operativo .obj__cuerpo { padding-top: 132px; padding-bottom: 26px; }
+/* pin: cabeza naranja y aguja clavada en el objetivo */
+.obj--operativo::before { content: ""; position: absolute; left: calc(26% - 10px); top: 40px; width: 20px; height: 20px; border-radius: 50%; z-index: 3; background: radial-gradient(circle at 35% 30%, #FFB27A, var(--oacc) 55%, #9A3A06); box-shadow: 0 8px 10px -3px rgba(0,0,0,.5); }
+.obj--operativo::after { content: ""; position: absolute; left: calc(26% - 1px); top: 56px; width: 2px; height: 22px; z-index: 2; background: linear-gradient(#5b5b5b, #2a2a2a); box-shadow: 3px 4px 6px rgba(0,0,0,.35); }
+.obj--operativo .obj__cuerpo::before { content: "Objetivo · Monterrey"; position: absolute; left: calc(26% + 52px); top: 66px; font-family: 'Saira Condensed', 'Arial Narrow', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: #9A3A06; border-bottom: 1.5px solid #9A3A06; padding-bottom: 2px; }
+.obj--operativo .obj__cuerpo::after { content: "A · B · C · D · E · F"; position: absolute; left: 22px; top: 12px; font-family: 'Saira Condensed', 'Arial Narrow', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: .3em; color: rgba(31,37,25,.5); }
+.obj--operativo h3 { text-transform: uppercase; font-weight: 800; letter-spacing: 0; font-size: clamp(30px, 2.6vw, 44px); line-height: .92; }
+.obj--operativo .obj__anio { font-family: 'Saira Condensed', 'Arial Narrow', sans-serif; font-weight: 900; }
+.obj--operativo .obj__abrir { color: #9A3A06; }
+/* margen para el post-it pegado sobre el borde superior */
+.obj--operativo .obj__cuerpo { padding-top: 140px; }

@@ -1,0 +1,97 @@
+/* PIZARRA · La mafia albanesa en el fútbol: pizarra táctica de vestuario. Verde profundo, tiza, amarillo de tarjeta.
+   Kanit (rótulos y dorsales) + Bitter (texto). */
+.fmt--pizarra { --bg: #0E3323; --bg-2: #14432E; --fg: #F2F5EE; --mute: #9BB4A6; --acc: #F2D024; --acc-2: #E8552F; --line-x: rgba(242,245,238,.16);
+  --tiza: rgba(242,245,238,.82); --verde: #12472F; --verde-2: #0B2A1C;
+  --f-display: 'Kanit', 'Arial Narrow', sans-serif; --f-body: 'Bitter', Georgia, serif; --f-mono: 'Kanit', ui-monospace, monospace; --f-label: 'Kanit', system-ui, sans-serif; --radius: 3px; }
+.fmt--pizarra::after { mix-blend-mode: screen; opacity: .05; }
+.fmt--pizarra .topbar { background: rgba(14,51,35,.93); }
+.fmt--pizarra .footer { background: var(--verde-2); }
+.fmt--pizarra .htitle, .fmt--pizarra .cap__title, .fmt--pizarra .fmod__head h2 { font-weight: 800; text-transform: uppercase; letter-spacing: -.02em; }
+.fmt--pizarra .htitle em, .fmt--pizarra .cap__title em, .fmt--pizarra .fmod__head h2 em { font-style: italic; color: var(--acc); }
+.fmt--pizarra .kicker, .fmt--pizarra .hkicker { font-family: var(--f-label); font-weight: 600; }
+.fmt--pizarra .mono { font-variant-numeric: tabular-nums lining-nums; }
+
+/* ---------------------------------------------------------------- portada: la pizarra */
+.hero--pizarra { padding: 92px 0 46px; min-height: auto;
+  background: radial-gradient(ellipse 60% 50% at 30% 8%, rgba(242,208,36,.09), transparent 62%), linear-gradient(180deg, #103826, #0C2C1E 70%, #0A2418); }
+.pizarra { background: linear-gradient(160deg, var(--verde), var(--verde-2)); border: 10px solid #6B4A2A; border-radius: 6px;
+  box-shadow: 0 34px 70px -46px #000, inset 0 0 60px rgba(0,0,0,.35); overflow: hidden; }
+.pizarra__top { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 16px; padding: 13px 18px; border-bottom: 1px dashed var(--line-x); font-family: var(--f-label); }
+.pizarra__top b { font-size: 19px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+.pizarra__top span { font-size: 11.5px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--mute); }
+.pizarra__top span:last-child { margin-left: auto; color: var(--acc); }
+.pizarra__set { display: grid; gap: 0; }
+@media (min-width: 1000px) { .pizarra__set { grid-template-columns: 1.35fr .65fr; } }
+
+/* cancha de tiza */
+.cancha { position: relative; aspect-ratio: 4 / 3; min-height: 300px; padding: 14px; }
+.cancha__lineas { position: absolute; inset: 14px; border: 2px solid var(--tiza); border-radius: 2px; opacity: .55;
+  background-image:
+    linear-gradient(90deg, transparent calc(50% - 1px), var(--tiza) calc(50% - 1px) calc(50% + 1px), transparent calc(50% + 1px)),
+    radial-gradient(circle at 50% 50%, transparent 52px, var(--tiza) 52px 54px, transparent 54px),
+    linear-gradient(0deg, transparent calc(100% - 2px), var(--tiza) calc(100% - 2px)); }
+.cancha__lineas::before, .cancha__lineas::after { content: ""; position: absolute; left: 26%; right: 26%; height: 58px; border: 2px solid var(--tiza); opacity: .9; }
+.cancha__lineas::before { top: -2px; border-top: 0; }
+.cancha__lineas::after { bottom: -2px; border-bottom: 0; }
+.cancha__p { position: absolute; left: var(--x); top: var(--y); transform: translate(-50%, -50%); display: grid; justify-items: center; gap: 2px; text-align: center; width: 108px;
+  opacity: 0; animation: pin .5s var(--ease-out) forwards; animation-delay: calc(.25s + var(--i) * .09s); }
+@keyframes pin { from { opacity: 0; transform: translate(-50%, -42%) scale(.85); } to { opacity: 1; transform: translate(-50%, -50%) scale(1); } }
+.cancha__p b { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--acc); color: #14231A;
+  font-family: var(--f-display); font-weight: 800; font-size: 15px; box-shadow: 0 4px 10px rgba(0,0,0,.4); }
+.cancha__p span { font-family: var(--f-label); font-weight: 600; font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase; line-height: 1.15; }
+.cancha__p small { font-family: var(--f-body); font-size: 10px; line-height: 1.2; color: var(--mute); }
+
+/* marcador de las dos contabilidades */
+.marcador { display: grid; align-content: start; gap: 0; border-left: 1px dashed var(--line-x); }
+.marcador__c { padding: 16px 18px; border-bottom: 1px dashed var(--line-x); }
+.marcador__c span { display: block; font-family: var(--f-label); font-size: 10.5px; font-weight: 500; letter-spacing: .18em; text-transform: uppercase; color: var(--mute); }
+.marcador__c b { display: block; font-family: var(--f-display); font-weight: 800; font-size: clamp(26px, 3vw, 40px); line-height: 1.05; color: var(--acc); }
+@media (max-width: 999px) { .marcador { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); border-left: 0; border-top: 1px dashed var(--line-x); } .marcador__c { border-bottom: 0; } }
+
+.hero--pizarra .hero__in { max-width: 46rem; margin-top: 38px; }
+.hero--pizarra .htitle { font-size: clamp(46px, 7.6vw, 116px); }
+.hero--pizarra .hdeck { color: #D7E2D9; }
+.hero--pizarra .hstats b { font-family: var(--f-display); font-weight: 800; color: var(--acc); }
+
+/* ---------------------------------------------------------------- estructura común */
+.fmt--pizarra .fnav { background: rgba(14,51,35,.95); }
+.fmt--pizarra .fnav a { font-family: var(--f-label); font-weight: 600; }
+.fmt--pizarra .fnav a b { color: var(--acc); }
+.fmt--pizarra .cap__num { color: var(--acc); font-family: var(--f-label); font-weight: 600; letter-spacing: .2em; }
+.fmt--pizarra .ftext { color: #DCE6DE; }
+.fmt--pizarra .ftext p { font-size: 17px; line-height: 1.62; }
+.fmt--pizarra .estado, .fmt--pizarra .fper, .fmt--pizarra .fresp li, .fmt--pizarra .hito, .fmt--pizarra .ftl li { background: var(--bg-2); }
+.fmt--pizarra .fcita { border-left: 3px solid var(--acc); background: rgba(255,255,255,.04); }
+.fmt--pizarra .fdato b, .fmt--pizarra .fcifras b { color: var(--acc); font-family: var(--f-display); font-weight: 800; }
+.fmt--pizarra .badge { color: var(--acc); }
+.fmt--pizarra .cierre { background: var(--bg-2); }
+.fmt--pizarra .preguntas li::before { color: var(--acc); }
+
+/* ---------------------------------------------------------------- módulo: planilla */
+.planilla { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.planilla__f { display: grid; grid-template-columns: 40px minmax(140px, 1fr) 2fr auto; gap: 8px 14px; align-items: center;
+  padding: 10px 14px; background: var(--bg-2); border-left: 3px solid var(--acc); }
+.planilla__d { font-family: var(--f-display); font-weight: 800; font-size: 17px; color: var(--acc); }
+.planilla__f b { font-family: var(--f-label); font-weight: 600; font-size: 14.5px; line-height: 1.25; }
+.planilla__barra { display: block; height: 12px; border-radius: 2px; background: linear-gradient(90deg, var(--acc), rgba(242,208,36,.35));
+  width: 0; transition: width 1s var(--ease-out); transition-delay: calc(var(--i) * .07s); }
+.planilla.in .planilla__barra { width: var(--w); }
+.planilla__f em { font-style: normal; font-family: var(--f-display); font-weight: 600; font-size: 15px; color: var(--fg); white-space: nowrap; }
+@media (max-width: 760px) { .planilla__f { grid-template-columns: 34px 1fr auto; } .planilla__barra { grid-column: 2 / -1; } }
+
+/* ---------------------------------------------------------------- módulo: dos libros */
+.libros { display: grid; gap: 14px; align-items: stretch; position: relative; }
+@media (min-width: 860px) { .libros { grid-template-columns: 1fr auto 1fr; align-items: center; } }
+.libro2 { background: var(--bg-2); border: 1px solid var(--line-x); border-radius: 3px; overflow: hidden; }
+.libro2 header { padding: 13px 16px; background: rgba(0,0,0,.25); }
+.libro2 header span { display: block; font-family: var(--f-label); font-size: 10px; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--acc); }
+.libro2 header b { display: block; font-family: var(--f-display); font-weight: 800; font-size: 21px; text-transform: uppercase; line-height: 1.05; margin-top: 3px; }
+.libro2 ul { list-style: none; margin: 0; padding: 6px 0; }
+.libro2 li { display: flex; justify-content: space-between; gap: 14px; padding: 9px 16px; border-bottom: 1px dashed var(--line-x); }
+.libro2 li:last-child { border-bottom: 0; }
+.libro2 span { font-family: var(--f-body); font-size: 13.5px; color: var(--mute); }
+.libro2 b { font-family: var(--f-display); font-weight: 600; font-size: 14.5px; text-align: right; }
+.libros__vs { display: grid; place-items: center; justify-self: center; width: 44px; height: 44px; border-radius: 50%; background: var(--acc-2); color: #FFF;
+  font-family: var(--f-display); font-weight: 800; font-size: 15px; text-transform: uppercase; }
+
+@media (max-width: 900px) { .hero--pizarra { padding-top: 80px; } .cancha { aspect-ratio: 3 / 4; } .cancha__p { width: 92px; } }

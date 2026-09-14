@@ -8,6 +8,7 @@ Disallow: /*.json$
 
 # Sitemaps
 Sitemap: https://boscanymoni.com/sitemap.xml
+Sitemap: https://boscanymoni.com/periodismo/sitemap.xml
 
 # AI Crawlers — permitidos con contexto completo en /llms.txt
 User-agent: GPTBot

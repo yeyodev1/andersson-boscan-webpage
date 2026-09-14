@@ -1,0 +1,228 @@
+/* ESCALETA · Ítalo Cedeño: estudio de televisión en vivo. Negro de set, blanco de prompter, rojo de tally, amarillo de marcador.
+   League Spartan (prompter, rótulos) + Gelasio (texto). */
+.fmt--escaleta { --bg: #0D0D0F; --bg-2: #17181B; --fg: #F2F1EE; --mute: #9A9A9E; --acc: #E1251B; --acc-2: #F6D64A; --line-x: rgba(242,241,238,.14);
+  --set: #08080A; --papel: #F4F4F2; --papel-2: #E6E5E0; --tinta: #141414; --marca: rgba(246,214,74,.5);
+  --f-display: 'League Spartan', 'Arial Black', sans-serif; --f-body: 'Gelasio', Georgia, serif; --f-mono: 'League Spartan', ui-monospace, monospace; --f-label: 'League Spartan', system-ui, sans-serif; --radius: 3px; }
+.fmt--escaleta::after { mix-blend-mode: screen; opacity: .04; }
+.fmt--escaleta .topbar { background: rgba(13,13,15,.92); }
+.fmt--escaleta .footer { background: var(--set); }
+.fmt--escaleta .htitle, .fmt--escaleta .cap__title, .fmt--escaleta .fmod__head h2 { font-weight: 800; text-transform: uppercase; letter-spacing: -.025em; }
+.fmt--escaleta .htitle em, .fmt--escaleta .cap__title em, .fmt--escaleta .fmod__head h2 em { font-style: normal; color: var(--acc); }
+.fmt--escaleta .kicker, .fmt--escaleta .hkicker { font-weight: 600; }
+.fmt--escaleta .mono { font-variant-numeric: tabular-nums lining-nums; letter-spacing: .04em; }
+
+/* ---------------------------------------------------------------- portada: el set */
+.hero--escaleta { padding: 96px 0 46px; min-height: auto;
+  background: radial-gradient(ellipse 70% 55% at 50% 8%, rgba(255,255,255,.07), transparent 60%), linear-gradient(180deg, #101012 0%, #0B0B0D 60%, #08080A 100%); }
+.hero--escaleta .hero__in { max-width: 46rem; margin-top: 42px; }
+.hero--escaleta .htitle { font-size: clamp(44px, 7.2vw, 108px); }
+.hero--escaleta .hdeck { color: #D6D5D1; }
+.hero--escaleta .hstats { background: rgba(255,255,255,.03); border-top-color: var(--line-x); }
+.hero--escaleta .hstats b { font-family: var(--f-display); font-weight: 800; color: var(--acc-2); }
+
+.studio { display: grid; gap: 22px; }
+.studio__bar { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; padding: 12px 16px; border: 1px solid var(--line-x); border-radius: 4px;
+  background: linear-gradient(180deg, #1B1C20, #131417); font-family: var(--f-label); }
+.tally { display: inline-flex; align-items: center; gap: 9px; font-size: 11.5px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: #FFF;
+  background: var(--acc); padding: 6px 12px 5px; border-radius: 3px; }
+.tally i { width: 8px; height: 8px; border-radius: 50%; background: #FFF; box-shadow: 0 0 8px rgba(255,255,255,.9); animation: tally 1.6s steps(1, end) infinite; }
+@keyframes tally { 0%, 55% { opacity: 1; } 56%, 100% { opacity: .25; } }
+.studio__prog { flex: 1; min-width: 200px; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--mute); }
+.studio__clock { display: grid; justify-items: end; gap: 2px; }
+.studio__clock small { font-size: 9.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--mute); }
+.studio__clock b { font-family: var(--f-mono); font-size: 20px; font-weight: 700; color: var(--acc-2); letter-spacing: .06em; }
+.studio__set { display: grid; gap: 24px; align-items: start; }
+@media (min-width: 1000px) { .studio__set { grid-template-columns: 1.25fr .75fr; gap: 30px; } }
+
+/* prompter */
+.prompter { border-radius: 6px; overflow: hidden; background: #050506; box-shadow: 0 40px 80px -50px #000, inset 0 0 0 1px rgba(255,255,255,.07); }
+.prompter__bezel { display: flex; align-items: center; gap: 12px; padding: 10px 14px; background: #1D1E22; font-family: var(--f-label); font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--mute); }
+.prompter__bezel span:last-child { margin-left: auto; }
+.prompter__tally { width: 10px; height: 10px; border-radius: 50%; background: var(--acc); box-shadow: 0 0 10px rgba(225,37,27,.9); }
+.prompter__screen { position: relative; height: clamp(280px, 38vw, 420px); overflow: hidden;
+  background: repeating-linear-gradient(180deg, rgba(255,255,255,.03) 0 2px, transparent 2px 4px), #08080A; }
+.prompter__screen::before, .prompter__screen::after { content: ""; position: absolute; left: 0; right: 0; height: 90px; z-index: 2; pointer-events: none; }
+.prompter__screen::before { top: 0; background: linear-gradient(180deg, #08080A, transparent); }
+.prompter__screen::after { bottom: 0; background: linear-gradient(0deg, #08080A, transparent); }
+.prompter__text { position: absolute; inset: 0; overflow: hidden; }
+.prompter__roll { padding: 40px 26px; animation: roll 46s linear infinite; }
+@keyframes roll { from { transform: translateY(0); } to { transform: translateY(-50%); } }
+.prompter__roll p { margin: 0 0 26px; font-family: var(--f-display); font-weight: 500; font-size: clamp(19px, 1.9vw, 27px); line-height: 1.28; text-transform: uppercase; color: #FFF; }
+.prompter__roll p span { display: block; font-size: 10.5px; font-weight: 700; letter-spacing: .24em; color: var(--acc-2); margin-bottom: 7px; }
+.prompter__roll p[data-q="respuesta"] { color: #C9C8C4; }
+.prompter__roll p[data-q="respuesta"] span { color: var(--mute); }
+.prompter__roll p[data-q="cierre"] { color: var(--acc-2); }
+.prompter__mark { position: absolute; left: 0; right: 0; top: 50%; height: 2px; background: linear-gradient(90deg, transparent, rgba(225,37,27,.85), transparent); z-index: 3; }
+@media (prefers-reduced-motion: reduce) { .prompter__roll { animation: none; } .tally i { animation: none; } }
+
+/* hoja de escaleta impresa (portada) */
+.hoja { background: var(--papel); color: var(--tinta); border-radius: 2px; padding: 0 0 14px; box-shadow: 0 30px 60px -40px #000; font-family: var(--f-label); }
+.hoja__head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px; padding: 14px 16px 10px; border-bottom: 2px solid var(--tinta); }
+.hoja__head b { font-size: 16px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.hoja__head span { font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: #5A5A5A; }
+.hoja__head span:last-child { margin-left: auto; }
+.hoja__cols, .hoja__r { display: grid; grid-template-columns: 46px 1fr; gap: 4px 12px; padding: 7px 16px; }
+.hoja__cols { grid-template-columns: 46px 1fr; font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: #8A8A8A; border-bottom: 1px solid rgba(20,20,20,.16); }
+.hoja__cols span:last-child { display: none; }
+.hoja__rows { list-style: none; margin: 0; padding: 0; }
+.hoja__r { border-bottom: 1px solid rgba(20,20,20,.09); align-items: baseline; position: relative; }
+.hoja__r span { font-size: 11px; font-weight: 700; color: #6B6B6B; }
+.hoja__r b { font-size: 13.5px; font-weight: 700; line-height: 1.2; }
+.hoja__r small { grid-column: 2; font-family: var(--f-body); font-size: 11.5px; color: #5A5A5A; line-height: 1.35; }
+.hoja__r--marca b { background: linear-gradient(180deg, transparent 58%, var(--marca) 58%); box-decoration-break: clone; }
+.hoja__r--aire::before { content: ""; position: absolute; left: 0; top: 6px; bottom: 6px; width: 3px; background: var(--acc); }
+.hoja__foot { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: baseline; padding: 12px 16px 2px; border-top: 2px solid var(--tinta); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: #5A5A5A; }
+.hoja__foot b { margin-left: auto; font-size: 12px; color: var(--tinta); }
+.hoja__foot em { font-style: normal; color: var(--acc); }
+
+/* ---------------------------------------------------------------- estructura común */
+.fmt--escaleta .fnav { background: rgba(13,13,15,.94); }
+.fmt--escaleta .fnav a { font-family: var(--f-label); font-weight: 600; }
+.fmt--escaleta .fnav a b { color: var(--acc-2); }
+.fmt--escaleta .cap__num { color: var(--acc); font-family: var(--f-label); font-weight: 700; letter-spacing: .2em; }
+.fmt--escaleta .ftext { color: #DAD9D5; }
+.fmt--escaleta .ftext p { font-size: 17px; line-height: 1.62; }
+.fmt--escaleta .estado, .fmt--escaleta .fper, .fmt--escaleta .fresp li, .fmt--escaleta .hito, .fmt--escaleta .ftl li { background: var(--bg-2); }
+.fmt--escaleta .fcita { border-left: 3px solid var(--acc); background: rgba(255,255,255,.03); }
+.fmt--escaleta .fcita p { font-family: var(--f-display); font-weight: 500; text-transform: none; }
+.fmt--escaleta .fdato b, .fmt--escaleta .fcifras b { color: var(--acc-2); font-family: var(--f-display); font-weight: 800; }
+.fmt--escaleta .badge { color: var(--acc-2); }
+.fmt--escaleta .cierre { background: var(--bg-2); border-radius: 4px; }
+.fmt--escaleta .cierre__lineas li, .fmt--escaleta .cierre__panel li { border-color: var(--line-x); }
+.fmt--escaleta .preguntas li::before { color: var(--acc); }
+
+/* ---------------------------------------------------------------- módulo escaleta */
+.esc { background: var(--papel); color: var(--tinta); border-radius: 3px; overflow: hidden; box-shadow: 0 30px 70px -50px #000; font-family: var(--f-label); }
+.esc__head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; padding: 15px 20px; background: var(--tinta); color: var(--papel); }
+.esc__head span { font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: #B9B8B4; display: inline-flex; align-items: center; gap: 8px; }
+.esc__head span i { width: 8px; height: 8px; border-radius: 50%; background: var(--acc); box-shadow: 0 0 8px rgba(225,37,27,.8); }
+.esc__head b { font-size: 15px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.esc__head span:last-child { margin-left: auto; color: var(--acc-2); }
+.esc__cols { display: none; padding: 9px 20px; border-bottom: 1px solid rgba(20,20,20,.16); font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: #8A8A8A; }
+@media (min-width: 900px) { .esc__cols { display: grid; grid-template-columns: 54px 1.05fr 1.1fr 1.1fr; gap: 20px; } }
+.esc__rows { list-style: none; margin: 0; padding: 0; }
+.esc__row { display: grid; gap: 8px 20px; padding: 18px 20px; border-bottom: 1px solid rgba(20,20,20,.1); position: relative;
+  opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .5s ease; transition-delay: calc(var(--i) * .06s); }
+.esc.in .esc__row, .no-anim .esc__row { opacity: 1; transform: none; }
+@media (min-width: 900px) { .esc__row { grid-template-columns: 54px 1.05fr 1.1fr 1.1fr; align-items: start; } }
+.esc__row:nth-child(even) { background: rgba(20,20,20,.028); }
+.esc__row--aire::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--acc); }
+.esc__n { font-family: var(--f-mono); font-size: 20px; font-weight: 800; color: #B4B3AE; line-height: 1; }
+.esc__b b { display: block; font-size: 15px; font-weight: 800; text-transform: uppercase; letter-spacing: .02em; line-height: 1.1; }
+.esc__b em { display: block; font-family: var(--f-body); font-style: italic; font-size: 14.5px; color: #3A3A3A; margin-top: 3px; }
+.esc__b small { display: block; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: #8A8A8A; margin-top: 7px; }
+.esc__m { margin: 0; font-family: var(--f-body); font-size: 14px; line-height: 1.5; color: #333; }
+.esc__r { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; align-content: start; }
+.esc__r li { display: grid; grid-template-columns: 1fr auto; gap: 6px 10px; align-items: start; }
+.esc__r p { margin: 0; font-family: var(--f-body); font-size: 13.5px; line-height: 1.45; color: #333; }
+.esc__pill { font-style: normal; font-size: 9.5px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; padding: 4px 9px 3px; border-radius: 999px; white-space: nowrap; align-self: start; }
+.esc__pill--si { background: var(--acc-2); color: var(--tinta); }
+.esc__pill--no { background: var(--tinta); color: var(--papel); }
+.esc__pill--alega { background: transparent; color: #6B6B6B; box-shadow: inset 0 0 0 1.5px #B4B3AE; }
+.esc__off { padding: 18px 20px 22px; background: var(--tinta); color: var(--papel); }
+.esc__off > span { display: block; font-size: 10px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--acc); margin-bottom: 12px; }
+.esc__off ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
+.esc__off b { display: block; font-family: var(--f-mono); font-size: 11px; letter-spacing: .12em; color: var(--acc-2); }
+.esc__off strong { display: block; font-size: 14px; font-weight: 800; text-transform: uppercase; margin: 3px 0 4px; }
+.esc__off p { margin: 0; font-family: var(--f-body); font-size: 13px; line-height: 1.45; color: #C4C3BF; }
+
+/* ---------------------------------------------------------------- cintillos (el entorno) */
+.cintillos { display: grid; gap: 14px; }
+.cintillos ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.cintillo { position: relative; padding: 12px 16px 14px 18px; background: linear-gradient(90deg, rgba(255,255,255,.97), rgba(255,255,255,.9)); color: var(--tinta);
+  border-left: 5px solid var(--acc); box-shadow: 0 14px 30px -22px #000; }
+.cintillo span { display: block; font-family: var(--f-label); font-size: 9.5px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--acc); }
+.cintillo b { display: block; font-family: var(--f-display); font-size: 21px; font-weight: 800; text-transform: uppercase; line-height: 1.05; margin: 3px 0 2px; }
+.cintillo p { margin: 0; font-family: var(--f-body); font-size: 13.5px; line-height: 1.45; color: #3A3A3A; }
+.cintillo--main { border-left-color: var(--acc-2); }
+.cintillo--main b { font-size: clamp(24px, 2.4vw, 34px); }
+
+@media (max-width: 900px) {
+  .hero--escaleta { padding-top: 84px; }
+  .prompter__screen { height: 260px; }
+  .esc__row { grid-template-columns: 1fr; }
+  .esc__n { font-size: 15px; }
+  .hoja__r small { font-size: 11px; }
+}
+
+/* ================================================================
+   El estudio sigue al aire después de la portada: pizarra de bloque,
+   cintillos en las citas, tally en los datos y escaleta impresa entre bloques
+   ================================================================ */
+.fmt--escaleta {
+  --escaleta-tira: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='46' viewBox='0 0 96 46'%3E%3Crect width='96' height='46' fill='%23F4F4F2'/%3E%3Crect x='0' y='0' width='96' height='1' fill='%23141414' fill-opacity='.18'/%3E%3Crect x='0' y='45' width='96' height='1' fill='%23141414' fill-opacity='.18'/%3E%3Crect x='9' y='0' width='1' height='46' fill='%23141414' fill-opacity='.14'/%3E%3Crect x='16' y='12' width='24' height='3' fill='%23141414' fill-opacity='.55'/%3E%3Crect x='46' y='12' width='38' height='3' fill='%23141414' fill-opacity='.22'/%3E%3Crect x='16' y='24' width='16' height='3' fill='%23141414' fill-opacity='.4'/%3E%3Crect x='38' y='24' width='46' height='3' fill='%23141414' fill-opacity='.16'/%3E%3Crect x='16' y='33' width='30' height='2' fill='%23141414' fill-opacity='.12'/%3E%3C/svg%3E");
+}
+
+/* --- Cada capítulo, un bloque del programa --- */
+.fmt--escaleta .cap[data-n] { position: relative; padding-top: 60px; }
+.fmt--escaleta .cap[data-n]::before {
+  content: "Café la Posta · 1 de agosto de 2022 · Único invitado: Ítalo Cedeño";
+  position: absolute; left: 0; right: 0; top: var(--blqtop, 0px); box-sizing: border-box;
+  padding: 11px 108px 10px 34px; background: var(--tinta); color: #B9B8B4; border-radius: 3px;
+  background-image: radial-gradient(circle 4.5px at 17px 50%, var(--acc) 96%, transparent 97%);
+  font-family: var(--f-label); font-weight: 600; font-size: 10px; letter-spacing: .16em; text-transform: uppercase;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.fmt--escaleta .cap[data-n]::after {
+  content: "Blq " attr(data-n); position: absolute; right: 16px; top: calc(var(--blqtop, 0px) + 11px); z-index: 2;
+  font-family: var(--f-mono); font-weight: 800; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--acc-2);
+}
+.fmt--escaleta .cap__num { display: inline-flex; align-items: center; gap: 9px; padding: 5px 12px 4px; background: var(--acc); color: #FFF; border-radius: 3px; font-size: 10px; }
+.fmt--escaleta .cap__num::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #FFF; flex: none; }
+
+/* --- Separador: la escaleta impresa que corre entre bloques --- */
+.fmt--escaleta .cap + .cap {
+  --blqtop: 104px; border-top: 0; margin-top: 24px; padding-top: 164px;
+  background-image: linear-gradient(var(--acc), var(--acc)), var(--escaleta-tira);
+  background-repeat: no-repeat, repeat-x;
+  background-position: left 26px, left 26px;
+  background-size: 4px 46px, auto 46px;
+}
+
+/* --- Citas: cintillo de televisión --- */
+.fmt--escaleta .fcita { position: relative; border-left: 5px solid var(--acc); padding: 26px 24px 0; margin: 52px 0 46px;
+  background: linear-gradient(90deg, rgba(255,255,255,.97), rgba(255,255,255,.9)); box-shadow: 0 20px 40px -28px #000; }
+.fmt--escaleta .fcita::before { content: "En el aire"; opacity: 1; position: absolute; left: 0; top: -13px; z-index: 2;
+  display: inline-flex; align-items: center; gap: 8px; padding: 5px 12px 4px 26px; background: var(--acc); color: #FFF; border-radius: 2px;
+  background-image: radial-gradient(circle 4px at 13px 50%, #FFF 95%, transparent 96%);
+  font-family: var(--f-label); font-weight: 800; font-size: 9.5px; line-height: 1.2; letter-spacing: .22em; text-transform: uppercase; }
+.fmt--escaleta .fcita p { color: var(--tinta); font-family: var(--f-display); font-weight: 600; font-size: clamp(21px, 2.2vw, 32px); line-height: 1.18; }
+.fmt--escaleta .fcita cite { display: block; margin: 16px -24px 0; padding: 10px 24px 9px; background: var(--tinta); color: var(--acc-2); font-size: 10.5px; letter-spacing: .14em; }
+
+/* --- Datos: la luz de tally --- */
+.fmt--escaleta .fdato { position: relative; padding-top: 30px; grid-template-columns: minmax(0, 1fr); gap: 8px 0; border-top-color: var(--acc); }
+.fmt--escaleta .fdato::before {
+  content: "Al aire"; position: absolute; left: 0; top: 8px; padding-left: 16px;
+  background-image: radial-gradient(circle 4.5px at 4.5px 50%, var(--acc) 96%, transparent 97%);
+  font-family: var(--f-label); font-weight: 800; font-size: 9.5px; letter-spacing: .22em; text-transform: uppercase; color: var(--acc);
+}
+.fmt--escaleta .fdato b { font-size: clamp(34px, 4.6vw, 68px); }
+.fmt--escaleta .fdato span { color: #C6C5C1; }
+
+/* --- Cabeceras de módulo con tally --- */
+.fmt--escaleta .fmod__head .kicker { display: inline-flex; align-items: center; gap: 9px; padding: 5px 13px 4px; border: 1px solid var(--acc); border-radius: 3px; font-size: 9.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--acc-2); }
+.fmt--escaleta .fmod__head .kicker::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--acc); flex: none; }
+
+/* --- Retratos: monitor del set con cintillo --- */
+.fmt--escaleta .retrato { background: #050506; padding: 12px 12px 0; border-radius: 4px; box-shadow: 0 30px 60px -44px #000, inset 0 0 0 1px rgba(255,255,255,.08); }
+.fmt--escaleta .retrato__img { border-radius: 2px; overflow: hidden; }
+.fmt--escaleta .retrato figcaption { border-top: 0; margin: 12px -12px 0; padding: 13px 18px 14px; background: linear-gradient(90deg, rgba(255,255,255,.97), rgba(255,255,255,.9)); color: var(--tinta); border-left: 5px solid var(--acc); border-radius: 0 0 4px 4px; }
+.fmt--escaleta .retrato figcaption b { font-family: var(--f-display); font-weight: 800; text-transform: uppercase; font-size: 20px; color: var(--tinta); }
+.fmt--escaleta .retrato figcaption span { font-family: var(--f-body); font-size: 13.5px; line-height: 1.45; color: #3A3A3A; }
+.fmt--escaleta .retrato figcaption small { font-family: var(--f-label); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #6B6B6B; }
+
+/* --- Después: fuera de aire --- */
+.fmt--escaleta .hito { position: relative; padding-top: 30px; }
+.fmt--escaleta .hito::after { content: "Fuera de aire"; position: absolute; left: 22px; top: 10px; font-family: var(--f-label); font-weight: 700; font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: var(--mute); }
+
+@media (max-width: 760px) {
+  .fmt--escaleta .cap[data-n]::before { content: "Café la Posta · 1 ago 2022"; padding: 10px 76px 9px 30px; font-size: 8.5px; letter-spacing: .12em; }
+  .fmt--escaleta .cap[data-n]::after { right: 12px; font-size: 10px; }
+  .fmt--escaleta .cap + .cap { --blqtop: 100px; padding-top: 156px; }
+  .fmt--escaleta .fcita cite { margin-inline: -24px; }
+}
+/* Cierre: los paneles apilan etiqueta y valor para que no se pisen */
+.fmt--escaleta .cierre__panel li, .fmt--escaleta .cierre__lineas li { grid-template-columns: minmax(0, 1fr); gap: 3px; }
+.fmt--escaleta .cierre__panel li b, .fmt--escaleta .cierre__lineas b { text-align: left; }
+.fmt--escaleta .cierre__panel li span, .fmt--escaleta .cierre__lineas span { color: var(--mute); }
+.fmt--escaleta .retrato--medio .retrato__img img { object-position: center 12%; }

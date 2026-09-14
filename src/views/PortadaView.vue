@@ -63,11 +63,11 @@
 
     <!-- CTAs -->
     <nav class="pt__ctas" ref="ctasEl" aria-label="Elige tu camino">
-      <RouterLink to="/periodismo" class="pt__cta pt__cta--light">
+      <a href="/periodismo/" class="pt__cta pt__cta--light">
         <span class="pt__cta-dash"></span>
         <span class="pt__cta-text">Quiero periodismo</span>
         <span class="pt__cta-arrow">→</span>
-      </RouterLink>
+      </a>
       <RouterLink to="/publicidad" class="pt__cta pt__cta--dark">
         <span class="pt__cta-dash"></span>
         <span class="pt__cta-text">Quiero publicidad</span>
@@ -91,13 +91,12 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from 'vue'
-import { useRouter } from 'vue-router'
 import { gsap } from 'gsap'
-
-const router = useRouter()
 
 interface Folder {
   id: string
+  /** Slug del expediente en el sitio estático de investigaciones. */
+  slug: string
   label: string
   variant: 'black' | 'manila'
   left: string
@@ -109,14 +108,14 @@ interface Folder {
 }
 
 const folders: Folder[] = [
-  { id: 'narcobabies', label: 'Narcobabies',        variant: 'black',  left: '6%',  top: '16%', rot: -8,  depth: 1.0, side: 'l' },
-  { id: 'odebrecht',   label: 'Odebrecht',          variant: 'manila', left: '22%', top: '24%', rot: 5,   depth: 0.6, side: 'l', mobileHide: true },
-  { id: 'padrino',     label: 'Caso Gran Padrino',  variant: 'black',  left: '9%',  top: '44%', rot: -4,  depth: 0.8, side: 'l' },
-  { id: 'albanesa',    label: 'La Mafia Albanesa',  variant: 'manila', left: '20%', top: '60%', rot: 7,   depth: 0.5, side: 'l', mobileHide: true },
-  { id: 'caminosca',   label: 'Caminosca',          variant: 'black',  left: '64%', top: '18%', rot: 6,   depth: 0.7, side: 'r', mobileHide: true },
-  { id: 'madrina',     label: 'La Madrina',         variant: 'manila', left: '80%', top: '22%', rot: -6,  depth: 1.0, side: 'r' },
-  { id: 'choneros',    label: 'Los Choneros',       variant: 'manila', left: '66%', top: '44%', rot: -3,  depth: 0.6, side: 'r', mobileHide: true },
-  { id: 'pazoplomo',   label: 'Paz o Plomo',        variant: 'black',  left: '82%', top: '48%', rot: 8,   depth: 0.9, side: 'r' },
+  { id: 'narcobabies', slug: 'narco-babies', label: 'Narcobabies',        variant: 'black',  left: '6%',  top: '16%', rot: -8,  depth: 1.0, side: 'l' },
+  { id: 'odebrecht', slug: 'bribery-division',   label: 'Odebrecht',          variant: 'manila', left: '22%', top: '24%', rot: 5,   depth: 0.6, side: 'l', mobileHide: true },
+  { id: 'padrino', slug: 'el-gran-padrino',     label: 'Caso Gran Padrino',  variant: 'black',  left: '9%',  top: '44%', rot: -4,  depth: 0.8, side: 'l' },
+  { id: 'albanesa', slug: 'mafia-albanesa',    label: 'La Mafia Albanesa',  variant: 'manila', left: '20%', top: '60%', rot: 7,   depth: 0.5, side: 'l', mobileHide: true },
+  { id: 'caminosca', slug: 'caminosca',   label: 'Caminosca',          variant: 'black',  left: '64%', top: '18%', rot: 6,   depth: 0.7, side: 'r', mobileHide: true },
+  { id: 'madrina', slug: 'madrina-narcogenerales',     label: 'La Madrina',         variant: 'manila', left: '80%', top: '22%', rot: -6,  depth: 1.0, side: 'r' },
+  { id: 'choneros', slug: 'caida-de-fito',    label: 'Los Choneros',       variant: 'manila', left: '66%', top: '44%', rot: -3,  depth: 0.6, side: 'r', mobileHide: true },
+  { id: 'pazoplomo', slug: 'paz-o-plomo',   label: 'Paz o Plomo',        variant: 'black',  left: '82%', top: '48%', rot: 8,   depth: 0.9, side: 'r' },
 ]
 
 const rootEl  = ref<HTMLElement | null>(null)
@@ -290,7 +289,10 @@ function onDragEnd() {
   const clicked = !dragStart.moved
   activeWrap = null
   dragId.value = null
-  if (clicked) router.push({ path: '/periodismo', hash: `#${id}` })
+  if (clicked) {
+    const f = folders.find(x => x.id === id)
+    window.location.assign(f ? `/periodismo/investigaciones/${f.slug}/` : '/periodismo/')
+  }
 }
 
 // ── Intro ───────────────────────────────────────────────────────

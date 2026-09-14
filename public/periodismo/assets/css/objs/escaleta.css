@@ -1,0 +1,21 @@
+/* hoja de escaleta (Cedeño): papel de estudio con banda de bloques, tally rojo y marcador amarillo */
+.obj--escaleta { --obg: #F4F4F2; --ofg: #141414; --oacc: #E1251B; border-radius: 2px; padding-top: 34px;
+  background-image: linear-gradient(180deg, #141414 0 6px, transparent 6px), repeating-linear-gradient(180deg, transparent 0 25px, rgba(20,20,20,.05) 25px 26px);
+  box-shadow: 0 22px 44px -30px rgba(0,0,0,.6), 0 1px 0 rgba(20,20,20,.16); }
+/* tally rojo encendido, arriba a la izquierda */
+.obj--escaleta::before { content: "En vivo"; position: absolute; left: 18px; top: 16px; z-index: 3; display: inline-flex; align-items: center; gap: 7px;
+  font-family: 'League Spartan', 'Arial Black', sans-serif; font-weight: 700; font-size: 9.5px; letter-spacing: .2em; text-transform: uppercase; color: #FFF;
+  background: var(--oacc); padding: 5px 10px 4px; border-radius: 2px; }
+.obj--escaleta::after { content: ""; position: absolute; left: 24px; top: 24px; z-index: 4; width: 6px; height: 6px; border-radius: 50%; background: #FFF; box-shadow: 0 0 6px rgba(255,255,255,.9); }
+.obj--escaleta .obj__cuerpo { padding-top: 92px; position: relative; }
+/* columna de órdenes de bloque al margen izquierdo */
+.obj--escaleta .obj__cuerpo::before { content: "01 02 03 04"; position: absolute; left: -2px; top: 54px; width: 14px;
+  font-family: 'League Spartan', monospace; font-size: 8.5px; font-weight: 700; letter-spacing: .1em; color: #A9A8A4; word-spacing: 999px; line-height: 2.4; }
+.obj--escaleta .obj__img { aspect-ratio: 16 / 9; filter: grayscale(1) contrast(1.15) brightness(.95); }
+.obj--escaleta h3 { text-transform: uppercase; font-size: clamp(20px, 1.6vw, 27px); line-height: .96; letter-spacing: -.02em; }
+/* marcador amarillo sobre el subtítulo, como en la escaleta impresa */
+.obj--escaleta .obj__sub { background: linear-gradient(180deg, transparent 55%, rgba(246,214,74,.6) 55%); display: inline; box-decoration-break: clone; }
+.obj--escaleta .obj__tema { color: var(--oacc); opacity: 1; font-weight: 600; }
+.obj--escaleta .obj__abrir { font-family: 'League Spartan', sans-serif; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+/* la cinta adhesiva de la esquina tapaba el membrete: lo corremos a su derecha */
+.obj--escaleta::before { left: 62px; top: 14px; white-space: nowrap; }

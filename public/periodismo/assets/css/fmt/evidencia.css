@@ -1,0 +1,256 @@
+/* EVIDENCIA · Progen: sobre de papel kraft, etiqueta roja de cadena de custodia, hoja de inventario blanca.
+   Archivo Black para gritar, Piazzolla para leer. */
+.fmt--evidencia { --bg: #C9A46B; --bg-2: #B9905A; --fg: #1B1510; --mute: #5C4A33; --acc: #C8102E; --acc-2: #8E0B21; --line-x: rgba(27,21,16,.22);
+  --papel: #F6F1E8; --papel-2: #EDE5D6; --kraft-3: #A87E4A; --hilo: #6E4B2A;
+  --f-display: 'Archivo Black', 'Arial Black', Impact, sans-serif; --f-body: 'Piazzolla', 'Iowan Old Style', Georgia, serif; --f-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; --f-label: 'Piazzolla', Georgia, serif;
+  background-image: linear-gradient(90deg, rgba(255,255,255,.05) 0 1px, transparent 1px 7px), linear-gradient(0deg, rgba(60,40,10,.045) 0 1px, transparent 1px 11px); }
+.fmt--evidencia::after { mix-blend-mode: multiply; opacity: .12; }
+.fmt--evidencia .topbar { background: rgba(201,164,107,.9); border-color: rgba(27,21,16,.25); }
+.fmt--evidencia .footer { background: #15100C; }
+.fmt--evidencia .kicker, .fmt--evidencia .hkicker, .fmt--evidencia .cap__num, .fmt--evidencia .hby, .fmt--evidencia .hstats span, .fmt--evidencia .fcita cite, .fmt--evidencia .fnav a, .fmt--evidencia .fper .badge { font-family: var(--f-label); font-weight: 700; letter-spacing: .16em; }
+.fmt--evidencia .htitle, .fmt--evidencia .cap__title, .fmt--evidencia .fmod__head h2, .fmt--evidencia .estado b, .fmt--evidencia .hito h3, .fmt--evidencia .fper h3, .fmt--evidencia .ftl b, .fmt--evidencia .ruta b, .fmt--evidencia .cierre__panel h3, .fmt--evidencia .vid__meta h3 { font-weight: 400; text-transform: uppercase; letter-spacing: -.005em; }
+.fmt--evidencia .htitle em, .fmt--evidencia .cap__title em, .fmt--evidencia .fmod__head h2 em { font-style: normal; color: var(--acc); }
+.fmt--evidencia .cap__title { font-size: clamp(28px, 3.6vw, 50px); line-height: .98; }
+.fmt--evidencia .fmod__head h2 { font-size: clamp(24px, 3vw, 40px); }
+.fmt--evidencia .hkicker::before { background: var(--fg); }
+
+/* ---------- Portada: el sobre ---------- */
+.hero--evidencia { padding: 110px 0 44px; min-height: 92svh; align-items: center; background: radial-gradient(ellipse 60% 50% at 78% 45%, rgba(255,240,210,.35), transparent 65%), var(--bg); }
+.hero--evidencia .hero__grid { align-items: center; margin-bottom: 40px; }
+.hero--evidencia .htitle { font-size: clamp(44px, 7vw, 108px); line-height: .9; letter-spacing: -.02em; max-width: 11ch; }
+.hero--evidencia .hdeck { font-size: clamp(17px, 1.35vw, 20px); max-width: 54ch; color: #2A2016; }
+.hero--evidencia .hby b { color: var(--fg); }
+.hero--evidencia .hstats { background: var(--papel); border: 1px solid rgba(27,21,16,.35); border-top: 6px solid var(--fg); margin-inline: 0; padding: 20px 22px 22px; box-shadow: 0 18px 40px -26px rgba(40,25,5,.7); }
+.hero--evidencia .hstats b { color: var(--acc); font-size: clamp(26px, 2.6vw, 38px); }
+.fmt--evidencia .hero__art img { opacity: .22; mix-blend-mode: multiply; filter: grayscale(1) contrast(1.25); }
+
+.sobre { --sw: min(100%, 470px); width: var(--sw); margin-left: auto; padding-top: 150px; perspective: 1200px; }
+.sobre__cuerpo { position: relative; aspect-ratio: 470 / 560; background: linear-gradient(160deg, #D2AE76, #C39E63 55%, #B8925A); box-shadow: 0 1px 2px rgba(20,12,0,.25), 0 40px 70px -34px rgba(40,25,5,.85); animation: sobreIn 1.1s var(--ease-out) both; }
+@keyframes sobreIn { from { opacity: 0; transform: translateY(40px) rotate(2deg); } }
+.sobre__cuerpo::before { content: ""; position: absolute; inset: 0; pointer-events: none; background-image: linear-gradient(90deg, rgba(255,255,255,.07) 0 1px, transparent 1px 6px), linear-gradient(0deg, rgba(70,45,10,.06) 0 1px, transparent 1px 9px); }
+/* Hoja de inventario: sale del sobre */
+.sobre__hoja { position: absolute; left: 7%; right: 7%; top: 2%; height: 78%; z-index: 2; background: var(--papel); color: var(--fg); padding: 18px 20px; box-shadow: 0 -2px 10px -4px rgba(0,0,0,.35); animation: hojaSube 1.3s var(--ease-out) 2.2s both; }
+@keyframes hojaSube { from { transform: translateY(6%); } to { transform: translateY(-36%); } }
+.hoja__head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; border-bottom: 2px solid var(--fg); padding-bottom: 6px; margin-bottom: 8px; }
+.hoja__head b { font-family: var(--f-display); font-size: 12px; text-transform: uppercase; letter-spacing: .02em; }
+.hoja__head span { font-family: var(--f-label); font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--acc); }
+.hoja__lista { list-style: none; margin: 0; padding: 0; }
+.hoja__lista li { display: grid; grid-template-columns: 26px 1fr; gap: 8px; align-items: baseline; padding: 4px 0; border-bottom: 1px dotted rgba(27,21,16,.35); font-family: var(--f-label); font-size: 12px; line-height: 1.25; }
+.hoja__lista b { font-family: var(--f-mono); font-size: 10.5px; color: var(--acc); }
+/* Solapa: se abre hacia arriba */
+.sobre__solapa { position: absolute; left: 0; right: 0; top: 0; height: 26%; z-index: 4; transform-origin: 50% 0; clip-path: polygon(0 0, 100% 0, 50% 100%); background: linear-gradient(180deg, #BE995F, #AE8A52); animation: solapaAbre 1.2s var(--ease-out) 1.2s both; }
+@keyframes solapaAbre { 0% { transform: rotateX(0); z-index: 4; } 49% { z-index: 4; } 50% { z-index: 1; } 100% { transform: rotateX(180deg); z-index: 1; } }
+.sobre__boton { position: absolute; left: 50%; width: 22px; height: 22px; margin-left: -11px; border-radius: 50%; background: radial-gradient(circle at 40% 35%, #F2E7D2, #C9B58C 60%, #8D7650); box-shadow: 0 2px 3px rgba(0,0,0,.4), inset 0 0 0 2px rgba(120,95,55,.5); z-index: 6; }
+.sobre__boton::after { content: ""; position: absolute; inset: 6px; border-radius: 50%; background: radial-gradient(circle, #7A6240 45%, transparent 47%), radial-gradient(circle at 30% 50%, #7A6240 22%, transparent 24%), radial-gradient(circle at 70% 50%, #7A6240 22%, transparent 24%); }
+.sobre__boton--solapa { bottom: 8px; }
+.sobre__boton--frente { top: 40%; }
+/* Frente del sobre: etiqueta, banda, cordel */
+.sobre__frente { position: absolute; inset: 0; z-index: 3; }
+.sobre__cordel { position: absolute; left: 50%; top: calc(26% - 32px); width: 120px; height: 140px; margin-left: -60px; z-index: 7; overflow: visible; pointer-events: none; }
+.sobre__cordel path { fill: none; stroke: var(--hilo); stroke-width: 2.4; stroke-linecap: round; }
+.cordel__lazo { stroke-dasharray: 420; stroke-dashoffset: 0; animation: cordelSuelta .9s ease-in .25s forwards; }
+@keyframes cordelSuelta { to { stroke-dashoffset: 420; opacity: 0; } }
+.cordel__suelto { stroke-dasharray: 80; stroke-dashoffset: 80; animation: cordelCae .7s var(--ease-out) 1s forwards; }
+@keyframes cordelCae { to { stroke-dashoffset: 0; } }
+.etiq { position: absolute; left: 7%; right: 7%; top: 46%; background: var(--papel); color: var(--fg); border: 1.5px solid var(--fg); box-shadow: 0 6px 14px -8px rgba(0,0,0,.5); transform: rotate(-1.2deg); }
+.etiq__top { display: flex; align-items: center; justify-content: space-between; gap: 10px; background: var(--acc); color: #FFF; padding: 7px 11px; }
+.etiq__top b { font-family: var(--f-display); font-size: 17px; text-transform: uppercase; letter-spacing: .04em; }
+.etiq__top span { font-family: var(--f-label); font-size: 9.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; text-align: right; line-height: 1.2; }
+.etiq__meta { display: flex; flex-wrap: wrap; gap: 4px 14px; padding: 7px 11px 6px; border-bottom: 1px solid var(--fg); font-family: var(--f-label); font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--mute); }
+.etiq__meta b { color: var(--fg); font-weight: 700; }
+.etiq__tabla { width: 100%; border-collapse: collapse; font-family: var(--f-label); font-size: 10px; }
+.etiq__tabla thead th { text-align: left; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; font-size: 8.5px; color: var(--mute); padding: 5px 6px 4px; border-bottom: 1px solid var(--fg); }
+.etiq__tabla thead th:first-child, .etiq__tabla tbody th { padding-left: 11px; }
+.etiq__tabla tbody th { text-align: left; font-weight: 700; font-family: var(--f-mono); font-size: 9px; letter-spacing: .04em; text-transform: uppercase; }
+.etiq__tabla td, .etiq__tabla tbody th { padding: 5px 6px; border-bottom: 1px dotted rgba(27,21,16,.4); vertical-align: middle; line-height: 1.2; }
+.etiq__tabla td i { color: var(--acc); font-style: italic; }
+.etiq__tabla tr:last-child td, .etiq__tabla tr:last-child th { border-bottom: 0; }
+.etiq__vacio th, .etiq__vacio td { background: rgba(200,16,46,.07); }
+.firma { display: block; width: 58px; height: 17px; }
+.firma path { fill: none; stroke: #1E2A6E; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 260; stroke-dashoffset: 260; animation: firmar 1s ease-out 2.8s forwards; }
+@keyframes firmar { to { stroke-dashoffset: 0; } }
+.firma--vacia { height: 12px; border-bottom: 1.5px solid var(--acc); }
+.sobre__banda { position: absolute; left: -8%; right: -8%; top: 88%; z-index: 5; display: flex; gap: 40px; overflow: hidden; white-space: nowrap; background: var(--acc); color: #FFF; padding: 7px 0; transform: rotate(-5deg); box-shadow: 0 6px 12px -6px rgba(0,0,0,.5); animation: bandaIn .6s var(--ease-out) 3.2s both; }
+@keyframes bandaIn { from { opacity: 0; transform: rotate(-5deg) scale(1.15); } }
+.sobre__banda span { font-family: var(--f-display); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
+.sobre__pie { position: absolute; left: 7%; right: 7%; bottom: 3.5%; display: flex; justify-content: space-between; gap: 12px; font-family: var(--f-mono); font-size: 9px; letter-spacing: .1em; text-transform: uppercase; color: rgba(27,21,16,.6); }
+.sobre__pie span:last-child { text-align: right; }
+@media (max-width: 999px) { .sobre { margin: 8px auto 0; padding-top: 120px; } .sobre__banda span { font-size: 11px; } }
+@media (max-width: 640px) { .sobre__cuerpo { aspect-ratio: 470 / 780; } .sobre__banda { top: 90%; } .sobre__pie { bottom: 1.5%; font-size: 8px; flex-direction: column; align-items: flex-end; gap: 1px; text-align: right; } .sobre__pie span { text-align: right; } }
+@media (max-width: 420px) { .sobre__hoja { padding: 12px 14px; } .hoja__lista li { font-size: 11px; } .etiq__tabla, .etiq__tabla thead th { font-size: 8.5px; } .etiq__top b { font-size: 15px; } .firma { width: 46px; } }
+@media (prefers-reduced-motion: reduce) { .sobre__solapa { animation: none; transform: rotateX(180deg); z-index: 1; } .sobre__hoja { animation: none; transform: translateY(-36%); } .cordel__lazo { opacity: 0; } .cordel__suelto, .firma path { stroke-dashoffset: 0; animation: none; } .sobre__banda, .sobre__cuerpo { animation: none; } }
+
+/* ---------- Navegación y cuerpo ---------- */
+.fmt--evidencia .fnav { background: rgba(201,164,107,.96); border-block: 1px solid rgba(27,21,16,.35); }
+.fmt--evidencia .fnav a { font-size: 12px; color: #3A2C1B; }
+.fmt--evidencia .fnav a b { font-family: var(--f-display); font-size: 11px; color: var(--acc); }
+.fmt--evidencia .fnav a:hover, .fmt--evidencia .fnav a.is-active { color: var(--fg); border-bottom-color: var(--acc); }
+.fmt--evidencia .claves li { border-top-color: var(--fg); }
+.fmt--evidencia .claves li::before { font-family: var(--f-display); color: var(--acc); }
+/* La lectura ocurre sobre la hoja blanca del inventario, apoyada en el kraft */
+.fmt--evidencia .fbody { background: var(--papel); border: 1px solid rgba(27,21,16,.35); box-shadow: 0 1px 2px rgba(20,12,0,.2), 0 40px 70px -40px rgba(40,25,5,.7); padding: 48px clamp(20px, 4vw, 64px) 40px; margin-top: 48px; margin-bottom: 72px; }
+.fmt--evidencia .ftext { color: #23180F; }
+.fmt--evidencia .cap:first-child .ftext > p:first-of-type::first-letter { color: var(--acc); }
+.fmt--evidencia .cap + .cap { border-top: 1px dashed rgba(27,21,16,.4); }
+.fmt--evidencia .estado { background: #FFF; border: 1.5px solid var(--fg); border-left: 8px solid var(--acc); box-shadow: 4px 4px 0 var(--bg-2); }
+.fmt--evidencia .estado--amarillo { border-left-color: var(--acc); }
+.fmt--evidencia .estado b { font-size: 20px; line-height: 1.05; }
+.fmt--evidencia .margen { background: var(--papel-2); }
+.fmt--evidencia .fcita { border-left: 0; padding-left: 0; }
+.fmt--evidencia .fcita p { font-family: var(--f-body); font-style: italic; font-weight: 500; font-size: clamp(24px, 2.5vw, 36px); line-height: 1.16; color: var(--fg); }
+.fmt--evidencia .fcita p::before { content: ""; display: block; width: 64px; height: 6px; background: var(--acc); margin-bottom: 16px; }
+.fmt--evidencia .fdato { border-top: 3px solid var(--fg); }
+.fmt--evidencia .fdato b { color: var(--acc); font-size: clamp(38px, 5vw, 76px); letter-spacing: -.02em; }
+.fmt--evidencia .fper, .fmt--evidencia .fresp li { background: #FFF; border: 1px solid rgba(27,21,16,.3); }
+.fmt--evidencia .fper .badge { color: #FFF; background: var(--fg); border-color: var(--fg); font-size: 9.5px; }
+.fmt--evidencia .fper h3 { font-size: 16px; line-height: 1.12; }
+.fmt--evidencia .fresp li { border-left: 5px solid var(--acc); }
+.fmt--evidencia .ftl { border-left-color: var(--fg); }
+.fmt--evidencia .ftl b { font-size: 16px; }
+.fmt--evidencia .ftl__f { font-family: var(--f-label); font-weight: 700; letter-spacing: .06em; }
+.fmt--evidencia .ruta li { border-top-color: rgba(27,21,16,.35); }
+.fmt--evidencia .ruta.in li { border-top-color: var(--acc); }
+.fmt--evidencia .ruta b { font-size: 15px; }
+.fmt--evidencia .preguntas { border-top-color: var(--fg); }
+.fmt--evidencia .preguntas li { font-family: var(--f-body); font-weight: 600; }
+.fmt--evidencia .preguntas li::before { font-family: var(--f-display); }
+.fmt--evidencia .fcifras b { color: var(--acc); }
+.fmt--evidencia .cierre { background: #FFF; border: 1.5px solid var(--fg); padding: 22px; }
+.fmt--evidencia .cierre__lineas li { border-bottom: 1px dotted rgba(27,21,16,.45); }
+.fmt--evidencia .sello { color: var(--acc); }
+/* Libro mayor (módulo genérico registros) */
+.fmt--evidencia .ledger { font-family: var(--f-label); font-size: 13.5px; }
+.fmt--evidencia .ledger th { font-family: var(--f-display); font-size: 9.5px; letter-spacing: .12em; color: var(--fg); border-bottom: 2px solid var(--fg); }
+.fmt--evidencia .ledger td { border-bottom: 1px dotted rgba(27,21,16,.45); }
+.fmt--evidencia .ledger td.mono { font-family: var(--f-mono); font-size: 12px; color: var(--mute); }
+.fmt--evidencia .ledger .num { color: var(--acc); font-family: var(--f-display); font-size: 14px; }
+.fmt--evidencia .ledger .ruta { color: var(--mute); font-size: 12.5px; }
+.fmt--evidencia .ledger .nota { font-size: 13px; color: #3A2C1B; }
+.fmt--evidencia .ledger tr:hover td { background: rgba(200,16,46,.05); }
+/* Después y créditos */
+.fmt--evidencia .despues { background: var(--bg-2); border-top: 1px solid rgba(27,21,16,.35); }
+.fmt--evidencia .hito { background: var(--papel); border-top: 5px solid var(--fg); }
+.fmt--evidencia .hito b { font-family: var(--f-label); font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.fmt--evidencia .hito h3 { font-size: 18px; }
+.fmt--evidencia .creditos { background: var(--bg); }
+.fmt--evidencia .fcred dt { color: var(--acc); font-weight: 700; }
+.fmt--evidencia .ffuentes a { text-decoration-color: var(--acc); }
+.fmt--evidencia .vid__rol { color: #E2B25C; }
+
+/* ---------- Módulo característico: cadena de custodia ---------- */
+.fmod--custodia { margin: 56px 0; }
+.cust { display: grid; gap: 22px; }
+.cust__caso { display: grid; grid-template-columns: max-content 1fr; gap: 4px 16px; align-items: baseline; padding: 14px 18px; background: var(--fg); color: var(--papel); font-family: var(--f-label); }
+.cust__caso span { font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: #D9B77A; }
+.cust__caso b { font-family: var(--f-display); font-size: 13px; text-transform: uppercase; letter-spacing: .02em; }
+.cust__leyenda { display: flex; flex-wrap: wrap; gap: 8px; }
+.cust__chip { display: inline-block; font-family: var(--f-label); font-weight: 700; font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; padding: 5px 9px 4px; border: 1.5px solid var(--fg); color: var(--fg); background: #FFF; line-height: 1; }
+.cust__chip--fuera { background: var(--acc); border-color: var(--acc); color: #FFF; }
+.cust__chip--publicada { background: var(--fg); border-color: var(--fg); color: var(--bg); }
+.cust__inv { list-style: none; margin: 0; padding: 0; border-top: 3px solid var(--fg); }
+.cust__pieza { display: grid; grid-template-columns: 52px 1fr; gap: 14px; padding: 16px 0; border-bottom: 1px dotted rgba(27,21,16,.45); }
+.cust__n { font-family: var(--f-display); font-size: 24px; color: var(--acc); line-height: 1; padding-top: 2px; }
+.cust__pieza h3 { font-family: var(--f-display); font-size: 16px; line-height: 1.15; text-transform: uppercase; margin: 0 0 6px; }
+.cust__pieza p { margin: 0 0 10px; font-family: var(--f-body); font-size: 15px; line-height: 1.5; color: #3A2C1B; max-width: 62ch; }
+.cust__estados { display: flex; flex-wrap: wrap; gap: 6px; }
+.cust__sub { margin-top: 12px; }
+.cust__sub .kicker { display: block; margin-bottom: 6px; }
+.cust__sub h3 { font-family: var(--f-display); font-size: clamp(20px, 2.2vw, 28px); text-transform: uppercase; margin: 0; line-height: 1; }
+.cust__cadena { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+.cust__paso { position: relative; display: grid; align-content: start; gap: 6px; padding: 16px 16px 18px; background: #FFF; border: 1.5px solid var(--fg); box-shadow: 4px 4px 0 var(--bg-2); }
+.cust__paso--vacio { background: repeating-linear-gradient(-45deg, #FFF 0 10px, #FBEDEF 10px 20px); border-style: dashed; border-color: var(--acc); box-shadow: none; }
+.cust__k { font-family: var(--f-label); font-weight: 700; font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--acc); }
+.cust__paso b { font-family: var(--f-display); font-size: 14px; line-height: 1.2; text-transform: uppercase; }
+.cust__paso time { font-family: var(--f-mono); font-size: 11.5px; color: var(--mute); }
+.cust__paso--vacio time { color: var(--acc); font-style: italic; }
+.cust__firma { display: grid; gap: 4px; margin: 6px 0 4px; padding: 8px 10px 6px; border: 1px solid rgba(27,21,16,.4); background: var(--papel); min-height: 46px; }
+.cust__firma .firma { width: 84px; height: 24px; }
+.cust__firma .firma path { animation-delay: .3s; }
+.cust__firma .firma--vacia { width: 100%; height: 16px; }
+.cust__firma small { font-family: var(--f-label); font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--mute); }
+.cust__paso--vacio .cust__firma small { color: var(--acc); font-weight: 700; }
+.cust__paso p { margin: 0; font-family: var(--f-body); font-size: 13.5px; line-height: 1.45; color: #3A2C1B; }
+@media (max-width: 640px) { .cust__pieza { grid-template-columns: 40px 1fr; gap: 10px; } .cust__n { font-size: 20px; } .cust__caso { grid-template-columns: 1fr; gap: 2px; } .cust__caso span:nth-child(3) { margin-top: 8px; } }
+
+/* ================================================================
+   El sobre sigue abierto: la cadena de custodia recorre toda la página
+   ================================================================ */
+.fmt--evidencia {
+  --cordel: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='26' viewBox='0 0 120 26'%3E%3Cpath d='M0 13 Q15 3 30 13 T60 13 T90 13 T120 13' fill='none' stroke='%236E4B2A' stroke-width='2.3' stroke-linecap='round'/%3E%3C/svg%3E");
+  --cordelv: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='120' viewBox='0 0 26 120'%3E%3Cpath d='M13 0 Q3 15 13 30 T13 60 T13 90 T13 120' fill='none' stroke='%236E4B2A' stroke-width='2.3' stroke-linecap='round'/%3E%3C/svg%3E");
+  --lacre: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Ccircle cx='30' cy='30' r='23' fill='%23C8102E'/%3E%3Ccircle cx='30' cy='30' r='16.5' fill='none' stroke='%23F6F1E8' stroke-width='1.3' stroke-dasharray='3 4.2'/%3E%3Ccircle cx='30' cy='30' r='8.5' fill='none' stroke='%23F6F1E8' stroke-width='2.8'/%3E%3C/svg%3E");
+  --ojal: radial-gradient(circle 4px at 15px 50%, var(--papel) 96%, transparent 97%);
+}
+
+/* --- El pliego de lectura queda atado con cordel --- */
+.fmt--evidencia .fbody { position: relative; background-image: var(--cordelv); background-repeat: repeat-y; background-position: 14px 0; }
+@media (max-width: 700px) { .fmt--evidencia .fbody { background-image: none; } }
+
+/* --- Cada capítulo es una pieza numerada --- */
+.fmt--evidencia .cap { --tagtop: 0px; position: relative; }
+.fmt--evidencia .cap[data-n]::before {
+  content: "Pieza " attr(data-n); position: absolute; right: 0; top: var(--tagtop); z-index: 2;
+  font-family: var(--f-display); font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--papel); background: var(--ojal) var(--fg); padding: 9px 14px 8px 26px;
+  clip-path: polygon(14px 0, 100% 0, 100% 100%, 14px 100%, 0 50%); transform: rotate(-1.4deg);
+}
+.fmt--evidencia .cap__num { display: inline-block; background: var(--ojal) var(--acc); color: #FFF; padding: 7px 13px 6px 26px; margin-bottom: 14px; font-family: var(--f-label); font-weight: 700; font-size: 10px; letter-spacing: .2em; }
+.fmt--evidencia .cap--material .cap__num, .fmt--evidencia .cap--tr .cap__num { background: var(--fg); }
+
+/* --- Separador: el cordel cortado y el lacre --- */
+.fmt--evidencia .cap + .cap { --tagtop: 96px; border-top: 0; margin-top: 24px; padding-top: 104px; }
+.fmt--evidencia .cap + .cap::after {
+  content: ""; position: absolute; left: 0; right: 0; top: 22px; height: 60px; pointer-events: none;
+  background: var(--lacre) no-repeat center center / 52px 52px, var(--cordel) repeat-x center center / 120px 26px;
+  opacity: .85;
+}
+
+/* --- Las citas van con etiqueta de cadena de custodia --- */
+.fmt--evidencia .fcita { position: relative; border-left: 0; padding: 44px 26px 20px; margin: 52px 0; background: #FFF; border: 1.5px solid var(--fg); box-shadow: 6px 6px 0 rgba(27,21,16,.12); }
+.fmt--evidencia .fcita::before {
+  content: "Cadena de custodia · cita literal"; position: absolute; left: 0; right: 0; top: 0; opacity: 1; line-height: 1.3;
+  background: var(--ojal) var(--acc); color: #FFF; font-family: var(--f-label); font-weight: 700;
+  font-size: 9.5px; letter-spacing: .18em; text-transform: uppercase; padding: 8px 12px 7px 28px;
+}
+.fmt--evidencia .fcita p::before { display: none; }
+.fmt--evidencia .fcita p { font-size: clamp(21px, 2.15vw, 31px); margin-bottom: 14px; }
+.fmt--evidencia .fcita cite { display: block; padding-top: 11px; border-top: 1px dashed rgba(27,21,16,.45); }
+.fmt--evidencia .fcita::after { content: "Transcripción literal · Boscán y La Moni"; display: block; margin-top: 9px; font-family: var(--f-mono); font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--mute); }
+
+/* --- Los datos sueltos son piezas sacadas del sobre --- */
+.fmt--evidencia .fdato { position: relative; padding-top: 30px; grid-template-columns: minmax(0, 1fr); gap: 8px 0; }
+.fmt--evidencia .fdato b { font-size: clamp(32px, 4.4vw, 66px); }
+.fmt--evidencia .fdato span { max-width: 60ch; }
+.fmt--evidencia .fdato::before { content: "Pieza suelta"; position: absolute; left: 0; top: 8px; font-family: var(--f-label); font-weight: 700; font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: var(--mute); }
+.fmt--evidencia .fdatos2 .fdato::before { content: "Pieza suelta"; }
+
+/* --- Cabeceras de módulo con etiqueta perforada --- */
+.fmt--evidencia .fmod__head .kicker { display: inline-block; background: var(--ojal) var(--fg); color: var(--papel); padding: 6px 13px 5px 26px; font-weight: 700; font-size: 9.5px; letter-spacing: .2em; text-transform: uppercase; }
+.fmt--evidencia .despues .fmod__head .kicker { background: var(--ojal) var(--acc); color: #FFF; }
+
+/* --- Cronología: casilla de recibido por --- */
+.fmt--evidencia .ftl { border-left-style: dashed; }
+.fmt--evidencia .ftl li > div::after {
+  content: "Recibido por"; display: block; margin-top: 12px; max-width: 250px; padding: 8px 11px 22px;
+  border: 1px dashed rgba(27,21,16,.5);
+  background:
+    linear-gradient(rgba(27,21,16,.5), rgba(27,21,16,.5)) no-repeat 11px calc(100% - 8px) / calc(100% - 22px) 1px,
+    repeating-linear-gradient(-45deg, transparent 0 9px, rgba(27,21,16,.035) 9px 18px);
+  font-family: var(--f-label); font-weight: 700; font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: var(--mute);
+}
+.fmt--evidencia .ftl li::before { border-radius: 0; transform: rotate(45deg); }
+
+/* --- Después: cada hito, un recibo --- */
+.fmt--evidencia .hito { position: relative; }
+.fmt--evidencia .hito::after { content: ""; position: absolute; left: 22px; right: 22px; bottom: 14px; height: 1px; background: repeating-linear-gradient(90deg, rgba(27,21,16,.4) 0 5px, transparent 5px 10px); }
+.fmt--evidencia .hito { padding-bottom: 34px; }
+
+/* --- El sello del cierre --- */
+.fmt--evidencia .cierre__sello { border-color: var(--acc); background: rgba(200,16,46,.06); }
+
+@media (max-width: 860px) {
+  .fmt--evidencia .cap[data-n]::before { position: static; display: inline-block; transform: none; margin-bottom: 12px; clip-path: none; padding-left: 26px; }
+  .fmt--evidencia .cap + .cap { padding-top: 92px; }
+}
+.fmt--evidencia .cierre li[data-estado="abierto"] b, .fmt--evidencia .cierre li[data-estado="pendiente"] b { color: #8A5A05; }
+.fmt--evidencia .cierre li[data-estado="condena"] b, .fmt--evidencia .cierre li[data-estado="si"] b { color: #1F5C37; }

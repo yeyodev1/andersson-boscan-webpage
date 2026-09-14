@@ -1,0 +1,13 @@
+/* tablero electrónico de votación (La caída de Mario Godoy): bisel de metal, tornillos, banda de resultado en LED y rejilla de curules encendidas */
+.obj--votacion { --obg: #121416; --ofg: #F2F3F1; --oacc: #35F26F; border: 7px solid #2A2E33; border-radius: 8px; box-shadow: var(--sombra), inset 0 0 0 1px rgba(255,255,255,.05), inset 0 1px 0 rgba(255,255,255,.08);
+  background-image: radial-gradient(circle at 11px 11px, #4A4F56 2.4px, #1C1F23 2.8px, transparent 3.6px), radial-gradient(circle at calc(100% - 11px) 11px, #4A4F56 2.4px, #1C1F23 2.8px, transparent 3.6px), radial-gradient(circle at 11px calc(100% - 11px), #4A4F56 2.4px, #1C1F23 2.8px, transparent 3.6px), radial-gradient(circle at calc(100% - 11px) calc(100% - 11px), #4A4F56 2.4px, #1C1F23 2.8px, transparent 3.6px); background-repeat: no-repeat; }
+.obj--votacion::before { content: "148 A FAVOR · 0 EN CONTRA · 1 ABSTENCIÓN"; position: absolute; left: 16px; right: 16px; top: 18px; height: 72px; padding: 9px 12px; box-sizing: border-box; border: 1px solid #2A2E33; border-radius: 4px; background: #08090B repeating-linear-gradient(transparent 0 3px, rgba(0,0,0,.25) 3px 4px); font-family: 'Chivo', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 11px; letter-spacing: .16em; line-height: 1; color: #35F26F; text-shadow: 0 0 8px rgba(53,242,111,.6); white-space: nowrap; overflow: clip; overflow-clip-margin: 46px; z-index: 1; }
+.obj--votacion::after { content: ""; position: absolute; left: 28px; right: 28px; top: 50px; height: 30px; background: radial-gradient(circle, #35F26F 1.7px, transparent 2.2px) 0 0 / 9px 9px; filter: drop-shadow(0 0 3px rgba(53,242,111,.6)); opacity: .9; z-index: 1; pointer-events: none; }
+.obj--votacion .obj__img { display: none; }
+.obj--votacion .obj__cuerpo { padding: 108px 22px 22px; }
+.obj--votacion h3 { font-family: 'Chivo', 'Arial Narrow', sans-serif; font-weight: 900; text-transform: uppercase; letter-spacing: -.015em; font-size: clamp(26px, 2.2vw, 36px); line-height: .95; }
+.obj--votacion .obj__sub { font-family: 'Rubik', system-ui, sans-serif; font-style: normal; font-weight: 300; color: #C9CDC9; }
+.obj--votacion p { color: #C9CDC9; }
+.obj--votacion .obj__abrir { font-family: 'Chivo', 'Arial Narrow', sans-serif; font-weight: 700; color: #35F26F; border-bottom-color: rgba(53,242,111,.6); text-shadow: 0 0 8px rgba(53,242,111,.5); }
+.obj--votacion:hover::after { opacity: 1; }
+@media (max-width: 480px) { .obj--votacion .obj__cuerpo { padding-top: 104px; } .obj--votacion::after { display: block; } }

@@ -1,0 +1,14 @@
+/* esquela recortada de periódico: papel tiza, borde negro grueso con filete doble, cruz dorada, corte a tijera */
+.obj--esquela { --obg: #EDE9E0; --ofg: #0B0B0C; --oacc: #8A6D2A; border-radius: 0; padding: 12px;
+  clip-path: polygon(0 1.2%, 2.5% 0, 97.5% .7%, 100% 2.2%, 99.4% 98.2%, 97% 100%, 2.2% 99.3%, 0 97.4%); }
+.obj--esquela::before { content: ""; position: absolute; inset: 12px; border: 8px solid #0B0B0C; pointer-events: none; z-index: 3; }
+.obj--esquela::after { content: ""; position: absolute; inset: 24px; border: 3px double #0B0B0C; pointer-events: none; z-index: 3; }
+.obj--esquela .obj__img { width: calc(100% - 68px); margin: 34px 34px 0; aspect-ratio: 16 / 9; filter: grayscale(1) contrast(1.2) brightness(1.05); mix-blend-mode: multiply; opacity: .82; }
+.obj--esquela .obj__cuerpo { padding: 84px 36px 40px; text-align: center; justify-items: center; }
+.obj--esquela .obj__img + .obj__cuerpo { padding-top: 22px; }
+.obj--esquela h3 { font-family: var(--ofont); font-weight: 700; letter-spacing: .05em; font-size: clamp(21px, 1.7vw, 27px); line-height: 1.12; }
+.obj--esquela h3::before { content: "\2720"; display: block; font-family: 'Cardo', Georgia, serif; font-size: 30px; line-height: 1; color: var(--oacc); margin-bottom: 12px; }
+.obj--esquela .obj__sub { font-family: var(--ofont); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--oacc); opacity: 1; }
+.obj--esquela p { max-width: 42ch; }
+.obj--esquela .obj__abrir { border-top: 1px solid rgba(11,11,12,.35); padding-top: 12px; }
+.obj--esquela .postit { top: 4px; right: 2px; }

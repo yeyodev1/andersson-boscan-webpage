@@ -1,0 +1,21 @@
+/* informe desclasificado (ConspiraIn): hoja gris con perforaciones, membrete tachado, sello RESERVADO tachado y foto adjunta censurada */
+.obj.obj--reservado { display: flex; flex-direction: column; border-top: 3px double #15171A;
+  background-image: radial-gradient(circle at 11px 30%, var(--mesa) 4.5px, rgba(21,23,26,.14) 5px, transparent 6.5px), radial-gradient(circle at 11px 70%, var(--mesa) 4.5px, rgba(21,23,26,.14) 5px, transparent 6.5px); }
+/* escudo de la Secretaría, arriba a la izquierda */
+.obj--reservado::before { content: ""; position: absolute; left: 24px; top: 18px; width: 30px; height: 30px; border-radius: 50%; z-index: 3;
+  background: radial-gradient(circle, #3B5170 0 4px, transparent 5px), repeating-conic-gradient(from 0deg, #3B5170 0 3deg, transparent 3deg 12deg);
+  box-shadow: inset 0 0 0 3px #E3E6E9, inset 0 0 0 5px #3B5170, inset 0 0 0 7px #E3E6E9, inset 0 0 0 8px #3B5170; }
+/* sello RESERVADO tachado */
+.obj--reservado::after { content: "Reservado"; position: absolute; left: 66px; top: 20px; z-index: 3; font-family: 'Big Shoulders Display', 'Arial Narrow', sans-serif; font-weight: 900; font-size: 13px; letter-spacing: .22em; text-indent: .22em; text-transform: uppercase; color: var(--oacc); border: 3px double var(--oacc); padding: 5px 8px 3px; transform: rotate(-5deg); text-decoration: line-through; text-decoration-color: #101214; text-decoration-thickness: 4px; }
+.obj--reservado .obj__cuerpo { order: 1; position: relative; padding: 104px 22px 20px 30px;
+  background: linear-gradient(#101214, #101214) 30px 62px / 36% 10px no-repeat, linear-gradient(#101214, #101214) 30px 78px / 22% 10px no-repeat; }
+/* nota de desclasificación bajo el sello */
+.obj--reservado .obj__cuerpo::before { content: "Desclasificado · La Posta · 2018"; position: absolute; left: 30px; top: 46px; font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase; color: #3B5170; }
+/* barra de censura sobre la foto adjunta */
+.obj--reservado .obj__cuerpo::after { content: ""; position: absolute; left: 30px; top: calc(100% + 38px); width: 44%; height: 12px; background: #101214; z-index: 2; }
+.obj--reservado .obj__img { order: 2; aspect-ratio: 16 / 9; filter: grayscale(1) contrast(1.18); mix-blend-mode: multiply; opacity: .92; border-top: 2px solid #15171A; }
+.obj--reservado h3 { text-transform: uppercase; font-weight: 800; font-size: clamp(30px, 2.6vw, 42px); line-height: .92; letter-spacing: 0; }
+.obj--reservado .obj__sub { font-family: 'EB Garamond', Georgia, serif; font-style: italic; }
+.obj--reservado p { font-family: 'EB Garamond', Georgia, serif; font-size: 15.5px; }
+/* margen para el post-it pegado sobre el borde superior */
+.obj--reservado .obj__cuerpo { padding-top: 118px; }

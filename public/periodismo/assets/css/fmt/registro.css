@@ -1,0 +1,208 @@
+/* REGISTRO · Mafia albanesa: caja de banano de exportación contra el gris del registro mercantil.
+   Cartón, cinta de embalaje, guía de embarque y sello de aduana: verde de hoja y amarillo de fruta
+   sobre el papel gris de la Superintendencia. El motivo recorre toda la página. */
+.fmt--registro {
+  --bg: #E9E6DC; --bg-2: #DCD8CB; --fg: #1B1D17; --mute: #6C6F63;
+  --acc: #1E6B3A; --acc-2: #E0A314; --line-x: rgba(27,29,23,.2);
+  --carton: #C99B60; --carton-2: #AE7F3F; --carton-luz: #E0BE8B; --oxido: #96402A;
+  --f-display: 'Newsreader', Georgia, serif; --f-body: 'Newsreader', Georgia, serif;
+  --f-mono: 'DM Mono', ui-monospace, monospace; --f-label: 'Archivo Narrow', 'Arial Narrow', sans-serif;
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(rgba(27,29,23,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(27,29,23,.045) 1px, transparent 1px);
+  background-size: 100% 34px, 34px 100%;
+}
+.fmt--registro .kicker,
+.fmt--registro .hkicker { font-family: var(--f-label); font-weight: 600; letter-spacing: .22em; }
+.fmt--registro .htitle,
+.fmt--registro .cap__title,
+.fmt--registro .fmod__head h2 { font-weight: 500; letter-spacing: -.03em; font-variation-settings: "opsz" 72; }
+.fmt--registro .htitle em,
+.fmt--registro .cap__title em,
+.fmt--registro .fmod__head h2 em { font-style: italic; color: var(--acc); }
+.fmt--registro .ftext { font-size: clamp(17.5px, 1.3vw, 20px); line-height: 1.62; font-variation-settings: "opsz" 16; }
+
+/* ---------------------------------------------------------------- portada */
+.hero--registro { padding: 96px 0 44px; }
+.hero--registro .hero__grid { align-items: start; }
+@media (min-width: 1000px) { .hero--registro .hero__grid { grid-template-columns: 1.02fr .98fr; gap: clamp(36px, 4.5vw, 72px); } }
+.hero--registro .htitle { font-size: clamp(46px, 7vw, 104px); }
+.hero--registro .hstats { border-top: 3px solid var(--fg); padding-top: 20px; margin-top: 34px; }
+.hero--registro .hstats b { font-family: var(--f-mono); font-weight: 500; font-size: clamp(20px, 2.3vw, 32px); color: var(--acc); }
+.hero--registro .hdeck { max-width: 52ch; }
+
+/* cinta de embalaje que cruza la cabecera */
+.hero__cinta { position: absolute; left: -6%; right: -6%; top: 148px; height: 34px; z-index: 0; pointer-events: none;
+  background: repeating-linear-gradient(90deg, rgba(224,163,20,.34) 0 22px, rgba(224,163,20,.16) 22px 44px);
+  border-block: 1px solid rgba(174,127,63,.35); transform: rotate(-1.1deg); opacity: .5; mix-blend-mode: multiply; }
+@media (max-width: 999px) { .hero__cinta { top: 108px; } }
+
+/* la caja */
+.caja { margin: 0; position: relative; filter: drop-shadow(10px 12px 0 rgba(27,29,23,.1)); }
+.caja__tapa { display: flex; gap: 6px; }
+.caja__tapa i { flex: 1; height: 26px; background:
+    repeating-linear-gradient(90deg, var(--carton-luz) 0 7px, var(--carton) 7px 14px);
+  border: 1px solid var(--carton-2); border-bottom: 0; }
+.caja__tapa i:first-child { transform: skewX(4deg); transform-origin: bottom left; }
+.caja__tapa i:last-child { transform: skewX(-4deg); transform-origin: bottom right; }
+.caja__cuerpo { position: relative; padding: 26px 26px 22px; border: 1px solid var(--carton-2);
+  background:
+    repeating-linear-gradient(180deg, rgba(174,127,63,.09) 0 3px, transparent 3px 9px),
+    linear-gradient(180deg, var(--carton-luz), var(--carton)); }
+.caja__marca { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; padding-bottom: 14px; border-bottom: 2px solid rgba(27,29,23,.35); }
+.caja__marca b { font-family: var(--f-label); font-weight: 700; font-size: clamp(24px, 2.6vw, 34px);
+  letter-spacing: .06em; text-transform: uppercase; color: #23260F; line-height: 1; }
+.caja__marca span { font-family: var(--f-label); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: rgba(27,29,23,.66); }
+.caja__aire { display: flex; gap: 10px; margin: 14px 0 4px; }
+.caja__aire i { width: 46px; height: 13px; border-radius: 999px; background: #4A3A22;
+  box-shadow: inset 0 2px 0 rgba(0,0,0,.45), 0 1px 0 rgba(255,255,255,.35); }
+.caja__campos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 18px; margin: 14px 0 18px; }
+.caja__campos dt { font-family: var(--f-label); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: rgba(27,29,23,.6); }
+.caja__campos dd { margin: 2px 0 0; font-family: var(--f-label); font-weight: 600; font-size: 14.5px;
+  letter-spacing: .04em; text-transform: uppercase; color: #23260F; }
+
+/* la guía de embarque engrapada a la caja */
+.guia { background: #F3F1E9; border: 1px solid rgba(27,29,23,.4); box-shadow: 0 2px 0 rgba(27,29,23,.18); position: relative; }
+.guia::before, .guia::after { content: ""; position: absolute; top: -5px; width: 15px; height: 5px;
+  background: #7C7F73; box-shadow: 0 1px 0 rgba(0,0,0,.35); }
+.guia::before { left: 26px; } .guia::after { right: 26px; }
+.guia__h { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; flex-wrap: wrap;
+  padding: 9px 13px; border-bottom: 1px solid rgba(27,29,23,.4); background: #E2DFD4;
+  font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--mute); }
+.guia__h b { font-weight: 500; color: var(--fg); }
+.regfila { display: grid; grid-template-columns: 38px minmax(0, 1fr) max-content; gap: 10px; align-items: center;
+  padding: 8px 13px; border-bottom: 1px dotted rgba(27,29,23,.28); font-family: var(--f-mono); font-size: 11.5px; color: var(--mute);
+  opacity: 0; animation: rise .5s var(--ease-out) forwards; animation-delay: calc(.5s + var(--i) * .1s); }
+.regfila b { font-family: var(--f-label); font-weight: 600; font-size: 14.5px; letter-spacing: .02em; color: var(--fg);
+  min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.regfila em { font-style: normal; font-family: var(--f-label); font-weight: 700; font-size: 9.5px; letter-spacing: .14em;
+  text-transform: uppercase; padding: 3px 6px; border: 1.5px solid; transform: rotate(-3deg); white-space: nowrap; }
+.regfila em[data-estado="activa"] { color: var(--acc); }
+.regfila em[data-estado="disuelta"] { color: var(--oxido); }
+.guia__pie { padding: 8px 13px; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--mute); background: #E2DFD4; }
+@media (prefers-reduced-motion: reduce) { .regfila { opacity: 1; animation: none; } }
+@media (max-width: 480px) {
+  .caja__cuerpo { padding: 18px 16px 16px; }
+  .caja__campos { grid-template-columns: 1fr; }
+  .regfila { grid-template-columns: 30px minmax(0, 1fr); row-gap: 4px; }
+  .regfila em { grid-column: 2; justify-self: start; }
+}
+
+/* ---------------------------------------------------------------- navegación y capítulos */
+.fmt--registro .fnav { background: color-mix(in srgb, var(--bg) 94%, transparent); border-top: 3px solid var(--carton-2); }
+.fmt--registro .fnav a { font-family: var(--f-label); font-weight: 600; font-size: 12px; letter-spacing: .14em; }
+.fmt--registro .fnav a b { color: var(--acc); }
+.fmt--registro .fnav a:hover, .fmt--registro .fnav a.is-active { border-bottom-color: var(--acc-2); }
+.fmt--registro .claves li { border-top-width: 3px; }
+.fmt--registro .claves li::before { font-family: var(--f-label); font-weight: 700; letter-spacing: .2em; }
+.fmt--registro .cap__title { font-size: clamp(32px, 4.4vw, 62px); }
+.fmt--registro .cap__num { position: relative; font-family: var(--f-label); font-weight: 700; font-size: 11px;
+  letter-spacing: .2em; color: #3A2E18; padding: 6px 14px; margin-bottom: 16px;
+  background: repeating-linear-gradient(90deg, rgba(224,163,20,.5) 0 18px, rgba(224,163,20,.28) 18px 36px);
+  border-block: 1px solid rgba(174,127,63,.55); transform: rotate(-.8deg); }
+.fmt--registro .cap + .cap { border-top: 3px double var(--carton-2); }
+.fmt--registro .cap:first-child .ftext:first-of-type > p:first-of-type::first-letter { color: var(--acc); }
+/* una sola capitular por capítulo: los módulos parten el texto en varios .ftext */
+.fmt--registro .cap:first-child .ftext ~ .ftext > p:first-of-type::first-letter { font-size: inherit; float: none; padding: 0; color: inherit; font-family: inherit; line-height: inherit; }
+.fmt--registro .margen { background: #F3F1E9; border-left: 3px solid var(--acc-2); }
+.fmt--registro .margen span { font-family: var(--f-label); font-weight: 700; color: var(--carton-2); }
+.fmt--registro .fcita { border-left: 0; padding-left: 26px; position: relative; }
+.fmt--registro .fcita::before { content: ""; position: absolute; left: 0; top: 4px; bottom: 4px; width: 9px;
+  background: repeating-linear-gradient(180deg, var(--carton-luz) 0 6px, var(--carton) 6px 12px); border: 1px solid var(--carton-2); }
+.fmt--registro .fcita p { font-weight: 400; }
+.fmt--registro .fdato { border-top-width: 3px; }
+.fmt--registro .fdato b { font-family: var(--f-mono); font-weight: 500; color: var(--acc); }
+.fmt--registro .fdato span { font-family: var(--f-label); font-size: 14px; }
+.fmt--registro .estado { background: #F3F1E9; border: 1px dashed rgba(27,29,23,.45); border-left: 5px solid var(--acc); }
+.fmt--registro .estado b { font-family: var(--f-label); font-weight: 700; text-transform: uppercase; letter-spacing: .02em; font-size: 20px; }
+.fmt--registro .estado--rojo { border-left-color: var(--oxido); }
+
+/* ---------------------------------------------------------------- la paleta de cajas */
+.paleta { display: grid; gap: 20px; grid-template-columns: repeat(auto-fill, minmax(272px, 1fr)); align-items: start; }
+.cajita { position: relative; padding: 20px 20px 16px; border: 1px solid var(--carton-2);
+  background:
+    repeating-linear-gradient(180deg, rgba(174,127,63,.08) 0 3px, transparent 3px 9px),
+    linear-gradient(180deg, var(--carton-luz), var(--carton));
+  box-shadow: 6px 7px 0 rgba(27,29,23,.1); }
+.cajita__tapa { position: absolute; left: 14px; right: 14px; top: -9px; height: 9px;
+  background: repeating-linear-gradient(90deg, var(--carton-luz) 0 7px, var(--carton) 7px 14px);
+  border: 1px solid var(--carton-2); border-bottom: 0; }
+.cajita header { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 12px; }
+.cajita__n { font-size: 10px; letter-spacing: .18em; color: rgba(27,29,23,.62); }
+.cajita__sello { font-family: var(--f-label); font-weight: 700; font-size: 9.5px; letter-spacing: .16em;
+  text-transform: uppercase; padding: 4px 8px; border: 2px solid; transform: rotate(-4deg); white-space: nowrap; }
+.cajita[data-estado="activa"] .cajita__sello { color: var(--acc); background: rgba(30,107,58,.09); }
+.cajita[data-estado="disuelta"] .cajita__sello { color: var(--oxido); background: rgba(150,64,42,.09); }
+.cajita[data-estado="activa"] { border-left: 6px solid var(--acc); }
+.cajita[data-estado="disuelta"] { border-left: 6px solid var(--oxido); }
+.cajita h3 { font-family: var(--f-label); font-weight: 700; font-size: 21px; line-height: 1.06;
+  letter-spacing: .03em; text-transform: uppercase; color: #23260F; margin: 0 0 6px; }
+.cajita__giro { font-family: var(--f-label); font-size: 11px; letter-spacing: .16em; text-transform: uppercase;
+  color: rgba(27,29,23,.66); margin: 0 0 12px; }
+.cajita__nota { margin: 0; font-family: var(--f-body); font-size: 14.5px; line-height: 1.48; color: #22240F; }
+.cajita footer { margin-top: 14px; padding-top: 10px; border-top: 1px dashed rgba(27,29,23,.4);
+  font-size: 10.5px; letter-spacing: .06em; color: rgba(27,29,23,.66); }
+.paleta__pie { font-family: var(--f-label); font-size: 12px; color: var(--mute); margin: 18px 0 0; }
+
+/* ---------------------------------------------------------------- la ruta como carga */
+.ruta--carga li { border-top: 3px solid var(--carton-2); padding-top: 20px; }
+.ruta--carga.in li { border-top-color: var(--acc); }
+.ruta--carga .ruta__n { display: inline-block; font-family: var(--f-mono); font-size: 10.5px; letter-spacing: .16em;
+  color: #3A2E18; padding: 3px 8px; margin-bottom: 10px; background: rgba(224,163,20,.42);
+  border: 1px solid rgba(174,127,63,.6); }
+.ruta--carga b { font-family: var(--f-label); font-weight: 700; font-size: 17px; letter-spacing: .04em; text-transform: uppercase; }
+.ruta--carga small { font-family: var(--f-body); font-size: 14px; color: var(--fg); }
+.ruta--carga li::after { color: var(--acc); }
+.fmt--registro .ruta__nota { font-family: var(--f-label); }
+
+/* ---------------------------------------------------------------- módulos genéricos con el mismo motivo */
+.fmt--registro .fmod__head { border-bottom: 3px double var(--carton-2); padding-bottom: 14px; }
+.fmt--registro .ftl { border-left: 3px solid var(--carton-2); }
+.fmt--registro .ftl li::before { background: var(--acc-2); border: 1px solid var(--carton-2); }
+.fmt--registro .ftl__f { font-family: var(--f-mono); color: var(--acc); }
+.fmt--registro .ftl b { font-family: var(--f-label); font-weight: 700; font-size: 18px; letter-spacing: .04em; text-transform: uppercase; }
+.fmt--registro .ftl p { font-family: var(--f-body); font-size: 15px; color: var(--fg); }
+.fmt--registro .fper { background: #F3F1E9; border: 1px solid var(--line-x); border-top: 4px solid var(--carton-2); }
+.fmt--registro .fper .badge { font-family: var(--f-label); font-weight: 600; color: var(--acc); }
+.fmt--registro .fper h3 { font-family: var(--f-label); font-weight: 700; letter-spacing: .03em; text-transform: uppercase; font-size: 19px; }
+.fmt--registro .fper p { font-family: var(--f-body); font-size: 14.5px; color: #333527; }
+.fmt--registro .fresp li { background: #F3F1E9; border-left: 4px solid var(--acc); }
+.fmt--registro .fresp b { font-family: var(--f-label); font-weight: 700; letter-spacing: .16em; color: var(--carton-2); }
+.fmt--registro .fresp p { font-family: var(--f-body); }
+.fmt--registro .preguntas { border-top: 3px solid var(--fg); }
+.fmt--registro .preguntas li::before { font-family: var(--f-mono); color: var(--acc); }
+.fmt--registro .fcifras > div { border-top-width: 3px; }
+.fmt--registro .fcifras b { font-family: var(--f-mono); font-weight: 500; color: var(--acc); }
+.fmt--registro .fcifras span { font-family: var(--f-label); }
+.fmt--registro .chips span { background: #F3F1E9; font-family: var(--f-label); }
+.fmt--registro .tablewrap th { font-family: var(--f-label); }
+.fmt--registro .retrato figcaption { border-top-color: var(--carton-2); }
+.fmt--registro .retrato figcaption b { font-family: var(--f-label); font-weight: 700; text-transform: uppercase; letter-spacing: .03em; }
+
+/* ---------------------------------------------------------------- cierre: el sello de aduana */
+.fmt--registro .cierre { background: #F3F1E9; border: 1px solid var(--carton-2); box-shadow: 8px 9px 0 var(--bg-2); }
+.fmt--registro .cierre::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 8px;
+  background: repeating-linear-gradient(90deg, var(--carton-luz) 0 8px, var(--carton) 8px 16px);
+  border-bottom: 1px solid var(--carton-2); }
+.fmt--registro .cierre__lineas { margin-top: 10px; }
+.fmt--registro .cierre__lineas li { font-family: var(--f-label); font-size: 14.5px; }
+.fmt--registro .cierre__lineas b { font-family: var(--f-body); font-size: 16px; }
+.fmt--registro .cierre li[data-estado="condena"] b, .fmt--registro .cierre li[data-estado="si"] b { color: var(--acc); }
+.fmt--registro .cierre li[data-estado="abierto"] b, .fmt--registro .cierre li[data-estado="pendiente"] b { color: #9B7412; }
+.fmt--registro .cierre li[data-estado="no"] b { color: var(--oxido); }
+.fmt--registro .cierre__sello { font-family: var(--f-label); font-weight: 700; color: var(--oxido);
+  background: #F3F1E9; border-color: var(--oxido); }
+.fmt--registro .cierre__fecha { font-family: var(--f-mono); }
+
+/* ---------------------------------------------------------------- después, créditos, pie */
+.fmt--registro .despues { background: var(--bg-2); border-top: 3px double var(--carton-2); }
+.fmt--registro .hito { background: #F3F1E9; border-top: 4px solid var(--acc); }
+.fmt--registro .hito b { font-family: var(--f-mono); color: var(--carton-2); }
+.fmt--registro .hito h3 { font-family: var(--f-label); font-weight: 700; text-transform: uppercase; letter-spacing: .03em; font-size: 19px; }
+.fmt--registro .hito p { font-family: var(--f-body); font-size: 15px; color: #333527; }
+.fmt--registro .creditos { border-top: 1px solid var(--line-x); }
+.fmt--registro .fcred dt, .fmt--registro .ffuentes, .fmt--registro .fnota { font-family: var(--f-label); }
+.fmt--registro .ffuentes a { text-decoration-color: var(--acc-2); }
+.fmt--registro .topbar { border-bottom: 3px solid var(--carton-2); }
+.fmt--registro .footer { background: var(--fg); color: #EDEAE0; border-top: 8px solid var(--carton); }

@@ -1,0 +1,33 @@
+/* RECIBO · Normita la recaudadora: papel térmico de caja, tinta gris, rojo de total, dentado */
+.fmt--recibo { --bg: #E8E4DC; --bg-2: #DDD8CE; --fg: #24221F; --mute: #605C54; --acc: #B3121C; --acc-2: #3A3630; --line-x: rgba(36,34,31,.16);
+  --f-display: 'Fraunces', Georgia, serif; --f-body: 'Fraunces', Georgia, serif; --f-mono: 'Courier Prime', 'Courier New', monospace; --f-label: 'Courier Prime', 'Courier New', monospace; }
+.fmt--recibo .ftext { font-variation-settings: "opsz" 14, "SOFT" 50; }
+.fmt--recibo .htitle, .fmt--recibo .cap__title, .fmt--recibo .fmod__head h2 { font-weight: 700; font-variation-settings: "opsz" 144, "SOFT" 100; letter-spacing: -.03em; }
+.fmt--recibo .htitle em, .fmt--recibo .cap__title em, .fmt--recibo .fmod__head h2 em { font-weight: 300; color: var(--acc); }
+.hero--recibo { padding: 100px 0 40px; }
+.hero--recibo .htitle { font-size: clamp(50px, 8vw, 120px); }
+.hero--recibo .hstats b { font-family: var(--f-mono); font-weight: 700; font-size: clamp(20px, 2.4vw, 32px); }
+.ticket { width: min(100%, 380px); margin-left: auto; background: #FBFAF6; color: #2A2824; font-family: var(--f-mono); padding: 26px 22px 30px; box-shadow: 0 30px 50px -30px rgba(36,34,31,.6); position: relative; }
+.ticket::before, .ticket::after { content: ""; position: absolute; left: 0; right: 0; height: 10px; background: radial-gradient(circle at 5px 0, transparent 5px, #FBFAF6 5.5px) 0 0 / 12px 10px repeat-x; }
+.ticket::before { top: -10px; transform: scaleY(-1); } .ticket::after { bottom: -10px; }
+.ticket--hero { animation: card 1s var(--ease-out) .3s both; transform: rotate(2deg); }
+@keyframes card { from { opacity: 0; transform: translateY(40px) rotate(6deg); } }
+.ticket__head { text-align: center; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; border-bottom: 1px dashed #999; padding-bottom: 12px; margin-bottom: 12px; line-height: 1.6; }
+.ticket__row { display: grid; grid-template-columns: 1fr auto max-content; gap: 8px; align-items: baseline; font-size: 13px; padding: 6px 0; }
+.ticket__row i { border-bottom: 1px dotted #999; min-width: 20px; }
+.ticket__row b { font-weight: 700; }
+.ticket__row small { grid-column: 1 / -1; font-size: 11px; color: #777; }
+.ticket__row--big { font-size: 16px; } .ticket__row--big b { color: var(--acc); font-size: 26px; }
+.ticket__foot { text-align: center; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; border-top: 1px dashed #999; padding-top: 12px; margin-top: 12px; color: #777; }
+.fmod--recibos .ticket { margin: 0; transform: none; width: min(100%, 460px); }
+.fmod--recibos .ticket__row { opacity: 0; transform: translateY(6px); transition: opacity .3s, transform .3s; }
+.fmod--recibos .ticket__row.in { opacity: 1; transform: none; }
+.fmod--recibos .ticket__row:last-of-type b { color: var(--acc); font-size: 18px; }
+.fmt--recibo .fnav a { font-size: 12.5px; }
+.fmt--recibo .cap__num { background: var(--fg); color: var(--bg); padding: 4px 8px; }
+.fmt--recibo .estado { background: #FBFAF6; }
+.fmt--recibo .fdato b { font-family: var(--f-mono); font-weight: 700; }
+.fmt--recibo .fcita p { font-weight: 400; }
+.fmt--recibo .cierre { background: #FBFAF6; font-family: var(--f-mono); border: 0; box-shadow: 0 30px 50px -30px rgba(36,34,31,.6); }
+.fmt--recibo .cierre__lineas li { border-bottom: 1px dotted #999; font-family: var(--f-mono); font-size: 13px; } .fmt--recibo .cierre__lineas b { font-family: var(--f-mono); }
+.fmt--recibo .cierre__lineas li:last-child { border-top: 1px dashed #999; border-bottom: 3px double #999; font-size: 15px; }

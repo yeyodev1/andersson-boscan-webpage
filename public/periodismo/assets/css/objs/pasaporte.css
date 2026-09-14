@@ -1,0 +1,20 @@
+/* pasaporte (Srdán): tapa azul con escudo dorado estampado, esquina redondeada y canto de páginas */
+.obj--pasaporte { --obg: #2E3A70; --ofg: #EEF0F5; --oacc: #D9C27A; border-radius: 4px 10px 10px 4px; padding-top: 30px;
+  background-image: radial-gradient(circle at 30% 12%, rgba(255,255,255,.07), transparent 55%), linear-gradient(160deg, #3B4A8C, #2A3566 70%, #222C57);
+  box-shadow: inset 0 0 0 1px rgba(217,194,122,.35), -3px 0 0 rgba(240,236,222,.9), -6px 0 0 rgba(210,204,186,.75), 0 26px 48px -30px rgba(10,15,40,.85); }
+/* escudo dorado estampado en seco, arriba a la izquierda */
+.obj--pasaporte::before { content: ""; position: absolute; left: 22px; top: 18px; width: 44px; height: 44px; z-index: 2; opacity: .85;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 44'><g fill='none' stroke='%23D9C27A' stroke-width='1.6'><path d='M22 4l14 5v13c0 9-6 15-14 18C14 37 8 31 8 22V9z'/><path d='M22 12v18M14 21h16'/><circle cx='22' cy='21' r='5.5'/></g></svg>") no-repeat center/contain; }
+/* leyenda "pasaporte" bajo el escudo */
+.obj--pasaporte::after { content: "Pasaporte"; position: absolute; left: 76px; top: 30px; z-index: 2;
+  font-family: 'Sofia Sans Condensed', 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: .3em; text-transform: uppercase; color: var(--oacc); }
+.obj--pasaporte .obj__cuerpo { padding-top: 92px; }
+.obj--pasaporte .obj__img { aspect-ratio: 16 / 9; filter: grayscale(.7) contrast(1.1) brightness(.85); opacity: .72; mix-blend-mode: luminosity; }
+.obj--pasaporte h3 { text-transform: uppercase; font-size: clamp(19px, 1.5vw, 25px); line-height: .98; color: #F3F1E8; }
+.obj--pasaporte .obj__sub, .obj--pasaporte .obj__cuerpo p { color: #C7CCE0; }
+.obj--pasaporte .obj__tema, .obj--pasaporte .obj__pie b { color: var(--oacc); opacity: 1; }
+/* sello de entrada estampado en diagonal sobre el pie */
+.obj--pasaporte .obj__abrir { position: relative; }
+.obj--pasaporte .obj__abrir::after { content: "Extraditable"; position: absolute; right: 6px; bottom: -6px;
+  font-family: 'Sofia Sans Condensed', 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 10px; letter-spacing: .16em; text-transform: uppercase;
+  color: #8E7FC7; border: 2px solid #8E7FC7; border-radius: 3px; padding: 4px 9px; transform: rotate(-9deg); opacity: .85; }

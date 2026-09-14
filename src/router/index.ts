@@ -22,24 +22,6 @@ const routes: Array<RouteRecordRaw> = [
     },
   },
   {
-    path: '/periodismo',
-    name: 'Periodismo',
-    component: () => import('../views/PeriodismoView.vue'),
-    meta: {
-      title: `Investigaciones — Boscán & La Moni`,
-      description: 'Las 35 investigaciones principales de la carrera de Andersson Boscán y Mónica Velásquez.',
-    },
-  },
-  {
-    path: '/periodismo/:slug',
-    name: 'PeriodismoCaso',
-    component: () => import('../views/PeriodismoCasoView.vue'),
-    meta: {
-      title: `Expediente — Boscán & La Moni`,
-      description: 'Expediente del archivo de investigaciones de Andersson Boscán y Mónica Velásquez.',
-    },
-  },
-  {
     path: '/publicidad',
     name: 'Publicidad',
     component: () => import('../views/PublicidadView.vue'),

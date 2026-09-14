@@ -1,0 +1,37 @@
+/* Página de transcripción: lectura larga, buscable, con el minuto de cada párrafo. Hereda los tokens del formato. */
+.trpage { background: var(--bg); color: var(--fg); }
+.trmain { max-width: 780px; padding: 46px 0 70px; }
+.trmiga { font-family: var(--f-label, sans-serif); font-size: 11.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--mute); margin-bottom: 26px; display: flex; flex-wrap: wrap; gap: 8px; }
+.trmiga a { color: inherit; text-decoration: none; border-bottom: 1px solid currentColor; }
+.trmiga a:hover { color: var(--acc); }
+.trhead { border-bottom: 1px solid var(--line-x); padding-bottom: 26px; margin-bottom: 26px; }
+.trhead h1 { font-family: var(--f-display, serif); font-size: clamp(30px, 4vw, 50px); line-height: 1.02; margin: 10px 0 12px; }
+.trhead__meta { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--mute); margin: 0 0 8px; }
+.trhead__rol { font-family: var(--f-body, serif); font-size: 16px; line-height: 1.5; margin: 0 0 18px; }
+.trhead__acc { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 18px; }
+.trbtn { display: inline-block; padding: 11px 18px; background: var(--acc); color: #fff; font-family: var(--f-label, sans-serif); font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; text-decoration: none; border-radius: 2px; }
+.trbtn:hover { filter: brightness(1.1); }
+.trbtn--ghost { background: transparent; color: var(--fg); box-shadow: inset 0 0 0 1px var(--line-x); }
+.trnota { font-family: var(--f-label, sans-serif); font-size: 12.5px; line-height: 1.5; color: var(--mute); margin: 0; max-width: 62ch; }
+.trbusca { position: sticky; top: 60px; z-index: 10; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; padding: 12px 0 14px; margin-bottom: 22px; background: color-mix(in srgb, var(--bg) 94%, transparent); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line-x); }
+.trbusca label { font-family: var(--f-label, sans-serif); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--mute); }
+.trbusca input { flex: 1; min-width: 200px; padding: 9px 12px; font-family: var(--f-body, serif); font-size: 15px; color: var(--fg); background: color-mix(in srgb, var(--fg) 6%, transparent); border: 1px solid var(--line-x); border-radius: 2px; }
+.trbusca input:focus { outline: 2px solid var(--acc); outline-offset: 1px; }
+.trbusca__n { font-family: var(--f-mono, monospace); font-size: 11.5px; color: var(--mute); }
+.trcuerpo { font-family: var(--f-body, serif); font-size: 17px; line-height: 1.68; }
+.tr__p { display: grid; grid-template-columns: 62px 1fr; gap: 16px; margin: 0 0 18px; align-items: baseline; }
+.tr__t { font-size: 11.5px; letter-spacing: .06em; color: var(--mute); text-decoration: none; padding-top: 4px; border-bottom: 1px solid transparent; }
+.tr__t:hover { color: var(--acc); border-bottom-color: var(--acc); }
+.trcuerpo mark { background: color-mix(in srgb, var(--acc) 30%, transparent); color: inherit; padding: 0 2px; }
+@media (max-width: 620px) { .tr__p { grid-template-columns: 1fr; gap: 2px; } .tr__t { padding-top: 0; } }
+
+/* Sección de transcripciones dentro del expediente */
+.tr { display: grid; gap: 14px; }
+.tr__item { background: color-mix(in srgb, var(--fg) 6%, transparent); border-left: 3px solid var(--acc); padding: 16px 18px 18px; }
+.tr__item header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; margin-bottom: 8px; }
+.tr__item h3 { font-family: var(--f-label, sans-serif); font-size: 15.5px; font-weight: 600; line-height: 1.25; margin: 0; flex: 1; min-width: 220px; }
+.tr__item header span { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--mute); }
+.tr__ex { margin: 0 0 10px; font-size: 14.5px; line-height: 1.55; color: var(--mute); }
+.tr__link { font-family: var(--f-label, sans-serif); font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--acc); text-decoration: none; }
+.tr__link:hover { text-decoration: underline; }
+.tr__nota { margin: 14px 0 0; font-family: var(--f-label, sans-serif); font-size: 12.5px; line-height: 1.5; color: var(--mute); max-width: 68ch; }

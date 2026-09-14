@@ -1,0 +1,35 @@
+/* ENERGÍA · Vera Grunauer: tablero eléctrico, azul de noche, amarillo de alta tensión, cables que se dibujan */
+.fmt--energia { --bg: #0F1420; --bg-2: #171E2E; --fg: #F1F3F8; --mute: #97A0B5; --acc: #FFE600; --acc-2: #FF8A00; --line-x: rgba(241,243,248,.14);
+  --f-display: 'Barlow Semi Condensed', 'Arial Narrow', sans-serif; --f-body: 'Source Serif 4', Georgia, serif; --f-mono: 'IBM Plex Mono', ui-monospace, monospace; --f-label: 'Barlow Semi Condensed', sans-serif; }
+.fmt--energia::after { mix-blend-mode: screen; opacity: .05; }
+.fmt--energia .topbar { background: rgba(15,20,32,.88); }
+.fmt--energia .footer { background: #090C14; }
+.fmt--energia .htitle, .fmt--energia .cap__title, .fmt--energia .fmod__head h2 { font-weight: 900; text-transform: uppercase; letter-spacing: -.01em; }
+.fmt--energia .htitle em, .fmt--energia .cap__title em, .fmt--energia .fmod__head h2 em { font-style: normal; color: var(--acc); }
+.fmt--energia .kicker, .fmt--energia .hkicker, .fmt--energia .cap__num { font-weight: 700; letter-spacing: .2em; font-size: 12.5px; }
+.hero--energia { padding: 130px 0 50px; min-height: 96svh; background: radial-gradient(ellipse 50% 50% at 75% 30%, rgba(255,230,0,.12), transparent 60%), var(--bg); }
+.wires { position: absolute; inset: auto 0 0 0; width: 100%; height: 42%; opacity: .9; }
+.wires path { fill: none; stroke: var(--acc); stroke-width: 2; filter: drop-shadow(0 0 8px rgba(255,230,0,.7)); }
+.wires path:nth-child(2) { stroke: var(--acc-2); animation-delay: .9s; }
+.hero--energia .htitle { font-size: clamp(64px, 12vw, 190px); line-height: .84; }
+.hero--energia .hdeck { color: #D9DEEA; }
+.hero--energia .hstats b { color: var(--acc); }
+.fmt--energia .fnav { background: rgba(15,20,32,.94); }
+.fmt--energia .fnav a { font-size: 15px; font-weight: 700; letter-spacing: .08em; }
+.fmt--energia .fnav a b { color: var(--acc); }
+.fmt--energia .cap__title { font-size: clamp(40px, 5.4vw, 80px); }
+.fmt--energia .cap__num { color: var(--acc); }
+.fmt--energia .ftext { color: #E4E8F1; }
+.fmt--energia .estado, .fmt--energia .fper, .fmt--energia .fresp li, .fmt--energia .hito { background: var(--bg-2); }
+.anillo { position: relative; display: grid; gap: 16px; }
+.anillo__centro { padding: 22px 24px; background: var(--acc); color: #0F1420; max-width: 360px; }
+.anillo__centro b { display: block; font-family: var(--f-label); font-size: 12px; letter-spacing: .2em; text-transform: uppercase; }
+.anillo__centro span { font-family: var(--f-display); font-size: 30px; font-weight: 900; text-transform: uppercase; line-height: 1; }
+.anillo ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
+.anillo li { padding: 16px 18px; background: var(--bg-2); border-top: 3px solid var(--acc-2); }
+.anillo li b { display: block; font-family: var(--f-display); font-size: 24px; font-weight: 900; text-transform: uppercase; color: var(--acc); line-height: 1; }
+.anillo li span { display: block; font-family: var(--f-label); font-size: 13px; letter-spacing: .06em; margin: 4px 0 8px; }
+.anillo li p { margin: 0; font-size: 14px; line-height: 1.5; color: #CDD3E0; }
+.fmt--energia .fcita p { font-family: var(--f-display); font-style: normal; font-weight: 700; text-transform: uppercase; font-size: clamp(26px, 3.2vw, 44px); line-height: 1.02; }
+.fmt--energia .fdato b { color: var(--acc); font-family: var(--f-display); font-weight: 900; }
+.fmt--energia .cierre__panel:first-child { border-top: 3px solid var(--acc-2); } .fmt--energia .cierre__panel:last-child { border-top: 3px solid var(--acc); }

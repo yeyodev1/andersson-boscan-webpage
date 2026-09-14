@@ -1,0 +1,45 @@
+/* The cover is ONLY the game. All visible controls are pictograms. */
+.bmhero{--ink:#292b29;--paper:#e3dbc5;--red:#b3121c;position:relative;z-index:1001;isolation:isolate;display:block;width:100%;height:min(100svh,940px);min-height:520px;overflow:hidden;background:#cfcbbd;color:var(--ink);contain:layout style;box-sizing:border-box}
+.bmhero *{box-sizing:border-box}.bmhero button,.bmhero a{-webkit-tap-highlight-color:transparent}.bmhero button{font:inherit;cursor:pointer;touch-action:manipulation}.bmhero button:disabled{cursor:default}
+.bmhero__scene{position:absolute;inset:0}.bmhero__canvas{display:block;width:100%;height:100%;touch-action:pan-y;outline:none}
+.bmhero__toolbar{position:absolute;top:max(22px,env(safe-area-inset-top));right:max(26px,env(safe-area-inset-right));z-index:4;display:flex;gap:8px}
+.bmhero__icon{width:46px;height:46px;display:inline-grid;place-items:center;border:1px solid #a2967955;border-radius:50%;background:#f0e8d5de;box-shadow:0 2px 6px #59432712;color:var(--ink);padding:10px;transition:background .15s,transform .15s;line-height:1;text-decoration:none}
+.bmhero__icon svg{width:100%;height:100%;display:block;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.bmhero__icon:hover{background:#fff5df;transform:translateY(-2px)}.bmhero__icon[aria-pressed=true]{color:var(--red);background:#fff3d9}.bmhero__icon:disabled{opacity:.36}
+.bmhero :is(button,a,input):focus-visible{outline:3px solid #b3121c;outline-offset:5px;box-shadow:0 0 0 7px #f5eddb}
+.bmhero__crew{position:absolute;bottom:30px;left:28px;z-index:4;display:flex;gap:12px;align-items:flex-end}
+.bmhero__person{position:relative;width:75px;height:82px;border:0;border-bottom:3px solid transparent;border-radius:40px 40px 18px 18px;background:#eee7d4c9;padding:0;box-shadow:0 4px 15px #44301e14;transition:transform .16s,opacity .16s,filter .16s}
+.bmhero__person canvas{display:block;width:75px;height:77px;pointer-events:none}.bmhero__person[aria-pressed=true]{border-bottom-color:var(--red);background:#fff5df;transform:translateY(-7px)}.bmhero__person.is-spent{filter:grayscale(1);opacity:.30}.bmhero__person:disabled:not(.is-spent){opacity:.65}
+.bmhero__launchpad{position:absolute;bottom:32px;right:30px;display:flex;gap:12px;align-items:center;z-index:4}.bmhero__launch{width:69px;height:69px;border:0;background:var(--red);color:#fff7e4;box-shadow:0 7px 20px #88221f30;padding:21px}.bmhero__launch:hover{background:#971824}.bmhero__launch svg{stroke-width:2}
+.bmhero__archive{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);background:#eee4ccb3;border-color:transparent;width:42px;height:42px;z-index:4}.bmhero__archive:hover{transform:translateX(-50%) translateY(2px)}
+.bmhero__drag{position:absolute;z-index:3;transform:translate(-50%,-50%);width:94px;height:132px;background:transparent;border:0;border-radius:50%;touch-action:none;cursor:grab;padding:0}.bmhero__drag:active{cursor:grabbing}.bmhero__drag::after{content:'';position:absolute;inset:16px 10px;border:2px dashed #b3121c80;border-radius:50%;opacity:0;transition:opacity .15s}.bmhero__drag:hover::after,.bmhero__drag:focus-visible::after{opacity:1}
+.bmhero__gesture{position:absolute;left:94%;top:96%;width:30px;height:35px;opacity:.7;pointer-events:none;color:#b3121c;transform:translate(-50%,-50%)}.bmhero__gesture svg{width:100%;height:100%;fill:#f8eed8c4;stroke:currentColor;stroke-width:1.6}.bmhero.is-played .bmhero__gesture{display:none}
+.bmhero__settings{position:absolute;right:30px;bottom:117px;z-index:5;width:212px;padding:16px;border:1px solid #af9f7b70;border-radius:14px;background:#f0e7d5ed;box-shadow:0 8px 30px #5845281c}.bmhero__settings[hidden]{display:none}.bmhero__setting{display:flex;gap:14px;align-items:center;margin:6px 0 16px}.bmhero__setting svg{width:25px;height:25px;fill:none;stroke:#5f624e;stroke-width:1.7}.bmhero input[type=range]{min-width:0;width:136px;accent-color:var(--red);height:25px;margin:0;cursor:ew-resize}.bmhero__dual{display:flex;justify-content:flex-end}
+.bmhero__paused{position:absolute;inset:0;display:none;place-items:center;pointer-events:none;background:#eee4cf35;z-index:2}.bmhero.is-paused .bmhero__paused{display:grid}.bmhero__paused svg{width:48px;height:48px;fill:none;stroke:#8a2724;stroke-width:3}
+.bmhero__sr{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip-path:inset(50%)!important;white-space:nowrap!important;padding:0!important;border:0!important;pointer-events:none!important}
+.bmhero__focuscam{display:none}
+@media(max-width:650px){
+ .bmhero{height:min(88svh,620px);min-height:470px}
+ .bmhero__toolbar{top:16px;right:14px;gap:6px}.bmhero__toolbar .bmhero__icon{width:42px;height:42px;padding:10px}
+ .bmhero__crew{left:14px;bottom:23px;gap:7px}.bmhero__person{width:55px;height:65px}.bmhero__person canvas{width:55px;height:59px}
+ .bmhero__launchpad{right:14px;bottom:27px;gap:8px}.bmhero__launch{width:57px;height:57px;padding:17px}.bmhero__launchpad .bmhero__aimtoggle{width:38px;height:38px;padding:9px}
+ .bmhero__archive{bottom:7px;width:32px;height:32px;padding:7px;left:55%}
+ .bmhero__settings{right:14px;bottom:101px}.bmhero__drag{width:72px;height:107px}.bmhero__focuscam{display:inline-grid}
+}
+@media(max-height:520px) and (min-width:651px){.bmhero{min-height:400px;height:100svh}.bmhero__person{height:62px;width:54px}.bmhero__person canvas{width:54px;height:58px}.bmhero__crew{bottom:14px}.bmhero__launchpad{bottom:17px}.bmhero__toolbar{top:14px}}
+@media(prefers-reduced-motion:reduce){.bmhero *{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+
+.bmhero__tally{position:absolute;right:30px;bottom:112px;z-index:4;font:700 15px/1 'IBM Plex Mono',ui-monospace,monospace;letter-spacing:.12em;color:#fff7e4;background:#1b1a17;padding:9px 12px;border-radius:999px;box-shadow:0 4px 12px #0003}.bmhero__tally[hidden]{display:none}@media(max-width:650px){.bmhero__tally{right:14px;bottom:96px;font-size:13px}}
+
+/* Fondos ilustrados por nivel (encima del degradado, debajo del canvas) */
+/* El telón se apoya en el borde trasero del terreno (57% del alto) y se disuelve
+   en la misma bruma que usa la niebla del render, para que no quede colgado. */
+.bmhero__fondo2{position:absolute;left:0;right:0;top:0;height:57%;z-index:0;pointer-events:none;background-position:center bottom;background-size:cover;background-repeat:no-repeat;filter:saturate(.78) contrast(.94) brightness(1.03);opacity:1;transition:opacity .6s;-webkit-mask-image:linear-gradient(to bottom,#000 0,#000 66%,rgba(0,0,0,.86) 86%,rgba(0,0,0,.45) 96%,rgba(0,0,0,0) 100%);mask-image:linear-gradient(to bottom,#000 0,#000 66%,rgba(0,0,0,.86) 86%,rgba(0,0,0,.45) 96%,rgba(0,0,0,0) 100%)}
+.bmhero__fondo2::after{content:"";position:absolute;left:0;right:0;bottom:0;height:34%;background:linear-gradient(to bottom,rgba(224,217,196,0) 0,rgba(224,217,196,.42) 58%,rgba(224,217,196,.82) 100%)}
+.bmhero.is-nivel-1 .bmhero__fondo2{background-image:url("fondos/nivel1.jpg")}
+.bmhero.is-nivel-2 .bmhero__fondo2{background-image:url("fondos/nivel2.jpg")}
+.bmhero.is-nivel-3 .bmhero__fondo2{background-image:url("fondos/nivel3.jpg")}
+.bmhero__canvas{position:relative;z-index:1}
+
+.bmhero__mini{position:absolute;z-index:4;display:none;border:1px solid #a2967999;border-radius:6px;box-shadow:0 2px 8px #59432733;cursor:pointer;overflow:hidden}.bmhero__mini::after{content:'Escenario completo';position:absolute;left:6px;top:4px;font:600 9px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:#5a4a34}.bmhero__minibox{position:absolute;top:0;bottom:0;border:2px solid #b3121c;border-radius:4px;background:#b3121c14;pointer-events:none}
+@media(max-width:650px){.bmhero__fondo2{height:62%;background-position:58% bottom}}

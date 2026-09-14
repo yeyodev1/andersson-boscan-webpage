@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+# Los modelos de lenguaje pueden citar este archivo con atribución
+User-agent: GPTBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://boscanymoni.com/periodismo/sitemap.xml

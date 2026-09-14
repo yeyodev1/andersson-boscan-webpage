@@ -1,0 +1,39 @@
+/* ÁRBOL · Carlos Luis Morales: retrato de familia, marfil y sepia, garamond, líneas genealógicas */
+.fmt--arbol { --bg: #F6F1E7; --bg-2: #EDE5D5; --fg: #2A2118; --mute: #7A6B58; --acc: #7A3E1D; --acc-2: #8A6626; --line-x: rgba(42,33,24,.16);
+  --f-display: 'Cormorant Garamond', Georgia, serif; --f-body: 'Cormorant Garamond', Georgia, serif; --f-mono: 'IBM Plex Mono', ui-monospace, monospace; --f-label: 'Lato', system-ui, sans-serif; }
+.fmt--arbol .ftext { font-size: clamp(19px, 1.4vw, 22px); line-height: 1.55; font-weight: 500; }
+.fmt--arbol .htitle, .fmt--arbol .cap__title, .fmt--arbol .fmod__head h2 { font-weight: 600; letter-spacing: -.02em; }
+.fmt--arbol .htitle em, .fmt--arbol .cap__title em, .fmt--arbol .fmod__head h2 em { font-style: italic; font-weight: 400; color: var(--acc); }
+.hero--arbol { padding: 100px 0 40px; background: radial-gradient(ellipse 60% 50% at 50% 30%, rgba(180,138,60,.14), transparent 65%), var(--bg); text-align: center; }
+.marco { position: relative; max-width: 960px; margin: 0 auto 36px; padding: clamp(28px, 5vw, 64px); border: 1px solid var(--acc-2); outline: 1px solid var(--acc-2); outline-offset: 8px; background: #FBF8F1; }
+.marco::before, .marco::after { content: "❦"; position: absolute; top: 12px; font-size: 20px; color: var(--acc-2); }
+.marco::before { left: 16px; } .marco::after { right: 16px; }
+.marco .hkicker { justify-content: center; } .marco .hkicker::before { display: none; }
+.marco .htitle { margin-inline: auto; font-size: clamp(50px, 8vw, 120px); }
+.marco .hdeck { margin-inline: auto; }
+.marco .hby { justify-content: center; }
+.hero--arbol .hstats { max-width: 960px; margin: 0 auto; }
+.hero--arbol .hstats b { font-family: var(--f-display); font-weight: 600; color: var(--acc); }
+.fmt--arbol .fnav a { font-family: var(--f-display); font-size: 17px; font-weight: 600; text-transform: none; letter-spacing: 0; }
+.fmt--arbol .fnav a b { color: var(--acc-2); }
+.fmt--arbol .cap__num { color: var(--acc-2); }
+.fmt--arbol .cap__title { font-size: clamp(38px, 5vw, 70px); }
+.fmt--arbol .estado { background: #FBF8F1; border-left-color: var(--acc-2); }
+.arbol { display: grid; gap: 0; }
+.arbol__root { text-align: center; max-width: 480px; margin: 0 auto; padding: 22px 26px; border: 1px solid var(--acc-2); background: #FBF8F1; position: relative; }
+.arbol__root::after { content: ""; position: absolute; left: 50%; bottom: -40px; width: 1px; height: 40px; background: var(--acc-2); }
+.arbol__root h3 { font-family: var(--f-display); font-size: 32px; font-weight: 600; margin: 0 0 6px; }
+.arbol__root p, .arbol__ramas p { margin: 0; font-family: var(--f-label); font-size: 13.5px; line-height: 1.5; color: var(--mute); }
+.arbol__ramas { list-style: none; margin: 40px 0 0; padding: 30px 0 0; position: relative; display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.arbol__ramas::before { content: ""; position: absolute; left: 10%; right: 10%; top: 0; height: 1px; background: var(--acc-2); }
+.arbol__ramas > li { position: relative; padding: 18px; background: #FBF8F1; border: 1px solid var(--line-x); }
+.arbol__ramas > li::before { content: ""; position: absolute; left: 50%; top: -30px; width: 1px; height: 30px; background: var(--acc-2); }
+.arbol__ramas h4 { font-family: var(--f-display); font-size: 24px; font-weight: 600; margin: 0 0 6px; }
+.arbol__ramas ul { list-style: none; margin: 14px 0 0; padding: 12px 0 0; border-top: 1px dashed var(--acc-2); display: grid; gap: 10px; }
+.arbol__ramas h5 { font-family: var(--f-display); font-size: 19px; font-weight: 600; margin: 0 0 4px; }
+.arbol__pie { margin-top: 30px; display: grid; gap: 18px; }
+.arbol__off { margin: 0; padding: 18px 20px; background: var(--fg); color: #F6F1E7; font-family: var(--f-label); font-size: 14px; line-height: 1.5; }
+.arbol__off b { display: block; font-family: var(--f-display); font-size: 24px; color: var(--acc-2); margin-bottom: 6px; }
+.fmt--arbol .fcita p { font-weight: 500; }
+.fmt--arbol .fdato b { font-weight: 600; }
+.fmt--arbol .cierre { background: #FBF8F1; border-color: var(--acc-2); }

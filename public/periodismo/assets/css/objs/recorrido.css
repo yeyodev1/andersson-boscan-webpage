@@ -1,0 +1,33 @@
+/* Monitor de videovigilancia: plano del barrio de noche, la ruta encendida por la luz de sodio
+   y el pin malva donde se detiene el recorrido (Nathaly Mafla · recorrido) */
+.obj--recorrido { --obg: #181520; --ofg: #EDE9F0; --oacc: #E7A63F; border: 1px solid rgba(237,233,240,.22);
+  background-color: var(--obg);
+  background-image:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 88'><rect x='14' y='6' width='272' height='76' fill='none' stroke='%23EDE9F0' stroke-opacity='.10'/><g fill='%23EDE9F0' fill-opacity='.05'><rect x='22' y='12' width='54' height='12' rx='2'/><rect x='86' y='12' width='40' height='12' rx='2'/><rect x='136' y='12' width='62' height='12' rx='2'/><rect x='208' y='12' width='60' height='12' rx='2'/><rect x='22' y='32' width='54' height='12' rx='2'/><rect x='86' y='32' width='40' height='12' rx='2'/><rect x='136' y='32' width='62' height='12' rx='2'/><rect x='208' y='32' width='60' height='12' rx='2'/><rect x='22' y='52' width='54' height='12' rx='2'/><rect x='86' y='52' width='40' height='12' rx='2'/><rect x='136' y='52' width='62' height='12' rx='2'/><rect x='208' y='52' width='60' height='12' rx='2'/><rect x='22' y='70' width='54' height='10' rx='2'/><rect x='86' y='70' width='40' height='10' rx='2'/><rect x='136' y='70' width='62' height='10' rx='2'/></g><path d='M32 76 V58 H84 V44 H140 V64 H188 V34' fill='none' stroke='%23E7A63F' stroke-width='3.4' stroke-linecap='round' stroke-dasharray='0 7.5' opacity='.95'/><path d='M28 72h8v8h-8z' fill='%23E7A63F'/><path d='M188 34c-8-10-11-14-11-20a11 11 0 1 1 22 0c0 6-3 10-11 20z' fill='%23C6B4D2'/><circle cx='188' cy='14' r='3.6' fill='%23181520'/></svg>"),
+    radial-gradient(circle 70px at 26% 34%, rgba(231,166,63,.20), transparent 70%),
+    radial-gradient(circle 60px at 72% 22%, rgba(231,166,63,.14), transparent 70%),
+    linear-gradient(rgba(237,233,240,.055) 1px, transparent 1px), linear-gradient(90deg, rgba(237,233,240,.055) 1px, transparent 1px);
+  background-size: 100% auto, 100% 100%, 100% 100%, 24px 24px, 24px 24px;
+  background-position: 0 8px, 0 0, 0 0, 0 0, 0 0;
+  background-repeat: no-repeat, no-repeat, no-repeat, repeat, repeat; }
+/* membrete de cámara, corrido a la derecha porque la cinta adhesiva ocupa la esquina */
+.obj--recorrido::before { content: "Cam 04 · Rec"; position: absolute; left: 62px; top: 16px; z-index: 2; white-space: nowrap;
+  font-family: 'Work Sans', 'Helvetica Neue', sans-serif; font-size: 9.5px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: #E9BBB0;
+  padding-left: 15px; }
+.obj--recorrido .obj__img { display: none; }
+.obj--recorrido .obj__cuerpo { padding-top: 152px; padding-bottom: 24px;
+  background: linear-gradient(180deg, transparent 0 122px, rgba(24,21,32,.88) 138px, var(--obg) 156px); }
+.obj--recorrido h3 { font-family: 'Work Sans', 'Helvetica Neue', sans-serif; font-weight: 800; text-transform: uppercase; letter-spacing: -.025em; font-size: clamp(22px, 1.9vw, 30px); line-height: .98; color: var(--ofg); }
+.obj--recorrido .obj__sub, .obj--recorrido p { color: #CFC8DA; }
+.obj--recorrido .obj__tema { color: #A9A1B6; opacity: 1; }
+.obj--recorrido .obj__anio { color: var(--oacc); font-family: 'Work Sans', 'Helvetica Neue', sans-serif; font-weight: 800; font-variant-numeric: tabular-nums; }
+.obj--recorrido .obj__abrir { color: var(--oacc); }
+.obj--recorrido .obj__pie { color: #A9A1B6; opacity: 1; }
+.obj--recorrido .obj__pie b { color: #C6B4D2; }
+/* el testigo rojo de grabación, junto al membrete */
+.obj--recorrido .obj__cuerpo::before { content: ""; position: absolute; left: 62px; top: 18px; z-index: 3; width: 8px; height: 8px; border-radius: 50%;
+  background: #D9503F; box-shadow: 0 0 9px rgba(217,80,63,.9); }
+/* marca de hora de la última cámara, arriba a la derecha del plano */
+.obj--recorrido .obj__cuerpo::after { content: "04-06-2026 · 18:30"; position: absolute; right: 18px; top: 96px; z-index: 2;
+  font-family: 'Work Sans', 'Helvetica Neue', sans-serif; font-size: 9.5px; font-weight: 600; letter-spacing: .16em; color: rgba(237,233,240,.6); font-variant-numeric: tabular-nums; }
+@media (max-width: 480px) { .obj--recorrido .obj__cuerpo::after { display: none; } }

@@ -1,0 +1,41 @@
+/* TERMINAL · Bribery Division: pantalla negra, fósforo verde, ámbar, libro mayor en monoespaciada */
+.fmt--terminal { --bg: #0B0F10; --bg-2: #121819; --fg: #E6EDE8; --mute: #8FA39A; --acc: #39FF88; --acc-2: #FFB454; --line-x: rgba(230,237,232,.14);
+  --f-display: 'JetBrains Mono', ui-monospace, monospace; --f-body: 'Source Serif 4', Georgia, serif; --f-mono: 'JetBrains Mono', ui-monospace, monospace; --f-label: 'JetBrains Mono', ui-monospace, monospace; }
+.fmt--terminal::after { mix-blend-mode: screen; opacity: .06; }
+.fmt--terminal .topbar { background: rgba(11,15,16,.85); }
+.fmt--terminal .footer { background: #060809; }
+.hero--terminal { padding: 90px 0 40px; background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(57,255,136,.08), transparent 60%), var(--bg); }
+.term { border: 1px solid rgba(57,255,136,.3); background: #050807; box-shadow: 0 0 0 1px rgba(57,255,136,.08), 0 40px 80px -40px rgba(57,255,136,.25); margin-bottom: 48px; position: relative; overflow: hidden; }
+.term::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(0deg, transparent 0 2px, rgba(0,0,0,.25) 2px 3px); }
+.term__bar { display: flex; gap: 8px; align-items: center; padding: 10px 14px; border-bottom: 1px solid rgba(57,255,136,.2); font-family: var(--f-mono); font-size: 11px; color: var(--mute); }
+.term__bar i { width: 10px; height: 10px; border-radius: 50%; background: #2a3a33; } .term__bar i:first-child { background: #FF5F56; } .term__bar i:nth-child(2) { background: #FFBD2E; } .term__bar i:nth-child(3) { background: #27C93F; }
+.term__bar span { margin-left: 10px; }
+.term__body { padding: 18px 20px 22px; font-family: var(--f-mono); font-size: 14px; color: var(--acc); min-height: 230px; }
+.term__prompt { color: var(--acc-2); }
+.term__prompt [data-type] { color: var(--acc); }
+.cursor { display: inline-block; width: 9px; height: 1em; background: var(--acc); vertical-align: -2px; margin-left: 4px; animation: blink 1s steps(2) infinite; }
+@keyframes blink { to { opacity: 0; } }
+.term__out { margin-top: 14px; display: grid; gap: 6px; }
+.term__line { display: grid; grid-template-columns: 90px 1fr max-content; gap: 16px; color: #A9D9BD; }
+.term__obra { color: var(--fg); } .term__m { color: var(--acc-2); }
+.hero--terminal .htitle { font-weight: 700; font-size: clamp(40px, 6.5vw, 96px); letter-spacing: -.04em; text-transform: uppercase; }
+.hero--terminal .htitle em { font-style: normal; color: var(--acc); }
+.hero--terminal .hstats b { font-family: var(--f-mono); color: var(--acc-2); }
+.fmt--terminal .fnav { background: rgba(11,15,16,.9); }
+.fmt--terminal .fnav a { text-transform: none; letter-spacing: 0; font-size: 13px; }
+.fmt--terminal .fnav a b::before { content: "> "; } .fmt--terminal .fnav a b { color: var(--acc-2); }
+.fmt--terminal .cap__title { font-weight: 700; text-transform: uppercase; letter-spacing: -.03em; font-size: clamp(28px, 3.6vw, 50px); }
+.fmt--terminal .cap__title em { color: var(--acc); font-style: normal; }
+.fmt--terminal .ftext { color: #D8E2DC; }
+.fmt--terminal .estado, .fmt--terminal .fper, .fmt--terminal .fresp li, .fmt--terminal .hito { background: var(--bg-2); }
+.fmt--terminal .fdato b { font-family: var(--f-mono); font-weight: 700; color: var(--acc-2); }
+.ledger { font-family: var(--f-mono); font-size: 13px; }
+.ledger th { color: var(--acc); border-bottom-color: var(--acc); }
+.ledger td { border-bottom: 1px dashed rgba(57,255,136,.25); }
+.ledger tr:hover td { background: rgba(57,255,136,.06); }
+.ledger .num { color: var(--acc-2); font-weight: 700; }
+.ledger .ruta { color: var(--mute); font-size: 12px; } .ledger .nota { font-family: var(--f-body); font-size: 13.5px; color: #C6D2CB; }
+.fmt--terminal .vid__meta { border-top-color: var(--acc); }
+.fmt--terminal .cierre { background: #050807; border-color: rgba(57,255,136,.3); font-family: var(--f-mono); }
+.fmt--terminal .cierre::before { content: "> case_status --ecuador"; display: block; font-family: var(--f-mono); color: var(--acc-2); margin-bottom: 12px; }
+.fmt--terminal .cierre__lineas li { border-bottom: 1px dashed rgba(57,255,136,.25); font-family: var(--f-mono); } .fmt--terminal .cierre__lineas b { font-family: var(--f-mono); color: var(--acc); }
