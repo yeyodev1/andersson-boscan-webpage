@@ -32,14 +32,45 @@ VITE_GHL_WEBHOOK_OPPORTUNITY=<GHL opportunity webhook URL>
 
 | Path | View | Notes |
 |------|------|-------|
-| `/` | `MediaKitView.vue` | 10-section media kit |
+| `/` | `PortadaView.vue` | Portada minimalista: logo, pareja, expedientes (carpetas) que aparecen al pasar el mouse y se pueden arrastrar, dos botones: "Quiero periodismo" → `/periodismo`, "Quiero publicidad" → `/publicidad` |
+| `/periodismo` | `PeriodismoView.vue` | Componentes Vue reales (ver "Periodismo" abajo). Migrado desde el artifact "Investigaciones · Boscán & La Moni"; ya no hay iframe ni HTML estático. |
+| `/periodismo/:slug` | `PeriodismoCasoView.vue` | **Provisional.** Cada uno de los 35 expedientes vive todavía como artifact aparte de Andersson, no compartido. Esta vista evita que los 105 enlaces caigan en el 404. |
+| `/publicidad` | `PublicidadView.vue` | Funnel v3 (ver `~/Downloads/handoff-desarrollador-sistema-ventas-publicidad-boscan-la-moni-v3-2026-09-06.md`): hero → configurador (objetivo, duración, datos) → máx. 2 recomendaciones → checkout por carril (A compra / B propuesta / C key account → `/agendar`) → briefing. Chat "Tengo una pregunta" siempre visible. |
+| `/media-kit` | `MediaKitView.vue` | 10-section media kit (antes vivía en `/`) |
 | `/quienes-somos` | `QuienesSomosView.vue` | Standalone about page |
 | `/agendar` | `AgendarView.vue` | GHL calendar embed (qualified leads only) |
 | `/precios` | `PreciosView.vue` | Full pricing table — gated behind contact form; skips gate if `mk_contact_given` in localStorage |
 
+## Periodismo (migrado del artifact)
+
+El artifact original era un documento suelto de 6 MB. Se partió así:
+
+- `src/periodismo/html/` — un fragmento por sección, más `html/expedientes/NNN-<slug>.html` (uno por expediente, 35).
+- `src/periodismo/styles/` — el CSS del artifact tal cual, más `_ua-defaults.css`, que devuelve dentro de `.home` los márgenes que borra el reset global `* { margin: 0 }` de `styles/index.scss`. Sin eso los párrafos quedan pegados.
+- `src/periodismo/scripts/` — los 8 módulos vanilla (`BM3D`, física, avatares, escenografía, `BMGame`, portada, comportamientos, montaje). Eran IIFE que corrían al parsearse; se envolvieron en `export default function init()`.
+- `src/periodismo/data/` — `home-data.json` (35 casos + 54 personas), `structured-data.json`, `slug-map.json` y `head-meta.html` como referencia.
+- `public/periodismo/assets/` — los ~95 data-URIs extraídos a archivos, más los 6 sprites del juego.
+
+`src/periodismo/runtime.ts` es el ciclo de vida: inyecta las fuentes de Google que el artifact cargaba en su `<head>` (sin ellas el titular se desborda), el CSS y el JSON-LD al montar, los retira al desmontar, y llama a los `init()` en el orden del documento original. `PeriodismoView` añade `body.home` (el CSS depende de esa clase) y destruye el juego WebGL en `onBeforeUnmount` vía `window.portadaJugable.destroy()`.
+
+**Reglas:**
+- El marcado no se reescribe a mano: los componentes montan los fragmentos con `v-html` para conservarlo igual al artifact. Para cambiar contenido, se edita el fragmento.
+- El CSS del artifact usa selectores genéricos (`.obj`, `.mesa`, `.wrap`) y toca `html`/`body`. Nunca importarlo globalmente: solo se inyecta mientras la vista está montada.
+- Verificado contra el artifact original: mismas seis secciones, 35 expedientes, misma altura de documento y cero diferencia de píxeles en las seis capturas.
+
+
+## Publicidad (funnel v3)
+
+- **Fuente única de verdad comercial**: `src/config/adProducts.ts` (productos, precios, reglas `AD_RULES`, categorías con brand safety, opciones del configurador). Nunca hardcodear precios en componentes.
+- **Base aprobada del chat**: `src/config/adKnowledge.ts`. El asistente solo responde desde ahí; si no hay coincidencia confiable escala a humano (formulario → webhook contacto con tag `pregunta-humana-publicidad` + transcript).
+- **Estado**: `useAdFunnel()` (singleton, persiste en `localStorage.ad_funnel_state`) y `useAdChat()` (`localStorage.ad_chat`). Preguntar nunca saca al cliente del checkout.
+- **Carriles**: A = 1 mes (self-serve), B = 6/12 meses bajo umbral, C = presupuesto ≥ 3000/mes + ≥ 6 meses + brand safety approved + decisor → habilita `/agendar`.
+- **Webhooks**: `src/services/GhlWebhookService.ts` (fetch a `VITE_GHL_WEBHOOK_CONTACT` / `VITE_GHL_WEBHOOK_OPPORTUNITY`, con campos `ad_*` y tags del handoff). Pago online aún no integrado: el flujo A promete "enlace de pago por correo".
+- **Analítica**: `trackAdEvent()` hace push a `window.dataLayer` con los eventos `ad_*` del handoff §11.
+
 ## Header Rule
 
-**Only `MediaKitView` uses `<MKHeader />`**. All other views (AgendarView, PreciosView, QuienesSomosView) have their own minimal topbar. Never add MKHeader to sub-pages — causes double header collision.
+**Only `MediaKitView` uses `<MKHeader />`** (its "Inicio" apunta a `/media-kit`). All other views (PortadaView, PeriodismoView, PublicidadView, AgendarView, PreciosView, QuienesSomosView) have their own minimal topbar. Never add MKHeader to sub-pages — causes double header collision.
 
 ## Lead Capture Flow
 
