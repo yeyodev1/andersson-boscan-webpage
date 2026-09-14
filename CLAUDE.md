@@ -69,6 +69,10 @@ entrega nueva y se reemplaza la carpeta entera.
   fuera de la carpeta de la entrega. Si llega una entrega nueva, volver a añadir
   `<link rel="stylesheet" href="/ajustes-periodismo/ajustes.css">` después de
   `game.css` en `public/periodismo/index.html`.
+- `ajustes-periodismo/letra.js` agranda toda letra menor de 20px (el cliente la
+  veía "de lupa"); está enlazado antes de `</head>` en la portada y en los 220
+  `investigaciones/**/index.html`. Con una entrega nueva hay que re-inyectarlo
+  (`perl` sobre `</head>`), y subir el `?v=` al cambiar CSS o JS para saltar caché.
 - `6e60fdfa0d2c5fad49aa11dbf1d063a5.txt` es la clave de IndexNow: no borrar ni
   renombrar.
 - Requisitos del hosting (del documento de entrega): respuestas `206 Partial
