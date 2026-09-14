@@ -5,7 +5,7 @@
 
   <url>
     <loc>https://boscanymoni.com/</loc>
-    <lastmod>2026-04-03</lastmod>
+    <lastmod>2026-09-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="es" href="https://boscanymoni.com/" />
@@ -22,6 +22,30 @@
       <image:loc>https://boscanymoni.com/images/p3-hero.png</image:loc>
       <image:title>Audiencia — 88 Millones de Impresiones Mensuales</image:title>
     </image:image>
+  </url>
+
+  <url>
+    <loc>https://boscanymoni.com/periodismo</loc>
+    <lastmod>2026-09-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://boscanymoni.com/periodismo" />
+  </url>
+
+  <url>
+    <loc>https://boscanymoni.com/publicidad</loc>
+    <lastmod>2026-09-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://boscanymoni.com/publicidad" />
+  </url>
+
+  <url>
+    <loc>https://boscanymoni.com/media-kit</loc>
+    <lastmod>2026-09-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://boscanymoni.com/media-kit" />
   </url>
 
   <url>
