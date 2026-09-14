@@ -34,7 +34,8 @@ VITE_GHL_WEBHOOK_OPPORTUNITY=<GHL opportunity webhook URL>
 |------|------|-------|
 | `/` | `PortadaView.vue` | Portada minimalista: logo, pareja, expedientes (carpetas) que aparecen al pasar el mouse y se pueden arrastrar, dos botones: "Quiero periodismo" → `/periodismo`, "Quiero publicidad" → `/publicidad` |
 | `/periodismo` | — (estático) | Sitio de investigaciones que entrega Andersson, servido desde `public/periodismo/`. No es una ruta de Vue: ver "Periodismo" abajo. |
-| `/media-kit` | `MediaKitView.vue` | 10-section media kit (antes vivía en `/`) |
+| `/publicidad` | `MediaKitView.vue` | El media kit de 10 secciones (el home anterior). "Quiero publicidad" hace una cortina negra con GSAP y navega aquí. |
+| `/media-kit` | — | Redirect a `/publicidad` |
 | `/quienes-somos` | `QuienesSomosView.vue` | Standalone about page |
 | `/agendar` | `AgendarView.vue` | GHL calendar embed (qualified leads only) |
 | `/precios` | `PreciosView.vue` | Full pricing table — gated behind contact form; skips gate if `mk_contact_given` in localStorage |
@@ -80,7 +81,7 @@ entrega nueva y se reemplaza la carpeta entera.
 
 ## Header Rule
 
-**Only `MediaKitView` uses `<MKHeader />`** (its "Inicio" apunta a `/media-kit`). All other views (PortadaView, PublicidadView, AgendarView, PreciosView, QuienesSomosView) have their own minimal topbar. Never add MKHeader to sub-pages — causes double header collision.
+**Only `MediaKitView` uses `<MKHeader />`** (its "Inicio" apunta a `/publicidad`). All other views (PortadaView, PublicidadView, AgendarView, PreciosView, QuienesSomosView) have their own minimal topbar. Never add MKHeader to sub-pages — causes double header collision.
 
 ## Lead Capture Flow
 

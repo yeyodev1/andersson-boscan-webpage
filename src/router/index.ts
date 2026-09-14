@@ -24,20 +24,15 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/publicidad',
     name: 'Publicidad',
-    component: () => import('../views/PublicidadView.vue'),
-    meta: {
-      title: `Publicidad con Boscán & La Moni — Arma tu campaña sin reunión`,
-      description: 'Dinos qué quieres conseguir y te mostramos la campaña que mejor encaja. Campañas puntuales sin reunión; contratos de 6 y 12 meses con propuesta automática.',
-    },
-  },
-  {
-    path: '/media-kit',
-    name: 'MediaKit',
     component: () => import('../views/MediaKitView.vue'),
     meta: {
       title: `Media Kit 2026 — Andersson y Moni Boscán | Periodismo Digital LATAM`,
       description: 'Media Kit oficial de Andersson y Moni Boscán. 88.7M impresiones mensuales, 910K seguidores TikTok, programa noticioso más viral de LATAM.',
     },
+  },
+  {
+    path: '/media-kit',
+    redirect: '/publicidad',
   },
   {
     path: '/quienes-somos',
