@@ -14,6 +14,42 @@ const routes: Array<RouteRecordRaw> = [
   },
   {
     path: '/',
+    name: 'Portada',
+    component: () => import('../views/PortadaView.vue'),
+    meta: {
+      title: `Boscán & La Moni — Periodismo de investigación y publicidad`,
+      description: 'Andersson Boscán y Mónica Velásquez. Elige: quiero periodismo o quiero publicidad.',
+    },
+  },
+  {
+    path: '/periodismo',
+    name: 'Periodismo',
+    component: () => import('../views/PeriodismoView.vue'),
+    meta: {
+      title: `Investigaciones — Boscán & La Moni`,
+      description: 'Las 35 investigaciones principales de la carrera de Andersson Boscán y Mónica Velásquez.',
+    },
+  },
+  {
+    path: '/periodismo/:slug',
+    name: 'PeriodismoCaso',
+    component: () => import('../views/PeriodismoCasoView.vue'),
+    meta: {
+      title: `Expediente — Boscán & La Moni`,
+      description: 'Expediente del archivo de investigaciones de Andersson Boscán y Mónica Velásquez.',
+    },
+  },
+  {
+    path: '/publicidad',
+    name: 'Publicidad',
+    component: () => import('../views/PublicidadView.vue'),
+    meta: {
+      title: `Publicidad con Boscán & La Moni — Arma tu campaña sin reunión`,
+      description: 'Dinos qué quieres conseguir y te mostramos la campaña que mejor encaja. Campañas puntuales sin reunión; contratos de 6 y 12 meses con propuesta automática.',
+    },
+  },
+  {
+    path: '/media-kit',
     name: 'MediaKit',
     component: () => import('../views/MediaKitView.vue'),
     meta: {
