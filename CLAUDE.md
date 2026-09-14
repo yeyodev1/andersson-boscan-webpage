@@ -63,6 +63,12 @@ entrega nueva y se reemplaza la carpeta entera.
 - En dev, el plugin `periodismoEstatico` de `vite.config.ts` sirve esas rutas;
   sin él el fallback de SPA de Vite devuelve el 404 de la app. En producción lo
   resuelve el hosting, más las dos reglas de `public/_redirects`.
+- Los ajustes nuestros sobre la entrega (titular del juego que no tape a los
+  personajes, corcho vectorial, tarjetas más grandes, luces y flecha en
+  "¿Quieres que investiguemos algo?") viven en `public/ajustes-periodismo/`,
+  fuera de la carpeta de la entrega. Si llega una entrega nueva, volver a añadir
+  `<link rel="stylesheet" href="/ajustes-periodismo/ajustes.css">` después de
+  `game.css` en `public/periodismo/index.html`.
 - `6e60fdfa0d2c5fad49aa11dbf1d063a5.txt` es la clave de IndexNow: no borrar ni
   renombrar.
 - Requisitos del hosting (del documento de entrega): respuestas `206 Partial
