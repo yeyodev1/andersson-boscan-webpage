@@ -1,0 +1,466 @@
+/* ACTA (Órdenes desde la Judicatura): foja de oficio con membrete, margen rayado en vino y tinta azul,
+   perforaciones de archivador y el sello seco de la balanza abajo a la derecha.
+   La cinta adhesiva ocupa la esquina superior izquierda: la etiqueta empieza a 62 px y no se parte. */
+.obj--acta { --obg: #F8F3E4; --ofg: #141826; --oacc: #8E1F33;
+  border: 1px solid rgba(20,24,38,.12);
+  background-image:
+    linear-gradient(90deg, transparent 0 44px, rgba(142,31,51,.6) 44px 45.5px, transparent 45.5px 50px, rgba(30,60,134,.55) 50px 51px, transparent 51px),
+    radial-gradient(circle at 22px 28%, var(--mesa) 6.5px, rgba(20,24,38,.22) 7px, transparent 8.6px),
+    radial-gradient(circle at 22px 72%, var(--mesa) 6.5px, rgba(20,24,38,.22) 7px, transparent 8.6px); }
+
+/* Membrete foliado: arranca después de la cinta adhesiva */
+.obj--acta::before { content: "Función Judicial · Fs. 1"; position: absolute; left: 62px; top: 16px; z-index: 3;
+  white-space: nowrap; font-family: 'IBM Plex Mono', monospace; font-weight: 700; font-size: 9px; letter-spacing: .16em;
+  text-transform: uppercase; color: #1E3C86; border: 1.5px solid #1E3C86; padding: 4px 7px 3px;
+  transform: rotate(-1.5deg); background: #F8F3E4; }
+
+/* Sello seco: la balanza en gris de sello */
+.obj--acta::after { content: ""; position: absolute; right: 14px; bottom: 12px; z-index: 2;
+  width: 84px; height: 84px; opacity: .5; transform: rotate(-7deg); pointer-events: none;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'><g fill='none' stroke='%236B7280' stroke-width='2.4'><circle cx='60' cy='60' r='57'/><circle cx='60' cy='60' r='52'/><circle cx='60' cy='60' r='36'/></g><g fill='none' stroke='%238E1F33' stroke-width='3' stroke-linecap='round'><path d='M60 45 V79'/><path d='M48 79 H72'/><path d='M52 83 H68'/><path d='M45 51 H75'/><path d='M45 51 V57'/><path d='M75 51 V57'/><path d='M38 57 A7 7 0 0 0 52 57'/><path d='M68 57 A7 7 0 0 0 82 57'/></g></svg>") center / contain no-repeat; }
+
+/* La foto entra dentro del margen, en duotono de tinta */
+.obj--acta .obj__img { width: calc(100% - 78px); margin: 56px 16px 0 62px; aspect-ratio: 16 / 9;
+  filter: grayscale(1) contrast(1.2) brightness(.98); mix-blend-mode: multiply; opacity: .9;
+  border: 1px solid rgba(20,24,38,.2); }
+
+.obj--acta .obj__cuerpo { padding: 88px 100px 30px 62px; }
+.obj--acta .obj__img + .obj__cuerpo { padding-top: 18px; }
+.obj--acta h3 { font-family: 'Newsreader', Georgia, serif; font-weight: 900; text-transform: uppercase;
+  letter-spacing: -.02em; line-height: .96; color: #141826; }
+.obj--acta .obj__sub { font-family: 'Newsreader', Georgia, serif; font-style: normal; font-weight: 500;
+  font-size: 15.5px; line-height: 1.3; color: #8E1F33; }
+.obj--acta p { font-family: 'Newsreader', Georgia, serif; font-size: 15px; line-height: 1.5; color: #2A3040; opacity: 1; }
+.obj--acta .obj__abrir { font-family: 'IBM Plex Mono', monospace; font-weight: 700; font-size: 9.5px; letter-spacing: .18em;
+  color: #1E3C86; border-bottom-color: #1E3C86; }
+
+@media (max-width: 900px) { .obj--acta .obj__cuerpo { padding-right: 62px; } }
+@media (max-width: 480px) {
+  .obj--acta::before { left: 54px; top: 12px; }
+  .obj--acta::after { width: 62px; height: 62px; right: 10px; bottom: 10px; }
+  .obj--acta .obj__cuerpo { padding: 60px 20px 26px 54px; }
+  .obj--acta .obj__img + .obj__cuerpo { padding-top: 18px; }
+  .obj--acta .obj__img { width: calc(100% - 70px); margin: 46px 16px 0 54px; }
+}
+
+/* BITÁCORA · El libro de guardia de Carondelet.
+   La tapa de tela verde solo enmarca: todo el texto vive sobre la hoja de novedades,
+   papel crema con renglones y tinta negra. Legibilidad por encima de la textura.
+   Ojo: home.css define .obj::before (chincheta roja de 16x16 y borde redondo) y
+   .obj::after (cinta adhesiva en la esquina superior izquierda). Aquí se reinicia
+   la chincheta para convertirla en la etiqueta de la tapa y se respeta la cinta. */
+
+.obj--bitacora {
+  --obg: #10291F; --ofg: #17150F; --oacc: #A5131A;
+  border-radius: 3px 9px 9px 3px;
+  padding: 78px 16px 18px 32px;
+  background-color: #10291F;
+  background-image:
+    linear-gradient(90deg, rgba(0,0,0,.55) 0, rgba(0,0,0,.22) 14px, rgba(255,255,255,.14) 19px, rgba(0,0,0,.3) 22px, transparent 28px),
+    repeating-linear-gradient(0deg, rgba(255,255,255,.035) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(90deg, rgba(0,0,0,.13) 0 1px, transparent 1px 3px);
+}
+.obj--bitacora .obj__img { display: none; }
+
+/* Etiqueta mecanografiada pegada en la tapa. Empieza en 62px para librar la cinta. */
+.obj--bitacora::before {
+  content: "Libro de novedades";
+  left: 62px; top: 22px; right: auto; bottom: auto;
+  width: auto; height: auto; margin: 0; border-radius: 0;
+  padding: 6px 11px 5px;
+  background: #EAE1C3; color: #1D1A12;
+  border: 1px solid rgba(29,26,18,.4);
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 9.5px; letter-spacing: .17em; text-transform: uppercase; line-height: 1;
+  white-space: nowrap;
+  box-shadow: 0 2px 4px rgba(0,0,0,.45);
+  transform: rotate(-1.1deg);
+  z-index: 3;
+}
+
+/* La hoja de guardia: aquí manda el papel claro y la tinta oscura. */
+.obj--bitacora .obj__cuerpo {
+  position: relative; z-index: 2;
+  padding: 30px 22px 24px 42px;
+  gap: 9px;
+  color: #17150F;
+  background-color: #F4EBCD;
+  background-image:
+    linear-gradient(180deg, #0B1D16 0 4px, #A5131A 4px 5px, transparent 5px),
+    linear-gradient(90deg, transparent 0 28px, rgba(165,19,26,.55) 28px 29px, transparent 29px),
+    repeating-linear-gradient(180deg, transparent 0 25px, rgba(23,21,15,.11) 25px 26px);
+  background-position: 0 0, 0 0, 0 34px;
+  box-shadow: 0 1px 2px rgba(0,0,0,.5), 0 12px 20px -12px rgba(0,0,0,.7), inset 0 0 0 1px rgba(23,21,15,.16);
+}
+
+.obj--bitacora h3 {
+  font-family: var(--ofont);
+  color: #14120C;
+  font-weight: 700; text-transform: uppercase;
+  font-size: clamp(25px, 2.2vw, 36px); line-height: .96; letter-spacing: -.005em;
+  margin: 0;
+}
+.obj--bitacora .obj__sub {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-style: italic; font-size: 14px; line-height: 1.34;
+  color: #6B3016; opacity: 1;
+}
+.obj--bitacora p { color: #2E2A1C; opacity: 1; }
+.obj--bitacora .obj__abrir {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--oacc);
+  padding-top: 10px; border-top: 1px solid rgba(23,21,15,.28);
+}
+.obj--bitacora .obj__pie { color: #5F5942; }
+.obj--bitacora .obj__pie b, .obj--bitacora .obj__anio, .obj--bitacora .obj__tema { color: var(--oacc); }
+
+/* Teléfono: la hoja ocupa casi toda la tapa y el texto no se aprieta contra el lomo. */
+@media (max-width: 700px) {
+  .obj--bitacora { padding: 74px 12px 14px 26px; }
+  .obj--bitacora .obj__cuerpo { padding: 26px 18px 22px 34px; }
+  .obj--bitacora::before { left: 52px; top: 20px; }
+}
+@media (max-width: 480px) {
+  .obj--bitacora { padding-top: 64px; }
+  .obj--bitacora .obj__cuerpo { padding-top: 24px; }
+}
+/* Sin cinta adhesiva a partir de 480 px: la etiqueta se alinea con la hoja. */
+@media (max-width: 480px) {
+  .obj--bitacora::before { left: 26px; }
+}
+
+/* CINTA · caja de carrete de cinta: cartón crema envejecido, el carrete asomando con la foto en la bobina, etiqueta escrita a máquina */
+.obj--cinta { --obg: #EDE4CF; --ofg: #26282B; --oacc: #A93A32; border-radius: 4px; border: 1px solid #C9BB9C; box-shadow: var(--sombra), inset 0 0 0 10px #E3D8BF, inset 0 0 0 11px #CDBF9F; background-image: repeating-linear-gradient(90deg, rgba(0,0,0,.025) 0 2px, transparent 2px 7px); }
+.obj--cinta .obj__img { position: absolute; left: 36px; top: 36px; width: 124px; height: 124px; aspect-ratio: 1; border-radius: 50%; object-fit: cover; filter: grayscale(1) contrast(1.15) brightness(.85); box-shadow: 0 0 0 13px #5E3F2A, 0 0 0 15px #26282B, 0 0 0 16px rgba(0,0,0,.25), 0 10px 18px -8px rgba(0,0,0,.6); }
+.obj--cinta::before { content: ""; position: absolute; left: 78px; top: 78px; width: 40px; height: 40px; border-radius: 50%; z-index: 2; background: radial-gradient(circle at 40% 35%, #4A4C50, #232528 65%, #151719); box-shadow: 0 0 0 2px #0F1113, 0 0 0 3px rgba(233,223,200,.2);
+  background-image: radial-gradient(circle at 50% 22%, #0A0B0C 0 4px, transparent 4.5px), radial-gradient(circle at 26% 66%, #0A0B0C 0 4px, transparent 4.5px), radial-gradient(circle at 74% 66%, #0A0B0C 0 4px, transparent 4.5px), radial-gradient(circle at 40% 35%, #4A4C50, #232528 65%, #151719); }
+.obj--cinta::after { content: "COSEPE \A 18-XII-2018 · 45 s \A 97 palabras · secretísimo"; white-space: pre; position: absolute; left: 30px; top: 190px; z-index: 2; padding: 8px 12px 9px; background: #F4EDDC; color: #2B2622; font-family: 'Special Elite', 'Courier Prime', 'Courier New', monospace; font-size: 11px; line-height: 1.35; letter-spacing: .06em; text-transform: uppercase; box-shadow: 0 2px 4px -1px rgba(0,0,0,.35); transform: rotate(-2.5deg); border: 1px solid rgba(38,40,43,.15); }
+.obj--cinta .obj__cuerpo { padding: 262px 26px 24px; }
+.obj--cinta h3 { font-family: 'Syne', 'Barlow Condensed', sans-serif; font-weight: 800; }
+.obj--cinta .obj__sub { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #7A4E2D; }
+@media (max-width: 480px) { .obj--cinta .obj__img { left: 28px; top: 28px; width: 110px; height: 110px; } .obj--cinta::before { left: 63px; top: 63px; } .obj--cinta::after { top: 176px; left: 22px; } .obj--cinta .obj__cuerpo { padding-top: 250px; } }
+
+/* hoja de contactos (Connie Garcés y Kada): papel baritado oscuro con perforación de película arriba y marca de lápiz graso */
+.obj--contactos { --obg: #181A19; --ofg: #EDEBE4; --oacc: #F25C05; border-radius: 0; padding-top: 22px;
+  background-image: radial-gradient(circle at 11px 11px, #181A19 4px, #2C2F2C 4.2px 5.4px, #181A19 5.6px);
+  background-size: 30px 22px; background-repeat: repeat-x; background-color: #181A19;
+  box-shadow: inset 0 -1px 0 rgba(237,235,228,.1), 0 24px 46px -32px #000; }
+/* marca de lápiz graso rojo en la esquina, como los cuadros elegidos */
+.obj--contactos::before { content: ""; position: absolute; left: 14px; top: 34px; right: 14px; height: 3px; background: #E03131; opacity: .9; transform: rotate(-.4deg); }
+.obj--contactos::after { content: "Rollo 01"; position: absolute; left: 16px; top: 44px; font-family: 'Bebas Neue', 'Arial Narrow', sans-serif; font-size: 12px; letter-spacing: .22em; text-transform: uppercase; color: var(--oacc); }
+.obj--contactos .obj__cuerpo { padding-top: 88px; }
+.obj--contactos .obj__img { aspect-ratio: 3 / 2; filter: grayscale(1) contrast(1.15) brightness(.85); }
+.obj--contactos h3 { text-transform: uppercase; font-weight: 400; font-size: clamp(24px, 2vw, 34px); letter-spacing: .02em; line-height: .95; }
+.obj--contactos .obj__sub { color: #B7B5AD; }
+.obj--contactos .obj__tema, .obj--contactos .obj__pie b { color: var(--oacc); opacity: 1; }
+.obj--contactos .obj__abrir { font-family: 'Bebas Neue', sans-serif; letter-spacing: .18em; text-transform: uppercase; }
+
+/* formulario de denuncia: papel bond, casillas marcadas con bolígrafo azul, sello de recibido */
+.obj--denuncia { --obg: #FAFAF7; --ofg: #1E2229; --oacc: #1E3D9B; border-top: 6px solid var(--oacc); background-image: linear-gradient(90deg, transparent 0 32px, rgba(30,61,155,.22) 32px 33px, transparent 33px), repeating-linear-gradient(transparent 0 29px, rgba(30,34,41,.13) 29px 30px); background-position: 0 0, 0 8px; }
+.obj--denuncia .obj__img { display: none; }
+.obj--denuncia::before { content: "Violencia física\A Amenazas de muerte\A Uso de datos personales"; position: absolute; left: 44px; top: 14px; z-index: 1; padding-left: 24px; white-space: pre; font-family: 'Public Sans', 'IBM Plex Sans', system-ui, sans-serif; font-size: 10.5px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; line-height: 22px; color: var(--ofg);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='66' viewBox='0 0 16 66'><g fill='none' stroke='%231E3D9B' stroke-width='1.6'><rect x='1' y='4.5' width='13' height='13' fill='white'/><rect x='1' y='26.5' width='13' height='13' fill='white'/><rect x='1' y='48.5' width='13' height='13' fill='white'/><path d='M3.5 11l3 3.5 6-7.5M3.5 33l3 3.5 6-7.5M3.5 55l3 3.5 6-7.5' stroke-width='2'/></g></svg>"); background-repeat: no-repeat; background-position: 0 0; }
+.obj--denuncia::after { content: "Recibido"; position: absolute; right: 22px; bottom: 26px; z-index: 1; font-family: 'Public Sans', 'IBM Plex Sans', system-ui, sans-serif; font-size: 12px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; color: var(--oacc); border: 2.5px solid var(--oacc); border-radius: 3px; padding: 7px 10px 6px 13px; transform: rotate(-9deg); opacity: .9; }
+.obj--denuncia .obj__cuerpo { padding-top: 100px; padding-left: 46px; padding-bottom: 64px; }
+.obj--denuncia h3 { font-family: 'Zilla Slab', 'Iowan Old Style', Georgia, serif; font-weight: 700; text-transform: uppercase; letter-spacing: -.01em; line-height: 1; }
+.obj--denuncia .obj__sub { font-style: italic; color: var(--oacc); }
+@media (max-width: 480px) { .obj--denuncia .obj__cuerpo { padding-top: 96px; padding-left: 40px; } .obj--denuncia::before { left: 40px; } }
+/* la cinta adhesiva de la esquina tapaba el membrete: lo corremos a su derecha */
+.obj--denuncia::before { left: 62px; }
+
+/* hoja de epicrisis (neonatos): papel clínico con pestaña de historia clínica, filete azul pálido y cuadrícula de cunas al pie */
+.obj--epicrisis { --obg: #FBFCFD; --ofg: #1B232E; --oacc: #8A1C1C; border-radius: 2px 2px 3px 3px; padding-top: 30px;
+  background-image: linear-gradient(180deg, #EAF1F6 0 46px, transparent 46px), repeating-linear-gradient(180deg, transparent 0 27px, rgba(27,35,46,.045) 27px 28px);
+  box-shadow: 0 1px 0 rgba(27,35,46,.14), 0 24px 44px -30px rgba(20,40,60,.55); }
+/* pestaña de historia clínica, arriba a la izquierda para no chocar con el post-it */
+.obj--epicrisis::before { content: "Historia clínica"; position: absolute; left: 20px; top: -16px; z-index: 3;
+  font-family: 'Sora', system-ui, sans-serif; font-size: 9.5px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase;
+  color: #1B232E; background: #C9DDEA; padding: 6px 14px 5px; border-radius: 4px 4px 0 0; box-shadow: 0 -1px 0 rgba(27,35,46,.12) inset; }
+/* filete azul del membrete y sello de servicio */
+.obj--epicrisis::after { content: "Neonatología"; position: absolute; left: 22px; top: 16px; z-index: 2;
+  font-family: 'Sora', system-ui, sans-serif; font-size: 10px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: #55708A; }
+.obj--epicrisis .obj__cuerpo { padding-top: 92px; position: relative; }
+.obj--epicrisis .obj__img { aspect-ratio: 16 / 8; filter: grayscale(.55) brightness(1.06) contrast(.95); opacity: .9; }
+.obj--epicrisis h3 { text-transform: uppercase; font-size: clamp(20px, 1.6vw, 27px); line-height: .98; letter-spacing: -.01em; }
+.obj--epicrisis .obj__sub { color: #55708A; }
+.obj--epicrisis .obj__tema { color: var(--oacc); opacity: 1; font-weight: 600; }
+/* cuadrícula de 18 termocunas: 12 llenas (2 en rojo), 6 vacías */
+.obj--epicrisis .obj__abrir { position: relative; padding-top: 26px; display: block; }
+.obj--epicrisis .obj__abrir::before { content: ""; position: absolute; left: 0; top: 2px; width: 158px; height: 14px;
+  background-image: radial-gradient(circle at 4px 7px, #8A1C1C 3px, transparent 3.5px), radial-gradient(circle at 4px 7px, #55708A 3px, transparent 3.5px), radial-gradient(circle at 4px 7px, transparent 2.4px, rgba(85,112,138,.5) 2.5px 3px, transparent 3.5px);
+  background-size: 18px 14px, 18px 14px, 18px 14px;
+  background-position: 0 0, 36px 0, 144px 0;
+  background-repeat: repeat-x, repeat-x, repeat-x;
+  -webkit-mask-image: linear-gradient(90deg, #000 0 158px); }
+
+/* hoja de escaleta (Cedeño): papel de estudio con banda de bloques, tally rojo y marcador amarillo */
+.obj--escaleta { --obg: #F4F4F2; --ofg: #141414; --oacc: #E1251B; border-radius: 2px; padding-top: 34px;
+  background-image: linear-gradient(180deg, #141414 0 6px, transparent 6px), repeating-linear-gradient(180deg, transparent 0 25px, rgba(20,20,20,.05) 25px 26px);
+  box-shadow: 0 22px 44px -30px rgba(0,0,0,.6), 0 1px 0 rgba(20,20,20,.16); }
+/* tally rojo encendido, arriba a la izquierda */
+.obj--escaleta::before { content: "En vivo"; position: absolute; left: 18px; top: 16px; z-index: 3; display: inline-flex; align-items: center; gap: 7px;
+  font-family: 'League Spartan', 'Arial Black', sans-serif; font-weight: 700; font-size: 9.5px; letter-spacing: .2em; text-transform: uppercase; color: #FFF;
+  background: var(--oacc); padding: 5px 10px 4px; border-radius: 2px; }
+.obj--escaleta::after { content: ""; position: absolute; left: 24px; top: 24px; z-index: 4; width: 6px; height: 6px; border-radius: 50%; background: #FFF; box-shadow: 0 0 6px rgba(255,255,255,.9); }
+.obj--escaleta .obj__cuerpo { padding-top: 92px; position: relative; }
+/* columna de órdenes de bloque al margen izquierdo */
+.obj--escaleta .obj__cuerpo::before { content: "01 02 03 04"; position: absolute; left: -2px; top: 54px; width: 14px;
+  font-family: 'League Spartan', monospace; font-size: 8.5px; font-weight: 700; letter-spacing: .1em; color: #A9A8A4; word-spacing: 999px; line-height: 2.4; }
+.obj--escaleta .obj__img { aspect-ratio: 16 / 9; filter: grayscale(1) contrast(1.15) brightness(.95); }
+.obj--escaleta h3 { text-transform: uppercase; font-size: clamp(20px, 1.6vw, 27px); line-height: .96; letter-spacing: -.02em; }
+/* marcador amarillo sobre el subtítulo, como en la escaleta impresa */
+.obj--escaleta .obj__sub { background: linear-gradient(180deg, transparent 55%, rgba(246,214,74,.6) 55%); display: inline; box-decoration-break: clone; }
+.obj--escaleta .obj__tema { color: var(--oacc); opacity: 1; font-weight: 600; }
+.obj--escaleta .obj__abrir { font-family: 'League Spartan', sans-serif; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+/* la cinta adhesiva de la esquina tapaba el membrete: lo corremos a su derecha */
+.obj--escaleta::before { left: 62px; top: 14px; white-space: nowrap; }
+
+/* casete de escucha: carcasa negra azulada, etiqueta hueso con franjas cian y roja, ventana con dos carretes (Los audios de alias Willy) */
+.obj--escucha { display: flex; flex-direction: column; border-radius: 10px; padding: 14px 14px 22px; box-shadow: var(--sombra), inset 0 1px 0 rgba(255,255,255,.08), inset 0 0 0 1px rgba(0,0,0,.6); background-image: linear-gradient(180deg, rgba(255,255,255,.05), transparent 30%); }
+.obj--escucha::before { content: "A"; position: absolute; left: 30px; top: 30px; z-index: 4; width: 34px; height: 34px; border-radius: 50%; border: 2px solid var(--oacc); color: var(--oacc); display: grid; place-items: center; font-family: var(--ofont); font-weight: 700; font-size: 18px; line-height: 1; }
+.obj--escucha::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 22px; background: radial-gradient(circle at 18% 60%, #EDE8DC 3.5px, transparent 4.5px), radial-gradient(circle at 34% 60%, #EDE8DC 3.5px, transparent 4.5px), radial-gradient(circle at 66% 60%, #EDE8DC 3.5px, transparent 4.5px), radial-gradient(circle at 82% 60%, #EDE8DC 3.5px, transparent 4.5px), radial-gradient(circle at 50% 60%, var(--oacc) 3px, transparent 4px); opacity: .8; }
+.obj--escucha .obj__cuerpo { order: 1; position: relative; background: #EDE8DC; color: #0B1220; border-radius: 6px; padding: 84px 20px 18px; margin: 0 0 14px; border-top: 10px solid #22D3EE; box-shadow: inset 0 6px 0 #FF3B4A, inset 0 0 0 1px rgba(11,18,32,.12); --oacc: #0A6F86; }
+.obj--escucha .obj__cuerpo h3 { color: #0B1220; }
+.obj--escucha .obj__cuerpo::before, .obj--escucha .obj__cuerpo::after { content: ""; position: absolute; top: calc(100% + 14px + 25px); width: 100px; height: 100px; border-radius: 50%; z-index: 3; box-sizing: border-box; border: 8px solid #EDE8DC; background: radial-gradient(circle, #0B1220 0 16%, #EDE8DC 16% 24%, transparent 24% 62%, rgba(237,232,220,.25) 62% 100%), repeating-conic-gradient(#EDE8DC 0 14deg, transparent 14deg 60deg); box-shadow: 0 0 0 3px rgba(11,18,32,.9), 0 0 0 4px rgba(237,232,220,.25), 0 6px 14px -4px rgba(0,0,0,.7); animation: reel 9s linear infinite; }
+.obj--escucha .obj__cuerpo::before { left: 20%; margin-left: -50px; }
+.obj--escucha .obj__cuerpo::after { right: 20%; margin-right: -50px; animation-duration: 12s; }
+@keyframes reel { to { transform: rotate(360deg); } }
+.obj--escucha .obj__img { order: 2; height: 150px; aspect-ratio: auto; width: 100%; object-fit: cover; object-position: center 40%; border-radius: 10px; border: 3px solid rgba(237,232,220,.22); box-sizing: border-box; filter: grayscale(1) contrast(1.25) brightness(.55); }
+.obj--escucha .obj__abrir { color: #0A6F86; }
+.obj--escucha .obj__sub { color: #0B1220; }
+.obj--escucha .postit { order: 0; }
+@media (max-width: 480px) { .obj--escucha .obj__cuerpo::before, .obj--escucha .obj__cuerpo::after { width: 84px; height: 84px; margin-left: -42px; margin-right: -42px; top: calc(100% + 14px + 33px); } .obj--escucha .obj__img { height: 150px; } }
+@media (prefers-reduced-motion: reduce) { .obj--escucha .obj__cuerpo::before, .obj--escucha .obj__cuerpo::after { animation: none; } }
+/* margen para el post-it pegado sobre el borde superior */
+.obj--escucha .obj__cuerpo { padding-top: 126px; }
+
+/* esquela recortada de periódico: papel tiza, borde negro grueso con filete doble, cruz dorada, corte a tijera */
+.obj--esquela { --obg: #EDE9E0; --ofg: #0B0B0C; --oacc: #8A6D2A; border-radius: 0; padding: 12px;
+  clip-path: polygon(0 1.2%, 2.5% 0, 97.5% .7%, 100% 2.2%, 99.4% 98.2%, 97% 100%, 2.2% 99.3%, 0 97.4%); }
+.obj--esquela::before { content: ""; position: absolute; inset: 12px; border: 8px solid #0B0B0C; pointer-events: none; z-index: 3; }
+.obj--esquela::after { content: ""; position: absolute; inset: 24px; border: 3px double #0B0B0C; pointer-events: none; z-index: 3; }
+.obj--esquela .obj__img { width: calc(100% - 68px); margin: 34px 34px 0; aspect-ratio: 16 / 9; filter: grayscale(1) contrast(1.2) brightness(1.05); mix-blend-mode: multiply; opacity: .82; }
+.obj--esquela .obj__cuerpo { padding: 84px 36px 40px; text-align: center; justify-items: center; }
+.obj--esquela .obj__img + .obj__cuerpo { padding-top: 22px; }
+.obj--esquela h3 { font-family: var(--ofont); font-weight: 700; letter-spacing: .05em; font-size: clamp(21px, 1.7vw, 27px); line-height: 1.12; }
+.obj--esquela h3::before { content: "\2720"; display: block; font-family: 'Cardo', Georgia, serif; font-size: 30px; line-height: 1; color: var(--oacc); margin-bottom: 12px; }
+.obj--esquela .obj__sub { font-family: var(--ofont); font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--oacc); opacity: 1; }
+.obj--esquela p { max-width: 42ch; }
+.obj--esquela .obj__abrir { border-top: 1px solid rgba(11,11,12,.35); padding-top: 12px; }
+.obj--esquela .postit { top: 4px; right: 2px; }
+
+/* sobre de evidencia (Progen): kraft, solapa triangular con botón y cordel, etiqueta roja EVIDENCIA a la izquierda */
+.obj--evidencia { --obg: #C9A46B; --ofg: #1B1510; --oacc: #C8102E; border-radius: 0; padding-top: 74px;
+  background-image: linear-gradient(90deg, rgba(255,255,255,.06) 0 1px, transparent 1px 6px), linear-gradient(0deg, rgba(70,45,10,.06) 0 1px, transparent 1px 9px), linear-gradient(160deg, #D2AE76, #C39E63 55%, #B8925A); }
+/* solapa cerrada (triángulo) con la sombra de su borde */
+.obj--evidencia::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 74px; z-index: 2; clip-path: polygon(0 0, 100% 0, 50% 100%); background: linear-gradient(180deg, #BE995F, #AC8850); filter: drop-shadow(0 2px 2px rgba(40,25,5,.35)); }
+/* botón, cordel en ocho y etiqueta roja: un solo SVG de fondo sobre la solapa */
+.obj--evidencia .obj__cuerpo { position: relative; padding-top: 88px; }
+.obj--evidencia .obj__cuerpo::before { content: ""; position: absolute; left: 50%; top: -22px; width: 60px; height: 96px; margin-left: -30px; z-index: 3; pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 96'><path d='M30 10c-11 0-11 13 0 15s11 15 0 17-11 13 0 15 11 15 0 17-11 13 0 15' fill='none' stroke='%236E4B2A' stroke-width='2' stroke-linecap='round'/><circle cx='30' cy='12' r='8' fill='%23E8DCBF' stroke='%238D7650' stroke-width='2'/><circle cx='30' cy='12' r='2' fill='%237A6240'/><circle cx='30' cy='72' r='8' fill='%23E8DCBF' stroke='%238D7650' stroke-width='2'/><circle cx='30' cy='72' r='2' fill='%237A6240'/></svg>"); background-repeat: no-repeat; background-size: 60px 96px; }
+.obj--evidencia .obj__cuerpo::after { content: "Evidencia"; position: absolute; left: 18px; top: 18px; z-index: 3; font-family: 'Archivo Black', 'Arial Black', sans-serif; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: #FFF; background: var(--oacc); padding: 7px 12px 6px; border: 1.5px solid #1B1510; box-shadow: 3px 3px 0 #1B1510; transform: rotate(-2deg); }
+.obj--evidencia .obj__img { aspect-ratio: 16 / 8; filter: grayscale(1) contrast(1.2); mix-blend-mode: multiply; opacity: .78; margin-top: 4px; }
+.obj--evidencia h3 { text-transform: uppercase; font-size: clamp(20px, 1.6vw, 26px); letter-spacing: -.005em; line-height: 1; }
+.obj--evidencia .obj__anio { font-family: 'Archivo Black', sans-serif; font-weight: 400; }
+.obj--evidencia .obj__tema { color: var(--oacc); opacity: 1; font-weight: 600; }
+/* banda roja "no consta en el expediente" cruzando la esquina inferior */
+.obj--evidencia .obj__abrir { position: relative; }
+.obj--evidencia .obj__abrir::before { content: "No consta en el expediente"; position: absolute; right: -30px; bottom: -26px; padding: 5px 40px; background: var(--oacc); color: #FFF; font-family: 'Archivo Black', 'Arial Black', sans-serif; font-size: 9px; letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; transform: rotate(-7deg); pointer-events: none; box-shadow: 0 4px 8px -4px rgba(0,0,0,.5); }
+/* la banda no debe desbordar el objeto en pantallas angostas */
+.obj--evidencia { overflow: clip; overflow-clip-margin: 46px; }
+/* el enlace necesita aire debajo para que la banda no lo tape */
+.obj--evidencia .obj__abrir { display: block; padding-bottom: 44px; }
+/* la cámara se sube para no montarse sobre la banda */
+.obj--evidencia .recuerdo { left: -40px; right: auto; bottom: 14px; }
+/* en pantalla angosta la cámara vuelve adentro para no salirse del teléfono */
+@media (max-width: 560px) { .obj--evidencia .recuerdo { left: auto; right: 10px; bottom: 66px; } }
+
+@import url("https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500..700&display=swap");
+/* estado de cuenta de banca privada (Las cuentas de la narcoelite): papel marfil con veta de mármol,
+   filete de oro arriba, la tarjeta metálica grapada abajo a la derecha y el borde inferior troquelado */
+.obj--extracto { --obg: #F7F3EA; --ofg: #17181B; --oacc: #9C7A2C; border-radius: 0; padding: 0 0 16px;
+  -webkit-mask: linear-gradient(#000 0 0) top / 100% calc(100% - 11px) no-repeat, conic-gradient(from 135deg at 50% 0, #000 90deg, transparent 0) bottom / 22px 11px repeat-x;
+  mask: linear-gradient(#000 0 0) top / 100% calc(100% - 11px) no-repeat, conic-gradient(from 135deg at 50% 0, #000 90deg, transparent 0) bottom / 22px 11px repeat-x;
+  background-image:
+    linear-gradient(104deg, transparent 27%, rgba(23,24,27,.07) 27.4%, transparent 28.6%),
+    linear-gradient(98deg, transparent 62%, rgba(156,122,44,.18) 62.3%, transparent 63.3%),
+    linear-gradient(112deg, #8C6A22 0%, #D9BC77 26%, #F1E3BE 42%, #B9942F 58%, #8C6A22 82%, #C6A957 100%);
+  background-size: 100% 100%, 100% 100%, 100% 5px; background-repeat: no-repeat; background-position: 0 0, 0 0, 0 0;
+  background-color: var(--obg); }
+/* renglón punteado del extracto sobre el título */
+.obj--extracto::before { content: "Estado de cuenta · Periodo 2021-2025"; position: absolute; left: 22px; top: 15px; z-index: 4;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 9.5px; letter-spacing: .2em; text-transform: uppercase; color: #7B766C; }
+/* la tarjeta metálica, con su chip de oro, grapada en la esquina */
+.obj--extracto::after { content: ""; position: absolute; right: 20px; bottom: 30px; z-index: 3; width: 108px; height: 68px; border-radius: 7px;
+  background: linear-gradient(146deg, #2A2D33, #14161A 55%, #101215);
+  box-shadow: 0 12px 20px -12px rgba(23,24,27,.85), inset 0 0 0 1px rgba(232,209,150,.4);
+  background-image: linear-gradient(112deg, #8C6A22, #E4CE92 40%, #B9942F 62%, #8C6A22) , linear-gradient(146deg, #2A2D33, #14161A 55%, #101215);
+  background-size: 26px 20px, 100% 100%; background-position: 12px 24px, 0 0; background-repeat: no-repeat; }
+.obj--extracto .obj__img { display: block; width: calc(100% - 44px); margin: 36px 22px 0; aspect-ratio: 16 / 8; filter: grayscale(1) contrast(1.1) brightness(1.06); mix-blend-mode: multiply; opacity: .72; }
+.obj--extracto .obj__cuerpo { padding: 92px 22px 58px; border-top: none; }
+.obj--extracto .obj__img + .obj__cuerpo { padding-top: 22px; }
+.obj--extracto h3 { font-family: 'Bodoni Moda', Didot, Georgia, serif; font-weight: 600; letter-spacing: -.025em; line-height: .98; }
+.obj--extracto .obj__sub, .obj--extracto p { color: #45474B; }
+.obj--extracto .obj__anio { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-weight: 500; }
+.obj--extracto .obj__pie b, .obj--extracto .obj__tema { color: var(--oacc); opacity: 1; }
+.obj--extracto .obj__abrir { display: block; padding-right: 132px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--oacc); }
+@media (max-width: 700px) {
+  .obj--extracto::after { width: 86px; height: 54px; right: 16px; bottom: 26px; background-size: 21px 16px, 100% 100%; background-position: 10px 19px, 0 0; }
+  .obj--extracto .obj__cuerpo { padding: 84px 18px 52px; }
+  .obj--extracto .obj__abrir { padding-right: 106px; }
+  .obj--extracto .obj__img + .obj__cuerpo { padding-top: 18px; }
+}
+
+/* mapa doblado con pin (Operativo · La caída de Fito) */
+.obj--operativo { --obg: #D8CDA8; --ofg: #1F2519; --oacc: #E8600F; padding: 0;
+  background-color: var(--obg);
+  background-image:
+    radial-gradient(circle at 26% 78px, transparent 0 13px, rgba(232,96,15,.9) 13px 14.5px, transparent 14.5px 27px, rgba(232,96,15,.55) 27px 28.5px, transparent 28.5px 42px, rgba(232,96,15,.3) 42px 43.5px, transparent 43.5px),
+    linear-gradient(90deg, rgba(255,255,255,.14) 0 33.2%, rgba(0,0,0,.14) 33.2% 33.7%, rgba(255,255,255,.5) 33.7% 34.1%, transparent 34.1% 66.3%, rgba(255,255,255,.5) 66.3% 66.7%, rgba(0,0,0,.14) 66.7% 67.2%, rgba(0,0,0,.05) 67.2%),
+    linear-gradient(180deg, transparent 0 49.6%, rgba(0,0,0,.13) 49.6% 50.1%, rgba(255,255,255,.45) 50.1% 50.6%, transparent 50.6%),
+    repeating-radial-gradient(ellipse 70% 45% at 8% 12%, transparent 0 22px, rgba(31,37,25,.16) 22px 23px),
+    repeating-radial-gradient(ellipse 60% 50% at 92% 96%, transparent 0 26px, rgba(31,37,25,.13) 26px 27px),
+    linear-gradient(rgba(31,37,25,.13) 1px, transparent 1px), linear-gradient(90deg, rgba(31,37,25,.13) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 30px 30px, 30px 30px; }
+.obj--operativo .obj__img { display: none; }
+.obj--operativo .obj__cuerpo { padding-top: 132px; padding-bottom: 26px; }
+/* pin: cabeza naranja y aguja clavada en el objetivo */
+.obj--operativo::before { content: ""; position: absolute; left: calc(26% - 10px); top: 40px; width: 20px; height: 20px; border-radius: 50%; z-index: 3; background: radial-gradient(circle at 35% 30%, #FFB27A, var(--oacc) 55%, #9A3A06); box-shadow: 0 8px 10px -3px rgba(0,0,0,.5); }
+.obj--operativo::after { content: ""; position: absolute; left: calc(26% - 1px); top: 56px; width: 2px; height: 22px; z-index: 2; background: linear-gradient(#5b5b5b, #2a2a2a); box-shadow: 3px 4px 6px rgba(0,0,0,.35); }
+.obj--operativo .obj__cuerpo::before { content: "Objetivo · Monterrey"; position: absolute; left: calc(26% + 52px); top: 66px; font-family: 'Saira Condensed', 'Arial Narrow', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: #9A3A06; border-bottom: 1.5px solid #9A3A06; padding-bottom: 2px; }
+.obj--operativo .obj__cuerpo::after { content: "A · B · C · D · E · F"; position: absolute; left: 22px; top: 12px; font-family: 'Saira Condensed', 'Arial Narrow', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: .3em; color: rgba(31,37,25,.5); }
+.obj--operativo h3 { text-transform: uppercase; font-weight: 800; letter-spacing: 0; font-size: clamp(30px, 2.6vw, 44px); line-height: .92; }
+.obj--operativo .obj__anio { font-family: 'Saira Condensed', 'Arial Narrow', sans-serif; font-weight: 900; }
+.obj--operativo .obj__abrir { color: #9A3A06; }
+/* margen para el post-it pegado sobre el borde superior */
+.obj--operativo .obj__cuerpo { padding-top: 140px; }
+
+/* hoja de parte naval (Narcomilicos): perforación superior, membrete de la Armada, foto en duotono azul, sello circular */
+.obj--parte { padding-top: 14px; background-image: radial-gradient(circle at 50% 0, var(--mesa) 4.5px, transparent 5px), linear-gradient(180deg, transparent 13px, rgba(11,31,58,.28) 13px, rgba(11,31,58,.28) 14px, transparent 14px); background-size: 22px 14px, 100% 100%; background-position: 0 0, 0 0; background-repeat: repeat-x, no-repeat; }
+.obj--parte::before { content: "Armada del Ecuador"; position: absolute; left: 22px; top: 24px; z-index: 3; font-family: 'Allerta Stencil', 'Arial Narrow', sans-serif; font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: #0B1F3A; padding-bottom: 6px; border-bottom: 3px double #0B1F3A; max-width: calc(100% - 44px); }
+.obj--parte .obj__img { aspect-ratio: 16 / 9; margin-top: 44px; filter: grayscale(1) contrast(1.15) brightness(.95); mix-blend-mode: multiply; opacity: .92; background: #0B1F3A; }
+.obj--parte .obj__cuerpo { padding-top: 84px; position: relative; }
+.obj--parte .obj__cuerpo::before { content: ""; position: absolute; left: 22px; right: 22px; top: 22px; height: 8px; background: repeating-linear-gradient(90deg, #FFC71F 0 34px, transparent 34px 42px); }
+.obj--parte .obj__cuerpo::after { content: "Simulado"; position: absolute; right: 18px; bottom: 16px; width: 92px; height: 92px; display: grid; place-items: center; text-align: center; border-radius: 50%; border: 3px double #0B1F3A; font-family: 'Allerta Stencil', 'Arial Narrow', sans-serif; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #0B1F3A; opacity: .8; transform: rotate(-12deg); pointer-events: none; }
+.obj--parte h3 { text-transform: uppercase; font-size: clamp(24px, 2vw, 32px); letter-spacing: .01em; line-height: .98; }
+.obj--parte .obj__anio { font-family: 'Allerta Stencil', 'Arial Narrow', sans-serif; font-weight: 400; letter-spacing: .02em; }
+.obj--parte p { max-width: calc(100% - 96px); }
+.obj--parte .obj__sub { max-width: 100%; }
+/* la cinta adhesiva de la esquina tapaba el membrete: lo corremos a su derecha */
+.obj--parte::before { left: 62px; top: 22px; white-space: nowrap; font-size: 9.5px; }
+/* sello más pequeño para que no invada el texto */
+.obj--parte .obj__cuerpo::after { width: 76px; height: 76px; font-size: 9px; right: 14px; bottom: 12px; }
+.obj--parte p { max-width: calc(100% - 84px); }
+.obj--parte::before { left: 60px; top: 18px; max-width: none; overflow: visible; font-size: 10px; background: rgba(247,247,244,.94); color: #0B1F3A; padding: 5px 9px 4px; border-bottom: 0; box-shadow: 0 1px 3px rgba(0,0,0,.25); }
+
+/* pasaporte (Srdán): tapa azul con escudo dorado estampado, esquina redondeada y canto de páginas */
+.obj--pasaporte { --obg: #2E3A70; --ofg: #EEF0F5; --oacc: #D9C27A; border-radius: 4px 10px 10px 4px; padding-top: 30px;
+  background-image: radial-gradient(circle at 30% 12%, rgba(255,255,255,.07), transparent 55%), linear-gradient(160deg, #3B4A8C, #2A3566 70%, #222C57);
+  box-shadow: inset 0 0 0 1px rgba(217,194,122,.35), -3px 0 0 rgba(240,236,222,.9), -6px 0 0 rgba(210,204,186,.75), 0 26px 48px -30px rgba(10,15,40,.85); }
+/* escudo dorado estampado en seco, arriba a la izquierda */
+.obj--pasaporte::before { content: ""; position: absolute; left: 22px; top: 18px; width: 44px; height: 44px; z-index: 2; opacity: .85;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 44'><g fill='none' stroke='%23D9C27A' stroke-width='1.6'><path d='M22 4l14 5v13c0 9-6 15-14 18C14 37 8 31 8 22V9z'/><path d='M22 12v18M14 21h16'/><circle cx='22' cy='21' r='5.5'/></g></svg>") no-repeat center/contain; }
+/* leyenda "pasaporte" bajo el escudo */
+.obj--pasaporte::after { content: "Pasaporte"; position: absolute; left: 76px; top: 30px; z-index: 2;
+  font-family: 'Sofia Sans Condensed', 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: .3em; text-transform: uppercase; color: var(--oacc); }
+.obj--pasaporte .obj__cuerpo { padding-top: 92px; }
+.obj--pasaporte .obj__img { aspect-ratio: 16 / 9; filter: grayscale(.7) contrast(1.1) brightness(.85); opacity: .72; mix-blend-mode: luminosity; }
+.obj--pasaporte h3 { text-transform: uppercase; font-size: clamp(19px, 1.5vw, 25px); line-height: .98; color: #F3F1E8; }
+.obj--pasaporte .obj__sub, .obj--pasaporte .obj__cuerpo p { color: #C7CCE0; }
+.obj--pasaporte .obj__tema, .obj--pasaporte .obj__pie b { color: var(--oacc); opacity: 1; }
+/* sello de entrada estampado en diagonal sobre el pie */
+.obj--pasaporte .obj__abrir { position: relative; }
+.obj--pasaporte .obj__abrir::after { content: "Extraditable"; position: absolute; right: 6px; bottom: -6px;
+  font-family: 'Sofia Sans Condensed', 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 10px; letter-spacing: .16em; text-transform: uppercase;
+  color: #8E7FC7; border: 2px solid #8E7FC7; border-radius: 3px; padding: 4px 9px; transform: rotate(-9deg); opacity: .85; }
+
+/* pizarra táctica (fútbol albanés): verde de vestuario con marco de madera, línea de tiza y balón de dorsal */
+.obj--pizarra { --obg: #12472F; --ofg: #F2F5EE; --oacc: #F2D024; border-radius: 4px; padding-top: 26px;
+  background-image: linear-gradient(160deg, rgba(255,255,255,.05), transparent 45%), linear-gradient(180deg, #145034, #0E3323);
+  box-shadow: inset 0 0 0 6px #6B4A2A, inset 0 0 40px rgba(0,0,0,.35), 0 24px 46px -30px rgba(0,0,0,.8); }
+/* círculo central y línea de medio campo dibujados en tiza sobre la cabecera */
+.obj--pizarra::before { content: ""; position: absolute; left: 18px; right: 18px; top: 20px; height: 54px; z-index: 1; opacity: .5; pointer-events: none;
+  background-image: linear-gradient(90deg, transparent calc(50% - 1px), rgba(242,245,238,.85) calc(50% - 1px) calc(50% + 1px), transparent calc(50% + 1px)),
+    radial-gradient(circle at 50% 50%, transparent 21px, rgba(242,245,238,.85) 21px 22.5px, transparent 22.5px); }
+.obj--pizarra::after { content: "Segunda categoría"; position: absolute; left: 20px; top: 84px; z-index: 2;
+  font-family: 'Kanit', 'Arial Narrow', sans-serif; font-weight: 600; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--oacc); }
+.obj--pizarra .obj__cuerpo { padding-top: 104px; }
+.obj--pizarra .obj__img { aspect-ratio: 16 / 9; filter: grayscale(.5) contrast(1.08) brightness(.9); opacity: .88; }
+.obj--pizarra h3 { text-transform: uppercase; font-weight: 800; font-size: clamp(21px, 1.7vw, 29px); line-height: .98; letter-spacing: -.015em; }
+.obj--pizarra .obj__sub { color: #B5C9BC; }
+.obj--pizarra .obj__tema, .obj--pizarra .obj__pie b { color: var(--oacc); opacity: 1; }
+/* dorsal amarillo en la esquina inferior derecha */
+.obj--pizarra .obj__abrir { position: relative; font-family: 'Kanit', sans-serif; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
+.obj--pizarra .obj__abrir::after { content: "11"; position: absolute; right: 4px; bottom: -4px; display: grid; place-items: center; width: 30px; height: 30px;
+  border-radius: 50%; background: var(--oacc); color: #14231A; font-family: 'Kanit', sans-serif; font-weight: 800; font-size: 13px; }
+
+/* Monitor de videovigilancia: plano del barrio de noche, la ruta encendida por la luz de sodio
+   y el pin malva donde se detiene el recorrido (Nathaly Mafla · recorrido) */
+.obj--recorrido { --obg: #181520; --ofg: #EDE9F0; --oacc: #E7A63F; border: 1px solid rgba(237,233,240,.22);
+  background-color: var(--obg);
+  background-image:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 88'><rect x='14' y='6' width='272' height='76' fill='none' stroke='%23EDE9F0' stroke-opacity='.10'/><g fill='%23EDE9F0' fill-opacity='.05'><rect x='22' y='12' width='54' height='12' rx='2'/><rect x='86' y='12' width='40' height='12' rx='2'/><rect x='136' y='12' width='62' height='12' rx='2'/><rect x='208' y='12' width='60' height='12' rx='2'/><rect x='22' y='32' width='54' height='12' rx='2'/><rect x='86' y='32' width='40' height='12' rx='2'/><rect x='136' y='32' width='62' height='12' rx='2'/><rect x='208' y='32' width='60' height='12' rx='2'/><rect x='22' y='52' width='54' height='12' rx='2'/><rect x='86' y='52' width='40' height='12' rx='2'/><rect x='136' y='52' width='62' height='12' rx='2'/><rect x='208' y='52' width='60' height='12' rx='2'/><rect x='22' y='70' width='54' height='10' rx='2'/><rect x='86' y='70' width='40' height='10' rx='2'/><rect x='136' y='70' width='62' height='10' rx='2'/></g><path d='M32 76 V58 H84 V44 H140 V64 H188 V34' fill='none' stroke='%23E7A63F' stroke-width='3.4' stroke-linecap='round' stroke-dasharray='0 7.5' opacity='.95'/><path d='M28 72h8v8h-8z' fill='%23E7A63F'/><path d='M188 34c-8-10-11-14-11-20a11 11 0 1 1 22 0c0 6-3 10-11 20z' fill='%23C6B4D2'/><circle cx='188' cy='14' r='3.6' fill='%23181520'/></svg>"),
+    radial-gradient(circle 70px at 26% 34%, rgba(231,166,63,.20), transparent 70%),
+    radial-gradient(circle 60px at 72% 22%, rgba(231,166,63,.14), transparent 70%),
+    linear-gradient(rgba(237,233,240,.055) 1px, transparent 1px), linear-gradient(90deg, rgba(237,233,240,.055) 1px, transparent 1px);
+  background-size: 100% auto, 100% 100%, 100% 100%, 24px 24px, 24px 24px;
+  background-position: 0 8px, 0 0, 0 0, 0 0, 0 0;
+  background-repeat: no-repeat, no-repeat, no-repeat, repeat, repeat; }
+/* membrete de cámara, corrido a la derecha porque la cinta adhesiva ocupa la esquina */
+.obj--recorrido::before { content: "Cam 04 · Rec"; position: absolute; left: 62px; top: 16px; z-index: 2; white-space: nowrap;
+  font-family: 'Work Sans', 'Helvetica Neue', sans-serif; font-size: 9.5px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: #E9BBB0;
+  padding-left: 15px; }
+.obj--recorrido .obj__img { display: none; }
+.obj--recorrido .obj__cuerpo { padding-top: 152px; padding-bottom: 24px;
+  background: linear-gradient(180deg, transparent 0 122px, rgba(24,21,32,.88) 138px, var(--obg) 156px); }
+.obj--recorrido h3 { font-family: 'Work Sans', 'Helvetica Neue', sans-serif; font-weight: 800; text-transform: uppercase; letter-spacing: -.025em; font-size: clamp(22px, 1.9vw, 30px); line-height: .98; color: var(--ofg); }
+.obj--recorrido .obj__sub, .obj--recorrido p { color: #CFC8DA; }
+.obj--recorrido .obj__tema { color: #A9A1B6; opacity: 1; }
+.obj--recorrido .obj__anio { color: var(--oacc); font-family: 'Work Sans', 'Helvetica Neue', sans-serif; font-weight: 800; font-variant-numeric: tabular-nums; }
+.obj--recorrido .obj__abrir { color: var(--oacc); }
+.obj--recorrido .obj__pie { color: #A9A1B6; opacity: 1; }
+.obj--recorrido .obj__pie b { color: #C6B4D2; }
+/* el testigo rojo de grabación, junto al membrete */
+.obj--recorrido .obj__cuerpo::before { content: ""; position: absolute; left: 62px; top: 18px; z-index: 3; width: 8px; height: 8px; border-radius: 50%;
+  background: #D9503F; box-shadow: 0 0 9px rgba(217,80,63,.9); }
+/* marca de hora de la última cámara, arriba a la derecha del plano */
+.obj--recorrido .obj__cuerpo::after { content: "04-06-2026 · 18:30"; position: absolute; right: 18px; top: 96px; z-index: 2;
+  font-family: 'Work Sans', 'Helvetica Neue', sans-serif; font-size: 9.5px; font-weight: 600; letter-spacing: .16em; color: rgba(237,233,240,.6); font-variant-numeric: tabular-nums; }
+@media (max-width: 480px) { .obj--recorrido .obj__cuerpo::after { display: none; } }
+
+/* informe desclasificado (ConspiraIn): hoja gris con perforaciones, membrete tachado, sello RESERVADO tachado y foto adjunta censurada */
+.obj.obj--reservado { display: flex; flex-direction: column; border-top: 3px double #15171A;
+  background-image: radial-gradient(circle at 11px 30%, var(--mesa) 4.5px, rgba(21,23,26,.14) 5px, transparent 6.5px), radial-gradient(circle at 11px 70%, var(--mesa) 4.5px, rgba(21,23,26,.14) 5px, transparent 6.5px); }
+/* escudo de la Secretaría, arriba a la izquierda */
+.obj--reservado::before { content: ""; position: absolute; left: 24px; top: 18px; width: 30px; height: 30px; border-radius: 50%; z-index: 3;
+  background: radial-gradient(circle, #3B5170 0 4px, transparent 5px), repeating-conic-gradient(from 0deg, #3B5170 0 3deg, transparent 3deg 12deg);
+  box-shadow: inset 0 0 0 3px #E3E6E9, inset 0 0 0 5px #3B5170, inset 0 0 0 7px #E3E6E9, inset 0 0 0 8px #3B5170; }
+/* sello RESERVADO tachado */
+.obj--reservado::after { content: "Reservado"; position: absolute; left: 66px; top: 20px; z-index: 3; font-family: 'Big Shoulders Display', 'Arial Narrow', sans-serif; font-weight: 900; font-size: 13px; letter-spacing: .22em; text-indent: .22em; text-transform: uppercase; color: var(--oacc); border: 3px double var(--oacc); padding: 5px 8px 3px; transform: rotate(-5deg); text-decoration: line-through; text-decoration-color: #101214; text-decoration-thickness: 4px; }
+.obj--reservado .obj__cuerpo { order: 1; position: relative; padding: 104px 22px 20px 30px;
+  background: linear-gradient(#101214, #101214) 30px 62px / 36% 10px no-repeat, linear-gradient(#101214, #101214) 30px 78px / 22% 10px no-repeat; }
+/* nota de desclasificación bajo el sello */
+.obj--reservado .obj__cuerpo::before { content: "Desclasificado · La Posta · 2018"; position: absolute; left: 30px; top: 46px; font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase; color: #3B5170; }
+/* barra de censura sobre la foto adjunta */
+.obj--reservado .obj__cuerpo::after { content: ""; position: absolute; left: 30px; top: calc(100% + 38px); width: 44%; height: 12px; background: #101214; z-index: 2; }
+.obj--reservado .obj__img { order: 2; aspect-ratio: 16 / 9; filter: grayscale(1) contrast(1.18); mix-blend-mode: multiply; opacity: .92; border-top: 2px solid #15171A; }
+.obj--reservado h3 { text-transform: uppercase; font-weight: 800; font-size: clamp(30px, 2.6vw, 42px); line-height: .92; letter-spacing: 0; }
+.obj--reservado .obj__sub { font-family: 'EB Garamond', Georgia, serif; font-style: italic; }
+.obj--reservado p { font-family: 'EB Garamond', Georgia, serif; font-size: 15.5px; }
+/* margen para el post-it pegado sobre el borde superior */
+.obj--reservado .obj__cuerpo { padding-top: 118px; }
+
+/* tablero electrónico de votación (La caída de Mario Godoy): bisel de metal, tornillos, banda de resultado en LED y rejilla de curules encendidas */
+.obj--votacion { --obg: #121416; --ofg: #F2F3F1; --oacc: #35F26F; border: 7px solid #2A2E33; border-radius: 8px; box-shadow: var(--sombra), inset 0 0 0 1px rgba(255,255,255,.05), inset 0 1px 0 rgba(255,255,255,.08);
+  background-image: radial-gradient(circle at 11px 11px, #4A4F56 2.4px, #1C1F23 2.8px, transparent 3.6px), radial-gradient(circle at calc(100% - 11px) 11px, #4A4F56 2.4px, #1C1F23 2.8px, transparent 3.6px), radial-gradient(circle at 11px calc(100% - 11px), #4A4F56 2.4px, #1C1F23 2.8px, transparent 3.6px), radial-gradient(circle at calc(100% - 11px) calc(100% - 11px), #4A4F56 2.4px, #1C1F23 2.8px, transparent 3.6px); background-repeat: no-repeat; }
+.obj--votacion::before { content: "148 A FAVOR · 0 EN CONTRA · 1 ABSTENCIÓN"; position: absolute; left: 16px; right: 16px; top: 18px; height: 72px; padding: 9px 12px; box-sizing: border-box; border: 1px solid #2A2E33; border-radius: 4px; background: #08090B repeating-linear-gradient(transparent 0 3px, rgba(0,0,0,.25) 3px 4px); font-family: 'Chivo', 'Arial Narrow', sans-serif; font-weight: 700; font-size: 11px; letter-spacing: .16em; line-height: 1; color: #35F26F; text-shadow: 0 0 8px rgba(53,242,111,.6); white-space: nowrap; overflow: clip; overflow-clip-margin: 46px; z-index: 1; }
+.obj--votacion::after { content: ""; position: absolute; left: 28px; right: 28px; top: 50px; height: 30px; background: radial-gradient(circle, #35F26F 1.7px, transparent 2.2px) 0 0 / 9px 9px; filter: drop-shadow(0 0 3px rgba(53,242,111,.6)); opacity: .9; z-index: 1; pointer-events: none; }
+.obj--votacion .obj__img { display: none; }
+.obj--votacion .obj__cuerpo { padding: 108px 22px 22px; }
+.obj--votacion h3 { font-family: 'Chivo', 'Arial Narrow', sans-serif; font-weight: 900; text-transform: uppercase; letter-spacing: -.015em; font-size: clamp(26px, 2.2vw, 36px); line-height: .95; }
+.obj--votacion .obj__sub { font-family: 'Rubik', system-ui, sans-serif; font-style: normal; font-weight: 300; color: #C9CDC9; }
+.obj--votacion p { color: #C9CDC9; }
+.obj--votacion .obj__abrir { font-family: 'Chivo', 'Arial Narrow', sans-serif; font-weight: 700; color: #35F26F; border-bottom-color: rgba(53,242,111,.6); text-shadow: 0 0 8px rgba(53,242,111,.5); }
+.obj--votacion:hover::after { opacity: 1; }
+@media (max-width: 480px) { .obj--votacion .obj__cuerpo { padding-top: 104px; } .obj--votacion::after { display: block; } }
