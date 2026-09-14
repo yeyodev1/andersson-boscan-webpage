@@ -46,7 +46,7 @@
           <span class="mkh__menu-num">{{ item.num }}</span>
           <span class="mkh__menu-label">
             {{ item.label }}
-            <span v-if="item.action === 'scroll' && route.path !== '/'" class="mkh__menu-hint">↗ Home</span>
+            <span v-if="item.action === 'scroll' && route.path !== '/media-kit'" class="mkh__menu-hint">↗ Home</span>
           </span>
           <span class="mkh__menu-arrow"><i class="fa-solid fa-arrow-right"></i></span>
         </div>
@@ -104,7 +104,7 @@ const ctaItemEl = ref<HTMLElement | null>(null)
 const footerEl  = ref<HTMLElement | null>(null)
 
 const navItems = [
-  { num: '01', label: 'Inicio',        action: 'home',   target: '/' },
+  { num: '01', label: 'Inicio',        action: 'home',   target: '/media-kit' },
   { num: '02', label: 'Quiénes somos', action: 'route',  target: '/quienes-somos' },
   { num: '03', label: 'Audiencia',     action: 'scroll', target: '.p3' },
   { num: '04', label: 'Formatos',      action: 'scroll', target: '.p5' },
@@ -114,13 +114,13 @@ const navItems = [
 function onScroll() { scrolled.value = window.scrollY > 60 }
 
 function isActive(item: typeof navItems[number]) {
-  if (item.action === 'home') return route.path === '/'
+  if (item.action === 'home') return route.path === '/media-kit'
   if (item.action === 'route') return route.path === item.target
   return false
 }
 
 function goHome() {
-  if (route.path !== '/') router.push('/')
+  if (route.path !== '/media-kit') router.push('/media-kit')
   else gsap.to(window, { duration: 0.75, scrollTo: { y: 0 }, ease: 'power2.inOut' })
 }
 
@@ -138,13 +138,13 @@ function handleNav(item: typeof navItems[number]) {
   closeMenu()
   setTimeout(() => {
     if (item.action === 'home') {
-      if (route.path !== '/') router.push('/')
+      if (route.path !== '/media-kit') router.push('/media-kit')
       else gsap.to(window, { duration: 0.75, scrollTo: { y: 0 }, ease: 'power2.inOut' })
     } else if (item.action === 'route') {
       router.push(item.target)
     } else {
-      if (route.path !== '/') {
-        router.push('/').then(() => setTimeout(() => scrollTo(item.target), 300))
+      if (route.path !== '/media-kit') {
+        router.push('/media-kit').then(() => setTimeout(() => scrollTo(item.target), 300))
       } else {
         scrollTo(item.target)
       }
