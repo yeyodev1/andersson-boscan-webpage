@@ -114,7 +114,7 @@ onMounted(() => {
 
   &__eyebrow {
     font-family: 'DM Sans', sans-serif;
-    font-size: 11px;
+    font-size: 1.14rem;
     letter-spacing: 0.35em;
     text-transform: uppercase;
     color: var(--mk-gold);
@@ -124,7 +124,7 @@ onMounted(() => {
 
   &__title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(40px, 4.5vw, 64px);
+    font-size: clamp(2.5rem, 4.5vw, 4rem);
     line-height: 0.92;
     color: var(--mk-cream);
     margin-bottom: 36px;
@@ -139,7 +139,7 @@ onMounted(() => {
 
     th {
       font-family: 'DM Sans', sans-serif;
-      font-size: 10px;
+      font-size: 1.09rem;
       letter-spacing: 0.25em;
       text-transform: uppercase;
       color: var(--mk-gold);
@@ -172,7 +172,7 @@ onMounted(() => {
 
   &__tf-name {
     font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
+    font-size: 1.23rem;
     font-weight: 600;
     color: var(--mk-dim);
     line-height: 1.3;
@@ -180,13 +180,13 @@ onMounted(() => {
 
   &__tf-reach-sub {
     font-family: 'DM Sans', sans-serif;
-    font-size: 11px;
+    font-size: 1.14rem;
     color: var(--mk-dimmer);
   }
 
   &__tf-reach {
     font-family: 'DM Sans', sans-serif;
-    font-size: 11px;
+    font-size: 1.14rem;
     color: rgba(245,242,237,0.3);
     white-space: nowrap;
 
@@ -197,7 +197,7 @@ onMounted(() => {
 
   &__tf-price {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 20px;
+    font-size: 1.56rem;
     color: var(--mk-cream);
     text-align: right;
     line-height: 1;
@@ -205,14 +205,14 @@ onMounted(() => {
 
   &__tf-unit {
     font-family: 'DM Sans', sans-serif;
-    font-size: 10px;
+    font-size: 1.09rem;
     color: var(--mk-dimmer);
     text-align: right;
   }
 
   &__discount {
     font-family: 'DM Sans', sans-serif;
-    font-size: 11px;
+    font-size: 1.14rem;
     color: rgba(245,242,237,0.25);
     margin-top: 16px;
     line-height: 1.5;
@@ -227,7 +227,7 @@ onMounted(() => {
 
   &__why-label {
     font-family: 'DM Sans', sans-serif;
-    font-size: 11px;
+    font-size: 1.14rem;
     letter-spacing: 0.3em;
     text-transform: uppercase;
     color: var(--mk-gold);
@@ -248,7 +248,7 @@ onMounted(() => {
   }
 
   &__wi-n {
-    font-size: 20px;
+    font-size: 1.56rem;
     color: var(--mk-red);
     line-height: 1;
     min-width: 28px;
@@ -259,14 +259,14 @@ onMounted(() => {
   &__wi-title {
     font-family: 'DM Sans', sans-serif;
     font-weight: 700;
-    font-size: 14px;
+    font-size: 1.28rem;
     color: var(--mk-cream);
     margin-bottom: 4px;
   }
 
   &__wi-text {
     font-family: 'DM Sans', sans-serif;
-    font-size: 12px;
+    font-size: 1.19rem;
     color: var(--mk-dim);
     line-height: 1.6;
   }
