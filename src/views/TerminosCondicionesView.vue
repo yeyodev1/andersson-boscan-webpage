@@ -53,7 +53,7 @@
 
 .description {
   color: var(--color-text-secondary, #a0a0a0);
-  font-size: 1.125rem;
+  font-size: 1.47rem;
   line-height: 1.6;
   margin-bottom: 1.5rem;
   
