@@ -236,7 +236,7 @@ onUnmounted(() => {
 
   &__brand {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 22px;
+    font-size: 1.66rem;
     letter-spacing: 0.06em;
     color: var(--mk-cream);
     cursor: pointer;
@@ -261,7 +261,7 @@ onUnmounted(() => {
 
   &__inline-link {
     font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
+    font-size: 1.23rem;
     letter-spacing: 0.05em;
     color: rgba(245,242,237,0.6);
     background: none; border: none;
@@ -273,7 +273,7 @@ onUnmounted(() => {
 
   &__inline-cta {
     font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
+    font-size: 1.23rem;
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -443,7 +443,7 @@ onUnmounted(() => {
 
 .mkh__menu-num {
   font-family: 'DM Sans', sans-serif;
-  font-size: clamp(11px, 1.2vw, 14px);
+  font-size: clamp(1.14rem, 1.2vw, 1.28rem);
   font-weight: 700;
   letter-spacing: 0.2em;
   color: rgba(245,242,237,0.2);
@@ -467,7 +467,7 @@ onUnmounted(() => {
 
 .mkh__menu-hint {
   font-family: 'DM Sans', sans-serif;
-  font-size: clamp(10px, 1vw, 12px);
+  font-size: clamp(1.09rem, 1vw, 1.19rem);
   font-weight: 600;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -485,7 +485,7 @@ onUnmounted(() => {
 }
 
 .mkh__menu-arrow {
-  font-size: clamp(20px, 2.5vw, 32px);
+  font-size: clamp(1.56rem, 2.5vw, 2.13rem);
   color: var(--mk-red);
   opacity: 0;
   transform: translateX(-12px);
@@ -512,7 +512,7 @@ onUnmounted(() => {
 
   &-brand {
     font-family: 'DM Sans', sans-serif;
-    font-size: 10px;
+    font-size: 1.09rem;
     letter-spacing: 0.3em;
     text-transform: uppercase;
     color: rgba(245,242,237,0.25);
@@ -525,7 +525,7 @@ onUnmounted(() => {
 }
 
 .mkh__overlay-social {
-  font-size: 18px;
+  font-size: 1.47rem;
   color: rgba(245,242,237,0.3);
   text-decoration: none;
   transition: color 0.2s, transform 0.2s;
