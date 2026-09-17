@@ -26,7 +26,7 @@
 
   p {
     font-family: $font-principal;
-    font-size: 1.2rem;
+    font-size: 1.53rem;
     color: $text-secondary;
   }
 }
