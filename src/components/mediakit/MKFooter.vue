@@ -153,15 +153,22 @@ onUnmounted(() => {
     max-width: 1280px;
     margin: 0 auto;
     padding: 72px 48px 56px;
+
+    @media (max-width: 640px) {
+      padding: 56px 24px 40px;
+    }
   }
 
   &__grid {
     display: grid;
-    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    // minmax(0, …) en vez de fr pelado: si el usuario agranda la letra del
+    // navegador, el texto baja de línea dentro de su columna en vez de empujar
+    // la página entera hacia la derecha
+    grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 1fr));
     gap: 48px;
 
     @media (max-width: 900px) {
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 40px;
     }
 
@@ -175,17 +182,19 @@ onUnmounted(() => {
     display: flex;
     flex-direction: column;
     gap: 16px;
+    min-width: 0;
   }
 
   // Brand column
   &__brand-name {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 28px;
+    font-size: 1.94rem;
     line-height: 1;
     letter-spacing: 0.04em;
     display: flex;
     align-items: center;
     gap: 6px;
+    flex-wrap: wrap; // con la letra del navegador en grande, la marca parte en dos líneas
 
     .brand-boscan {
       color: var(--mk-cream, #f5f2ed);
@@ -203,14 +212,14 @@ onUnmounted(() => {
   &__tagline {
     font-family: 'Playfair Display', serif;
     font-style: italic;
-    font-size: 13px;
+    font-size: 1.23rem;
     color: rgba(245, 242, 237, 0.45);
     margin: 0;
     line-height: 1.5;
   }
 
   &__subtext {
-    font-size: 11px;
+    font-size: 1.14rem;
     color: rgba(245, 242, 237, 0.25);
     margin: 0;
     letter-spacing: 0.05em;
@@ -219,7 +228,7 @@ onUnmounted(() => {
   // Section titles
   &__section-title {
     font-family: 'DM Sans', sans-serif;
-    font-size: 10px;
+    font-size: 1.09rem;
     font-weight: 600;
     letter-spacing: 0.3em;
     color: var(--mk-gold, #c9a84c);
@@ -241,7 +250,7 @@ onUnmounted(() => {
     cursor: pointer;
     text-align: left;
     font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
+    font-size: 1.28rem;
     color: rgba(245, 242, 237, 0.55);
     text-decoration: none;
     transition: color 0.25s ease;
@@ -266,12 +275,15 @@ onUnmounted(() => {
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: 13px;
+    font-size: 1.23rem;
     color: rgba(245, 242, 237, 0.55);
+    // el correo no tiene dónde partirse y con la letra en grande empujaba la página
+    overflow-wrap: anywhere;
+    min-width: 0;
 
     i {
       color: var(--mk-gold, #c9a84c);
-      font-size: 13px;
+      font-size: 1.23rem;
       width: 16px;
       flex-shrink: 0;
     }
@@ -283,11 +295,12 @@ onUnmounted(() => {
     align-items: center;
     gap: 16px;
     margin-top: 8px;
+    flex-wrap: wrap; // seis iconos en fila no caben si la letra crece
   }
 
   &__social-link {
     color: rgba(245, 242, 237, 0.4);
-    font-size: 16px;
+    font-size: 1.38rem;
     text-decoration: none;
     transition: color 0.25s ease;
 
@@ -319,7 +332,7 @@ onUnmounted(() => {
 
   &__bottom-copy,
   &__bottom-love {
-    font-size: 12px;
+    font-size: 1.19rem;
     color: rgba(245, 242, 237, 0.25);
     line-height: 1.5;
   }
