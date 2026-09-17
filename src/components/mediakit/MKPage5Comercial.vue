@@ -158,7 +158,7 @@ onMounted(() => {
     border: 1px solid rgba(200,57,43,0.4);
     color: var(--mk-cream);
     font-family: 'DM Sans', sans-serif;
-    font-size: 11px;
+    font-size: 1.14rem;
     font-weight: 700;
     letter-spacing: 0.05em;
     padding: 6px 14px;
@@ -173,14 +173,14 @@ onMounted(() => {
   &__title,
   &__spotify-title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(36px, 4.5vw, 60px);
+    font-size: clamp(2.31rem, 4.5vw, 3.75rem);
     line-height: 0.95;
     color: var(--mk-cream);
   }
 
   &__body {
     font-family: 'DM Sans', sans-serif;
-    font-size: 16px;
+    font-size: 1.38rem;
     color: var(--mk-dim);
     line-height: 1.7;
   }
@@ -193,7 +193,7 @@ onMounted(() => {
 
     li {
       font-family: 'DM Sans', sans-serif;
-      font-size: 15px;
+      font-size: 1.33rem;
       color: var(--mk-dim);
       padding-left: 18px;
       position: relative;
@@ -222,7 +222,7 @@ onMounted(() => {
 
   &__price {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(44px, 5vw, 64px);
+    font-size: clamp(2.75rem, 5vw, 4rem);
     color: var(--mk-cream);
     line-height: 1;
 
@@ -231,7 +231,7 @@ onMounted(() => {
 
   &__price-unit {
     font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
+    font-size: 1.23rem;
     color: var(--mk-dimmer);
     line-height: 1.4;
   }
@@ -246,7 +246,7 @@ onMounted(() => {
     border-radius: 4px;
     color: var(--mk-cream);
     font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
+    font-size: 1.23rem;
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -276,7 +276,7 @@ onMounted(() => {
   &__cupos,
   &__spotify-foot {
     font-family: 'DM Sans', sans-serif;
-    font-size: 12px;
+    font-size: 1.19rem;
     letter-spacing: 0.05em;
     color: var(--mk-dimmer);
   }
