@@ -109,7 +109,7 @@ watch([messages, isOpen, escalating], async () => {
   background: #0b0b0b;
   color: #fff;
   font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
+  font-size: 1.23rem;
   letter-spacing: 0.04em;
   cursor: pointer;
   box-shadow: 0 12px 32px rgba(0,0,0,0.18);
@@ -139,31 +139,31 @@ watch([messages, isOpen, escalating], async () => {
     padding: 16px 18px; border-bottom: 1px solid rgba(0,0,0,0.06);
     background: #0b0b0b; color: #fff;
   }
-  &__title { font-family: 'Playfair Display', serif; font-size: 17px; }
-  &__sub { font-size: 11px; opacity: .6; letter-spacing: .04em; margin-top: 2px; }
-  &__close { background: none; border: 0; color: #fff; font-size: 26px; line-height: 1; cursor: pointer; opacity: .7; &:hover { opacity: 1; } }
+  &__title { font-family: 'Playfair Display', serif; font-size: 1.42rem; }
+  &__sub { font-size: 1.14rem; opacity: .6; letter-spacing: .04em; margin-top: 2px; }
+  &__close { background: none; border: 0; color: #fff; font-size: 1.84rem; line-height: 1; cursor: pointer; opacity: .7; &:hover { opacity: 1; } }
 
   &__body { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 10px; background: #f7f6f3; }
   &__msg {
-    max-width: 88%; padding: 10px 14px; border-radius: 14px; font-size: 13.5px; line-height: 1.5; white-space: pre-wrap;
+    max-width: 88%; padding: 10px 14px; border-radius: 14px; font-size: 1.26rem; line-height: 1.5; white-space: pre-wrap;
     &--assistant { align-self: flex-start; background: #fff; color: #111; border: 1px solid rgba(0,0,0,0.06); border-bottom-left-radius: 4px; }
     &--user { align-self: flex-end; background: #0b0b0b; color: #fff; border-bottom-right-radius: 4px; }
   }
   &__chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
   &__chip {
     background: #fff; border: 1px solid rgba(0,0,0,0.12); border-radius: 999px; padding: 7px 12px;
-    font-size: 12px; cursor: pointer; color: #222; font-family: inherit;
+    font-size: 1.19rem; cursor: pointer; color: #222; font-family: inherit;
     &:hover { border-color: #c8392b; color: #c8392b; }
   }
   &__esc {
     display: grid; gap: 8px; padding: 12px; background: #fff; border: 1px solid rgba(0,0,0,0.08); border-radius: 12px;
-    input, textarea { font: inherit; font-size: 13px; padding: 9px 11px; border: 1px solid rgba(0,0,0,0.14); border-radius: 8px; outline: none; &:focus { border-color: #0b0b0b; } }
-    button { font: inherit; font-size: 13px; padding: 10px; border: 0; border-radius: 8px; background: #c8392b; color: #fff; cursor: pointer; &:disabled { opacity: .6; } }
+    input, textarea { font: inherit; font-size: 1.23rem; padding: 9px 11px; border: 1px solid rgba(0,0,0,0.14); border-radius: 8px; outline: none; &:focus { border-color: #0b0b0b; } }
+    button { font: inherit; font-size: 1.23rem; padding: 10px; border: 0; border-radius: 8px; background: #c8392b; color: #fff; cursor: pointer; &:disabled { opacity: .6; } }
   }
   &__input {
     display: flex; gap: 8px; padding: 12px; border-top: 1px solid rgba(0,0,0,0.06); background: #fff;
-    input { flex: 1; font: inherit; font-size: 14px; padding: 11px 14px; border: 1px solid rgba(0,0,0,0.14); border-radius: 999px; outline: none; &:focus { border-color: #0b0b0b; } }
-    button { width: 42px; border: 0; border-radius: 50%; background: #0b0b0b; color: #fff; font-size: 18px; cursor: pointer; &:disabled { opacity: .3; cursor: default; } }
+    input { flex: 1; font: inherit; font-size: 1.28rem; padding: 11px 14px; border: 1px solid rgba(0,0,0,0.14); border-radius: 999px; outline: none; &:focus { border-color: #0b0b0b; } }
+    button { width: 42px; border: 0; border-radius: 50%; background: #0b0b0b; color: #fff; font-size: 1.47rem; cursor: pointer; &:disabled { opacity: .3; cursor: default; } }
   }
 }
 
