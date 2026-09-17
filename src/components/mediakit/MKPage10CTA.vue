@@ -138,7 +138,7 @@ onMounted(() => {
 
   &__label {
     font-family: 'DM Sans', sans-serif;
-    font-size: 11px;
+    font-size: 1.14rem;
     letter-spacing: 0.35em;
     text-transform: uppercase;
     color: var(--mk-gold);
@@ -148,7 +148,7 @@ onMounted(() => {
 
   &__title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(48px, 7vw, 96px);
+    font-size: clamp(3rem, 7vw, 6rem);
     line-height: 0.92;
     color: var(--mk-cream);
     margin-bottom: 40px;
@@ -175,7 +175,7 @@ onMounted(() => {
     border-radius: 4px;
     color: var(--mk-cream);
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(18px, 2.5vw, 26px);
+    font-size: clamp(1.47rem, 2.5vw, 1.84rem);
     letter-spacing: 0.08em;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -196,7 +196,7 @@ onMounted(() => {
     align-items: center;
     gap: 8px;
     font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
+    font-size: 1.28rem;
     color: rgba(245,242,237,0.4);
     text-decoration: none;
     margin-bottom: 48px;
@@ -205,7 +205,7 @@ onMounted(() => {
     padding-bottom: 2px;
 
     &:hover { color: var(--mk-gold); border-color: var(--mk-gold); }
-    i { font-size: 12px; }
+    i { font-size: 1.19rem; }
   }
 
   &__emails {
@@ -221,7 +221,7 @@ onMounted(() => {
 
   &__emails-label {
     font-family: 'DM Sans', sans-serif;
-    font-size: 10px;
+    font-size: 1.09rem;
     letter-spacing: 0.3em;
     text-transform: uppercase;
     color: rgba(201,168,76,0.6);
@@ -246,7 +246,7 @@ onMounted(() => {
   &__email-who {
     font-family: 'DM Sans', sans-serif;
     font-weight: 700;
-    font-size: 12px;
+    font-size: 1.19rem;
     color: rgba(245,242,237,0.45);
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -254,7 +254,7 @@ onMounted(() => {
 
   &__email {
     font-family: 'DM Sans', sans-serif;
-    font-size: clamp(17px, 3.5vw, 22px);
+    font-size: clamp(1.42rem, 3.5vw, 1.66rem);
     font-weight: 500;
     color: var(--mk-gold);
     text-decoration: none;
@@ -271,7 +271,7 @@ onMounted(() => {
 
   &__sub {
     font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
+    font-size: 1.23rem;
     color: var(--mk-dimmer);
     margin-bottom: 48px;
   }
@@ -292,7 +292,7 @@ onMounted(() => {
     align-items: center;
     justify-content: center;
     color: var(--mk-dim);
-    font-size: 16px;
+    font-size: 1.38rem;
     text-decoration: none;
     transition: border-color 0.3s, color 0.3s, background 0.3s, transform 0.3s;
 
@@ -306,7 +306,7 @@ onMounted(() => {
 
   &__footer-brand {
     font-family: 'DM Sans', sans-serif;
-    font-size: 11px;
+    font-size: 1.14rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: rgba(245,242,237,0.2);
