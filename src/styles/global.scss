@@ -1,6 +1,13 @@
 @use './colorVariables.module.scss' as *;
 @use './fonts.module.scss' as *;
 
+html {
+  /* Sin tamaño fijo a propósito: el rem parte del tamaño de letra que el
+     usuario tenga configurado en su navegador, así puede agrandarlo todo.
+     Nunca poner aquí font-size: 62.5% ni un valor en px. */
+  font-size: 100%;
+}
+
 html, body {
   background-color: $white;
   margin: 0;
