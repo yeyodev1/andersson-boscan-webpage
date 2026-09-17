@@ -34,8 +34,8 @@ VITE_GHL_WEBHOOK_OPPORTUNITY=<GHL opportunity webhook URL>
 |------|------|-------|
 | `/` | `PortadaView.vue` | Portada minimalista: logo, pareja, expedientes (carpetas) que aparecen al pasar el mouse y se pueden arrastrar, dos botones: "Quiero periodismo" → `/periodismo`, "Quiero publicidad" → `/publicidad` |
 | `/periodismo` | — (estático) | Sitio de investigaciones que entrega Andersson, servido desde `public/periodismo/`. No es una ruta de Vue: ver "Periodismo" abajo. |
-| `/publicidad` | `MediaKitView.vue` | El media kit de 10 secciones (el home anterior). "Quiero publicidad" hace una cortina negra con GSAP y navega aquí. |
-| `/media-kit` | — | Redirect a `/publicidad` |
+| `/publicidad` | `PublicidadView.vue` | Funnel de ventas v3: hero, configurador de 3 pasos, recomendación, checkout por carril, briefing y chat. "Quiero publicidad" hace una cortina negra con GSAP y navega aquí. |
+| `/media-kit` | `MediaKitView.vue` | El media kit de 10 secciones. Material de apoyo, ya no es la puerta de entrada; se enlaza desde el funnel y desde "Media kit 2026" en la portada. |
 | `/quienes-somos` | `QuienesSomosView.vue` | Standalone about page |
 | `/agendar` | `AgendarView.vue` | GHL calendar embed (qualified leads only) |
 | `/precios` | `PreciosView.vue` | Full pricing table — gated behind contact form; skips gate if `mk_contact_given` in localStorage |
@@ -69,10 +69,14 @@ entrega nueva y se reemplaza la carpeta entera.
   fuera de la carpeta de la entrega. Si llega una entrega nueva, volver a añadir
   `<link rel="stylesheet" href="/ajustes-periodismo/ajustes.css">` después de
   `game.css` en `public/periodismo/index.html`.
-- `ajustes-periodismo/letra.js` agranda toda letra menor de 20px (el cliente la
-  veía "de lupa"); está enlazado antes de `</head>` en la portada y en los 220
-  `investigaciones/**/index.html`. Con una entrega nueva hay que re-inyectarlo
-  (`perl` sobre `</head>`), y subir el `?v=` al cambiar CSS o JS para saltar caché.
+- `ajustes-periodismo/letra.js` sube el tamaño de letra de toda la entrega (ver
+  "Tipografía" abajo) y `ajustes-periodismo/encaje.css` corrige lo poco que no
+  entra con la letra grande (cabecera y lista de créditos). Los dos están
+  enlazados antes de `</head>` en las 221 páginas (portada + `investigaciones/**`).
+  Con una entrega nueva hay que re-inyectar ambos (`perl` sobre `</head>`), y
+  subir el `?v=` al cambiar CSS o JS para saltar caché.
+  `ajustes.css` sigue siendo solo de la portada: tiene reglas sobre `.obj`, `.cta`
+  y `.mesa` que en un reportaje harían daño.
 - `6e60fdfa0d2c5fad49aa11dbf1d063a5.txt` es la clave de IndexNow: no borrar ni
   renombrar.
 - Requisitos del hosting (del documento de entrega): respuestas `206 Partial
@@ -87,11 +91,33 @@ entrega nueva y se reemplaza la carpeta entera.
 - **Estado**: `useAdFunnel()` (singleton, persiste en `localStorage.ad_funnel_state`) y `useAdChat()` (`localStorage.ad_chat`). Preguntar nunca saca al cliente del checkout.
 - **Carriles**: A = 1 mes (self-serve), B = 6/12 meses bajo umbral, C = presupuesto ≥ 3000/mes + ≥ 6 meses + brand safety approved + decisor → habilita `/agendar`.
 - **Webhooks**: `src/services/GhlWebhookService.ts` (fetch a `VITE_GHL_WEBHOOK_CONTACT` / `VITE_GHL_WEBHOOK_OPPORTUNITY`, con campos `ad_*` y tags del handoff). Pago online aún no integrado: el flujo A promete "enlace de pago por correo".
-- **Analítica**: `trackAdEvent()` hace push a `window.dataLayer` con los eventos `ad_*` del handoff §11.
+- **Analítica**: `trackAdEvent()` hace push a `window.dataLayer` con los eventos `ad_*` del handoff §11. `ad_zoom_booked` lo dispara `AgendarView` al detectar el booking.
+- **Etapas de pipeline**: `syncStage(etapa)` en `useAdFunnel` empuja "Configurador iniciado", "Recomendación generada", "Checkout iniciado / propuesta enviada" y "Pregunta pendiente" a GHL *en cuanto se conoce el correo*, con dedupe en `localStorage.ad_stage_sent`. Sin ese push temprano GHL no puede recordar carritos abandonados (§8A): el tag `checkout-abandonado` lo aplica un workflow de GHL sobre las oportunidades que se quedan en "Checkout iniciado".
+- **Candado del calendario**: el carril C escribe `localStorage.ad_zoom_unlocked`. El guard de `/agendar` bloquea a quien tenga `ad_funnel_state` sin esa llave y lo devuelve a `/publicidad`. Quien llega por el media kit (sin estado de funnel) mantiene el flujo de siempre.
+- **Pago**: no hay pasarela. El carril A cierra con `ad_checkout_status: 'payment_pending'` y etapa "Pago pendiente"; el enlace de pago lo manda un workflow de GHL.
+
+## Tipografía
+
+El cliente pidió letra grande en todas partes y que el usuario pueda agrandarla
+más desde su navegador. Dos reglas, una sola curva:
+
+- **Todo en `rem`, nunca en `px`.** `html` se queda en `font-size: 100%`
+  (`src/styles/global.scss`) para que el rem parta del tamaño que el usuario
+  tenga configurado. Nunca poner ahí `62.5%` ni un valor en px: rompe el que el
+  texto crezca con la configuración del navegador.
+- **La curva** (misma en `src/` y en `ajustes-periodismo/letra.js`):
+  `nuevo = viejo + (40 - viejo) / 4` para tamaños menores a 40px; de 40px para
+  arriba no se toca. La letra chica sube mucho y los titulares casi nada, así que
+  la jerarquía se mantiene. En números: 11px→1.14rem, 13px→1.23rem, 15px→1.33rem,
+  17px→1.42rem, 20px→1.56rem, 24px→1.75rem, 32px→2.13rem.
+- Si hay que volver a subirla, se cambia `BONO`/`TOPE` en los dos lados y se
+  vuelve a medir el desborde horizontal a 1920/1440/1280/1024/834/390 px y con
+  `font-size` de raíz en 16/20/24px. La app y periodismo están verificados sin
+  desborde en esa matriz.
 
 ## Header Rule
 
-**Only `MediaKitView` uses `<MKHeader />`** (its "Inicio" apunta a `/publicidad`). All other views (PortadaView, PublicidadView, AgendarView, PreciosView, QuienesSomosView) have their own minimal topbar. Never add MKHeader to sub-pages — causes double header collision.
+**Only `MediaKitView` uses `<MKHeader />`** (its "Inicio" apunta a `/media-kit`). All other views (PortadaView, PublicidadView, AgendarView, PreciosView, QuienesSomosView) have their own minimal topbar. Never add MKHeader to sub-pages — causes double header collision.
 
 ## Lead Capture Flow
 
