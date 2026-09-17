@@ -7,6 +7,7 @@ import { GhlWebhookService } from '@/services/GhlWebhookService'
 
 export type Lane = 'A' | 'B' | 'C'   // A autoservicio · B asistida asincrónica · C cuenta estratégica
 export type DecisionPower = 'decision_maker' | 'co_decision_maker' | 'influencer' | ''
+export type ExclusivityConflict = 'none' | 'possible' | 'unknown' | ''
 export type FunnelStage = 'hero' | 'goal' | 'duration' | 'details' | 'result' | 'checkout' | 'briefing' | 'done'
 
 export interface FunnelState {
@@ -21,6 +22,7 @@ export interface FunnelState {
   budget: string
   role: string
   decision_power: DecisionPower
+  exclusivity_conflict: ExclusivityConflict
   special_notes: string
   selected_product: string
   // contacto
@@ -39,12 +41,16 @@ export interface FunnelState {
 
 const STORAGE_KEY = 'ad_funnel_state'
 const CONTACT_KEY = 'mk_contact_given'
+/** Llave del candado del calendario: solo el carril C la escribe (ver AgendarView) */
+export const ZOOM_KEY = 'ad_zoom_unlocked'
+/** Etapas ya empujadas a GHL, para no repetirlas en cada paso */
+const STAGE_KEY = 'ad_stage_sent'
 
 const defaults = (): FunnelState => ({
   stage: 'hero',
   goal: '', duration: 0,
   brand: '', website: '', category: '', country: 'Ecuador', start_date: '', budget: '',
-  role: '', decision_power: '', special_notes: '',
+  role: '', decision_power: '', exclusivity_conflict: '', special_notes: '',
   selected_product: '',
   first_name: '', last_name: '', email: '', phone: '',
   accepted_terms: false,
@@ -128,15 +134,55 @@ export function useAdFunnel() {
 
   const questionPriority = computed(() => lane.value === 'C' ? 1 : lane.value === 'B' ? 2 : 3)
 
+  /**
+   * Empuja la etapa del pipeline a GHL en cuanto se conoce el correo, con dedupe.
+   * Sin este push temprano GHL no puede recordar carritos abandonados: el tag
+   * `checkout-abandonado` lo aplica un workflow sobre las oportunidades que se
+   * quedan en "Checkout iniciado".
+   */
+  async function syncStage(stage: string, tags: string[] = []): Promise<boolean> {
+    const s = state.value
+    if (!s.email) return false
+    let sent: string[] = []
+    try { sent = JSON.parse(localStorage.getItem(STAGE_KEY) || '[]') } catch { /* ignore */ }
+    if (sent.includes(stage)) return false
+
+    const ok = await GhlWebhookService.opportunity({
+      ...basePayload(),
+      opportunityName: `${s.brand || s.first_name} — ${selectedProduct.value?.name ?? 'Publicidad'} · ${s.duration || '?'}m`,
+      pipelineName: lane.value === 'C' ? AD_RULES.pipeline_strategic : AD_RULES.pipeline_name,
+      pipelineStage: stage,
+      opportunityStatus: 'open',
+      monetaryValue: contractValue.value,
+      tags,
+      ad_checkout_status: 'in_progress',
+    })
+    try { localStorage.setItem(STAGE_KEY, JSON.stringify([...sent, stage])) } catch { /* ignore */ }
+    return ok
+  }
+
   function go(stage: FunnelStage) {
     state.value.stage = stage
-    if (stage === 'goal') trackAdEvent('ad_funnel_started')
-    if (stage === 'result') trackAdEvent('ad_recommendation_viewed', { products: recommendations.value.map(p => p.product_id), lane: lane.value })
-    if (stage === 'checkout') trackAdEvent(lane.value === 'A' ? 'ad_checkout_started' : 'ad_proposal_requested', { lane: lane.value })
+    if (stage === 'goal') {
+      trackAdEvent('ad_funnel_started')
+      syncStage('Configurador iniciado')
+    }
+    if (stage === 'result') {
+      trackAdEvent('ad_recommendation_viewed', { products: recommendations.value.map(p => p.product_id), lane: lane.value })
+      syncStage('Recomendación generada')
+    }
+    if (stage === 'checkout') {
+      trackAdEvent(lane.value === 'A' ? 'ad_checkout_started' : 'ad_proposal_requested', { lane: lane.value })
+      syncStage('Checkout iniciado / propuesta enviada')
+    }
   }
 
   function reset() {
     state.value = defaults()
+    try {
+      localStorage.removeItem(STAGE_KEY)
+      localStorage.removeItem(ZOOM_KEY)
+    } catch { /* ignore */ }
   }
 
   function saveContact() {
@@ -167,7 +213,7 @@ export function useAdFunnel() {
       ad_role: s.role,
       ad_decision_power: s.decision_power,
       ad_brand_safety: brandSafety.value,
-      ad_exclusivity_conflict: 'unknown',
+      ad_exclusivity_conflict: s.exclusivity_conflict || 'unknown',
       ad_zoom_eligible: calendarAccess.value,
       ad_lane: lane.value,
       ad_special_notes: s.special_notes,
@@ -219,8 +265,17 @@ export function useAdFunnel() {
       sendError.value = ''
     }
     s.submitted_lane = l
+    syncZoomKey()
     trackAdEvent(l === 'A' ? 'ad_purchase_completed' : l === 'B' ? 'ad_proposal_requested' : 'ad_zoom_unlocked', { lane: l, value: contractValue.value })
     return true
+  }
+
+  /** El carril C deja la llave del calendario; los demás la quitan */
+  function syncZoomKey() {
+    try {
+      if (calendarAccess.value) localStorage.setItem(ZOOM_KEY, '1')
+      else localStorage.removeItem(ZOOM_KEY)
+    } catch { /* ignore */ }
   }
 
   /** Briefing post-compra (carril A) */
@@ -276,6 +331,6 @@ export function useAdFunnel() {
     state, sending, sendError,
     monthlyBudget, brandSafety, recommendations, selectedProduct, contractValue,
     calendarAccess, lane, needsManualReview, questionPriority, agendarQuery,
-    go, reset, saveContact, submitCheckout, submitBriefing, contextSummary,
+    go, reset, saveContact, syncStage, submitCheckout, submitBriefing, contextSummary,
   }
 }
