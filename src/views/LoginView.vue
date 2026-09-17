@@ -114,7 +114,7 @@ const handleLogin = async () => {
     display: block;
     color: var(--color-text-secondary, #a0a0a0);
     margin-bottom: 0.5rem;
-    font-size: 0.875rem;
+    font-size: 1.28rem;
   }
 
   input {
@@ -124,7 +124,7 @@ const handleLogin = async () => {
     border: 1px solid var(--color-border-primary, rgba(255, 255, 255, 0.1));
     border-radius: 8px;
     color: var(--color-text-primary, #ffffff);
-    font-size: 1rem;
+    font-size: 1.38rem;
     transition: border-color 0.2s ease;
 
     &:focus {
@@ -144,7 +144,7 @@ const handleLogin = async () => {
   border: none;
   border-radius: 8px;
   padding: 0.875rem 1.5rem;
-  font-size: 1.125rem;
+  font-size: 1.47rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -184,7 +184,7 @@ const handleLogin = async () => {
   border: 1px solid rgba(255, 77, 109, 0.2);
   padding: 0.75rem;
   border-radius: 8px;
-  font-size: 0.875rem;
+  font-size: 1.28rem;
   margin-bottom: 1.5rem;
   text-align: center;
 }
@@ -201,7 +201,7 @@ const handleLogin = async () => {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2rem;
+    font-size: 2.13rem;
     margin: 0 auto 1rem;
   }
 
@@ -228,7 +228,7 @@ const handleLogin = async () => {
     .label {
       display: block;
       color: var(--color-text-secondary, #a0a0a0);
-      font-size: 0.875rem;
+      font-size: 1.28rem;
       margin-bottom: 0.5rem;
     }
 
@@ -236,7 +236,7 @@ const handleLogin = async () => {
       display: block;
       color: #22c55e;
       font-family: monospace;
-      font-size: 0.9rem;
+      font-size: 1.3rem;
     }
   }
 }
@@ -247,7 +247,7 @@ const handleLogin = async () => {
   border: 1px solid var(--color-border-primary, rgba(255, 255, 255, 0.2));
   border-radius: 8px;
   padding: 0.75rem 1rem;
-  font-size: 1rem;
+  font-size: 1.38rem;
   cursor: pointer;
   transition: all 0.2s ease;
   width: 100%;
