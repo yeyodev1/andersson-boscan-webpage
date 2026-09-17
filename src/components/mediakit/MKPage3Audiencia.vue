@@ -118,7 +118,7 @@ onMounted(() => {
 
   &__eyebrow {
     font-family: 'DM Sans', sans-serif;
-    font-size: 11px;
+    font-size: 1.14rem;
     letter-spacing: 0.35em;
     text-transform: uppercase;
     color: var(--mk-gold);
@@ -128,7 +128,7 @@ onMounted(() => {
 
   &__hero-title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(36px, 5vw, 72px);
+    font-size: clamp(2.31rem, 5vw, 4.5rem);
     line-height: 0.95;
     color: var(--mk-cream);
   }
@@ -178,7 +178,7 @@ onMounted(() => {
   }
 
   &__card-icon {
-    font-size: 22px;
+    font-size: 1.66rem;
     color: var(--mk-gold);
     opacity: 0.7;
     margin-bottom: 12px;
@@ -187,7 +187,7 @@ onMounted(() => {
 
   &__card-n {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(44px, 5vw, 64px);
+    font-size: clamp(2.75rem, 5vw, 4rem);
     color: var(--mk-cream);
     line-height: 1;
     margin-bottom: 8px;
@@ -196,7 +196,7 @@ onMounted(() => {
   &__card-l {
     font-family: 'DM Sans', sans-serif;
     font-weight: 700;
-    font-size: 13px;
+    font-size: 1.23rem;
     letter-spacing: 0.05em;
     text-transform: uppercase;
     color: var(--mk-gold);
@@ -205,7 +205,7 @@ onMounted(() => {
 
   &__card-s {
     font-family: 'DM Sans', sans-serif;
-    font-size: 15px;
+    font-size: 1.33rem;
     color: var(--mk-dim);
     line-height: 1.6;
     margin-bottom: 16px;
