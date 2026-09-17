@@ -419,19 +419,26 @@ const pricingRows = [
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    font-size: 13px;
+    white-space: nowrap;
+    font-size: 1.23rem;
     color: rgba(245,242,237,0.5);
     text-decoration: none;
     transition: color 0.2s;
     &:hover { color: #f5f2ed; }
-    i { font-size: 12px; }
+    i { font-size: 1.19rem; }
   }
 
   &__brand {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 16px;
+    font-size: 1.38rem;
     letter-spacing: 0.08em;
     color: rgba(245,242,237,0.3);
+    white-space: nowrap;
+
+    // en un teléfono, con la letra grande, la marca y el "volver" se pisaban
+    @media (max-width: 560px) {
+      display: none;
+    }
   }
 
   // ── GATE ──────────────────────────────────────────────────────
@@ -454,7 +461,7 @@ const pricingRows = [
   }
 
   &__gate-eyebrow {
-    font-size: 11px;
+    font-size: 1.14rem;
     letter-spacing: 0.35em;
     text-transform: uppercase;
     color: #c9a84c;
@@ -464,14 +471,14 @@ const pricingRows = [
 
   &__gate-title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(2.4rem, 6vw, 3.6rem);
+    font-size: clamp(2.42rem, 6vw, 3.6rem);
     line-height: 0.95;
     color: #f5f2ed;
     margin: 0 0 16px;
   }
 
   &__gate-sub {
-    font-size: 15px;
+    font-size: 1.33rem;
     color: rgba(245,242,237,0.5);
     line-height: 1.65;
     margin: 0 0 32px;
@@ -503,7 +510,7 @@ const pricingRows = [
   }
 
   &__label {
-    font-size: 11px;
+    font-size: 1.14rem;
     font-weight: 700;
     letter-spacing: 0.15em;
     text-transform: uppercase;
@@ -530,7 +537,7 @@ const pricingRows = [
     padding: 14px 16px;
     color: #f5f2ed;
     font-family: 'DM Sans', sans-serif;
-    font-size: 15px;
+    font-size: 1.33rem;
     outline: none;
     box-sizing: border-box;
     transition: border-color 0.2s, box-shadow 0.2s;
@@ -550,7 +557,7 @@ const pricingRows = [
     top: 50%;
     transform: translateY(-50%);
     color: #2ecc71;
-    font-size: 16px;
+    font-size: 1.38rem;
     pointer-events: none;
   }
 
@@ -568,7 +575,7 @@ const pricingRows = [
   }
 
   &__phone-flag {
-    font-size: 18px;
+    font-size: 1.47rem;
     padding: 0 0 0 14px;
     flex-shrink: 0;
     pointer-events: none;
@@ -588,7 +595,7 @@ const pricingRows = [
 
   &__phone-dial {
     font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
+    font-size: 1.28rem;
     font-weight: 600;
     color: rgba(245,242,237,0.55);
     padding: 0 4px 0 6px;
@@ -604,7 +611,7 @@ const pricingRows = [
     border-left: 1px solid rgba(245,242,237,0.08);
     color: #f5f2ed;
     font-family: 'DM Sans', sans-serif;
-    font-size: 15px;
+    font-size: 1.33rem;
     padding: 14px 16px;
     outline: none;
     margin-left: 4px;
@@ -617,7 +624,7 @@ const pricingRows = [
     border-radius: 8px;
     padding: 12px 16px;
     color: #e87a6e;
-    font-size: 14px;
+    font-size: 1.28rem;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -630,7 +637,7 @@ const pricingRows = [
     border-radius: 8px;
     color: #f5f2ed;
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.4rem;
+    font-size: 1.67rem;
     letter-spacing: 0.06em;
     padding: 18px;
     cursor: pointer;
@@ -653,12 +660,12 @@ const pricingRows = [
 
     &--cta {
       max-width: 420px;
-      font-size: 1.2rem;
+      font-size: 1.53rem;
     }
   }
 
   &__gate-note {
-    font-size: 12px;
+    font-size: 1.19rem;
     color: rgba(245,242,237,0.25);
     text-align: center;
     margin: 16px 0 0;
@@ -666,7 +673,7 @@ const pricingRows = [
     align-items: center;
     justify-content: center;
     gap: 6px;
-    i { font-size: 11px; }
+    i { font-size: 1.14rem; }
   }
 
   // ── PRICES ────────────────────────────────────────────────────
@@ -680,7 +687,7 @@ const pricingRows = [
   }
 
   &__prices-eyebrow {
-    font-size: 11px;
+    font-size: 1.14rem;
     letter-spacing: 0.35em;
     text-transform: uppercase;
     color: #c9a84c;
@@ -697,7 +704,7 @@ const pricingRows = [
   }
 
   &__prices-sub {
-    font-size: 16px;
+    font-size: 1.38rem;
     color: rgba(245,242,237,0.5);
     line-height: 1.65;
     max-width: 600px;
@@ -713,10 +720,10 @@ const pricingRows = [
   &__table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 15px;
+    font-size: 1.33rem;
 
     th {
-      font-size: 11px;
+      font-size: 1.14rem;
       font-weight: 700;
       letter-spacing: 0.18em;
       text-transform: uppercase;
@@ -754,7 +761,7 @@ const pricingRows = [
     background: rgba(200,57,43,0.15);
     border: 1px solid rgba(200,57,43,0.3);
     border-radius: 3px;
-    font-size: 10px;
+    font-size: 1.09rem;
     font-weight: 700;
     letter-spacing: 0.05em;
     padding: 2px 8px;
@@ -765,20 +772,20 @@ const pricingRows = [
 
   &__tf-name {
     font-weight: 700;
-    font-size: 15px;
+    font-size: 1.33rem;
     color: #f5f2ed;
     line-height: 1.4;
   }
 
   &__tf-desc {
-    font-size: 13px;
+    font-size: 1.23rem;
     color: rgba(245,242,237,0.45);
     line-height: 1.6;
     max-width: 340px;
   }
 
   &__tf-reach {
-    font-size: 13px;
+    font-size: 1.23rem;
     color: #c9a84c;
     font-weight: 600;
     white-space: nowrap;
@@ -791,13 +798,13 @@ const pricingRows = [
 
   &__price {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.7rem;
+    font-size: 1.9rem;
     color: #f5f2ed;
     line-height: 1;
   }
 
   &__price-unit {
-    font-size: 11px;
+    font-size: 1.14rem;
     color: rgba(245,242,237,0.35);
     letter-spacing: 0.05em;
     margin-top: 3px;
@@ -811,7 +818,7 @@ const pricingRows = [
   }
 
   &__fn {
-    font-size: 13px;
+    font-size: 1.23rem;
     color: rgba(245,242,237,0.3);
     display: flex;
     align-items: flex-start;
@@ -831,14 +838,14 @@ const pricingRows = [
 
   &__cta-text {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-size: clamp(1.98rem, 4vw, 2.8rem);
     color: #f5f2ed;
     margin: 0;
   }
 
   &__cta-sub {
     font-family: 'DM Sans', sans-serif;
-    font-size: 15px;
+    font-size: 1.33rem;
     color: rgba(245,242,237,0.45);
     margin: 0;
     line-height: 1.5;
@@ -851,7 +858,7 @@ const pricingRows = [
   }
 
   &__email {
-    font-size: 14px;
+    font-size: 1.28rem;
     color: rgba(245,242,237,0.45);
     text-decoration: none;
     display: flex;
@@ -859,7 +866,7 @@ const pricingRows = [
     gap: 7px;
     transition: color 0.2s;
     &:hover { color: #f5f2ed; }
-    i { font-size: 12px; }
+    i { font-size: 1.19rem; }
   }
 }
 
