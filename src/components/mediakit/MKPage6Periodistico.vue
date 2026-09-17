@@ -137,7 +137,7 @@ onMounted(() => {
 
   &__eyebrow {
     font-family: 'DM Sans', sans-serif;
-    font-size: 11px;
+    font-size: 1.14rem;
     letter-spacing: 0.35em;
     text-transform: uppercase;
     color: var(--mk-gold);
@@ -147,7 +147,7 @@ onMounted(() => {
 
   &__title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(40px, 5vw, 72px);
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
     line-height: 0.95;
     color: var(--mk-cream);
     margin-bottom: 40px;
@@ -186,7 +186,7 @@ onMounted(() => {
 
   &__format-tag {
     font-family: 'DM Sans', sans-serif;
-    font-size: 10px;
+    font-size: 1.09rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--mk-gold);
@@ -196,14 +196,14 @@ onMounted(() => {
   &__format-title {
     font-family: 'DM Sans', sans-serif;
     font-weight: 700;
-    font-size: 17px;
+    font-size: 1.42rem;
     color: var(--mk-cream);
     margin-bottom: 6px;
   }
 
   &__format-desc {
     font-family: 'DM Sans', sans-serif;
-    font-size: 15px;
+    font-size: 1.33rem;
     color: var(--mk-dim);
     line-height: 1.6;
   }
@@ -219,7 +219,7 @@ onMounted(() => {
     border-radius: 4px;
     color: var(--mk-cream);
     font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
+    font-size: 1.28rem;
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
