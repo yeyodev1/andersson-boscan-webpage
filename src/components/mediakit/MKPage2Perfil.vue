@@ -166,7 +166,7 @@ onMounted(() => {
 
   &__label {
     font-family: 'DM Sans', sans-serif;
-    font-size: 11px;
+    font-size: 1.14rem;
     letter-spacing: 0.35em;
     text-transform: uppercase;
     color: var(--mk-gold);
@@ -176,7 +176,7 @@ onMounted(() => {
 
   &__title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(48px, 6vw, 88px);
+    font-size: clamp(3rem, 6vw, 5.5rem);
     line-height: 0.92;
     color: var(--mk-cream);
     margin-bottom: 48px;
@@ -201,7 +201,7 @@ onMounted(() => {
 
   &__stat-n {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(36px, 4.5vw, 60px);
+    font-size: clamp(2.31rem, 4.5vw, 3.75rem);
     color: var(--mk-red);
     line-height: 1;
     min-width: clamp(60px, 12vw, 90px);
@@ -211,14 +211,14 @@ onMounted(() => {
   &__stat-title {
     font-family: 'DM Sans', sans-serif;
     font-weight: 700;
-    font-size: 17px;
+    font-size: 1.42rem;
     color: var(--mk-cream);
     margin-bottom: 6px;
   }
 
   &__stat-sub {
     font-family: 'DM Sans', sans-serif;
-    font-size: 15px;
+    font-size: 1.33rem;
     color: var(--mk-dim);
     line-height: 1.6;
   }
@@ -230,7 +230,7 @@ onMounted(() => {
 
   &__awards-label {
     font-family: 'DM Sans', sans-serif;
-    font-size: 10px;
+    font-size: 1.09rem;
     letter-spacing: 0.3em;
     text-transform: uppercase;
     color: var(--mk-gold);
@@ -239,7 +239,7 @@ onMounted(() => {
 
   &__awards-text {
     font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
+    font-size: 1.23rem;
     color: var(--mk-dimmer);
     line-height: 1.7;
   }
@@ -253,7 +253,7 @@ onMounted(() => {
   &__social-intro {
     font-family: 'Playfair Display', serif;
     font-style: italic;
-    font-size: clamp(14px, 1.6vw, 17px);
+    font-size: clamp(1.28rem, 1.6vw, 1.42rem);
     color: var(--mk-dim);
     margin-bottom: 18px;
   }
@@ -272,7 +272,7 @@ onMounted(() => {
 
   &__social-name {
     font-family: 'DM Sans', sans-serif;
-    font-size: 11px;
+    font-size: 1.14rem;
     font-weight: 700;
     letter-spacing: 0.18em;
     text-transform: uppercase;
@@ -292,13 +292,13 @@ onMounted(() => {
     padding: 7px 14px;
     border-radius: 100px;
     font-family: 'DM Sans', sans-serif;
-    font-size: 12px;
+    font-size: 1.19rem;
     font-weight: 500;
     text-decoration: none;
     transition: all 0.25s ease;
     border: 1px solid;
 
-    i { font-size: 13px; }
+    i { font-size: 1.23rem; }
 
     &--ig {
       color: #e1306c;
