@@ -92,6 +92,7 @@ export function useAdChat() {
       chat_transcript: transcript,
       source: 'Publicidad — Tengo una pregunta',
     })
+    await funnel.syncStage('Pregunta pendiente', ['pregunta-humana-publicidad'])
     sending.value = false
     escalating.value = false
     escalated.value = true
