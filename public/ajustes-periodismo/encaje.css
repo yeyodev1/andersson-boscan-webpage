@@ -1,0 +1,42 @@
+/* Ajustes de Bakano: lo que hay que ceder para que la letra grande de letra.js
+   entre en pantalla. Va en las 221 páginas de la entrega (portada, expedientes y
+   transcripciones), a diferencia de ajustes.css, que es solo de la portada.
+   Todo lo de aquí sale de medir desbordes reales, no de gusto. */
+
+/* Cabecera: con la letra más grande (y más aún si el usuario la agranda en su
+   navegador) la marca y el menú ya no caben en una línea de 60px de alto. */
+.topbar__in {
+  height: auto;
+  min-height: 60px;
+  flex-wrap: wrap;
+  padding-block: 8px;
+  row-gap: 4px;
+}
+.topbar__nav {
+  flex-wrap: wrap;
+  row-gap: 4px;
+}
+
+/* Créditos y fuentes: la columna de etiquetas era max-content, así que un
+   "INVESTIGACIÓN (2019)" en grande empujaba la página entera hacia la derecha. */
+.fcred {
+  grid-template-columns: minmax(0, max-content) minmax(0, 1fr);
+}
+/* En pantallas angostas se apilan etiqueta y valor. */
+@media (max-width: 620px) {
+  .fcred {
+    grid-template-columns: 1fr;
+    gap: 2px 0;
+  }
+  .fcred dt {
+    padding-top: 12px;
+  }
+}
+
+/* Correos, URLs y nombres largos: no tienen dónde partirse, así que en grande
+   fijaban un ancho mínimo que empujaba la página entera hacia la derecha.
+   overflow-wrap se hereda, así que basta ponerlo en los dos contenedores. */
+.footer,
+.creditos {
+  overflow-wrap: anywhere;
+}
