@@ -164,7 +164,7 @@ onUnmounted(() => {
     background: rgba(8,8,8,0.85);
     color: #f5f2ed;
     font-family: 'DM Sans', sans-serif;
-    font-size: 11px;
+    font-size: 1.14rem;
     letter-spacing: 0.08em;
     white-space: nowrap;
     padding: 4px 10px;
