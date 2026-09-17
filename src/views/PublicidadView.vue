@@ -105,6 +105,14 @@
                 <option value="influencer">No, la decide otra persona</option>
               </select>
             </label>
+            <label>¿Compites con alguna marca que ya nos auspicia?
+              <select v-model="state.exclusivity_conflict" required>
+                <option value="" disabled>Elige</option>
+                <option value="none">No, que yo sepa</option>
+                <option value="possible">Puede ser, revísenlo</option>
+                <option value="unknown">No lo sé</option>
+              </select>
+            </label>
           </template>
           <label v-if="state.goal === 'especial'" class="grid__full">Cuéntanos qué tienes en mente
             <textarea v-model.trim="state.special_notes" rows="3" placeholder="Formato, idea, fecha…"></textarea>
@@ -355,39 +363,42 @@ $line: rgba(0,0,0,.09);
   font-family: 'DM Sans', sans-serif; -webkit-font-smoothing: antialiased;
 
   &__bar {
-    position: sticky; top: 0; z-index: 50; height: 56px; display: flex; align-items: center; justify-content: space-between;
-    padding: 0 clamp(16px, 3vw, 40px); background: rgba(251,251,250,.85); backdrop-filter: blur(10px); border-bottom: 1px solid $line;
+    // altura mínima y no fija: si el usuario agranda la letra del navegador, la
+    // barra crece y el menú baja de línea en vez de salirse de la pantalla
+    position: sticky; top: 0; z-index: 50; min-height: 56px; display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 8px 16px; padding: 8px clamp(16px, 3vw, 40px);
+    background: rgba(251,251,250,.85); backdrop-filter: blur(10px); border-bottom: 1px solid $line;
   }
-  &__brand { font-family: 'Playfair Display', serif; font-size: 19px; color: inherit; text-decoration: none; span { color: $red; } }
+  &__brand { font-family: 'Playfair Display', serif; font-size: 1.52rem; color: inherit; text-decoration: none; span { color: $red; } }
   &__nav {
-    display: flex; align-items: center; gap: 22px;
-    a, button { font: inherit; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: $muted; text-decoration: none; background: none; border: 0; cursor: pointer; &:hover { color: $red; } }
+    display: flex; align-items: center; flex-wrap: wrap; gap: 8px 22px;
+    a, button { font: inherit; font-size: 1.14rem; letter-spacing: .2em; text-transform: uppercase; color: $muted; text-decoration: none; background: none; border: 0; cursor: pointer; &:hover { color: $red; } }
     button { color: $ink; }
   }
 
-  &__eyebrow { font-size: 11px; letter-spacing: .3em; text-transform: uppercase; color: $red; margin: 0 0 14px; }
-  &__h2 { font-family: 'Playfair Display', serif; font-weight: 500; font-size: clamp(26px, 3.4vw, 40px); line-height: 1.1; margin: 0 0 10px; }
+  &__eyebrow { font-size: 1.14rem; letter-spacing: .3em; text-transform: uppercase; color: $red; margin: 0 0 14px; }
+  &__h2 { font-family: 'Playfair Display', serif; font-weight: 500; font-size: clamp(1.84rem, 3.4vw, 2.5rem); line-height: 1.1; margin: 0 0 10px; }
   &__muted { color: $muted; margin: 0 0 26px; max-width: 60ch; line-height: 1.55; }
-  &__fine { font-size: 13px; color: $muted; line-height: 1.55; margin: 14px 0 0; }
+  &__fine { font-size: 1.23rem; color: $muted; line-height: 1.55; margin: 14px 0 0; }
 
   &__hero {
     flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
     padding: clamp(60px, 10vh, 120px) 20px 60px;
-    h1 { font-family: 'Playfair Display', serif; font-weight: 500; font-size: clamp(38px, 6vw, 76px); line-height: 1.02; margin: 0 0 22px; letter-spacing: -.01em; span { color: $red; } }
+    h1 { font-family: 'Playfair Display', serif; font-weight: 500; font-size: clamp(2.41rem, 6vw, 4.75rem); line-height: 1.02; margin: 0 0 22px; letter-spacing: -.01em; span { color: $red; } }
   }
-  &__lead { font-size: clamp(16px, 1.5vw, 19px); line-height: 1.55; color: rgba(11,11,11,.72); margin: 0 0 36px; }
+  &__lead { font-size: clamp(1.38rem, 1.5vw, 1.52rem); line-height: 1.55; color: rgba(11,11,11,.72); margin: 0 0 36px; }
   &__hero-ctas { display: flex; flex-direction: column; align-items: center; gap: 16px; }
   &__proof {
     list-style: none; padding: 0; margin: 60px 0 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 36px;
-    font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: $muted;
-    strong { display: block; font-family: 'Playfair Display', serif; font-size: 26px; color: $ink; letter-spacing: 0; text-transform: none; margin-bottom: 2px; }
+    font-size: 1.19rem; letter-spacing: .12em; text-transform: uppercase; color: $muted;
+    strong { display: block; font-family: 'Playfair Display', serif; font-size: 1.84rem; color: $ink; letter-spacing: 0; text-transform: none; margin-bottom: 2px; }
   }
   &__resume {
-    margin-top: 36px; font-size: 13px; color: $muted;
+    margin-top: 36px; font-size: 1.23rem; color: $muted;
     button { font: inherit; background: none; border: 0; color: $ink; text-decoration: underline; cursor: pointer; }
   }
   &__link {
-    font: inherit; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: $muted; background: none; border: 0; cursor: pointer;
+    font: inherit; font-size: 1.19rem; letter-spacing: .14em; text-transform: uppercase; color: $muted; background: none; border: 0; cursor: pointer;
     border-bottom: 1px solid transparent; padding-bottom: 2px; &:hover { color: $red; border-color: $red; }
     &--center { display: block; margin: 18px auto 0; }
   }
@@ -397,14 +408,14 @@ $line: rgba(0,0,0,.09);
 
   &__foot {
     display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; padding: 18px clamp(16px, 3vw, 40px); padding-right: max(210px, 3vw);
-    border-top: 1px solid $line; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: $muted;
+    border-top: 1px solid $line; font-size: 1.14rem; letter-spacing: .12em; text-transform: uppercase; color: $muted;
     a { color: inherit; text-decoration: none; &:hover { color: $red; } }
   }
 }
 
 .btn {
   display: inline-flex; align-items: center; gap: 14px; padding: 16px 28px; border-radius: 8px; border: 1px solid $ink;
-  font-family: 'Cormorant Garamond', serif; font-weight: 600; text-transform: uppercase; letter-spacing: .18em; font-size: 16px;
+  font-family: 'Cormorant Garamond', serif; font-weight: 600; text-transform: uppercase; letter-spacing: .18em; font-size: 1.38rem;
   cursor: pointer; text-decoration: none; transition: transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s ease;
   span { transition: transform .3s cubic-bezier(.2,.8,.2,1); }
   &:hover { transform: translateY(-2px); span { transform: translateX(6px); } }
@@ -417,7 +428,7 @@ $line: rgba(0,0,0,.09);
 .steps {
   list-style: none; padding: 0; margin: 0 0 32px; display: flex; gap: 6px;
   li {
-    flex: 1; font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: rgba(11,11,11,.35); padding-top: 10px; border-top: 2px solid rgba(0,0,0,.08);
+    flex: 1; font-size: 1.12rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(11,11,11,.35); padding-top: 10px; border-top: 2px solid rgba(0,0,0,.08);
     &.done { border-color: $ink; color: $ink; }
     &.on { border-color: $red; color: $ink; }
   }
@@ -425,7 +436,7 @@ $line: rgba(0,0,0,.09);
 
 .card {
   background: #fff; border: 1px solid $line; border-radius: 14px; padding: clamp(22px, 3vw, 36px); box-shadow: 0 10px 30px rgba(0,0,0,.04);
-  h2 { font-family: 'Playfair Display', serif; font-weight: 500; font-size: clamp(22px, 2.6vw, 30px); margin: 0 0 22px; line-height: 1.15; }
+  h2 { font-family: 'Playfair Display', serif; font-weight: 500; font-size: clamp(1.66rem, 2.6vw, 2.03rem); margin: 0 0 22px; line-height: 1.15; }
 }
 
 .opts {
@@ -438,8 +449,8 @@ $line: rgba(0,0,0,.09);
   display: flex; flex-direction: column; gap: 6px; transition: border-color .2s, transform .2s, box-shadow .2s;
   &:hover { border-color: $ink; transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0,0,0,.06); }
   &.on { border-color: $red; box-shadow: 0 0 0 1px $red inset; }
-  &__t { font-family: 'Playfair Display', serif; font-size: 17px; line-height: 1.2; }
-  &__h { font-size: 12.5px; color: $muted; line-height: 1.45; }
+  &__t { font-family: 'Playfair Display', serif; font-size: 1.42rem; line-height: 1.2; }
+  &__h { font-size: 1.21rem; color: $muted; line-height: 1.45; }
 }
 
 .grid {
@@ -448,16 +459,16 @@ $line: rgba(0,0,0,.09);
   &__full { grid-column: 1 / -1; }
 }
 label {
-  display: flex; flex-direction: column; gap: 6px; font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; color: $muted;
+  display: flex; flex-direction: column; gap: 6px; font-size: 1.16rem; letter-spacing: .1em; text-transform: uppercase; color: $muted;
   input, select, textarea {
-    font: inherit; font-family: 'DM Sans', sans-serif; font-size: 15px; letter-spacing: 0; text-transform: none; color: $ink;
+    font: inherit; font-family: 'DM Sans', sans-serif; font-size: 1.33rem; letter-spacing: 0; text-transform: none; color: $ink;
     padding: 12px 14px; border: 1px solid rgba(0,0,0,.14); border-radius: 8px; background: #fff; outline: none;
     &:focus { border-color: $ink; }
   }
   textarea { resize: vertical; }
 }
 .check {
-  flex-direction: row; align-items: flex-start; gap: 10px; margin-top: 18px; text-transform: none; letter-spacing: 0; font-size: 13px; color: rgba(11,11,11,.75);
+  flex-direction: row; align-items: flex-start; gap: 10px; margin-top: 18px; text-transform: none; letter-spacing: 0; font-size: 1.23rem; color: rgba(11,11,11,.75);
   input { width: 16px; height: 16px; margin-top: 2px; }
   a { color: $ink; }
 }
@@ -465,10 +476,10 @@ label {
   display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-top: 26px; flex-wrap: wrap;
   &--end { justify-content: flex-end; } &--center { justify-content: center; }
 }
-.back { font: inherit; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: $muted; background: none; border: 0; cursor: pointer; padding: 8px 0; margin-top: 18px; &:hover { color: $ink; } }
+.back { font: inherit; font-size: 1.19rem; letter-spacing: .12em; text-transform: uppercase; color: $muted; background: none; border: 0; cursor: pointer; padding: 8px 0; margin-top: 18px; &:hover { color: $ink; } }
 .row .back { margin-top: 0; }
 
-.notice { background: #fff6f5; border: 1px solid rgba(200,57,43,.25); color: #7a1f15; border-radius: 10px; padding: 14px 16px; font-size: 14px; line-height: 1.5; margin-bottom: 22px; }
+.notice { background: #fff6f5; border: 1px solid rgba(200,57,43,.25); color: #7a1f15; border-radius: 10px; padding: 14px 16px; font-size: 1.28rem; line-height: 1.5; margin-bottom: 22px; }
 
 .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; margin-bottom: 8px; }
 .prod {
@@ -476,13 +487,13 @@ label {
   transition: border-color .2s, box-shadow .25s, transform .25s;
   &:hover { transform: translateY(-3px); box-shadow: 0 18px 40px rgba(0,0,0,.07); }
   &.on { border-color: $ink; }
-  h3 { font-family: 'Playfair Display', serif; font-weight: 500; font-size: 22px; margin: 6px 0 4px; line-height: 1.15; }
-  &__tag { font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: $red; }
-  &__result { color: $muted; font-size: 14px; margin: 0; line-height: 1.45; }
-  &__price { font-family: 'Playfair Display', serif; font-size: 26px; padding: 12px 0; border-top: 1px solid $line; border-bottom: 1px solid $line; }
-  &__warn { font-size: 12.5px; color: $red; margin: 0; }
-  dl { margin: 0; display: grid; grid-template-columns: 110px 1fr; gap: 8px 12px; font-size: 13.5px; line-height: 1.45;
-    dt { font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: $muted; padding-top: 2px; }
+  h3 { font-family: 'Playfair Display', serif; font-weight: 500; font-size: 1.66rem; margin: 6px 0 4px; line-height: 1.15; }
+  &__tag { font-size: 1.09rem; letter-spacing: .2em; text-transform: uppercase; color: $red; }
+  &__result { color: $muted; font-size: 1.28rem; margin: 0; line-height: 1.45; }
+  &__price { font-family: 'Playfair Display', serif; font-size: 1.84rem; padding: 12px 0; border-top: 1px solid $line; border-bottom: 1px solid $line; }
+  &__warn { font-size: 1.21rem; color: $red; margin: 0; }
+  dl { margin: 0; display: grid; grid-template-columns: 110px 1fr; gap: 8px 12px; font-size: 1.26rem; line-height: 1.45;
+    dt { font-size: 1.12rem; letter-spacing: .14em; text-transform: uppercase; color: $muted; padding-top: 2px; }
     dd { margin: 0; ul { margin: 0; padding-left: 16px; } }
   }
   footer { margin-top: auto; display: flex; flex-direction: column; align-items: center; gap: 12px; }
@@ -491,6 +502,6 @@ label {
 .summary {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin: 0 0 22px;
   div { background: #fff; border: 1px solid $line; border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; gap: 4px;
-    span { font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: $muted; } strong { font-weight: 500; font-size: 14px; } }
+    span { font-size: 1.09rem; letter-spacing: .16em; text-transform: uppercase; color: $muted; } strong { font-weight: 500; font-size: 1.28rem; } }
 }
 </style>
