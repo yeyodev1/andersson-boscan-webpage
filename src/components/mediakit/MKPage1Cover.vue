@@ -147,6 +147,7 @@ onMounted(() => {
 .p1 {
   position: relative;
   min-height: 100vh;
+  height: auto;
   display: flex;
   align-items: flex-end;
   overflow: hidden;
@@ -184,23 +185,31 @@ onMounted(() => {
     z-index: 2;
     width: 100%;
     min-width: 0;
-    padding: 0 clamp(16px, 5vw, 60px) clamp(40px, 8vh, 80px);
+    // el padding de arriba deja libre el header fijo (64px): con la letra grande
+    // el contenido ya no cabía en 100vh y se metía debajo de la marca
+    padding: 88px clamp(16px, 5vw, 60px) clamp(40px, 8vh, 80px);
     box-sizing: border-box;
   }
 
   &__eyebrow {
     font-family: 'DM Sans', sans-serif;
-    font-size: 11px;
+    font-size: 1.14rem;
     letter-spacing: 0.35em;
     text-transform: uppercase;
     color: var(--mk-gold);
     font-weight: 700;
     margin-bottom: 20px;
+
+    @media (max-width: 640px) {
+      font-size: 1rem;
+      letter-spacing: 0.16em;
+      margin-bottom: 14px;
+    }
   }
 
   &__title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(48px, 13vw, 160px);
+    font-size: clamp(3rem, 13vw, 10rem);
     line-height: 0.9;
     letter-spacing: 0.01em;
     color: var(--mk-cream);
@@ -218,7 +227,7 @@ onMounted(() => {
   &__tagline {
     font-family: 'Playfair Display', serif;
     font-style: italic;
-    font-size: clamp(13px, 3vw, 20px);
+    font-size: clamp(1.23rem, 3vw, 1.56rem);
     color: var(--mk-dim);
     margin-bottom: 32px;
     max-width: 100%;
@@ -282,7 +291,7 @@ onMounted(() => {
   }
 
   &__stat-icon {
-    font-size: 13px;
+    font-size: 1.23rem;
     color: rgba(201,168,76,0.55);
   }
 
@@ -291,11 +300,15 @@ onMounted(() => {
     flex-direction: column;
     min-width: 0;
     overflow: hidden;
+
+    @media (max-width: 1024px) {
+      overflow: visible;
+    }
   }
 
   &__stat-n {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(18px, 2.2vw, 30px);
+    font-size: clamp(1.47rem, 2.2vw, 2.03rem);
     color: rgba(245,242,237,0.75);
     line-height: 1;
     letter-spacing: 0.02em;
@@ -303,14 +316,14 @@ onMounted(() => {
 
   &__stat-l {
     font-family: 'DM Sans', sans-serif;
-    font-size: 9px;
+    font-size: 1.05rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: rgba(201,168,76,0.5);
     margin-top: 3px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    // con la letra grande "FORMATOS DE PAUTA" no cabía en su columna y se cortaba
+    // con puntos suspensivos: preferimos que baje de línea, en cualquier ancho
+    line-height: 1.25;
   }
 
   &__foot {
@@ -322,7 +335,7 @@ onMounted(() => {
 
   &__byline {
     font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
+    font-size: 1.23rem;
     color: var(--mk-dimmer);
     letter-spacing: 0.08em;
   }
@@ -335,7 +348,7 @@ onMounted(() => {
 
   &__email {
     font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
+    font-size: 1.23rem;
     color: var(--mk-dim);
     border-bottom: 1px solid rgba(245,242,237,0.2);
     padding-bottom: 2px;
@@ -355,7 +368,7 @@ onMounted(() => {
 
     span {
       font-family: 'DM Sans', sans-serif;
-      font-size: 10px;
+      font-size: 1.09rem;
       letter-spacing: 0.25em;
       text-transform: uppercase;
       color: var(--mk-dimmer);
@@ -385,14 +398,14 @@ onMounted(() => {
     padding: 20px 44px;
     border-radius: 4px;
     font-family: 'DM Sans', sans-serif;
-    font-size: 17px;
+    font-size: 1.42rem;
     font-weight: 700;
     letter-spacing: 0.06em;
     text-transform: uppercase;
     cursor: pointer;
     transition: all 0.3s ease;
 
-    i { font-size: 16px; }
+    i { font-size: 1.38rem; }
 
     &--ghost {
       background: transparent;
