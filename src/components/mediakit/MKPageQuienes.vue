@@ -438,7 +438,7 @@ $dimmer: var(--mk-dimmer);
 
   &-eyebrow {
     font-family: 'DM Sans', sans-serif;
-    font-size: 11px;
+    font-size: 1.14rem;
     letter-spacing: 0.45em;
     text-transform: uppercase;
     color: $gold;
@@ -470,7 +470,7 @@ $dimmer: var(--mk-dimmer);
 
   &-sub {
     font-family: 'DM Sans', sans-serif;
-    font-size: clamp(14px, 1.8vw, 18px);
+    font-size: clamp(1.28rem, 1.8vw, 1.47rem);
     color: $dim;
     line-height: 1.7;
     max-width: 560px;
@@ -490,7 +490,7 @@ $dimmer: var(--mk-dimmer);
     align-items: center;
     gap: 10px;
     font-family: 'DM Sans', sans-serif;
-    font-size: 11px;
+    font-size: 1.14rem;
     letter-spacing: 0.3em;
     text-transform: uppercase;
     color: $dimmer;
@@ -588,7 +588,7 @@ $dimmer: var(--mk-dimmer);
     bottom: clamp(20px, 4vw, 40px);
     left: clamp(20px, 4vw, 40px);
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(80px, 12vw, 140px);
+    font-size: clamp(5rem, 12vw, 8.75rem);
     line-height: 1;
     color: rgba(245,242,237,0.04);
     pointer-events: none;
@@ -626,7 +626,7 @@ $dimmer: var(--mk-dimmer);
   &-country,
   &-role {
     font-family: 'DM Sans', sans-serif;
-    font-size: 11px;
+    font-size: 1.14rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     font-weight: 700;
@@ -664,7 +664,7 @@ $dimmer: var(--mk-dimmer);
 
   &-bio {
     font-family: 'DM Sans', sans-serif;
-    font-size: clamp(13px, 1.4vw, 15px);
+    font-size: clamp(1.23rem, 1.4vw, 1.33rem);
     color: $dim;
     line-height: 1.75;
     margin: 0 0 28px;
@@ -685,12 +685,12 @@ $dimmer: var(--mk-dimmer);
     align-items: center;
     gap: 10px;
     font-family: 'DM Sans', sans-serif;
-    font-size: 12px;
+    font-size: 1.19rem;
     color: $dimmer;
 
     i {
       color: $red;
-      font-size: 13px;
+      font-size: 1.23rem;
       width: 16px;
       flex-shrink: 0;
     }
@@ -715,14 +715,14 @@ $dimmer: var(--mk-dimmer);
 
     &-n {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-size: clamp(1.83rem, 3vw, 2.42rem);
       color: $cream;
       line-height: 1;
     }
 
     &-l {
       font-family: 'DM Sans', sans-serif;
-      font-size: 10px;
+      font-size: 1.09rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: $gold;
@@ -753,7 +753,7 @@ $dimmer: var(--mk-dimmer);
     border-radius: 4px;
     color: $cream;
     font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
+    font-size: 1.23rem;
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -795,7 +795,7 @@ $dimmer: var(--mk-dimmer);
   background: rgba(245,242,237,0.02);
 
   > i {
-    font-size: 20px;
+    font-size: 1.56rem;
     flex-shrink: 0;
   }
 
@@ -807,14 +807,14 @@ $dimmer: var(--mk-dimmer);
 
   &-handle {
     font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
+    font-size: 1.23rem;
     font-weight: 600;
     color: $cream;
   }
 
   &-stat {
     font-family: 'DM Sans', sans-serif;
-    font-size: 11px;
+    font-size: 1.14rem;
     color: $dimmer;
   }
 
@@ -875,7 +875,7 @@ $dimmer: var(--mk-dimmer);
 
   &-badge {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 28px;
+    font-size: 1.94rem;
     letter-spacing: 0.3em;
     color: $gold;
     white-space: nowrap;
@@ -902,7 +902,7 @@ $dimmer: var(--mk-dimmer);
   &-quote {
     font-family: 'Playfair Display', serif;
     font-style: italic;
-    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+    font-size: clamp(1.53rem, 2.5vw, 1.98rem);
     color: $cream;
     line-height: 1.6;
     margin: 0;
@@ -923,7 +923,7 @@ $dimmer: var(--mk-dimmer);
     border-radius: 4px;
     color: $cream;
     font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
+    font-size: 1.28rem;
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
