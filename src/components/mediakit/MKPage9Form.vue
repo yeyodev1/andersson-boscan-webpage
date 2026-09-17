@@ -165,7 +165,7 @@ onUnmounted(() => {
 
 .pf__eyebrow {
   font-family: 'DM Sans', sans-serif;
-  font-size: clamp(0.65rem, 1.2vw, 0.85rem);
+  font-size: clamp(1.11rem, 1.2vw, 1.26rem);
   letter-spacing: 0.28em;
   color: var(--mk-gold, #c9a84c);
   text-transform: uppercase;
@@ -184,7 +184,7 @@ onUnmounted(() => {
 
 .pf__video-sub {
   font-family: 'DM Sans', sans-serif;
-  font-size: clamp(1rem, 2vw, 1.4rem);
+  font-size: clamp(1.38rem, 2vw, 1.67rem);
   color: rgba(245,242,237,0.75);
   margin: 0;
 }
@@ -201,7 +201,7 @@ onUnmounted(() => {
 
 .pf__cta-sub {
   font-family: 'DM Sans', sans-serif;
-  font-size: clamp(12px, 1.4vw, 15px);
+  font-size: clamp(1.19rem, 1.4vw, 1.33rem);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--mk-gold, #c9a84c);
@@ -227,7 +227,7 @@ onUnmounted(() => {
   border-radius: 4px;
   color: var(--mk-cream, #f5f2ed);
   font-family: 'DM Sans', sans-serif;
-  font-size: clamp(13px, 1.4vw, 15px);
+  font-size: clamp(1.23rem, 1.4vw, 1.33rem);
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
