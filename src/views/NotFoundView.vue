@@ -87,7 +87,7 @@ onUnmounted(() => clearInterval(interval))
 
   &__code {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(120px, 20vw, 240px);
+    font-size: clamp(7.5rem, 20vw, 15rem);
     line-height: 0.85;
     color: #c8392b;
     letter-spacing: -0.02em;
@@ -104,14 +104,14 @@ onUnmounted(() => clearInterval(interval))
 
   &__title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(24px, 4vw, 40px);
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
     color: #f5f2ed;
     letter-spacing: 0.05em;
     margin-bottom: 16px;
   }
 
   &__sub {
-    font-size: 15px;
+    font-size: 1.33rem;
     color: rgba(245,242,237,0.5);
     margin-bottom: 40px;
     line-height: 1.6;
@@ -119,7 +119,7 @@ onUnmounted(() => clearInterval(interval))
 
   &__count {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 20px;
+    font-size: 1.56rem;
     color: #c9a84c;
   }
 
@@ -129,7 +129,7 @@ onUnmounted(() => clearInterval(interval))
     border: 1px solid rgba(200,57,43,0.5);
     color: #f5f2ed;
     text-decoration: none;
-    font-size: 13px;
+    font-size: 1.23rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     font-weight: 700;
