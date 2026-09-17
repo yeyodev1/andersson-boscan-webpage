@@ -167,7 +167,7 @@ onMounted(() => {
 
   &__who {
     font-family: 'DM Sans', sans-serif;
-    font-size: 11px;
+    font-size: 1.14rem;
     letter-spacing: 0.3em;
     text-transform: uppercase;
     color: var(--mk-gold);
@@ -177,7 +177,7 @@ onMounted(() => {
 
   &__handle {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(28px, 3.5vw, 44px);
+    font-size: clamp(1.94rem, 3.5vw, 2.75rem);
     color: var(--mk-cream);
     margin-bottom: 32px;
     letter-spacing: 0.02em;
@@ -198,7 +198,7 @@ onMounted(() => {
 
   &__bar-name {
     font-family: 'DM Sans', sans-serif;
-    font-size: 12px;
+    font-size: 1.19rem;
     color: var(--mk-dim);
     font-weight: 500;
   }
@@ -219,7 +219,7 @@ onMounted(() => {
 
   &__bar-n {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 20px;
+    font-size: 1.56rem;
     color: var(--mk-cream);
     line-height: 1;
     text-align: right;
@@ -227,7 +227,7 @@ onMounted(() => {
 
   &__bar-l {
     font-family: 'DM Sans', sans-serif;
-    font-size: 10px;
+    font-size: 1.09rem;
     color: var(--mk-dimmer);
     text-align: right;
   }
