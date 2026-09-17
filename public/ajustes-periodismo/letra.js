@@ -1,14 +1,22 @@
-/* Ajustes de Bakano: agranda la letra pequeña de la entrega de Andersson ("letra de lupa").
-   Los tamaños del sitio están en px y repartidos en 35 formatos, así que en vez de
-   sobrescribir cientos de selectores se escala cada tamaño computado por debajo de 20px.
+/* Ajustes de Bakano: sube el tamaño de letra de toda la entrega de Andersson.
+   El sitio trae ~1400 tamaños en px repartidos en 35 formatos, así que en vez de
+   sobrescribir selectores se reescribe el tamaño ya calculado de cada elemento.
+
+   Dos cosas importantes:
+   - Se escribe en rem sobre una base de 16, así que si el usuario agranda la
+     letra en su navegador (Ctrl + o Configuración → Apariencia → Tamaño de
+     fuente) todo el sitio crece con él. En px no crecía.
+   - La curva es la misma que usa la app Vue (src/): la letra chica sube mucho,
+     la grande casi nada, y de 40px para arriba solo se pasa a rem sin cambiar
+     el tamaño, para no romper los titulares.
    Se mide todo antes de escribir para que los tamaños en em no se multipliquen. */
 (function () {
-  var SALTAR = 'svg, canvas, script, style, noscript, #portada-jugable, .bmhero, .intro, .topbar, .fnav';
+  var SALTAR = 'svg, canvas, script, style, noscript, #portada-jugable, .bmhero, .intro';
+  var BASE = 16, TOPE = 40;
   var original = new WeakMap();
 
-  function objetivo(s, angosto) {
-    if (s >= 20) return s;
-    return Math.min(angosto ? 18 : 20, Math.max(s * 1.3, angosto ? 14 : 15));
+  function objetivo(px, bono) {
+    return px >= TOPE ? px : px + bono * (TOPE - px) / (TOPE - 8);
   }
 
   function restaurar(els) {
@@ -19,20 +27,22 @@
   }
 
   function escalar(els) {
-    var angosto = window.innerWidth < 650, cambios = [];
+    var bono = window.innerWidth < 650 ? 6.5 : 8, cambios = [];
     for (var i = 0; i < els.length; i++) {
       var e = els[i];
       if (e.closest(SALTAR)) continue;
-      var cs = getComputedStyle(e), s = parseFloat(cs.fontSize), n = objetivo(s, angosto);
-      if (n === s) continue;
+      var cs = getComputedStyle(e), px = parseFloat(cs.fontSize);
+      if (!px) continue;
+      var n = objetivo(px, bono);
+      // el alto de línea en px quedaría apretado con la letra nueva: se pasa a proporción
       var lh = parseFloat(cs.lineHeight);
-      cambios.push([e, n, isNaN(lh) ? null : Math.max(lh * n / s, n * 1.2)]);
+      cambios.push([e, Math.round(n / BASE * 1000) / 1000, isNaN(lh) ? null : Math.max(lh / px, 1.2)]);
     }
     for (i = 0; i < cambios.length; i++) {
       var c = cambios[i], el = c[0];
       if (!original.has(el)) original.set(el, { fs: el.style.fontSize, lh: el.style.lineHeight });
-      el.style.fontSize = c[1] + 'px';
-      if (c[2]) el.style.lineHeight = c[2] + 'px';
+      el.style.fontSize = c[1] + 'rem';
+      if (c[2]) el.style.lineHeight = String(c[2]);
     }
   }
 
