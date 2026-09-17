@@ -132,7 +132,7 @@ onMounted(() => {
     border: 1px solid rgba(200,57,43,0.35);
     color: var(--mk-cream);
     font-family: 'DM Sans', sans-serif;
-    font-size: 11px;
+    font-size: 1.14rem;
     font-weight: 700;
     letter-spacing: 0.05em;
     padding: 6px 14px;
@@ -141,14 +141,14 @@ onMounted(() => {
 
   &__title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(48px, 6vw, 80px);
+    font-size: clamp(3rem, 6vw, 5rem);
     line-height: 0.9;
     color: var(--mk-cream);
   }
 
   &__desc {
     font-family: 'DM Sans', sans-serif;
-    font-size: 15px;
+    font-size: 1.33rem;
     color: var(--mk-dim);
     line-height: 1.7;
   }
@@ -184,7 +184,7 @@ onMounted(() => {
 
   &__opt-label {
     font-family: 'DM Sans', sans-serif;
-    font-size: 11px;
+    font-size: 1.14rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--mk-dimmer);
@@ -202,7 +202,7 @@ onMounted(() => {
 
   &__opt-desc {
     font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
+    font-size: 1.23rem;
     color: var(--mk-dim);
     line-height: 1.6;
     flex: 1;
@@ -215,7 +215,7 @@ onMounted(() => {
 
   &__opt-price {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 36px;
+    font-size: 2.31rem;
     color: var(--mk-cream);
     line-height: 1;
 
@@ -224,13 +224,13 @@ onMounted(() => {
 
   &__opt-unit {
     font-family: 'DM Sans', sans-serif;
-    font-size: 11px;
+    font-size: 1.14rem;
     color: var(--mk-dimmer);
   }
 
   &__opt-reach {
     font-family: 'DM Sans', sans-serif;
-    font-size: 12px;
+    font-size: 1.19rem;
     color: rgba(200,57,43,0.7);
     font-weight: 500;
   }
@@ -245,7 +245,7 @@ onMounted(() => {
     border-radius: 4px;
     color: var(--mk-cream);
     font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
+    font-size: 1.28rem;
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
