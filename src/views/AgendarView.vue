@@ -9,14 +9,19 @@
             <i class="fa-solid fa-circle-info"></i>
           </div>
           <p class="ag-success__eyebrow">UN MOMENTO</p>
-          <h1 class="ag-success__title" style="font-size:clamp(2rem,5vw,3.5rem)">PRIMERO<br>COMPLETA TU PERFIL</h1>
-          <p class="ag-success__sub">
+          <h1 v-if="blocked" class="ag-success__title" style="font-size:clamp(2rem,5vw,3.5rem)">NO NECESITAS<br>UNA REUNIÓN</h1>
+          <h1 v-else class="ag-success__title" style="font-size:clamp(2rem,5vw,3.5rem)">PRIMERO<br>COMPLETA TU PERFIL</h1>
+          <p v-if="blocked" class="ag-success__sub">
+            Tu campaña se resuelve sin llamada: la compras o recibes la propuesta directo
+            en la web, y cualquier duda te la respondemos por escrito. Te llevamos de vuelta…
+          </p>
+          <p v-else class="ag-success__sub">
             Para agendar una llamada, necesitamos conocerte un poco.
             Te redirigimos al inicio en unos segundos…
           </p>
           <div class="ag-success__actions">
-            <button class="ag-btn-primary" @click="router.push('/')">
-              <i class="fa-solid fa-house"></i> Ir al inicio ahora
+            <button class="ag-btn-primary" @click="router.push(blocked ? '/publicidad' : '/')">
+              <i class="fa-solid fa-house"></i> {{ blocked ? 'Volver a mi campaña' : 'Ir al inicio ahora' }}
             </button>
           </div>
         </div>
@@ -98,6 +103,7 @@ import { computed, ref, onMounted, onUnmounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import MKFooter from '@/components/mediakit/MKFooter.vue'
 import MKHeader from '@/components/mediakit/MKHeader.vue'
+import { ZOOM_KEY, trackAdEvent } from '@/composables/useAdFunnel'
 
 const route = useRoute()
 const router = useRouter()
@@ -106,10 +112,13 @@ const iframeHeight = ref(1100)
 const booked      = ref(false)
 const bookedName  = ref('')
 const redirecting = ref(false)
+/** Llegó desde el funnel de publicidad sin ser cuenta estratégica: no le toca reunión */
+const blocked     = ref(false)
 
 function triggerBooked(name: string | null) {
   bookedName.value = name ?? ((route.query.firstName as string) ?? '')
   booked.value = true
+  trackAdEvent('ad_zoom_booked', { email: (route.query.email as string) ?? '' })
   window.scrollTo({ top: 0, behavior: 'smooth' })
 }
 
@@ -134,6 +143,18 @@ onMounted(() => {
 
   const hasQueryData = !!(route.query.firstName || route.query.email || route.query.phone)
   const stored = localStorage.getItem('mk_contact_given')
+  const fromFunnel = !!localStorage.getItem('ad_funnel_state')
+  const zoomUnlocked = localStorage.getItem(ZOOM_KEY) === '1'
+
+  // Candado del calendario: quien viene del funnel de publicidad solo pasa si el
+  // carril C le dejó la llave. Quien llega por el media kit no tiene estado de
+  // funnel y mantiene el flujo de siempre.
+  if (fromFunnel && !zoomUnlocked) {
+    blocked.value = true
+    redirecting.value = true
+    setTimeout(() => router.push('/publicidad'), 4000)
+    return
+  }
 
   if (!hasQueryData && !stored) {
     // No contact data at all — redirect to home
@@ -209,13 +230,13 @@ const calendarUrl = computed(() => {
     align-items: center;
     justify-content: center;
     margin: 0 auto 2rem;
-    font-size: 2rem;
+    font-size: 2.13rem;
     color: #c8392b;
   }
 
   &__eyebrow {
     font-family: 'DM Sans', sans-serif;
-    font-size: 0.75rem;
+    font-size: 1.19rem;
     letter-spacing: 0.25em;
     color: #c9a84c;
     margin: 0 0 1rem;
@@ -232,7 +253,7 @@ const calendarUrl = computed(() => {
 
   &__sub {
     font-family: 'DM Sans', sans-serif;
-    font-size: 1.05rem;
+    font-size: 1.41rem;
     line-height: 1.7;
     color: rgba(245,242,237,0.7);
     margin: 0 0 2rem;
@@ -252,7 +273,7 @@ const calendarUrl = computed(() => {
 
   &__label {
     font-family: 'DM Sans', sans-serif;
-    font-size: 0.72rem;
+    font-size: 1.17rem;
     letter-spacing: 0.15em;
     color: rgba(245,242,237,0.4);
     text-transform: uppercase;
@@ -260,7 +281,7 @@ const calendarUrl = computed(() => {
 
   &__value {
     font-family: 'DM Sans', sans-serif;
-    font-size: 1rem;
+    font-size: 1.38rem;
     font-weight: 500;
     color: #f5f2ed;
     text-transform: capitalize;
@@ -272,7 +293,7 @@ const calendarUrl = computed(() => {
 
   &__note {
     font-family: 'DM Sans', sans-serif;
-    font-size: 0.82rem;
+    font-size: 1.24rem;
     color: rgba(245,242,237,0.35);
     margin: 0;
   }
@@ -320,7 +341,7 @@ const calendarUrl = computed(() => {
 
 .ag-eyebrow {
   font-family: 'DM Sans', sans-serif;
-  font-size: 0.8rem;
+  font-size: 1.23rem;
   letter-spacing: 0.2em;
   color: var(--mk-gold, #c9a84c);
   text-transform: uppercase;
@@ -338,7 +359,7 @@ const calendarUrl = computed(() => {
 
 .ag-subtitle {
   font-family: 'DM Sans', sans-serif;
-  font-size: 1rem;
+  font-size: 1.38rem;
   line-height: 1.6;
   color: rgba(245, 242, 237, 0.7);
   max-width: 560px;
@@ -369,7 +390,7 @@ const calendarUrl = computed(() => {
   text-align: center;
   margin-top: 1.5rem;
   font-family: 'DM Sans', sans-serif;
-  font-size: 0.8rem;
+  font-size: 1.23rem;
   color: rgba(245,242,237,0.25);
 }
 
@@ -378,7 +399,7 @@ const calendarUrl = computed(() => {
   border: none;
   color: rgba(245,242,237,0.4);
   font-family: 'DM Sans', sans-serif;
-  font-size: 0.8rem;
+  font-size: 1.23rem;
   cursor: pointer;
   text-decoration: underline;
   padding: 0;
@@ -395,7 +416,7 @@ const calendarUrl = computed(() => {
   border: none;
   border-radius: 6px;
   font-family: 'DM Sans', sans-serif;
-  font-size: 0.95rem;
+  font-size: 1.34rem;
   font-weight: 500;
   padding: 14px 28px;
   cursor: pointer;
