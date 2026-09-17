@@ -208,7 +208,7 @@ onMounted(() => {
 
   &__label {
     font-family: 'DM Sans', sans-serif;
-    font-size: 11px;
+    font-size: 1.14rem;
     letter-spacing: 0.25em;
     text-transform: uppercase;
     color: var(--mk-gold);
@@ -217,13 +217,13 @@ onMounted(() => {
 
   &__badge-sep {
     font-family: 'DM Sans', sans-serif;
-    font-size: 11px;
+    font-size: 1.14rem;
     color: rgba(201, 168, 76, 0.4);
   }
 
   &__badge-sub {
     font-family: 'DM Sans', sans-serif;
-    font-size: 11px;
+    font-size: 1.14rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: rgba(201, 168, 76, 0.65);
@@ -236,7 +236,7 @@ onMounted(() => {
 
   &__title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(40px, 5vw, 72px);
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
     line-height: 0.95;
     color: var(--mk-cream);
     margin-bottom: 20px;
@@ -244,7 +244,7 @@ onMounted(() => {
 
   &__body {
     font-family: 'DM Sans', sans-serif;
-    font-size: 16px;
+    font-size: 1.38rem;
     color: var(--mk-dim);
     line-height: 1.7;
     margin-bottom: 40px;
@@ -272,7 +272,7 @@ onMounted(() => {
   }
 
   &__step-icon {
-    font-size: 28px;
+    font-size: 1.94rem;
     color: var(--mk-red);
     line-height: 1;
     display: block;
@@ -281,14 +281,14 @@ onMounted(() => {
   &__step-title {
     font-family: 'DM Sans', sans-serif;
     font-weight: 700;
-    font-size: 16px;
+    font-size: 1.38rem;
     color: var(--mk-cream);
     margin-bottom: 6px;
   }
 
   &__step-sub {
     font-family: 'DM Sans', sans-serif;
-    font-size: 15px;
+    font-size: 1.33rem;
     color: var(--mk-dim);
     line-height: 1.6;
   }
@@ -316,7 +316,7 @@ onMounted(() => {
 
   &__price-n {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(44px, 5vw, 64px);
+    font-size: clamp(2.75rem, 5vw, 4rem);
     color: var(--mk-cream);
     line-height: 1;
   }
@@ -324,20 +324,20 @@ onMounted(() => {
   &__price-unit {
     font-family: 'DM Sans', sans-serif;
     font-weight: 700;
-    font-size: 14px;
+    font-size: 1.28rem;
     color: var(--mk-cream);
     margin-bottom: 4px;
   }
 
   &__price-label {
     font-family: 'DM Sans', sans-serif;
-    font-size: 12px;
+    font-size: 1.19rem;
     color: var(--mk-dimmer);
   }
 
   &__reach {
     font-family: 'DM Sans', sans-serif;
-    font-size: 12px;
+    font-size: 1.19rem;
     color: var(--mk-dimmer);
   }
 
@@ -360,7 +360,7 @@ onMounted(() => {
     border-radius: 4px;
     color: var(--mk-cream);
     font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
+    font-size: 1.28rem;
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
