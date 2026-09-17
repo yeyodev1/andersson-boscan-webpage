@@ -134,7 +134,7 @@ onMounted(() => {
 
   span {
     font-family: 'DM Sans', sans-serif;
-    font-size: 11px;
+    font-size: 1.14rem;
     font-weight: 700;
     letter-spacing: 0.2em;
     color: rgba(245, 242, 237, 0.9);
@@ -171,7 +171,7 @@ onMounted(() => {
 
 .mk-sep__word {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(52px, 15vw, 100px);
+  font-size: clamp(3.25rem, 15vw, 6.25rem);
   line-height: 0.9;
   letter-spacing: 0.03em;
   color: var(--mk-cream, #f5f2ed);
@@ -201,14 +201,14 @@ onMounted(() => {
   border: 1px solid rgba(245, 242, 237, 0.15);
   border-radius: 100px;
   font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
+  font-size: 1.23rem;
   font-weight: 500;
   color: rgba(245, 242, 237, 0.75);
   background: rgba(245, 242, 237, 0.04);
   letter-spacing: 0.03em;
   visibility: hidden; /* controlled by GSAP */
 
-  i { font-size: 12px; color: var(--mk-gold, #c9a84c); }
+  i { font-size: 1.19rem; color: var(--mk-gold, #c9a84c); }
 
   &--accent {
     border-color: rgba(200, 57, 43, 0.4);
@@ -221,7 +221,7 @@ onMounted(() => {
 /* ── Body ───────────────────────────────────────── */
 .mk-sep__body {
   font-family: 'DM Sans', sans-serif;
-  font-size: 15px;
+  font-size: 1.33rem;
   line-height: 1.75;
   color: rgba(245, 242, 237, 0.55);
   max-width: 480px;
@@ -244,7 +244,7 @@ onMounted(() => {
   border-radius: 4px;
   color: var(--mk-cream, #f5f2ed);
   font-family: 'DM Sans', sans-serif;
-  font-size: 15px;
+  font-size: 1.33rem;
   font-weight: 700;
   letter-spacing: 0.05em;
   cursor: pointer;
