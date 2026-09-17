@@ -770,7 +770,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 
 .lm-confirm-title {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  font-size: clamp(1.83rem, 4vw, 2.28rem);
   color: #f5f2ed;
   margin: 0;
   line-height: 1;
@@ -778,7 +778,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 
 .lm-confirm-sub {
   font-family: 'DM Sans', sans-serif;
-  font-size: 14px;
+  font-size: 1.28rem;
   color: rgba(245,242,237,0.5);
   margin: 0 0 8px;
 }
@@ -796,7 +796,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   border-radius: 6px;
   color: #f5f2ed;
   font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
+  font-size: 1.23rem;
   font-weight: 700;
   padding: 12px 24px;
   cursor: pointer;
@@ -822,7 +822,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   background: #1a1a1a;
   border: 1px solid rgba(245,242,237,0.15);
   color: rgba(245,242,237,0.6);
-  font-size: 13px;
+  font-size: 1.23rem;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -874,7 +874,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   align-items: center;
   justify-content: center;
   font-family: 'DM Sans', sans-serif;
-  font-size: 12px;
+  font-size: 1.19rem;
   font-weight: 700;
   color: rgba(245,242,237,0.3);
   transition: all 0.3s;
@@ -896,7 +896,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 
 .lm-eyebrow {
   font-family: 'DM Sans', sans-serif;
-  font-size: 11px;
+  font-size: 1.14rem;
   letter-spacing: 0.3em;
   text-transform: uppercase;
   color: #c9a84c;
@@ -905,7 +905,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 
 .lm-title {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(2.2rem, 5vw, 3rem);
+  font-size: clamp(2.28rem, 5vw, 3rem);
   line-height: 0.95;
   color: #f5f2ed;
   margin: 0 0 8px;
@@ -914,7 +914,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 
 .lm-subtitle {
   font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
+  font-size: 1.23rem;
   color: rgba(245,242,237,0.5);
   margin: 0 0 24px;
   &--success { text-align: center; line-height: 1.6; }
@@ -936,7 +936,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   padding: 13px 16px;
   color: #f5f2ed;
   font-family: 'DM Sans', sans-serif;
-  font-size: 0.9rem;
+  font-size: 1.3rem;
   width: 100%;
   box-sizing: border-box;
   outline: none;
@@ -962,7 +962,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 }
 
 .lm-phone-flag {
-  font-size: 18px;
+  font-size: 1.47rem;
   padding: 0 0 0 14px;
   flex-shrink: 0;
   pointer-events: none;
@@ -980,7 +980,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 
 .lm-phone-dial {
   font-family: 'DM Sans', sans-serif;
-  font-size: 0.88rem;
+  font-size: 1.29rem;
   font-weight: 600;
   color: rgba(245,242,237,0.55);
   padding: 0 4px 0 6px;
@@ -996,7 +996,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   border-left: 1px solid rgba(245,242,237,0.08);
   color: #f5f2ed;
   font-family: 'DM Sans', sans-serif;
-  font-size: 0.9rem;
+  font-size: 1.3rem;
   padding: 13px 16px;
   outline: none;
   margin-left: 4px;
@@ -1006,7 +1006,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 // ── FIELD LABEL ───────────────────────────────────────────────
 .lm-field-label {
   font-family: 'DM Sans', sans-serif;
-  font-size: 11px;
+  font-size: 1.14rem;
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -1030,7 +1030,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   background: transparent;
   color: rgba(245,242,237,0.65);
   font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
+  font-size: 1.23rem;
   cursor: pointer;
   transition: all 0.2s;
   &:hover { border-color: rgba(245,242,237,0.4); color: #f5f2ed; }
@@ -1057,7 +1057,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   background: rgba(245,242,237,0.02);
   color: rgba(245,242,237,0.6);
   font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
+  font-size: 1.23rem;
   cursor: pointer;
   transition: all 0.2s;
   text-align: center;
@@ -1071,7 +1071,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 }
 
 .lm-card-icon {
-  font-size: 22px;
+  font-size: 1.66rem;
   color: rgba(201,168,76,0.6);
   transition: color 0.2s;
 }
@@ -1086,7 +1086,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   padding: 12px 16px;
   color: #e87a6e;
   font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
+  font-size: 1.23rem;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -1104,14 +1104,14 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 
 .lm-step2-missing-title {
   font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
+  font-size: 1.23rem;
   font-weight: 700;
   color: #c9a84c;
   display: flex;
   align-items: center;
   gap: 7px;
   margin-bottom: 8px;
-  i { font-size: 13px; }
+  i { font-size: 1.23rem; }
 }
 
 .lm-step2-missing-list {
@@ -1120,7 +1120,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   list-style: disc;
   li {
     font-family: 'DM Sans', sans-serif;
-    font-size: 12px;
+    font-size: 1.19rem;
     color: rgba(201,168,76,0.8);
     line-height: 1.8;
   }
@@ -1134,7 +1134,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   border-radius: 6px;
   color: #f5f2ed;
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+  font-size: clamp(1.53rem, 2.5vw, 1.75rem);
   letter-spacing: 0.06em;
   padding: 20px;
   cursor: pointer;
@@ -1146,7 +1146,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   margin-top: 8px;
   &:hover:not(:disabled) { background: transparent; color: #c8392b; }
   &:disabled { opacity: 0.55; cursor: not-allowed; }
-  &.lm-btn--lg { padding: 22px; font-size: clamp(1.3rem, 2.8vw, 1.6rem); }
+  &.lm-btn--lg { padding: 22px; font-size: clamp(1.6rem, 2.8vw, 1.83rem); }
 }
 
 .lm-btn-ghost {
@@ -1155,7 +1155,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   border-radius: 6px;
   color: rgba(245,242,237,0.55);
   font-family: 'DM Sans', sans-serif;
-  font-size: 14px;
+  font-size: 1.28rem;
   padding: 14px 22px;
   cursor: pointer;
   transition: all 0.2s;
@@ -1163,7 +1163,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   align-items: center;
   gap: 8px;
   &:hover { border-color: rgba(245,242,237,0.4); color: #f5f2ed; }
-  &.lm-btn--sm { font-size: 12px; padding: 9px 18px; margin-top: 8px; }
+  &.lm-btn--sm { font-size: 1.19rem; padding: 9px 18px; margin-top: 8px; }
 }
 
 .lm-btn-row {
@@ -1205,7 +1205,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 
 .lm-qualify-intro {
   font-family: 'DM Sans', sans-serif;
-  font-size: 14px;
+  font-size: 1.28rem;
   color: rgba(245,242,237,0.6);
   line-height: 1.6;
   margin: 0 0 24px;
@@ -1237,7 +1237,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 }
 
 .lm-qualify-req-icon {
-  font-size: 1.2rem;
+  font-size: 1.53rem;
   color: #c9a84c;
   margin-top: 3px;
   flex-shrink: 0;
@@ -1249,14 +1249,14 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 
 .lm-qualify-req-title {
   font-family: 'DM Sans', sans-serif;
-  font-size: 15px;
+  font-size: 1.33rem;
   font-weight: 600;
   color: #f5f2ed;
   margin-bottom: 4px;
 
   strong {
     color: #c9a84c;
-    font-size: 16px;
+    font-size: 1.38rem;
   }
 
   .lm-qualify-req--warning & strong { color: #e87a6e; }
@@ -1264,7 +1264,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 
 .lm-qualify-req-sub {
   font-family: 'DM Sans', sans-serif;
-  font-size: 12px;
+  font-size: 1.19rem;
   color: rgba(245,242,237,0.45);
   line-height: 1.55;
 
@@ -1280,7 +1280,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 
 .lm-qualify-confirm-label {
   font-family: 'DM Sans', sans-serif;
-  font-size: 11px;
+  font-size: 1.14rem;
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -1293,7 +1293,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 
 .lm-qualify-phrase {
   font-family: 'DM Sans', sans-serif;
-  font-size: 15px;
+  font-size: 1.33rem;
   color: rgba(245,242,237,0.55);
   background: rgba(245,242,237,0.04);
   border: 1px dashed rgba(245,242,237,0.12);
@@ -1313,7 +1313,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   border: 1px solid rgba(245,242,237,0.15) !important;
   border-radius: 6px;
   padding: 14px 44px 14px 16px !important;
-  font-size: 15px !important;
+  font-size: 1.33rem !important;
   transition: border-color 0.25s, box-shadow 0.25s;
 
   &--ok {
@@ -1332,12 +1332,12 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   top: 50%;
   transform: translateY(-50%);
   color: #2ecc71;
-  font-size: 16px;
+  font-size: 1.38rem;
 }
 
 .lm-qualify-hint {
   font-family: 'DM Sans', sans-serif;
-  font-size: 11px;
+  font-size: 1.14rem;
   color: rgba(245,242,237,0.28);
   margin: 0;
 
@@ -1347,7 +1347,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
     border: 1px solid rgba(245,242,237,0.15);
     border-radius: 3px;
     padding: 1px 5px;
-    font-size: 10px;
+    font-size: 1.09rem;
     color: rgba(245,242,237,0.45);
   }
 }
@@ -1363,7 +1363,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   border-radius: 10px;
   color: rgba(245,242,237,0.6);
   font-family: 'DM Sans', sans-serif;
-  font-size: 15px;
+  font-size: 1.33rem;
   font-weight: 500;
   text-align: left;
   cursor: pointer;
@@ -1371,7 +1371,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
   line-height: 1.4;
 
   i {
-    font-size: 20px;
+    font-size: 1.56rem;
     flex-shrink: 0;
     color: rgba(245,242,237,0.3);
     transition: color 0.2s;
@@ -1401,7 +1401,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 
   span {
     font-family: 'DM Sans', sans-serif;
-    font-size: 11px;
+    font-size: 1.14rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: rgba(245,242,237,0.25);
@@ -1422,7 +1422,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 
 .lm-qualify-curious-text {
   font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
+  font-size: 1.23rem;
   color: rgba(245,242,237,0.4);
   text-align: center;
   margin: 0;
