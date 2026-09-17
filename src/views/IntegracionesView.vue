@@ -474,7 +474,7 @@ onMounted(() => {
 
   .logo {
     color: #ffffff;
-    font-size: 1.2rem;
+    font-size: 1.53rem;
     font-weight: 700;
   }
 
@@ -484,7 +484,7 @@ onMounted(() => {
     border: 1px solid rgba(255, 255, 255, 0.2);
     padding: 0.5rem 1rem;
     border-radius: 6px;
-    font-size: 0.9rem;
+    font-size: 1.3rem;
     cursor: pointer;
     transition: all 0.2s;
 
@@ -521,7 +521,7 @@ onMounted(() => {
 
   h3 {
     color: #ffffff;
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     margin-bottom: 1rem;
   }
 
@@ -589,7 +589,7 @@ onMounted(() => {
 
   .subtitle {
     color: var(--color-text-secondary, #a0a0a0);
-    font-size: 1.125rem;
+    font-size: 1.47rem;
   }
 }
 
@@ -629,13 +629,13 @@ onMounted(() => {
 
       h3 {
         color: #ffffff;
-        font-size: 1.25rem;
+        font-size: 1.56rem;
         margin: 0;
       }
     }
 
     .status-badge {
-      font-size: 0.75rem;
+      font-size: 1.19rem;
       font-weight: 700;
       text-transform: uppercase;
       padding: 0.4rem 0.8rem;
@@ -657,7 +657,7 @@ onMounted(() => {
 
 .description {
   color: var(--color-text-secondary, #a0a0a0);
-  font-size: 1.125rem;
+  font-size: 1.47rem;
   line-height: 1.6;
   margin-bottom: 2rem;
 }
@@ -676,7 +676,7 @@ onMounted(() => {
   border: none;
   border-radius: 8px;
   padding: 0.75rem 1.5rem;
-  font-size: 1.125rem;
+  font-size: 1.47rem;
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.2s ease, transform 0.1s ease;
@@ -702,7 +702,7 @@ onMounted(() => {
   border: 1px solid var(--color-border-primary, rgba(255, 255, 255, 0.2));
   border-radius: 8px;
   padding: 0.5rem 1rem;
-  font-size: 1rem;
+  font-size: 1.38rem;
   cursor: pointer;
   margin-top: 1.5rem;
   transition: all 0.2s ease;
@@ -744,7 +744,7 @@ onMounted(() => {
   
   .small-note {
     margin-top: 0.5rem;
-    font-size: 0.875rem;
+    font-size: 1.28rem;
     opacity: 0.8;
   }
 }
@@ -769,12 +769,12 @@ onMounted(() => {
     h4 {
       color: var(--color-text-primary, #ffffff);
       margin-bottom: 0.5rem;
-      font-size: 1.8rem;
+      font-size: 1.98rem;
     }
 
     p {
       color: var(--color-text-secondary, #a0a0a0);
-      font-size: 1.1rem;
+      font-size: 1.45rem;
     }
   }
 
@@ -828,7 +828,7 @@ onMounted(() => {
         align-items: center;
         justify-content: center;
         color: #a0a0a0;
-        font-size: 1.2rem;
+        font-size: 1.53rem;
         border: 2px solid rgba(255, 255, 255, 0.2);
         flex-shrink: 0;
       }
@@ -841,7 +841,7 @@ onMounted(() => {
 
         .username {
           color: #ffffff;
-          font-size: 1.2rem;
+          font-size: 1.53rem;
           font-weight: 700;
           letter-spacing: 0.5px;
           white-space: nowrap;
@@ -851,7 +851,7 @@ onMounted(() => {
 
         .display-name {
           color: var(--color-text-secondary, #a0a0a0);
-          font-size: 0.9rem;
+          font-size: 1.3rem;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
@@ -875,7 +875,7 @@ onMounted(() => {
         border: 1px solid rgba(254, 44, 85, 0.3);
         border-radius: 8px;
         padding: 0.6rem 1rem;
-        font-size: 0.9rem;
+        font-size: 1.3rem;
         font-weight: 600;
         cursor: pointer;
         transition: all 0.2s ease;
@@ -905,7 +905,7 @@ onMounted(() => {
         border: 1px solid rgba(255, 255, 255, 0.1);
         border-radius: 8px;
         padding: 0.6rem;
-        font-size: 0.9rem;
+        font-size: 1.3rem;
         cursor: pointer;
         transition: all 0.2s ease;
         display: flex;
@@ -935,7 +935,7 @@ onMounted(() => {
 .btn-large {
   width: 100%;
   padding: 1rem 2rem;
-  font-size: 1.2rem;
+  font-size: 1.53rem;
   background-color: #fe2c55;
   color: white;
   border: none;
@@ -964,7 +964,7 @@ onMounted(() => {
       display: block;
       color: #a0a0a0;
       margin-bottom: 0.5rem;
-      font-size: 0.9rem;
+      font-size: 1.3rem;
     }
 
     .form-input {
@@ -974,7 +974,7 @@ onMounted(() => {
       color: white;
       padding: 0.8rem 1rem;
       border-radius: 8px;
-      font-size: 1rem;
+      font-size: 1.38rem;
       
       &:focus {
         outline: none;
@@ -986,7 +986,7 @@ onMounted(() => {
         resize: vertical;
         min-height: 80px;
         font-family: monospace;
-        font-size: 0.85rem;
+        font-size: 1.26rem;
       }
     }
   }
