@@ -307,14 +307,28 @@ function onDragEnd() {
 
 // ── Salida hacia publicidad ─────────────────────────────────────
 let leaving = false
+
+/**
+ * La cortina tapa toda la pantalla, así que si la navegación no ocurre el
+ * visitante se queda mirando un negro del que no puede salir. Por eso: si
+ * `router.push` falla o la deja pendiente, forzamos una navegación real del
+ * navegador; y si la animación nunca termina, un temporizador navega igual.
+ */
+function irAPublicidad() {
+  router.push('/publicidad').then(fallo => {
+    if (fallo) window.location.href = '/publicidad'
+  }).catch(() => { window.location.href = '/publicidad' })
+}
+
 function goPublicidad() {
   if (leaving) return
   leaving = true
-  if (reduceMotion || !curtainEl.value) { router.push('/publicidad'); return }
+  if (reduceMotion || !curtainEl.value) { irAPublicidad(); return }
 
   const els = folders.map(f => fEls.get(f.id)!).filter(Boolean)
   floats.forEach(t => t.kill()); floats = []
-  gsap.timeline({ onComplete: () => { router.push('/publicidad') } })
+  const red = setTimeout(irAPublicidad, 1600)
+  gsap.timeline({ onComplete: () => { clearTimeout(red); irAPublicidad() } })
     .to([...els, svgEl.value], { opacity: 0, y: -30, duration: 0.4, ease: 'power2.in', stagger: 0.015 }, 0)
     .to([logoEl.value, ruleEl.value, hintEl.value, ctasEl.value], { opacity: 0, y: -16, duration: 0.45, ease: 'power2.in' }, 0)
     .to(photoEl.value, { opacity: 0, scale: 1.04, filter: 'blur(6px)', duration: 0.55, ease: 'power2.in' }, 0)
