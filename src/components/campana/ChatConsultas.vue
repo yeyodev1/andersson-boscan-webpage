@@ -57,8 +57,8 @@
 
 <script setup lang="ts">
 import { ref, watch, nextTick } from 'vue'
-import { useAdChat } from '@/composables/useAdChat'
-import { useAdFunnel } from '@/composables/useAdFunnel'
+import { useAdChat } from '@/composables/useConsultas'
+import { useAdFunnel } from '@/composables/useCampana'
 
 const { isOpen, messages, escalating, sending, suggestions, open, close, ask, escalate } = useAdChat()
 const { state } = useAdFunnel()

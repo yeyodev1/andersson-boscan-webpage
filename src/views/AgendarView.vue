@@ -103,7 +103,7 @@ import { computed, ref, onMounted, onUnmounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import MKFooter from '@/components/mediakit/MKFooter.vue'
 import MKHeader from '@/components/mediakit/MKHeader.vue'
-import { ZOOM_KEY, trackAdEvent } from '@/composables/useAdFunnel'
+import { ZOOM_KEY, trackAdEvent } from '@/composables/useCampana'
 
 const route = useRoute()
 const router = useRouter()

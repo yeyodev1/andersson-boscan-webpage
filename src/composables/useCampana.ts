@@ -2,7 +2,7 @@ import { ref, computed, watch } from 'vue'
 import {
   AD_BUDGETS, AD_CATEGORIES, AD_RULES, recommendProducts,
   type AdGoal, type AdDuration, type AdProduct, type BrandSafety,
-} from '@/config/adProducts'
+} from '@/config/catalogo'
 import { GhlWebhookService } from '@/services/GhlWebhookService'
 
 export type Lane = 'A' | 'B' | 'C'   // A autoservicio · B asistida asincrónica · C cuenta estratégica
@@ -117,11 +117,15 @@ export function useAdFunnel() {
     return p.price
   })
 
+  /** Posible choque con un anunciante activo: se revisa antes de cobrar o de abrir Zoom (§8F, §9) */
+  const hasExclusivityConflict = computed(() => state.value.exclusivity_conflict === 'possible')
+
   /** Regla del calendario (handoff v3 §6) */
   const calendarAccess = computed(() =>
     monthlyBudget.value >= AD_RULES.strategic_monthly_budget &&
     (state.value.duration || 0) >= AD_RULES.strategic_min_months &&
     brandSafety.value === 'approved' &&
+    !hasExclusivityConflict.value &&
     ['decision_maker', 'co_decision_maker'].includes(state.value.decision_power))
 
   const lane = computed<Lane>(() => {
@@ -130,7 +134,14 @@ export function useAdFunnel() {
     return 'A'
   })
 
-  const needsManualReview = computed(() => brandSafety.value !== 'approved')
+  /** El formato elegido no se vende en autoservicio (sin precio fijo o `self_serve_enabled: false`) */
+  const productNeedsQuote = computed(() => {
+    const p = selectedProduct.value
+    return lane.value === 'A' && !!p && (!p.self_serve_enabled || p.price === null)
+  })
+
+  const needsManualReview = computed(() =>
+    brandSafety.value !== 'approved' || hasExclusivityConflict.value || productNeedsQuote.value)
 
   const questionPriority = computed(() => lane.value === 'C' ? 1 : lane.value === 'B' ? 2 : 3)
 

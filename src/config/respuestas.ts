@@ -18,7 +18,7 @@ export interface KnowledgeEntry {
 export const AD_KNOWLEDGE: KnowledgeEntry[] = [
   {
     id: 'precios',
-    keywords: ['precio', 'cuesta', 'costo', 'tarifa', 'cuanto', 'valor', 'usd', 'dolar'],
+    keywords: ['precio', 'cuesta', 'costo', 'tarifa', 'vale', 'valor', 'usd', 'dolar', 'presupuesto'],
     question: '¿Cuánto cuesta pautar con ustedes?',
     answer: 'Los paquetes van de USD 1.200 a USD 3.000 según el formato. Una campaña puntual (un mes) se compra directo en esta página. Para 6 o 12 meses generamos una propuesta automática. Arma tu campaña arriba y verás el precio exacto del formato recomendado.',
   },
@@ -30,7 +30,7 @@ export const AD_KNOWLEDGE: KnowledgeEntry[] = [
   },
   {
     id: 'plataformas',
-    keywords: ['plataforma', 'red', 'redes', 'tiktok', 'youtube', 'instagram', 'facebook', 'spotify', 'donde', 'canal'],
+    keywords: ['plataforma', 'red', 'redes', 'tiktok', 'youtube', 'instagram', 'facebook', 'spotify', 'donde', 'canal', 'publica'],
     question: '¿En qué plataformas se publica?',
     answer: 'Según el formato: el Comercial IA sale en YouTube, Facebook, Instagram, TikTok y Spotify (22 episodios al mes). El TikTok patrocinado va en TikTok (926K seguidores). El video culinario sale en YouTube y TikTok de ambos canales. El podcast se emite en Spotify. Cada tarjeta de producto detalla sus plataformas.',
   },
@@ -48,19 +48,19 @@ export const AD_KNOWLEDGE: KnowledgeEntry[] = [
   },
   {
     id: 'tiempos',
-    keywords: ['tiempo', 'cuando', 'demora', 'plazo', 'semana', 'dias', 'rapido', 'fecha', 'disponibilidad', 'cupo'],
+    keywords: ['tiempo', 'cuando', 'demora', 'tarda', 'plazo', 'semana', 'dias', 'rapido', 'fecha', 'disponib', 'cupo'],
     question: '¿Cuánto tarda en publicarse?',
     answer: 'Un TikTok patrocinado o un video dedicado tarda entre 2 y 4 semanas desde la aprobación del guion. El Plan PYMEs es inmediato. El Comercial IA y el podcast dependen del cupo disponible (5 marcas y 1 auspiciante, respectivamente). Al armar tu campaña eliges una fecha tentativa y te confirmamos.',
   },
   {
     id: 'pago',
-    keywords: ['pago', 'pagar', 'tarjeta', 'transferencia', 'factura', 'metodo', 'paypal', 'cobro'],
+    keywords: ['pago', 'pagar', 'paga', 'pagan', 'tarjeta', 'transferencia', 'factura', 'metodo', 'paypal', 'cobr'],
     question: '¿Cómo se paga?',
     answer: 'Campañas de un mes: pago online al confirmar (te enviamos el enlace de pago al correo junto con la confirmación). Contratos de 6 y 12 meses: firma electrónica y pago tras aceptar la propuesta. Emitimos factura de Eureka Productions Cía. Ltda.',
   },
   {
     id: 'audiencia',
-    keywords: ['audiencia', 'seguidores', 'impresiones', 'alcance', 'reproducciones', 'gente', 'pais', 'edad', 'demograf'],
+    keywords: ['audiencia', 'seguidor', 'impresion', 'alcance', 'reproducci', 'gente', 'pais', 'edad', 'demograf'],
     question: '¿Qué audiencia tienen?',
     answer: '88,7M de impresiones mensuales, 926K seguidores en TikTok, 404K en X y 85K oyentes de podcast. Audiencia principalmente de Ecuador, Colombia, Venezuela, Argentina y México, con fuerte peso en 18–45 años. El media kit completo tiene el detalle por plataforma.',
   },
@@ -72,7 +72,7 @@ export const AD_KNOWLEDGE: KnowledgeEntry[] = [
   },
   {
     id: 'exclusividad',
-    keywords: ['exclusividad', 'exclusivo', 'competencia', 'competidor', 'categoria', 'restriccion', 'prohibido', 'permitido'],
+    keywords: ['exclusiv', 'competidor', 'categoria', 'restriccion', 'prohibid', 'permitid', 'apuesta', 'casino', 'alcohol', 'cripto', 'politic'],
     question: '¿Hay exclusividad por categoría?',
     answer: 'El podcast tiene un solo auspiciante y el Comercial IA admite 5 marcas simultáneas. Categorías como banca, salud, alcohol, apuestas, cripto, política y gobierno pasan por una revisión rápida antes del pago. Si tu marca compite con un anunciante activo, te lo decimos antes de cobrar.',
   },
@@ -84,7 +84,7 @@ export const AD_KNOWLEDGE: KnowledgeEntry[] = [
   },
   {
     id: 'reporte',
-    keywords: ['reporte', 'metrica', 'metricas', 'informe', 'estadistica', 'datos'],
+    keywords: ['reporte', 'metrica', 'informe', 'estadistica'],
     question: '¿Recibo reporte de resultados?',
     answer: 'Sí. Cada formato incluye un reporte con las métricas indicadas en su tarjeta (impresiones, reproducciones, interacciones o leads). Lo recibes al cierre de la campaña o mensualmente en contratos largos.',
   },
@@ -95,19 +95,41 @@ export function normalize(s: string): string {
   return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
 }
 
+/**
+ * Posición de la primera palabra de la pregunta que empieza con la clave
+ * (o de la frase, si la clave tiene espacios). -1 si no aparece.
+ * Se compara por inicio de palabra para que "credito" no active "red" ni
+ * "cuantos seguidores" caiga en precios.
+ */
+function keywordPos(words: string[], text: string, k: string): number {
+  if (k.includes(' ')) return text.indexOf(k)
+  const i = words.findIndex(w => w.startsWith(k))
+  return i === -1 ? -1 : i
+}
+
 /** Devuelve la mejor entrada o null si no hay coincidencia confiable */
 export function findAnswer(question: string): KnowledgeEntry | null {
-  const q = normalize(question)
-  const words = q.split(/\s+/).filter(Boolean).length
-  let best: { e: KnowledgeEntry; hits: number } | null = null
+  const q = normalize(question).replace(/[^a-z0-9ñ\s]/g, ' ')
+  const words = q.split(/\s+/).filter(Boolean)
+  let best: { e: KnowledgeEntry; hits: number; first: number } | null = null
   for (const e of AD_KNOWLEDGE) {
-    const hits = e.keywords.reduce((n, k) => n + (q.includes(k) ? 1 : 0), 0)
-    if (hits > 0 && (!best || hits > best.hits)) best = { e, hits }
+    // Se cuentan palabras distintas: "resultado" y "resultados" sobre la misma
+    // palabra no deben sumar dos.
+    const matched = new Set<number>()
+    for (const k of e.keywords) {
+      const pos = keywordPos(words, q, k)
+      if (pos !== -1) matched.add(k.includes(' ') ? -1 - pos : pos)
+    }
+    const hits = matched.size
+    if (!hits) continue
+    const first = Math.min(...[...matched].map(p => (p < 0 ? 0 : p)))
+    // Más coincidencias gana; en empate, el tema que aparece primero en la pregunta.
+    if (!best || hits > best.hits || (hits === best.hits && first < best.first)) best = { e, hits, first }
   }
   if (!best) return null
   // Una sola coincidencia en una pregunta larga suele ser un caso particular:
   // mejor escalar a humano que responder algo genérico.
-  if (best.hits === 1 && words > 7) return null
+  if (best.hits === 1 && words.length > 7) return null
   return best.e
 }
 

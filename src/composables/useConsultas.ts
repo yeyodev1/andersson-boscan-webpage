@@ -1,7 +1,7 @@
 import { ref, watch } from 'vue'
-import { findAnswer, AD_ESCALATION_MESSAGE, AD_KNOWLEDGE } from '@/config/adKnowledge'
+import { findAnswer, AD_ESCALATION_MESSAGE, AD_KNOWLEDGE } from '@/config/respuestas'
 import { GhlWebhookService } from '@/services/GhlWebhookService'
-import { useAdFunnel, trackAdEvent } from '@/composables/useAdFunnel'
+import { useAdFunnel, trackAdEvent } from '@/composables/useCampana'
 
 export interface ChatMessage {
   role: 'user' | 'assistant' | 'system'
@@ -56,6 +56,20 @@ export function useAdChat() {
       if (hit) {
         messages.value.push({ role: 'assistant', text: hit.answer, ts: Date.now() })
         trackAdEvent('ad_question_ai_resolved', { id: hit.id })
+        // §8B: la pregunta y su respuesta quedan en el CRM, pero NO se crea
+        // tarea humana. Sin correo conocido no hay contacto que actualizar.
+        if (funnel.state.value.email) {
+          void GhlWebhookService.contact({
+            ...funnel.contextSummary(),
+            tags: ['pregunta-ia-resuelta'],
+            ad_question_status: 'resolved_ai',
+            ad_ai_resolved: true,
+            ad_human_review_required: false,
+            pregunta: q,
+            respuesta: hit.answer,
+            source: 'Publicidad — pregunta resuelta por IA',
+          })
+        }
       } else {
         messages.value.push({ role: 'assistant', text: AD_ESCALATION_MESSAGE, ts: Date.now(), escalate: true })
         escalating.value = true

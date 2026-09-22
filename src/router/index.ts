@@ -24,7 +24,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/publicidad',
     name: 'Publicidad',
-    component: () => import('../views/PublicidadView.vue'),
+    component: () => import('../views/CampanaView.vue'),
     meta: {
       title: `Publicidad con Boscán & La Moni — Arma tu campaña sin reunión`,
       description: 'Elige tu objetivo, mira la campaña que mejor encaja y compra sin agendar una reunión. Formatos, precios y disponibilidad en un solo lugar.',
@@ -138,5 +138,22 @@ router.beforeEach((to, _from, next) => {
 
   next()
 })
+
+/**
+ * Si falla la descarga de una vista (deploy nuevo con otros hashes, o Vite
+ * reoptimizando dependencias en dev), el router cambia el título pero deja la
+ * página en blanco. Recargamos una vez hacia la ruta pedida; la marca en
+ * sessionStorage evita un bucle si el archivo realmente no existe.
+ */
+const RELOAD_KEY = 'chunk_reload'
+router.onError((err, to) => {
+  const msg = String((err as Error)?.message ?? err)
+  const isChunkError = /dynamically imported module|Importing a module script failed|Failed to fetch|error loading dynamically/i.test(msg)
+  if (!isChunkError) return
+  if (sessionStorage.getItem(RELOAD_KEY) === to.fullPath) return
+  sessionStorage.setItem(RELOAD_KEY, to.fullPath)
+  window.location.assign(to.fullPath)
+})
+router.afterEach(() => { sessionStorage.removeItem(RELOAD_KEY) })
 
 export default router

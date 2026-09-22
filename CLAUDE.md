@@ -34,7 +34,7 @@ VITE_GHL_WEBHOOK_OPPORTUNITY=<GHL opportunity webhook URL>
 |------|------|-------|
 | `/` | `PortadaView.vue` | Portada minimalista: logo, pareja, expedientes (carpetas) que aparecen al pasar el mouse y se pueden arrastrar, dos botones: "Quiero periodismo" → `/periodismo`, "Quiero publicidad" → `/publicidad` |
 | `/periodismo` | — (estático) | Sitio de investigaciones que entrega Andersson, servido desde `public/periodismo/`. No es una ruta de Vue: ver "Periodismo" abajo. |
-| `/publicidad` | `PublicidadView.vue` | Funnel de ventas v3: hero, configurador de 3 pasos, recomendación, checkout por carril, briefing y chat. "Quiero publicidad" hace una cortina negra con GSAP y navega aquí. |
+| `/publicidad` | `CampanaView.vue` | Funnel de ventas v3: hero, configurador de 3 pasos, recomendación, checkout por carril, briefing y chat. "Quiero publicidad" es un `<a href>` normal, igual que "Quiero periodismo": sin transición (la cortina de GSAP dejaba la página en blanco). |
 | `/media-kit` | `MediaKitView.vue` | El media kit de 10 secciones. Material de apoyo, ya no es la puerta de entrada; se enlaza desde el funnel y desde "Media kit 2026" en la portada. |
 | `/quienes-somos` | `QuienesSomosView.vue` | Standalone about page |
 | `/agendar` | `AgendarView.vue` | GHL calendar embed (qualified leads only) |
@@ -86,13 +86,22 @@ entrega nueva y se reemplaza la carpeta entera.
 
 ## Publicidad (funnel v3)
 
-- **Fuente única de verdad comercial**: `src/config/adProducts.ts` (productos, precios, reglas `AD_RULES`, categorías con brand safety, opciones del configurador). Nunca hardcodear precios en componentes.
-- **Base aprobada del chat**: `src/config/adKnowledge.ts`. El asistente solo responde desde ahí; si no hay coincidencia confiable escala a humano (formulario → webhook contacto con tag `pregunta-humana-publicidad` + transcript).
-- **Estado**: `useAdFunnel()` (singleton, persiste en `localStorage.ad_funnel_state`) y `useAdChat()` (`localStorage.ad_chat`). Preguntar nunca saca al cliente del checkout.
+- **Nombres de archivo sin "ad" ni "publicidad".** Los bloqueadores de anuncios
+  cortan cualquier descarga cuya URL parezca publicidad (`/publicidad/`, `AdChat`,
+  `ads`, `banner`, `sponsor`…). Si cae un solo archivo, la vista entera no carga
+  y `/publicidad` queda en blanco. Ya pasó con `components/publicidad/AdChat.vue`.
+  Por eso la vista es `CampanaView.vue` y el resto `useCampana`, `useConsultas`,
+  `catalogo`, `respuestas`, `ChatConsultas`. La URL `/publicidad` sí puede
+  quedarse: los bloqueadores no bloquean el documento principal. Lo mismo
+  aplica a clases CSS: no usar `.ad`, `.ads`, `.publicidad`, `.banner`.
+
+- **Fuente única de verdad comercial**: `src/config/catalogo.ts` (productos, precios, reglas `AD_RULES`, categorías con brand safety, opciones del configurador). Nunca hardcodear precios en componentes.
+- **Base aprobada del chat**: `src/config/respuestas.ts`. El asistente solo responde desde ahí; si no hay coincidencia confiable escala a humano (formulario → webhook contacto con tag `pregunta-humana-publicidad` + transcript).
+- **Estado**: `useAdFunnel()` en `src/composables/useCampana.ts` (singleton, persiste en `localStorage.ad_funnel_state`) y `useAdChat()` en `src/composables/useConsultas.ts` (`localStorage.ad_chat`). El chat es `src/components/campana/ChatConsultas.vue`. Preguntar nunca saca al cliente del checkout.
 - **Carriles**: A = 1 mes (self-serve), B = 6/12 meses bajo umbral, C = presupuesto ≥ 3000/mes + ≥ 6 meses + brand safety approved + decisor → habilita `/agendar`.
 - **Webhooks**: `src/services/GhlWebhookService.ts` (fetch a `VITE_GHL_WEBHOOK_CONTACT` / `VITE_GHL_WEBHOOK_OPPORTUNITY`, con campos `ad_*` y tags del handoff). Pago online aún no integrado: el flujo A promete "enlace de pago por correo".
 - **Analítica**: `trackAdEvent()` hace push a `window.dataLayer` con los eventos `ad_*` del handoff §11. `ad_zoom_booked` lo dispara `AgendarView` al detectar el booking.
-- **Etapas de pipeline**: `syncStage(etapa)` en `useAdFunnel` empuja "Configurador iniciado", "Recomendación generada", "Checkout iniciado / propuesta enviada" y "Pregunta pendiente" a GHL *en cuanto se conoce el correo*, con dedupe en `localStorage.ad_stage_sent`. Sin ese push temprano GHL no puede recordar carritos abandonados (§8A): el tag `checkout-abandonado` lo aplica un workflow de GHL sobre las oportunidades que se quedan en "Checkout iniciado".
+- **Etapas de pipeline**: `syncStage(etapa)` en `useCampana.ts` empuja "Configurador iniciado", "Recomendación generada", "Checkout iniciado / propuesta enviada" y "Pregunta pendiente" a GHL *en cuanto se conoce el correo*, con dedupe en `localStorage.ad_stage_sent`. Sin ese push temprano GHL no puede recordar carritos abandonados (§8A): el tag `checkout-abandonado` lo aplica un workflow de GHL sobre las oportunidades que se quedan en "Checkout iniciado".
 - **Candado del calendario**: el carril C escribe `localStorage.ad_zoom_unlocked`. El guard de `/agendar` bloquea a quien tenga `ad_funnel_state` sin esa llave y lo devuelve a `/publicidad`. Quien llega por el media kit (sin estado de funnel) mantiene el flujo de siempre.
 - **Pago**: no hay pasarela. El carril A cierra con `ad_checkout_status: 'payment_pending'` y etapa "Pago pendiente"; el enlace de pago lo manda un workflow de GHL.
 
@@ -117,7 +126,7 @@ más desde su navegador. Dos reglas, una sola curva:
 
 ## Header Rule
 
-**Only `MediaKitView` uses `<MKHeader />`** (its "Inicio" apunta a `/media-kit`). All other views (PortadaView, PublicidadView, AgendarView, PreciosView, QuienesSomosView) have their own minimal topbar. Never add MKHeader to sub-pages — causes double header collision.
+**Only `MediaKitView` uses `<MKHeader />`** (its "Inicio" apunta a `/media-kit`). All other views (PortadaView, CampanaView, AgendarView, PreciosView, QuienesSomosView) have their own minimal topbar. Never add MKHeader to sub-pages — causes double header collision.
 
 ## Lead Capture Flow
 

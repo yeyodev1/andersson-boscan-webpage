@@ -132,7 +132,7 @@
       <p class="pub__muted">{{ laneCopy }}</p>
 
       <div v-if="needsManualReview" class="notice">
-        Tu categoría necesita una revisión rápida antes del pago. Ya tenemos toda tu información; no necesitas agendar una reunión.
+        Tu campaña necesita una revisión rápida antes del pago. Ya tenemos toda tu información; no necesitas agendar una reunión.
       </div>
 
       <div class="products">
@@ -160,7 +160,7 @@
           </dl>
           <p v-if="p.min_months && state.duration < p.min_months" class="prod__warn">Requiere mínimo {{ p.min_months }} meses.</p>
           <footer>
-            <button class="btn btn--dark btn--full" type="button" @click.stop="choose(p.product_id)">{{ primaryCta }} <span>→</span></button>
+            <button class="btn btn--dark btn--full" type="button" @click.stop="choose(p.product_id)">{{ ctaFor(p) }} <span>→</span></button>
             <button class="pub__link" type="button" @click.stop="chat.open()">Tengo una pregunta</button>
           </footer>
         </article>
@@ -195,7 +195,7 @@
         </label>
         <p v-if="lane === 'A'" class="pub__fine">
           {{ needsManualReview
-            ? 'Revisamos tu categoría y, si todo está bien, te enviamos el enlace de pago al correo. No necesitas agendar nada.'
+            ? 'Revisamos tu campaña y, si todo está bien, te enviamos el enlace de pago al correo. No necesitas agendar nada.'
             : 'Al confirmar te enviamos al correo el enlace de pago y los términos. Después completas un briefing corto aquí mismo.' }}
         </p>
         <p v-else-if="lane === 'B'" class="pub__fine">
@@ -254,19 +254,19 @@
       <span><RouterLink to="/terminos-y-condiciones">Términos</RouterLink> · <RouterLink to="/politica-de-privacidad">Privacidad</RouterLink></span>
     </footer>
 
-    <AdChat />
+    <ChatConsultas />
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed, onMounted } from 'vue'
-import AdChat from '@/components/publicidad/AdChat.vue'
-import { useAdFunnel, trackAdEvent } from '@/composables/useAdFunnel'
-import { useAdChat } from '@/composables/useAdChat'
+import ChatConsultas from '@/components/campana/ChatConsultas.vue'
+import { useAdFunnel, trackAdEvent } from '@/composables/useCampana'
+import { useAdChat } from '@/composables/useConsultas'
 import {
   AD_GOALS, AD_DURATIONS, AD_CATEGORIES, AD_COUNTRIES, AD_BUDGETS, formatPrice,
-  type AdGoal, type AdDuration,
-} from '@/config/adProducts'
+  type AdGoal, type AdDuration, type AdProduct,
+} from '@/config/catalogo'
 
 const funnel = useAdFunnel()
 const {
@@ -325,11 +325,18 @@ const laneCopy = computed(() => {
 const primaryCta = computed(() =>
   lane.value === 'A' ? 'Comprar ahora' : lane.value === 'B' ? 'Recibir propuesta' : 'Continuar')
 
+/** Un formato sin precio fijo o fuera de autoservicio no se "compra": se cotiza */
+function ctaFor(p: AdProduct) {
+  if (lane.value === 'A' && (!p.self_serve_enabled || p.price === null)) return 'Pedir cotización'
+  return primaryCta.value
+}
+
 const checkoutTitle = computed(() =>
   lane.value === 'A' ? 'Confirma y te enviamos el pago.' : lane.value === 'B' ? 'Tu propuesta, sin reunión.' : 'Último paso antes de la llamada.')
 
 const submitLabel = computed(() =>
-  lane.value === 'A' ? 'Comprar ahora' : lane.value === 'B' ? 'Recibir propuesta' : 'Habilitar calendario')
+  lane.value === 'A' ? (needsManualReview.value ? 'Enviar para revisión' : 'Comprar ahora')
+  : lane.value === 'B' ? 'Recibir propuesta' : 'Habilitar calendario')
 
 const doneTitle = computed(() => {
   const l = state.value.submitted_lane
@@ -340,7 +347,7 @@ const doneTitle = computed(() => {
 const doneCopy = computed(() => {
   const l = state.value.submitted_lane
   if (l === 'A') return needsManualReview.value
-    ? 'Tu categoría pasa por una revisión rápida. Si todo está bien, recibes el enlace de pago por correo en el próximo bloque comercial.'
+    ? 'Tu campaña pasa por una revisión rápida. Si todo está bien, recibes el enlace de pago por correo en el próximo bloque comercial.'
     : 'Te enviamos al correo el enlace de pago, los términos y el estado de producción. Con el briefing listo, arrancamos.'
   if (l === 'B') return 'Andersson o Mónica revisan tu propuesta en su próximo bloque comercial. La recibes por correo con firma y pago en línea. Si tienes dudas mientras tanto, usa "Tengo una pregunta".'
   return 'Elige un espacio de 25 minutos. Ya tenemos todos tus datos: la llamada es para cerrar, no para empezar de cero.'
@@ -492,9 +499,12 @@ label {
   &__result { color: $muted; font-size: 1.28rem; margin: 0; line-height: 1.45; }
   &__price { font-family: 'Playfair Display', serif; font-size: 1.84rem; padding: 12px 0; border-top: 1px solid $line; border-bottom: 1px solid $line; }
   &__warn { font-size: 1.21rem; color: $red; margin: 0; }
-  dl { margin: 0; display: grid; grid-template-columns: 110px 1fr; gap: 8px 12px; font-size: 1.26rem; line-height: 1.45;
-    dt { font-size: 1.12rem; letter-spacing: .14em; text-transform: uppercase; color: $muted; padding-top: 2px; }
-    dd { margin: 0; ul { margin: 0; padding-left: 16px; } }
+  // Etiqueta arriba y valor abajo: con la letra en rem una columna fija de
+  // etiquetas se desborda sobre los valores al agrandar el texto.
+  dl { margin: 0; display: flex; flex-direction: column; font-size: 1.26rem; line-height: 1.45;
+    dt { font-size: 1.12rem; letter-spacing: .14em; text-transform: uppercase; color: $muted; margin-top: .9rem;
+      &:first-child { margin-top: 0; } }
+    dd { margin: .15rem 0 0; ul { margin: 0; padding-left: 1.1em; } }
   }
   footer { margin-top: auto; display: flex; flex-direction: column; align-items: center; gap: 12px; }
 }
