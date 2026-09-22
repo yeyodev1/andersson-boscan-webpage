@@ -8,6 +8,7 @@
       </nav>
     </header>
 
+    <Transition :name="`stage-${dir}`" mode="out-in" @after-leave="toTop">
     <!-- ══ HERO ═══════════════════════════════════════════════ -->
     <section v-if="state.stage === 'hero'" class="pub__hero">
       <p class="pub__eyebrow">Publicidad</p>
@@ -33,6 +34,7 @@
 
     <!-- ══ CONFIGURADOR ═══════════════════════════════════════ -->
     <section v-else-if="isConfig" class="pub__wrap">
+      <div class="meter" aria-hidden="true"><span :style="{ transform: `scaleX(${(stepIndex + 1) / 4})` }"></span></div>
       <ol class="steps" aria-label="Progreso">
         <li :class="{ on: state.stage === 'goal', done: stepIndex > 0 }">Objetivo</li>
         <li :class="{ on: state.stage === 'duration', done: stepIndex > 1 }">Duración</li>
@@ -40,13 +42,14 @@
         <li :class="{ on: stepIndex >= 3 }">Recomendación</li>
       </ol>
 
+      <Transition :name="`step-${dir}`" mode="out-in">
       <!-- Paso 1 -->
       <div v-if="state.stage === 'goal'" class="card">
         <h2>¿Qué quieres conseguir?</h2>
         <div class="opts">
           <button
-            v-for="g in AD_GOALS" :key="g.value" type="button"
-            class="opt" :class="{ on: state.goal === g.value }"
+            v-for="(g, i) in AD_GOALS" :key="g.value" type="button"
+            class="opt" :class="{ on: state.goal === g.value }" :style="{ '--i': i }" :disabled="picking"
             @click="pickGoal(g.value)"
           >
             <span class="opt__t">{{ g.label }}</span>
@@ -60,8 +63,8 @@
         <h2>¿Durante cuánto tiempo?</h2>
         <div class="opts opts--3">
           <button
-            v-for="d in AD_DURATIONS" :key="d.value" type="button"
-            class="opt" :class="{ on: state.duration === d.value }"
+            v-for="(d, i) in AD_DURATIONS" :key="d.value" type="button"
+            class="opt" :class="{ on: state.duration === d.value }" :style="{ '--i': i }" :disabled="picking"
             @click="pickDuration(d.value)"
           >
             <span class="opt__t">{{ d.label }}</span>
@@ -74,6 +77,7 @@
       <!-- Paso 3 -->
       <form v-else-if="state.stage === 'details'" class="card" @submit.prevent="submitDetails">
         <h2>Datos mínimos para recomendarte bien</h2>
+        <Fill :done="detailsFill.done" :total="detailsFill.total" />
         <div class="grid">
           <label>Marca / empresa<input v-model.trim="state.brand" type="text" required placeholder="Nombre comercial" /></label>
           <label>Web o Instagram<input v-model.trim="state.website" type="text" placeholder="https://… o @usuario" /></label>
@@ -120,9 +124,13 @@
         </div>
         <div class="row">
           <button class="back" type="button" @click="go('duration')">← Atrás</button>
-          <button class="btn btn--dark" type="submit">Ver mi recomendación <span>→</span></button>
+          <button class="btn btn--dark" type="submit" :disabled="thinking">
+            <template v-if="thinking"><i class="spin" aria-hidden="true"></i> Armando tu recomendación</template>
+            <template v-else>Ver mi recomendación <span>→</span></template>
+          </button>
         </div>
       </form>
+      </Transition>
     </section>
 
     <!-- ══ RESULTADO ══════════════════════════════════════════ -->
@@ -137,8 +145,8 @@
 
       <div class="products">
         <article
-          v-for="p in recommendations" :key="p.product_id"
-          class="prod" :class="{ on: selectedProduct?.product_id === p.product_id }"
+          v-for="(p, i) in recommendations" :key="p.product_id"
+          class="prod" :style="{ '--i': i }" :class="{ on: selectedProduct?.product_id === p.product_id }"
           @click="state.selected_product = p.product_id"
         >
           <header>
@@ -183,6 +191,7 @@
       </div>
 
       <form class="card" @submit.prevent="submit">
+        <Fill :done="checkoutFill.done" :total="checkoutFill.total" />
         <div class="grid">
           <label>Nombre<input v-model.trim="state.first_name" type="text" required /></label>
           <label>Apellido<input v-model.trim="state.last_name" type="text" required /></label>
@@ -207,7 +216,8 @@
         <div class="row">
           <button class="back" type="button" @click="go('result')">← Volver</button>
           <button class="btn btn--dark" type="submit" :disabled="sending">
-            {{ sending ? 'Enviando…' : submitLabel }} <span>→</span>
+            <template v-if="sending"><i class="spin" aria-hidden="true"></i> Enviando</template>
+            <template v-else>{{ submitLabel }} <span>→</span></template>
           </button>
         </div>
         <button class="pub__link pub__link--center" type="button" @click="chat.open()">Tengo una pregunta antes de continuar</button>
@@ -230,13 +240,15 @@
           <textarea v-model.trim="state.brief_notes" rows="2" placeholder="Qué evitar, tono, fechas clave…"></textarea>
         </label>
         <div class="row row--end">
-          <button class="btn btn--dark" type="submit" :disabled="sending">{{ sending ? 'Enviando…' : 'Enviar briefing' }} <span>→</span></button>
+          <button class="btn btn--dark" type="submit" :disabled="sending"><template v-if="sending"><i class="spin" aria-hidden="true"></i> Enviando</template>
+            <template v-else>Enviar briefing <span>→</span></template></button>
         </div>
       </form>
     </section>
 
     <!-- ══ DONE ═══════════════════════════════════════════════ -->
     <section v-else class="pub__wrap pub__done">
+      <svg class="tick" viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="24" /><path d="M15 27l7 7 15-16" /></svg>
       <p class="pub__eyebrow">Listo</p>
       <h2 class="pub__h2">{{ doneTitle }}</h2>
       <p class="pub__muted">{{ doneCopy }}</p>
@@ -248,6 +260,7 @@
       </div>
       <button class="pub__link pub__link--center" type="button" @click="restart">Armar otra campaña</button>
     </section>
+    </Transition>
 
     <footer class="pub__foot">
       <span>Eureka Productions Cía. Ltda. · Toronto</span>
@@ -259,8 +272,9 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import ChatConsultas from '@/components/campana/ChatConsultas.vue'
+import Fill from '@/components/campana/Relleno.vue'
 import { useAdFunnel, trackAdEvent } from '@/composables/useCampana'
 import { useAdChat } from '@/composables/useConsultas'
 import {
@@ -281,21 +295,66 @@ const isConfig  = computed(() => ['goal', 'duration', 'details'].includes(state.
 const stepIndex = computed(() => ['goal', 'duration', 'details', 'result'].indexOf(state.value.stage))
 const hasProgress = computed(() => !!state.value.goal)
 
+// ── Movimiento ───────────────────────────────────────────────────
+// La dirección decide hacia dónde se desliza el paso: adelante entra por la
+// derecha, atrás por la izquierda.
+const ORDER = ['hero', 'goal', 'duration', 'details', 'result', 'checkout', 'briefing', 'done']
+const dir = ref<'fwd' | 'back'>('fwd')
+watch(() => state.value.stage, (to, from) => {
+  dir.value = ORDER.indexOf(to) >= ORDER.indexOf(from) ? 'fwd' : 'back'
+})
+function toTop() {
+  if (window.scrollY > 80) window.scrollTo({ top: 0, behavior: 'smooth' })
+}
+
+const reduceMotion = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+const wait = (ms: number) => new Promise(r => setTimeout(r, reduceMotion ? 0 : ms))
+
+/** Deja ver la opción marcada un instante antes de pasar al siguiente paso */
+const picking = ref(false)
+/** Pausa corta al calcular la recomendación: sin ella el salto se siente vacío */
+const thinking = ref(false)
+
+const filled = (v: unknown) => v !== '' && v !== null && v !== undefined && v !== false
+const detailsFill = computed(() => {
+  const s = state.value
+  const req: unknown[] = [s.brand, s.category, s.budget]
+  if (s.duration >= 6) req.push(s.role, s.decision_power, s.exclusivity_conflict)
+  return { done: req.filter(filled).length, total: req.length }
+})
+const checkoutFill = computed(() => {
+  const s = state.value
+  const req: unknown[] = [s.first_name, s.last_name, s.email, s.phone, s.accepted_terms]
+  return { done: req.filter(filled).length, total: req.length }
+})
+
 function start() { go('goal') }
 function resume() { go(state.value.goal && state.value.duration ? (state.value.brand ? 'result' : 'details') : 'goal') }
 function restart() { reset(); go('hero') }
 
-function pickGoal(g: AdGoal) {
+async function pickGoal(g: AdGoal) {
+  if (picking.value) return
+  picking.value = true
   state.value.goal = g
   trackAdEvent('ad_goal_selected', { goal: g })
+  await wait(280)
+  picking.value = false
   go('duration')
 }
-function pickDuration(d: AdDuration) {
+async function pickDuration(d: AdDuration) {
+  if (picking.value) return
+  picking.value = true
   state.value.duration = d
+  await wait(280)
+  picking.value = false
   go('details')
 }
-function submitDetails() {
+async function submitDetails() {
+  if (thinking.value) return
+  thinking.value = true
   state.value.selected_product = ''
+  await wait(850)
+  thinking.value = false
   go('result')
 }
 function choose(id: string) {
@@ -513,5 +572,99 @@ label {
   display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin: 0 0 22px;
   div { background: #fff; border: 1px solid $line; border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; gap: 4px;
     span { font-size: 1.09rem; letter-spacing: .16em; text-transform: uppercase; color: $muted; } strong { font-weight: 500; font-size: 1.28rem; } }
+}
+// ── Movimiento ───────────────────────────────────────────────────
+$ease: cubic-bezier(.2,.8,.2,1);
+
+// Cambio de etapa (hero → configurador → resultado → checkout…)
+.stage-fwd-enter-active, .stage-back-enter-active { transition: opacity .45s $ease, transform .45s $ease, filter .45s $ease; }
+.stage-fwd-leave-active, .stage-back-leave-active { transition: opacity .22s ease-in, transform .22s ease-in, filter .22s ease-in; }
+.stage-fwd-enter-from  { opacity: 0; transform: translateY(24px); filter: blur(4px); }
+.stage-fwd-leave-to    { opacity: 0; transform: translateY(-14px); filter: blur(3px); }
+.stage-back-enter-from { opacity: 0; transform: translateY(-24px); filter: blur(4px); }
+.stage-back-leave-to   { opacity: 0; transform: translateY(14px); filter: blur(3px); }
+
+// Pasos del configurador: adelante entra por la derecha, atrás por la izquierda
+.step-fwd-enter-active, .step-back-enter-active { transition: opacity .4s $ease, transform .4s $ease; }
+.step-fwd-leave-active, .step-back-leave-active { transition: opacity .2s ease-in, transform .2s ease-in; }
+.step-fwd-enter-from  { opacity: 0; transform: translateX(40px); }
+.step-fwd-leave-to    { opacity: 0; transform: translateX(-28px); }
+.step-back-enter-from { opacity: 0; transform: translateX(-40px); }
+.step-back-leave-to   { opacity: 0; transform: translateX(28px); }
+
+// Barra de avance continua sobre las etiquetas de pasos
+.meter {
+  height: 3px; border-radius: 3px; background: rgba(0,0,0,.07); overflow: hidden; margin-bottom: -2px;
+  span { display: block; height: 100%; background: $red; transform-origin: left; transition: transform .6s $ease; }
+}
+.steps li { transition: color .35s ease, border-color .35s ease; }
+
+// Entrada escalonada: `backwards` y no `both`, para que al terminar la
+// animación no pise el transform del hover.
+@keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+
+.opt {
+  position: relative;
+  animation: rise .5s $ease backwards; animation-delay: calc(var(--i, 0) * 70ms + 120ms);
+  &:disabled { cursor: default; }
+  &:disabled:not(.on) { opacity: .5; transform: none; box-shadow: none; }
+  &.on::after {
+    content: ''; position: absolute; inset: -1px; border-radius: inherit; border: 2px solid $red; pointer-events: none;
+    animation: ring .55s ease-out forwards;
+  }
+  &.on .opt__t { color: $red; }
+  .opt__t { transition: color .2s ease; }
+}
+@keyframes ring { from { opacity: .9; transform: scale(1); } to { opacity: 0; transform: scale(1.06); } }
+
+.grid > * { animation: rise .45s $ease backwards; }
+@for $n from 1 through 12 {
+  .grid > :nth-child(#{$n}) { animation-delay: #{80 + $n * 45}ms; }
+}
+label {
+  transition: color .2s ease;
+  &:focus-within { color: $ink; }
+  input, select, textarea { transition: border-color .2s ease, box-shadow .25s ease; }
+  input:focus, select:focus, textarea:focus { box-shadow: 0 0 0 4px rgba(200,57,43,.1); }
+}
+
+.summary > div { animation: rise .45s $ease backwards; }
+@for $n from 1 through 4 {
+  .summary > :nth-child(#{$n}) { animation-delay: #{60 + $n * 60}ms; }
+}
+
+.prod { animation: rise .6s $ease backwards; animation-delay: calc(var(--i, 0) * 140ms + 200ms); }
+.notice { animation: rise .45s $ease backwards .1s; }
+
+.pub__hero > * { animation: rise .7s $ease backwards; }
+@for $n from 1 through 6 {
+  .pub__hero > :nth-child(#{$n}) { animation-delay: #{$n * 90}ms; }
+}
+
+// Spinner de botón
+.spin {
+  width: 1em; height: 1em; border-radius: 50%; border: 2px solid rgba(255,255,255,.3); border-top-color: #fff;
+  animation: spin .7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.btn:disabled:has(.spin) { opacity: .85; }
+
+// Check final que se dibuja
+.tick {
+  width: 64px; height: 64px; margin: 0 auto 18px; display: block;
+  circle, path { fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+  circle { stroke: rgba(200,57,43,.25); stroke-dasharray: 151; stroke-dashoffset: 151; animation: draw .6s $ease forwards .15s; }
+  path { stroke: $red; stroke-dasharray: 36; stroke-dashoffset: 36; animation: draw .4s $ease forwards .6s; }
+}
+@keyframes draw { to { stroke-dashoffset: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .stage-fwd-enter-active, .stage-back-enter-active, .stage-fwd-leave-active, .stage-back-leave-active,
+  .step-fwd-enter-active, .step-back-enter-active, .step-fwd-leave-active, .step-back-leave-active { transition: opacity .15s linear; }
+  .stage-fwd-enter-from, .stage-fwd-leave-to, .stage-back-enter-from, .stage-back-leave-to,
+  .step-fwd-enter-from, .step-fwd-leave-to, .step-back-enter-from, .step-back-leave-to { transform: none; filter: none; }
+  .opt, .grid > *, .summary > div, .prod, .notice, .pub__hero > *, .opt.on::after { animation: none; }
+  .tick circle, .tick path { animation: none; stroke-dashoffset: 0; }
+  .meter span { transition: none; }
 }
 </style>
