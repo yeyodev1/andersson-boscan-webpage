@@ -4,45 +4,45 @@
   "outputDirectory": "dist",
   "redirects": [
     {
-      "source": "/:path*",
+      "source": "/:path(.*)",
       "has": [{ "type": "host", "value": "www.boscanymoni.com" }],
-      "destination": "https://boscanymoni.com/:path*",
+      "destination": "https://boscanymoni.com/:path",
       "permanent": true
     },
     {
-      "source": "/:path*",
+      "source": "/:path(.*)",
       "has": [{ "type": "host", "value": "anderssonboscan.com" }],
-      "destination": "https://boscanymoni.com/:path*",
+      "destination": "https://boscanymoni.com/:path",
       "permanent": true
     },
     {
-      "source": "/:path*",
+      "source": "/:path(.*)",
       "has": [{ "type": "host", "value": "www.anderssonboscan.com" }],
-      "destination": "https://boscanymoni.com/:path*",
+      "destination": "https://boscanymoni.com/:path",
       "permanent": true
     },
     {
-      "source": "/:path*",
+      "source": "/:path(.*)",
       "has": [{ "type": "host", "value": "anderssonboscan.ec" }],
-      "destination": "https://boscanymoni.com/:path*",
+      "destination": "https://boscanymoni.com/:path",
       "permanent": true
     },
     {
-      "source": "/:path*",
+      "source": "/:path(.*)",
       "has": [{ "type": "host", "value": "www.anderssonboscan.ec" }],
-      "destination": "https://boscanymoni.com/:path*",
+      "destination": "https://boscanymoni.com/:path",
       "permanent": true
     },
     {
-      "source": "/:path*",
+      "source": "/:path(.*)",
       "has": [{ "type": "host", "value": "monivelasquezv.com" }],
-      "destination": "https://boscanymoni.com/:path*",
+      "destination": "https://boscanymoni.com/:path",
       "permanent": true
     },
     {
-      "source": "/:path*",
+      "source": "/:path(.*)",
       "has": [{ "type": "host", "value": "www.monivelasquezv.com" }],
-      "destination": "https://boscanymoni.com/:path*",
+      "destination": "https://boscanymoni.com/:path",
       "permanent": true
     },
     {
