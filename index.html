@@ -4,70 +4,76 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- ═══ PRIMARY SEO ══════════════════════════════════════════════ -->
+    <!-- ═══ PRIMARY SEO ══════════════════════════════════════════════
+         El título, la description, el canonical y los OG se actualizan
+         por ruta en src/router/index.ts (metaPorRuta). Aquí va solo el
+         valor de la portada, que es lo que lee un crawler sin JS. -->
     <title>Boscán & La Moni — Periodismo de investigación y publicidad</title>
-    <meta name="description" content="Andersson Boscán y Mónica Velásquez. Las investigaciones principales de su carrera y publicidad sin reunión: arma tu campaña en minutos. Desde Toronto, Canadá." />
-    <meta name="keywords" content="Andersson Boscán, media kit, periodismo digital Ecuador, influencer periodista, programa noticias LATAM, media kit 2026, publicidad digital, pauta digital, TikTok Ecuador, YouTube Ecuador, EUREKA Media EC" />
-    <meta name="author" content="Andersson y Moni Boscán, Mónica Velásquez — EUREKA Media EC" />
+    <meta name="description" content="Andersson Boscán y Mónica Velásquez, periodistas de investigación. 35 expedientes sobre corrupción y crimen organizado en Ecuador, y publicidad sin reunión: arma tu campaña en minutos." />
+    <meta name="author" content="Andersson Boscán y Mónica Velásquez — Boscán & La Moni" />
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     <link rel="canonical" href="https://boscanymoni.com/" />
 
     <!-- ═══ OPEN GRAPH ════════════════════════════════════════════════ -->
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Boscán & La Moni — Media Kit 2026" />
-    <meta property="og:title" content="Media Kit 2026 — Andersson y Moni Boscán | 88.7M Impresiones Mensuales" />
-    <meta property="og:description" content="El programa noticioso más viral de LATAM. 88.7M impresiones · 910K TikTok · 500K reproducciones diarias. Conoce todos los formatos de pauta disponibles." />
+    <meta property="og:site_name" content="Boscán & La Moni" />
+    <meta property="og:title" content="Boscán & La Moni — Periodismo de investigación y publicidad" />
+    <meta property="og:description" content="Andersson Boscán y Mónica Velásquez, periodistas de investigación. 35 expedientes sobre corrupción y crimen organizado en Ecuador." />
     <meta property="og:url" content="https://boscanymoni.com/" />
-    <meta property="og:image" content="https://boscanymoni.com/images/p1-cover.png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Media Kit Andersson y Moni Boscán 2026" />
+    <meta property="og:image" content="https://boscanymoni.com/images/portada-pareja.png" />
+    <meta property="og:image:alt" content="Andersson Boscán y Mónica Velásquez — Boscán & La Moni" />
     <meta property="og:locale" content="es_EC" />
-    <meta property="og:locale:alternate" content="es_CO" />
-    <meta property="og:locale:alternate" content="es_VE" />
 
     <!-- ═══ TWITTER / X CARD ════════════════════════════════════════ -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@anderssonboscan" />
     <meta name="twitter:creator" content="@anderssonboscan" />
-    <meta name="twitter:title" content="Media Kit 2026 — Andersson y Moni Boscán" />
-    <meta name="twitter:description" content="88.7M impresiones mensuales · 910K TikTok · El programa noticioso más viral de LATAM." />
-    <meta name="twitter:image" content="https://boscanymoni.com/images/p1-cover.png" />
-    <meta name="twitter:image:alt" content="Media Kit Andersson y Moni Boscán 2026" />
+    <meta name="twitter:title" content="Boscán & La Moni — Periodismo de investigación y publicidad" />
+    <meta name="twitter:description" content="Andersson Boscán y Mónica Velásquez, periodistas de investigación. 35 expedientes sobre corrupción y crimen organizado en Ecuador." />
+    <meta name="twitter:image" content="https://boscanymoni.com/images/portada-pareja.png" />
+    <meta name="twitter:image:alt" content="Andersson Boscán y Mónica Velásquez — Boscán & La Moni" />
 
-    <!-- ═══ GEO & LANGUAGE ══════════════════════════════════════════ -->
-    <meta name="geo.region" content="CA-ON" />
-    <meta name="geo.placename" content="Toronto, Ontario, Canada" />
-    <link rel="alternate" hreflang="es" href="https://boscanymoni.com/" />
-    <link rel="alternate" hreflang="x-default" href="https://boscanymoni.com/" />
-
-    <!-- ═══ STRUCTURED DATA — Person ═══════════════════════════════ -->
+    <!-- ═══ STRUCTURED DATA ═════════════════════════════════════════
+         La organización comparte @id con la del lado periodismo
+         (public/periodismo/index.html) para que Google y los LLM
+         fusionen la entidad en una sola. -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@graph": [
         {
+          "@type": "NewsMediaOrganization",
+          "@id": "https://boscanymoni.com/periodismo/#organizacion",
+          "name": "Boscán & La Moni",
+          "url": "https://boscanymoni.com/",
+          "founder": [
+            { "@id": "https://boscanymoni.com/#andersson" },
+            { "@id": "https://boscanymoni.com/#monica" }
+          ]
+        },
+        {
           "@type": "Person",
           "@id": "https://boscanymoni.com/#andersson",
           "name": "Andersson Boscán",
-          "alternateName": ["Andersson y Moni Boscán", "Andersson Boscan"],
-          "jobTitle": "Periodista Digital, Creador de Contenido",
-          "description": "Periodista de investigación y creador de contenido digital. Conductor del programa noticioso matutino más visto de LATAM.",
-          "url": "https://boscanymoni.com/",
-          "image": "https://boscanymoni.com/images/p1-cover.png",
+          "alternateName": "Andersson Boscan",
+          "jobTitle": "Periodista de investigación",
+          "description": "Periodista de investigación ecuatoriano radicado en Toronto, Canadá. Autor de El Gran Padrino, la investigación de 34 entregas que llevó al presidente Guillermo Lasso a un juicio político. Premio Rey de España 2024, finalista del Premio Gabo 2023 y Premio Eppy 2019.",
+          "award": [
+            "Premio Rey de España 2024",
+            "Finalista Premio Gabo 2023",
+            "Premio Eppy 2019"
+          ],
+          "knowsAbout": ["Crimen organizado", "Narcotráfico", "Corrupción", "Ecuador", "Periodismo de investigación"],
+          "url": "https://boscanymoni.com/quienes-somos",
+          "image": "https://boscanymoni.com/images/portada-pareja.png",
           "sameAs": [
             "https://www.tiktok.com/@anderssonboscan",
             "https://www.youtube.com/@anderssonboscan",
             "https://twitter.com/anderssonboscan",
             "https://www.instagram.com/anderssonboscan",
-            "https://www.facebook.com/anderssonboscan",
-            "https://open.spotify.com/show/boscanpodcast"
+            "https://www.facebook.com/anderssonboscan"
           ],
-          "worksFor": {
-            "@type": "Organization",
-            "name": "EUREKA Media EC",
-            "url": "https://boscanymoni.com/"
-          },
+          "worksFor": { "@id": "https://boscanymoni.com/periodismo/#organizacion" },
           "address": {
             "@type": "PostalAddress",
             "addressLocality": "Toronto",
@@ -80,54 +86,22 @@
           "@id": "https://boscanymoni.com/#monica",
           "name": "Mónica Velásquez",
           "alternateName": "La Moni",
-          "jobTitle": "Periodista Digital, Conductora",
-          "url": "https://boscanymoni.com/",
+          "jobTitle": "Periodista, conductora",
+          "url": "https://boscanymoni.com/quienes-somos",
           "sameAs": [
-            "https://www.tiktok.com/@monicavelasquez",
-            "https://www.youtube.com/@monicavelasquez"
-          ]
+            "https://www.tiktok.com/@monivelasquezv",
+            "https://www.youtube.com/@monivelasquezv"
+          ],
+          "worksFor": { "@id": "https://boscanymoni.com/periodismo/#organizacion" }
         },
         {
           "@type": "WebSite",
           "@id": "https://boscanymoni.com/#website",
           "url": "https://boscanymoni.com/",
-          "name": "Boscán & La Moni — Media Kit 2026",
-          "description": "Media Kit oficial de Andersson y Moni Boscán y Mónica Velásquez",
+          "name": "Boscán & La Moni",
+          "description": "Periodismo de investigación de Andersson Boscán y Mónica Velásquez, y publicidad con su audiencia.",
           "inLanguage": "es",
-          "publisher": {
-            "@id": "https://boscanymoni.com/#andersson"
-          }
-        },
-        {
-          "@type": "WebPage",
-          "@id": "https://boscanymoni.com/#webpage",
-          "url": "https://boscanymoni.com/",
-          "name": "Media Kit 2026 — Andersson y Moni Boscán",
-          "isPartOf": { "@id": "https://boscanymoni.com/#website" },
-          "about": { "@id": "https://boscanymoni.com/#andersson" },
-          "description": "Descubre los formatos de pauta disponibles, estadísticas de audiencia y tarifas del programa noticioso más viral de LATAM.",
-          "inLanguage": "es",
-          "datePublished": "2026-01-01",
-          "dateModified": "2026-04-02"
-        },
-        {
-          "@type": "MediaObject",
-          "name": "Media Kit Andersson y Moni Boscán 2026",
-          "description": "Media Kit digital completo con estadísticas de audiencia, formatos de pauta y tarifas.",
-          "encodingFormat": "text/html",
-          "url": "https://boscanymoni.com/",
-          "author": { "@id": "https://boscanymoni.com/#andersson" }
-        },
-        {
-          "@type": "BreadcrumbList",
-          "itemListElement": [
-            {
-              "@type": "ListItem",
-              "position": 1,
-              "name": "Media Kit 2026",
-              "item": "https://boscanymoni.com/"
-            }
-          ]
+          "publisher": { "@id": "https://boscanymoni.com/periodismo/#organizacion" }
         }
       ]
     }

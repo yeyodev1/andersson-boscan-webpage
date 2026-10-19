@@ -329,7 +329,7 @@ const pricingRows = [
   },
   {
     name:  'Diario de Boscán para la Marca',
-    desc:  'El intro viral diario de Andersson relata una historia donde tu marca aparece de forma sutil. No parece publicidad — porque no lo es.',
+    desc:  'El intro viral diario de Andersson relata una historia donde tu marca aparece integrada con naturalidad, siempre rotulada como contenido pagado.',
     reach: '~500K reprod.',
     price: '$3,000',
     unit:  'única vez',

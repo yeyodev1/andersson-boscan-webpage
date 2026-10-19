@@ -1,15 +1,20 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
 
-const BASE_TITLE = 'Andersson y Moni Boscán — Media Kit 2026'
+const BASE_TITLE = 'Boscán & La Moni'
+const CANONICAL_BASE = 'https://boscanymoni.com'
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/login',
+    // Ruta secreta del panel: no se enlaza desde ninguna página ni se lista
+    // en robots/sitemap. Si se cambia, actualizar también public/_redirects,
+    // GUIA-ANDERSSON.md y el logout de IntegracionesView.
+    path: '/acceso-eureka',
     name: 'Login',
     component: () => import('../views/LoginView.vue'),
     meta: {
-      title: `Iniciar Sesión — Andersson y Moni Boscán`,
+      title: `Iniciar Sesión — Boscán & La Moni`,
       description: 'Inicia sesión para acceder a funciones exclusivas.',
+      noindex: true,
     },
   },
   {
@@ -35,8 +40,8 @@ const routes: Array<RouteRecordRaw> = [
     name: 'MediaKit',
     component: () => import('../views/MediaKitView.vue'),
     meta: {
-      title: `Media Kit 2026 — Andersson y Moni Boscán | Periodismo Digital LATAM`,
-      description: 'Media Kit oficial de Andersson y Moni Boscán. 88.7M impresiones mensuales, 910K seguidores TikTok, programa noticioso más viral de LATAM.',
+      title: `Media Kit 2026 — Boscán & La Moni`,
+      description: 'Media Kit oficial de Andersson Boscán y Mónica Velásquez: audiencia, plataformas y formatos de pauta disponibles.',
     },
   },
   {
@@ -44,8 +49,8 @@ const routes: Array<RouteRecordRaw> = [
     name: 'QuienesSomos',
     component: () => import('../views/QuienesSomosView.vue'),
     meta: {
-      title: `Quiénes somos — Andersson y Moni Boscán | Media Kit 2026`,
-      description: 'Conoce a Andersson Boscán y Mónica Velásquez — el equipo detrás del programa noticioso más viral de LATAM.',
+      title: `Quiénes somos — Andersson Boscán y Mónica Velásquez`,
+      description: 'Conoce a Andersson Boscán y Mónica Velásquez, periodistas de investigación y conductores del programa diario Boscán & La Moni.',
     },
   },
   {
@@ -53,8 +58,8 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Precios',
     component: () => import('../views/PreciosView.vue'),
     meta: {
-      title: `Tarifas 2026 — Andersson y Moni Boscán | Media Kit`,
-      description: 'Tabla de tarifas y formatos de pauta de Andersson y Moni Boscán. Accede a precios y formatos disponibles para tu marca.',
+      title: `Tarifas 2026 — Boscán & La Moni`,
+      description: 'Tabla de tarifas y formatos de pauta de Boscán & La Moni. Accede a precios y formatos disponibles para tu marca.',
     },
   },
   {
@@ -62,8 +67,8 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Agendar',
     component: () => import('../views/AgendarView.vue'),
     meta: {
-      title: `Agenda tu llamada — Andersson y Moni Boscán | Media Kit 2026`,
-      description: 'Agenda tu llamada estratégica con el equipo de Andersson y Moni Boscán.',
+      title: `Agenda tu llamada — Boscán & La Moni`,
+      description: 'Agenda tu llamada estratégica con el equipo de Boscán & La Moni.',
     },
   },
   {
@@ -71,7 +76,7 @@ const routes: Array<RouteRecordRaw> = [
     name: 'TerminosCondiciones',
     component: () => import('../views/TerminosCondicionesView.vue'),
     meta: {
-      title: `Términos y Condiciones — Andersson y Moni Boscán`,
+      title: `Términos y Condiciones — Boscán & La Moni`,
       description: 'Términos y condiciones de uso y privacidad.',
     },
   },
@@ -80,7 +85,7 @@ const routes: Array<RouteRecordRaw> = [
     name: 'PoliticaPrivacidad',
     component: () => import('../views/PoliticaPrivacidadView.vue'),
     meta: {
-      title: `Política de Privacidad — Andersson y Moni Boscán`,
+      title: `Política de Privacidad — Boscán & La Moni`,
       description: 'Política de privacidad y protección de datos.',
     },
   },
@@ -89,9 +94,10 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Integraciones',
     component: () => import('../views/IntegracionesView.vue'),
     meta: {
-      title: `Panel de Integraciones — Andersson y Moni Boscán`,
+      title: `Panel de Integraciones — Boscán & La Moni`,
       description: 'Gestiona tus integraciones externas.',
-      requiresAuth: true
+      requiresAuth: true,
+      noindex: true,
     },
   },
   {
@@ -101,6 +107,7 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       title: `404 — Página no encontrada | ${BASE_TITLE}`,
       description: 'La página que buscas no existe.',
+      noindex: true,
     },
   },
 ]
@@ -113,26 +120,58 @@ const router = createRouter({
   },
 })
 
-router.beforeEach((to, _from, next) => {
-  // Set page title
-  const title = to.meta?.title as string | undefined
-  if (title) document.title = title
+/**
+ * Metas por ruta: cada vista deja de ser un "duplicado" de la portada para
+ * el crawler que ejecuta JS. El canonical, og:url, título y description se
+ * actualizan en cada navegación; el HTML estático (index.html) solo trae
+ * los valores de la portada.
+ */
+const setAttr = (selector: string, value: string) => {
+  document.head.querySelector(selector)?.setAttribute('content', value)
+}
 
-  // Set meta description
+router.beforeEach((to, _from, next) => {
+  // Título por ruta, también en las tarjetas de compartir
+  const title = (to.meta?.title as string | undefined) ?? BASE_TITLE
+  document.title = title
+  setAttr('meta[property="og:title"]', title)
+  setAttr('meta[name="twitter:title"]', title)
+
+  // Description por ruta
   const desc = to.meta?.description as string | undefined
   if (desc) {
-    const metaDesc = document.querySelector('meta[name="description"]')
-    if (metaDesc) metaDesc.setAttribute('content', desc)
+    setAttr('meta[name="description"]', desc)
+    setAttr('meta[property="og:description"]', desc)
+    setAttr('meta[name="twitter:description"]', desc)
   }
+
+  // Canonical y og:url por ruta (sin query ni hash)
+  const canonical = CANONICAL_BASE + (to.path === '/' ? '/' : to.path.replace(/\/+$/, ''))
+  let canonicalLink = document.head.querySelector('link[rel="canonical"]')
+  if (!canonicalLink) {
+    canonicalLink = document.createElement('link')
+    canonicalLink.setAttribute('rel', 'canonical')
+    document.head.appendChild(canonicalLink)
+  }
+  canonicalLink.setAttribute('href', canonical)
+  setAttr('meta[property="og:url"]', canonical)
+
+  // Rutas internas y 404 fuera del índice
+  setAttr(
+    'meta[name="robots"]',
+    to.meta?.noindex
+      ? 'noindex, nofollow'
+      : 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
+  )
 
   const hasToken = !!localStorage.getItem('access_token')
   const requiresAuth = to.matched.some((record) => record.meta?.requiresAuth)
 
   if (requiresAuth && !hasToken) {
-    return next({ path: '/login', replace: true })
+    return next({ path: '/acceso-eureka', replace: true })
   }
 
-  if (to.path === '/login' && hasToken) {
+  if (to.path === '/acceso-eureka' && hasToken) {
     return next({ path: '/integraciones', replace: true })
   }
 

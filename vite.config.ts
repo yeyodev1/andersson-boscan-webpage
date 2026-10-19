@@ -26,11 +26,32 @@ function periodismoEstatico(): Plugin {
   }
 }
 
+/**
+ * Identificador del build. Va incrustado en el bundle (__ID_BUILD__) y en
+ * dist/version.json: cuando no coinciden, AvisoActualizacion.vue sabe que hay
+ * una versión nueva publicada y fuerza la recarga.
+ */
+const ID_BUILD = Date.now().toString(36)
+
+function versionJson(): Plugin {
+  return {
+    name: 'version-json',
+    apply: 'build',
+    closeBundle() {
+      const destino = path.join(process.cwd(), 'dist', 'version.json')
+      fs.writeFileSync(destino, JSON.stringify({ id: ID_BUILD }))
+    },
+  }
+}
+
 export default defineConfig({
   server: {
     allowedHosts: ['testing-storybrand-frontend.bakano.ec'],
   },
-  plugins: [vue(), periodismoEstatico()],
+  define: {
+    __ID_BUILD__: JSON.stringify(ID_BUILD),
+  },
+  plugins: [vue(), periodismoEstatico(), versionJson()],
   css: {
     preprocessorOptions: {
       scss: {

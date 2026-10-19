@@ -9,11 +9,16 @@
       <div class="card">
         <p class="description">
           Todos los datos e información recopilados en este sitio web son estrictamente reservados 
-          y propiedad exclusiva de <strong>Andersson Boscán</strong> y <strong>Moni Boscán</strong>.
+          y propiedad exclusiva de <strong>Andersson Boscán</strong> y <strong>Mónica Velásquez</strong>.
         </p>
         <p class="description">
-          Su privacidad es importante para nosotros. Nos comprometemos a proteger su información personal 
+          Su privacidad es importante para nosotros. Nos comprometemos a proteger su información personal
           y a utilizarla únicamente para los fines establecidos y autorizados.
+        </p>
+        <p class="description">
+          Los datos que usted envía a través de los formularios de contacto y del configurador de campañas
+          se almacenan en nuestro CRM (LeadConnector / GoHighLevel) con el único fin de responder su solicitud
+          y dar seguimiento comercial. No se venden ni se comparten con terceros ajenos a esa gestión.
         </p>
       </div>
     </div>

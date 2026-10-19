@@ -9,7 +9,7 @@
       <div class="card">
         <p class="description">
           Todos los datos e información recopilados en este sitio web son estrictamente reservados 
-          y propiedad exclusiva de <strong>Andersson Boscán</strong> y <strong>Moni Boscán</strong>.
+          y propiedad exclusiva de <strong>Andersson Boscán</strong> y <strong>Mónica Velásquez</strong>.
         </p>
         <p class="description">
           El uso no autorizado, reproducción o distribución de cualquier contenido está estrictamente prohibido.

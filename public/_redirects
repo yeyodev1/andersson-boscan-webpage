@@ -1,6 +1,27 @@
-# El sitio de investigaciones es estático (public/periodismo/); tiene que
-# resolverse antes del fallback de la SPA.
-/periodismo      /periodismo/index.html   200
-/periodismo/     /periodismo/index.html   200
+# ── Dominios alternos → 301 al canónico, ruta por ruta ─────────────────
+https://anderssonboscan.ec/*        https://boscanymoni.com/:splat  301!
+https://www.anderssonboscan.ec/*    https://boscanymoni.com/:splat  301!
+https://monivelasquezv.com/*        https://boscanymoni.com/:splat  301!
+https://www.monivelasquezv.com/*    https://boscanymoni.com/:splat  301!
+https://andersson-boscan.netlify.app/*  https://boscanymoni.com/:splat  301!
 
-/*               /index.html              200
+# ── Periodismo (sitio estático): resolver antes del fallback de la SPA ──
+/periodismo                     /periodismo/index.html  200
+/periodismo/                    /periodismo/index.html  200
+/periodismo/investigaciones     /periodismo/            301
+/periodismo/investigaciones/    /periodismo/            301
+
+# ── Rutas de la SPA, enumeradas para que lo demás sea un 404 real ───────
+# Si se agrega una ruta nueva en src/router/index.ts hay que añadirla aquí.
+/publicidad                 /index.html  200
+/media-kit                  /index.html  200
+/quienes-somos              /index.html  200
+/precios                    /index.html  200
+/agendar                    /index.html  200
+/terminos-y-condiciones     /index.html  200
+/politica-de-privacidad     /index.html  200
+/acceso-eureka              /index.html  200
+/integraciones              /index.html  200
+
+# ── Todo lo demás: 404 con código 404 de verdad ─────────────────────────
+/*                          /404.html    404

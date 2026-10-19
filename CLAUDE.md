@@ -28,6 +28,55 @@ VITE_GHL_WEBHOOK_OPPORTUNITY=<GHL opportunity webhook URL>
 - Aliases: `monivelasquezv.com`, `anderssonboscan.ec`, `andersson-boscan.netlify.app`
 - Always use `boscanymoni.com` as canonical in SEO files (sitemap, robots, llms.txt, og:url)
 
+## SEO / GEO (auditoría 2026-10-18)
+
+- **Metas por ruta**: título, description, canonical, OG/Twitter y robots se
+  actualizan en el `beforeEach` de `src/router/index.ts` (constante
+  `CANONICAL_BASE`). `index.html` solo trae los valores de la portada. Rutas
+  internas (`/login`, `/integraciones`, 404) llevan `meta.noindex: true`.
+- **404 real**: `public/_redirects` enumera las rutas de la SPA una por una y
+  manda todo lo demás a `public/404.html` con código 404. **Si se agrega una
+  ruta nueva al router hay que añadirla también a `_redirects`**, o dará 404.
+- `public/_redirects` además hace 301 de los dominios alternos al canónico y
+  301 de `/periodismo/investigaciones/` → `/periodismo/`.
+- `public/_headers`: cabeceras de seguridad y caché immutable para `/assets/`.
+- **`llms.txt` y `llms-full.txt`**: presentan a Andersson y Mónica como
+  periodistas de investigación, listan los 35 expedientes y dejan la
+  publicidad al final **sin precios**. Con una entrega nueva de periodismo,
+  regenerar la lista de expedientes (títulos/descriptions de
+  `public/periodismo/investigaciones/*/index.html`).
+- **Nombre de marca**: "Boscán & La Moni" o "Andersson Boscán y Mónica
+  Velásquez". Nunca "Andersson y Moni Boscán" (era el error que arrastraba
+  todo el SEO). El JSON-LD comercial comparte la organización
+  `@id https://boscanymoni.com/periodismo/#organizacion` con el lado
+  periodismo: no romper ese enlace.
+
+## Acceso de Andersson
+
+- El login vive en la **ruta secreta `/acceso-eureka`** (noindex, sin enlaces
+  entrantes, no listada en robots ni sitemap). Si se cambia la ruta, actualizar
+  router, `public/_redirects`, `GUIA-ANDERSSON.md` y el logout de
+  `IntegracionesView`.
+- `src/services/AuthService.ts` tiene un acceso directo (correo de Andersson)
+  que entra a `/integraciones` sin backend. El repo no lleva credenciales: el
+  hash SHA-256 de `correo:contraseña` vive en `VITE_ACCESO_DIRECTO_HASH`
+  (.env local y variables de entorno del hosting). Aun así es un candado de
+  cliente: el panel no debe guardar nada sensible mientras exista.
+- `.claude/settings.json` (del repo) permite git add/commit/push/revert y pnpm
+  sin prompts, para que Andersson publique y revierta desde Claude Code.
+- **Aviso de versión nueva**: el build escribe `dist/version.json` (plugin
+  `versionJson` en `vite.config.ts`) y `AvisoActualizacion.vue` (montado en
+  `App.vue`) lo consulta; si el id no coincide con `__ID_BUILD__`, muestra un
+  modal bloqueante y fuerza la recarga.
+- `.mcp.json` configura el MCP de GitHub con `Authorization: Bearer ${GITHUB_PAT}`.
+  Andersson **no tiene cuenta propia de GitHub ni es colaborador del repo**:
+  trabaja con un fine-grained PAT de Diego limitado a este repositorio
+  (Contents read/write + Metadata read). El token va en la URL del remote al
+  clonar (`https://x-access-token:TOKEN@github.com/...`) para los push, y en la
+  variable de entorno `GITHUB_PAT` para el MCP. `GUIA-ANDERSSON.md` trae los
+  pasos. Si el token se filtra, Diego lo revoca en GitHub → Settings →
+  Developer settings → Fine-grained tokens y genera otro.
+
 ## Routes
 
 | Path | View | Notes |

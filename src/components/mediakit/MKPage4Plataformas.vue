@@ -5,7 +5,7 @@
       <div class="p4__photo p4__photo--1"></div>
       <div class="p4__overlay p4__overlay--l"></div>
       <div class="p4__content">
-        <div class="p4__who">Andersson y Moni Boscán</div>
+        <div class="p4__who">Andersson Boscán</div>
         <div class="p4__handle">@ANDERSSONBOSCAN</div>
         <div class="p4__bars">
           <div class="p4__bar-row" v-for="p in platformsLeft" :key="p.name" ref="barRowsLeft">

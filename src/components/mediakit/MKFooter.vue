@@ -83,7 +83,7 @@
     <div class="mk-footer__bottom">
       <div class="mk-footer__bottom-inner">
         <span class="mk-footer__bottom-copy">
-          &copy; 2026 Andersson y Moni Boscán · EUREKA Media EC. Todos los derechos reservados.
+          &copy; 2026 Boscán &amp; La Moni · EUREKA Media EC. Todos los derechos reservados.
         </span>
         <span class="mk-footer__bottom-love">Hecho con amor desde Toronto 🍁</span>
       </div>

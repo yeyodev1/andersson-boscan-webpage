@@ -7,8 +7,10 @@ import { instagramService, type InstagramAccount } from '../services/InstagramSe
 const route = useRoute()
 const router = useRouter()
 
-const CLIENT_KEY = 'sbawzron1ukzcg607m'
-const CLIENT_SECRET = 'lHY9hy7iyir0CZM60u3yri90lJB6f4S3'
+// Credenciales de la app de TikTok: fuera del repo. Se definen en el .env
+// local y en las variables de entorno del hosting.
+const CLIENT_KEY = (import.meta.env.VITE_TIKTOK_CLIENT_KEY as string | undefined) ?? ''
+const CLIENT_SECRET = (import.meta.env.VITE_TIKTOK_CLIENT_SECRET as string | undefined) ?? ''
 
 const loading = ref(false)
 const loadingAccounts = ref(true) // Inicialmente en true para cargar en mount
@@ -43,7 +45,7 @@ const showToastNotification = (msg: string) => {
 
 const handleLogout = () => {
   localStorage.removeItem('access_token')
-  router.push('/login')
+  router.push('/acceso-eureka')
 }
 
 // Estado para Eliminar Cuenta
@@ -271,7 +273,30 @@ onMounted(() => {
         <h1 class="title">Panel de Integraciones</h1>
         <p class="subtitle">Gestiona y conecta tus cuentas externas para el flujo de trabajo.</p>
       </header>
-      
+
+      <!-- Guía: editar el sitio con Claude + MCP de GitHub -->
+      <section
+        style="background:#1a1a1a;border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:2rem;margin-bottom:2rem;"
+      >
+        <h2 style="color:#fff;font-size:1.6rem;margin-bottom:0.75rem;">
+          <i class="fa-brands fa-github"></i> Editar el sitio tú mismo
+        </h2>
+        <p style="color:#a0a0a0;font-size:1.3rem;line-height:1.6;margin-bottom:1rem;">
+          Este proyecto trae configurado el MCP de GitHub: puedes pedirle los cambios a Claude
+          en lenguaje normal y él los publica.
+        </p>
+        <ol style="color:#a0a0a0;font-size:1.3rem;line-height:1.8;padding-left:1.5rem;">
+          <li>Abre la carpeta del proyecto en <strong style="color:#fff;">Claude Code</strong> y escribe <code>/mcp</code> → elige <strong style="color:#fff;">github</strong> → entra con tu cuenta de GitHub.</li>
+          <li>Pide el cambio como un mensaje: <em>"cambia el precio del TikTok patrocinado a…"</em></li>
+          <li>Para publicarlo: <em>"haz commit con un mensaje claro y pushea a main"</em>. El hosting publica solo.</li>
+          <li>Para deshacer: <em>"revierte el último commit y pushea"</em>.</li>
+        </ol>
+        <p style="color:#a0a0a0;font-size:1.2rem;margin-top:1rem;">
+          La guía completa está en <code>GUIA-ANDERSSON.md</code>, en la raíz del repositorio.
+          No toques <code>public/periodismo/</code> a mano: esa carpeta es tu entrega y se reemplaza entera.
+        </p>
+      </section>
+
       <div class="integrations-grid">
         <!-- Tarjeta de TikTok -->
         <div class="integration-card">

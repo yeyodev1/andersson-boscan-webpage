@@ -1,27 +1,66 @@
-# robots.txt — Andersson y Moni Boscán | EUREKA Media EC
+# robots.txt — Boscán & La Moni (Andersson Boscán y Mónica Velásquez)
 # https://boscanymoni.com/
+#
+# Decisión editorial: este es un medio que vive de ser citado, así que se
+# permite el rastreo a buscadores y a todos los motores de IA, declarados
+# explícitamente. Contexto para LLMs en /llms.txt y /llms-full.txt.
 
 User-agent: *
 Allow: /
 Disallow: /api/
-Disallow: /*.json$
+Disallow: /integraciones
 
-# Sitemaps
-Sitemap: https://boscanymoni.com/sitemap.xml
-Sitemap: https://boscanymoni.com/periodismo/sitemap.xml
-
-# AI Crawlers — permitidos con contexto completo en /llms.txt
-User-agent: GPTBot
-Allow: /
-
-User-agent: Claude-Web
-Allow: /
-
-User-agent: PerplexityBot
-Allow: /
-
+# ── Buscadores ────────────────────────────────────────────────
 User-agent: Googlebot
 Allow: /
 
 User-agent: Bingbot
 Allow: /
+
+# ── IA: respuesta / navegación ────────────────────────────────
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# ── IA: entrenamiento ─────────────────────────────────────────
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+# Sitemaps
+Sitemap: https://boscanymoni.com/sitemap.xml
+Sitemap: https://boscanymoni.com/periodismo/sitemap.xml

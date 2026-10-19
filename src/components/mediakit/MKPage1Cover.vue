@@ -9,7 +9,7 @@
       <h1 class="p1__title" ref="titleEl">
         BOSCÁN<span class="amp"> &amp; </span><span class="moni">LA MONI</span>
       </h1>
-      <p class="p1__tagline" ref="taglineEl">"Cuento historias que otros no." — Andersson y Moni Boscán</p>
+      <p class="p1__tagline" ref="taglineEl">"Cuento historias que otros no." — Boscán &amp; La Moni</p>
 
       <div class="p1__ctas" ref="ctasEl">
         <button class="p1__cta p1__cta--solid" @click="scrollToSection('form')">

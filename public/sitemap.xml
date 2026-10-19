@@ -1,67 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 
   <url>
     <loc>https://boscanymoni.com/</loc>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-10-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://boscanymoni.com/" />
     <image:image>
-      <image:loc>https://boscanymoni.com/images/p1-cover.png</image:loc>
-      <image:title>Media Kit 2026 — Andersson y Moni Boscán</image:title>
-      <image:caption>Portada del Media Kit oficial de Andersson y Moni Boscán y Mónica Velásquez — EUREKA Media EC 2026</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://boscanymoni.com/images/p2-photo.png</image:loc>
-      <image:title>Andersson y Moni Boscán — Perfil</image:title>
-    </image:image>
-    <image:image>
-      <image:loc>https://boscanymoni.com/images/p3-hero.png</image:loc>
-      <image:title>Audiencia — 88 Millones de Impresiones Mensuales</image:title>
+      <image:loc>https://boscanymoni.com/images/portada-pareja.png</image:loc>
+      <image:title>Andersson Boscán y Mónica Velásquez — Boscán &amp; La Moni</image:title>
     </image:image>
   </url>
 
   <url>
-    <loc>https://boscanymoni.com/periodismo</loc>
-    <lastmod>2026-09-07</lastmod>
+    <loc>https://boscanymoni.com/periodismo/</loc>
+    <lastmod>2026-10-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://boscanymoni.com/periodismo" />
   </url>
 
   <url>
     <loc>https://boscanymoni.com/publicidad</loc>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-10-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://boscanymoni.com/publicidad" />
   </url>
 
   <url>
     <loc>https://boscanymoni.com/media-kit</loc>
-    <lastmod>2026-09-17</lastmod>
+    <lastmod>2026-10-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://boscanymoni.com/media-kit" />
   </url>
 
   <url>
     <loc>https://boscanymoni.com/quienes-somos</loc>
-    <lastmod>2026-04-03</lastmod>
+    <lastmod>2026-10-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://boscanymoni.com/quienes-somos" />
+  </url>
+
+  <url>
+    <loc>https://boscanymoni.com/precios</loc>
+    <lastmod>2026-10-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
 
   <url>
     <loc>https://boscanymoni.com/agendar</loc>
-    <lastmod>2026-04-03</lastmod>
+    <lastmod>2026-10-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
-    <xhtml:link rel="alternate" hreflang="es" href="https://boscanymoni.com/agendar" />
   </url>
 
 </urlset>

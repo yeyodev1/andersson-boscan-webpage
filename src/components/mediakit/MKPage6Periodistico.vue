@@ -17,8 +17,8 @@
           </div>
           <div class="p6__format-title">Diario de Boscán para la Marca</div>
           <div class="p6__format-desc">
-            El viral diario intro de Andersson relata una historia donde tu marca aparece de forma sutil.
-            No parece publicidad — porque no lo es.
+            El viral diario intro de Andersson relata una historia donde tu marca aparece integrada
+            con naturalidad, siempre rotulada como contenido pagado.
           </div>
         </div>
 
