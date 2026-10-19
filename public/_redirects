@@ -1,4 +1,6 @@
 # ── Dominios alternos → 301 al canónico, ruta por ruta ─────────────────
+https://anderssonboscan.com/*       https://boscanymoni.com/:splat  301!
+https://www.anderssonboscan.com/*   https://boscanymoni.com/:splat  301!
 https://anderssonboscan.ec/*        https://boscanymoni.com/:splat  301!
 https://www.anderssonboscan.ec/*    https://boscanymoni.com/:splat  301!
 https://monivelasquezv.com/*        https://boscanymoni.com/:splat  301!

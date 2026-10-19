@@ -22,10 +22,18 @@ VITE_GHL_WEBHOOK_CONTACT=<GHL contact webhook URL>
 VITE_GHL_WEBHOOK_OPPORTUNITY=<GHL opportunity webhook URL>
 ```
 
-## Domains
+## Domains / Hosting
 
+- **Hosting: Vercel** (proyecto `andersson-boscan-webpage`, team
+  `proyectos-de-diego`, conectado al repo: push a `main` = deploy de
+  producción). Las reglas de hosting viven en **`vercel.json`** (301 de
+  dominios alternos, rewrites de la SPA, 404 real vía `404.html`, cabeceras).
+  `public/_redirects` y `public/_headers` son el equivalente Netlify: se
+  conservan mientras el sitio viejo siga vivo; al apagar Netlify se pueden
+  borrar. Hasta entonces, **todo cambio de rutas se hace en los dos lados**.
 - **Primary**: `https://boscanymoni.com`
-- Aliases: `monivelasquezv.com`, `anderssonboscan.ec`, `andersson-boscan.netlify.app`
+- Aliases (301 al primario): `anderssonboscan.com`, `anderssonboscan.ec`,
+  `monivelasquezv.com` (y sus `www.`)
 - Always use `boscanymoni.com` as canonical in SEO files (sitemap, robots, llms.txt, og:url)
 
 ## SEO / GEO (auditoría 2026-10-18)
@@ -34,9 +42,10 @@ VITE_GHL_WEBHOOK_OPPORTUNITY=<GHL opportunity webhook URL>
   actualizan en el `beforeEach` de `src/router/index.ts` (constante
   `CANONICAL_BASE`). `index.html` solo trae los valores de la portada. Rutas
   internas (`/login`, `/integraciones`, 404) llevan `meta.noindex: true`.
-- **404 real**: `public/_redirects` enumera las rutas de la SPA una por una y
-  manda todo lo demás a `public/404.html` con código 404. **Si se agrega una
-  ruta nueva al router hay que añadirla también a `_redirects`**, o dará 404.
+- **404 real**: las rutas de la SPA están enumeradas (rewrite con alternancia
+  en `vercel.json`; una por una en `public/_redirects` para Netlify) y todo lo
+  demás cae en `public/404.html` con código 404. **Si se agrega una ruta nueva
+  al router hay que añadirla también en `vercel.json` y `_redirects`**, o dará 404.
 - `public/_redirects` además hace 301 de los dominios alternos al canónico y
   301 de `/periodismo/investigaciones/` → `/periodismo/`.
 - `public/_headers`: cabeceras de seguridad y caché immutable para `/assets/`.

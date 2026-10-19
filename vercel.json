@@ -1,0 +1,87 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "pnpm build",
+  "outputDirectory": "dist",
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.boscanymoni.com" }],
+      "destination": "https://boscanymoni.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "anderssonboscan.com" }],
+      "destination": "https://boscanymoni.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.anderssonboscan.com" }],
+      "destination": "https://boscanymoni.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "anderssonboscan.ec" }],
+      "destination": "https://boscanymoni.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.anderssonboscan.ec" }],
+      "destination": "https://boscanymoni.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "monivelasquezv.com" }],
+      "destination": "https://boscanymoni.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.monivelasquezv.com" }],
+      "destination": "https://boscanymoni.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/periodismo",
+      "destination": "/periodismo/",
+      "permanent": true
+    },
+    {
+      "source": "/periodismo/investigaciones{/}?",
+      "destination": "/periodismo/",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/(publicidad|media-kit|quienes-somos|precios|agendar|terminos-y-condiciones|politica-de-privacidad|acceso-eureka|integraciones)",
+      "destination": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" }
+      ]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/periodismo/assets/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000" }
+      ]
+    }
+  ]
+}
