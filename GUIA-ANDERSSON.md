@@ -6,34 +6,35 @@ y mandar la actualización directamente, sin que tengas que saber git.
 
 ## Conectarte (una sola vez)
 
-**No necesitas cuenta de GitHub.** Diego te pasa por WhatsApp un **token de
-acceso** (una clave larga que empieza con `github_pat_`). Trátalo como una
-contraseña: no lo pegues en correos, chats públicos ni en el sitio.
+**No necesitas cuenta de GitHub.** Diego te manda por WhatsApp un archivo
+llamado `boscanymoni`: es tu **llave de acceso** al proyecto. Trátala como una
+contraseña: no la reenvíes ni la pegues en correos o chats públicos.
 
 1. Instala Claude Code: en una terminal, `npm install -g @anthropic-ai/claude-code`
    (o descarga la app de escritorio desde claude.ai/code).
-2. Descarga el proyecto con el token (reemplaza `TU_TOKEN`):
+2. Guarda la llave (una sola vez). Descarga el archivo `boscanymoni` que te
+   mandó Diego a tu carpeta de Descargas y pega esto en la terminal:
 
    ```
-   git clone https://x-access-token:TU_TOKEN@github.com/yeyodev1/andersson-boscan-webpage.git
+   mkdir -p ~/.ssh
+   mv ~/Downloads/boscanymoni ~/.ssh/boscanymoni
+   chmod 600 ~/.ssh/boscanymoni
+   ```
+
+3. Descarga el proyecto con la llave:
+
+   ```
+   git clone -c core.sshCommand="ssh -i ~/.ssh/boscanymoni -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new" git@github.com:yeyodev1/andersson-boscan-webpage.git
    cd andersson-boscan-webpage
    ```
 
    Con eso, publicar y deshacer cambios ya funciona sin pedirte usuario ni
-   contraseña: el token queda guardado en la carpeta del proyecto.
-3. Deja el token disponible también para las herramientas de GitHub de Claude
-   (una sola vez; reemplaza `TU_TOKEN`):
-
-   ```
-   echo 'export GITHUB_PAT=TU_TOKEN' >> ~/.zshrc
-   ```
-
-   Cierra y vuelve a abrir la terminal después de hacerlo.
+   contraseña: la llave queda asociada a la carpeta del proyecto.
 4. Escribe `claude` para abrir Claude Code dentro de la carpeta y pide tu
    primer cambio.
 
-Si el token caduca o deja de funcionar, pídele uno nuevo a Diego y repite los
-pasos 2 y 3 (o pídele a Claude: "actualiza el token del proyecto a ...").
+Si la llave deja de funcionar, pídele una nueva a Diego y repite los pasos
+2 y 3.
 
 ## Pedir un cambio
 
@@ -58,8 +59,8 @@ hosting publica automáticamente lo que llega a la rama `main`.
   precio, pídelo ahí ("cambia el precio del TikTok patrocinado a...").
 - Si algo sale raro, dile a Claude "deshaz el último cambio" o avísale a Diego
   (dreyes@bakano.ec).
-- El token que te dio Diego solo sirve para este proyecto. Si crees que se
-  filtró, avísale de una: él lo anula y te manda otro.
+- La llave que te dio Diego solo sirve para este proyecto. Si crees que se
+  filtró, avísale de una: él la anula y te manda otra.
 
 ## Tu acceso al panel del sitio
 

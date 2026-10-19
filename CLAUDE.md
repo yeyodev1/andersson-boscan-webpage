@@ -68,14 +68,16 @@ VITE_GHL_WEBHOOK_OPPORTUNITY=<GHL opportunity webhook URL>
   `versionJson` en `vite.config.ts`) y `AvisoActualizacion.vue` (montado en
   `App.vue`) lo consulta; si el id no coincide con `__ID_BUILD__`, muestra un
   modal bloqueante y fuerza la recarga.
-- `.mcp.json` configura el MCP de GitHub con `Authorization: Bearer ${GITHUB_PAT}`.
-  Andersson **no tiene cuenta propia de GitHub ni es colaborador del repo**:
-  trabaja con un fine-grained PAT de Diego limitado a este repositorio
-  (Contents read/write + Metadata read). El token va en la URL del remote al
-  clonar (`https://x-access-token:TOKEN@github.com/...`) para los push, y en la
-  variable de entorno `GITHUB_PAT` para el MCP. `GUIA-ANDERSSON.md` trae los
-  pasos. Si el token se filtra, Diego lo revoca en GitHub → Settings →
-  Developer settings → Fine-grained tokens y genera otro.
+- Andersson **no tiene cuenta propia de GitHub ni es colaborador del repo**:
+  trabaja con una **deploy key con escritura** ("acceso-andersson", creada
+  2026-10-19) que solo abre este repositorio. Clona por SSH con
+  `core.sshCommand` apuntando a su llave (`~/.ssh/boscanymoni`); los push y
+  revert salen por git, sin MCP. `GUIA-ANDERSSON.md` trae los pasos. Si la
+  llave se filtra: `gh repo deploy-key list --repo yeyodev1/andersson-boscan-webpage`
+  y `gh repo deploy-key delete <id>` la cortan al instante.
+- `.mcp.json` configura el MCP de GitHub con `Authorization: Bearer ${GITHUB_PAT}`
+  (opcional: solo conecta si esa variable existe, p. ej. en la máquina de
+  Diego; Andersson no la necesita).
 
 ## Routes
 
