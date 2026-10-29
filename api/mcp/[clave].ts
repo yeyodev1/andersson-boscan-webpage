@@ -50,7 +50,7 @@ Reglas del proyecto (Vue 3 + TypeScript + SCSS):
 - Tamaños de letra siempre en rem, nunca px.
 - No uses "ad", "ads", "publicidad", "banner" ni "sponsor" en nombres de archivo ni clases CSS (los bloqueadores de anuncios los cortan).
 - Marca: "Boscán & La Moni" o "Andersson Boscán y Mónica Velásquez". Nunca "Andersson y Moni Boscán".
-- Páginas nuevas (rutas nuevas) no se pueden crear desde aquí: necesitan vercel.json, que está bloqueado. Si lo pide, dile que se lo pida a Diego.
+- Página nueva: crea la vista en src/views/ y su ruta en src/router/index.ts (con meta title y description) con publicar_cambios, y en el mismo pedido llama a habilitar_pagina con la ruta. Sin habilitar_pagina la página da 404 en producción.
 - El sitio de investigaciones (public/periodismo/) no se edita aquí: Andersson lo genera con build.py y lo sube aparte. Si pide corregir una investigación, díselo.
 - Archivos bloqueados para este conector: ${BLOQUEADAS.join(', ')}.
 - Mira CLAUDE.md (leer_archivo) si dudas de cómo está armado algo.`
@@ -105,6 +105,12 @@ const HERRAMIENTAS = [
     description: 'Dice si la última publicación ya está en línea, sigue en proceso o falló, y muestra los últimos cambios publicados.',
     inputSchema: { type: 'object', properties: {} },
     annotations: { readOnlyHint: true },
+  },
+  {
+    name: 'habilitar_pagina',
+    description: 'Registra una ruta nueva del sitio en el hosting (vercel.json y public/_redirects) para que no dé 404. Úsala al crear una página nueva. Solo una palabra en minúsculas con guiones, sin barra: p. ej. "eventos".',
+    inputSchema: { type: 'object', properties: { ruta: { type: 'string' } }, required: ['ruta'] },
+    annotations: { destructiveHint: false },
   },
   {
     name: 'deshacer_ultima_publicacion',
@@ -271,6 +277,26 @@ async function ejecutar(nombre: string, a: Record<string, any>): Promise<string>
         .map((c) => `- ${c.sha.slice(0, 7)} · ${c.commit.author.date.slice(0, 16).replace('T', ' ')} UTC · ${c.commit.message.split('\n')[0]}`)
         .join('\n')
       return `Última publicación: ${estado}\n\nÚltimos cambios:\n${ultimos}`
+    }
+    case 'habilitar_pagina': {
+      // vercel.json está bloqueado (puede cambiar el comando de build); aquí
+      // solo se añade una palabra validada a la alternancia de rewrites.
+      const ruta = String(a.ruta ?? '').trim().replace(/^\/+|\/+$/g, '')
+      if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(ruta) || ['api', 'assets', 'periodismo'].includes(ruta))
+        throw new ErrorAmable('La ruta tiene que ser una palabra en minúsculas con guiones, p. ej. "eventos".')
+      const vercel = (await leer('vercel.json'))!
+      const re = /("source": "\/\()([a-z0-9|-]+)(\)",\s*"destination": "\/index\.html")/
+      const m = vercel.match(re)
+      if (!m) throw new ErrorAmable('No encontré la regla de páginas en vercel.json; avisa a Diego.')
+      if (m[2].split('|').includes(ruta)) return `/${ruta} ya estaba habilitada.`
+      const redirects = (await leer('public/_redirects'))!
+      const lineaMcp = redirects.split('\n').find((l) => l.startsWith('/mcp ')) ?? ''
+      const nuevaLinea = `/${ruta}`.padEnd(28) + '/index.html  200'
+      const sha = await commit(`chore(hosting): habilita la ruta /${ruta}`, [
+        { path: 'vercel.json', content: vercel.replace(re, `$1$2|${ruta}$3`) },
+        { path: 'public/_redirects', content: lineaMcp ? redirects.replace(lineaMcp, `${lineaMcp}\n${nuevaLinea}`) : `${redirects.trimEnd()}\n${nuevaLinea}\n` },
+      ])
+      return `Ruta /${ruta} habilitada (${sha.slice(0, 7)}). Ya puede publicarse la página.`
     }
     case 'deshacer_ultima_publicacion': {
       const ref = await gh(`/repos/${REPO}/git/ref/heads/${RAMA}`)

@@ -97,8 +97,11 @@ VITE_GHL_WEBHOOK_OPPORTUNITY=<GHL opportunity webhook URL>
   `api/mcp/[clave].ts` es un servidor MCP (streamable HTTP sin estado) que lee,
   edita y publica vía API de GitHub: cada `publicar_cambios` es **un** commit a
   `main` → Vercel despliega. Herramientas: ver_archivos, leer_archivo,
-  buscar_texto, publicar_cambios, estado_publicacion (lee el status "Vercel"
-  del commit), deshacer_ultima_publicacion. Bloquea `public/periodismo/`,
+  buscar_texto (recorre los archivos: GitHub no indexa el repo), publicar_cambios,
+  habilitar_pagina (añade una ruta validada a `vercel.json` y `_redirects` sin
+  abrir el archivo), estado_publicacion (lee el status "Vercel" del commit),
+  deshacer_ultima_publicacion. **Andersson empuja directo a `main`: hacer
+  `git pull` antes de trabajar en local.** Bloquea `public/periodismo/`,
   `api/`, `scripts/`, `.github/`, `.claude/`, `.env*`. La página `/mcp`
   (noindex) pide un código, lo valida `api/acceso-mcp.ts` y entrega la URL
   para pegar en claude.ai → Conectores. Variables **solo en Vercel** (el repo
