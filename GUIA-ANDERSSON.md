@@ -1,19 +1,34 @@
-# Guía para Andersson: pedir cambios al sitio desde Claude
+# Guía para Andersson: cambiar tu página web desde Claude
 
-Este repositorio trae configurado el servidor **MCP de GitHub** (archivo
-`.mcp.json`). Con eso, Claude puede leer el proyecto en GitHub, hacer cambios
-y mandar la actualización directamente, sin que tengas que saber git.
+Le pides los cambios a Claude en lenguaje normal, él los hace, revisa que no
+se rompa nada, los publica en **boscanymoni.com** y te avisa cuando ya están
+en línea (1-2 minutos). No necesitas saber programar ni tener cuenta de GitHub.
 
-## Conectarte (una sola vez)
+## Preparar tu computadora (una sola vez, ~15 min)
 
-**No necesitas cuenta de GitHub.** Diego te manda por WhatsApp un archivo
-llamado `boscanymoni`: es tu **llave de acceso** al proyecto. Trátala como una
-contraseña: no la reenvíes ni la pegues en correos o chats públicos.
+Necesitas una cuenta de Claude con plan Pro o Max (la misma de claude.ai).
 
-1. Instala Claude Code: en una terminal, `npm install -g @anthropic-ai/claude-code`
-   (o descarga la app de escritorio desde claude.ai/code).
-2. Guarda la llave (una sola vez). Descarga el archivo `boscanymoni` que te
-   mandó Diego a tu carpeta de Descargas y pega esto en la terminal:
+1. **Instala Claude Code.** Abre la app Terminal y pega:
+
+   ```
+   curl -fsSL https://claude.ai/install.sh | bash
+   ```
+
+2. **Instala las herramientas del proyecto** (pnpm y Node):
+
+   ```
+   curl -fsSL https://get.pnpm.io/install.sh | sh -
+   ```
+
+   Cierra la Terminal, ábrela de nuevo y pega:
+
+   ```
+   pnpm env use --global lts
+   ```
+
+3. **Guarda tu llave.** Diego te manda por WhatsApp un archivo llamado
+   `boscanymoni`: es tu llave de acceso al proyecto. Trátala como una
+   contraseña: no la reenvíes. Descárgalo a tu carpeta de Descargas y pega:
 
    ```
    mkdir -p ~/.ssh
@@ -21,60 +36,81 @@ contraseña: no la reenvíes ni la pegues en correos o chats públicos.
    chmod 600 ~/.ssh/boscanymoni
    ```
 
-3. Descarga el proyecto con la llave:
+4. **Descarga el proyecto:**
 
    ```
+   cd ~
    git clone -c core.sshCommand="ssh -i ~/.ssh/boscanymoni -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new" git@github.com:yeyodev1/andersson-boscan-webpage.git
    cd andersson-boscan-webpage
+   pnpm install
    ```
 
-   Con eso, publicar y deshacer cambios ya funciona sin pedirte usuario ni
-   contraseña: la llave queda asociada a la carpeta del proyecto.
-4. Escribe `claude` para abrir Claude Code dentro de la carpeta y pide tu
-   primer cambio.
+   Si la Mac te pide instalar "herramientas de línea de comandos", acepta y
+   vuelve a pegar el `git clone`.
 
-Si la llave deja de funcionar, pídele una nueva a Diego y repite los pasos
-2 y 3.
+5. **Abre Claude** dentro del proyecto:
 
-## Pedir un cambio
+   ```
+   claude
+   ```
 
-Escríbelo en lenguaje normal, como un mensaje:
+   La primera vez te pide iniciar sesión con tu cuenta de Claude y te pregunta
+   si confías en la carpeta: di que sí.
+
+## Cada vez que quieras cambiar algo
+
+Abre la Terminal y pega:
+
+```
+cd ~/andersson-boscan-webpage && claude
+```
+
+Al abrir, Claude trae solo la última versión de la página. Luego pide lo que
+quieras, como si fuera un mensaje:
 
 > "Cambia el correo de contacto del pie de página a pauta@..."
-> "En la página de publicidad, el texto del primer paso debería decir..."
-> "Sube la última entrega de periodismo que está en esta carpeta."
+> "En la página de publicidad, el primer paso debería decir..."
+> "Sube el precio del TikTok patrocinado a 900."
+> "Publícalo."
 
-Y para mandarlo al proyecto:
+Claude hace el cambio, te lo resume, lo publica y te confirma con el enlace
+cuando ya se ve en la web. Si lo pides todo junto ("cambia X y publícalo"),
+no te vuelve a preguntar.
 
-> "Haz commit y súbelo a GitHub."
+### Subir tus investigaciones
 
-Claude hace el cambio, lo confirma contigo y lo empuja al repositorio. El
-hosting publica automáticamente lo que llega a la rama `main`.
+Cuando generes el sitio con tu `build.py` (un expediente nuevo o una
+corrección), dile:
 
-## Reglas de la casa (importantes)
+> "Sube mi entrega nueva de periodismo, está en Descargas."
 
-- **No toques `public/periodismo/` a mano**: esa carpeta es tu propia entrega
-  generada con `build.py`; se reemplaza entera con cada entrega nueva.
-- Los precios y formatos viven en `src/config/catalogo.ts`: si cambias un
-  precio, pídelo ahí ("cambia el precio del TikTok patrocinado a...").
-- Si algo sale raro, dile a Claude "deshaz el último cambio" o avísale a Diego
-  (dreyes@bakano.ec).
-- La llave que te dio Diego solo sirve para este proyecto. Si crees que se
-  filtró, avísale de una: él la anula y te manda otra.
+Puede ser la carpeta que sale de `build.py` o un `.zip`. Claude reemplaza el
+sitio de investigaciones, le vuelve a poner los ajustes de diseño y de letra
+grande, actualiza la lista para buscadores e IA, y lo publica. Si en la
+entrega falta algún expediente que hoy está publicado, te pregunta antes de
+quitarlo.
+
+### Si algo sale mal
+
+> "Deshaz lo último que publicaste."
+
+Claude regresa la página a como estaba antes y lo publica. Si se traba o algo
+se ve raro, avísale a Diego (dreyes@bakano.ec).
+
+## Reglas de la casa
+
+- Las investigaciones se corrigen **en tu proyecto de `build.py`** y se suben
+  como entrega nueva; Claude no las edita a mano dentro de la página.
+- Los precios y formatos de publicidad viven en un solo lugar
+  (`src/config/catalogo.ts`); Claude ya lo sabe.
+- La llave solo abre este proyecto. Si crees que se filtró, avísale a Diego:
+  él la anula al instante y te manda otra (repites los pasos 3 y 4).
 
 ## Tu acceso al panel del sitio
 
 En **https://boscanymoni.com/acceso-eureka** (ruta secreta: no está enlazada
-desde ninguna página ni aparece en buscadores) puedes entrar con tu correo
-anderssonboscan@gmail.com y tu clave. De ahí pasas al panel de integraciones,
-donde también está el resumen de cómo pedir cambios con Claude.
+desde ninguna página ni aparece en buscadores) entras con tu correo
+anderssonboscan@gmail.com y tu clave. De ahí pasas al panel de integraciones.
 
-## Publicar y deshacer cambios
-
-- **Publicar**: dile a Claude "haz commit con un mensaje claro y pushea a main".
-  La primera vez Claude te pedirá confirmar los comandos de git: elige
-  "permitir siempre" y no te vuelve a preguntar.
-- **Deshacer**: "revierte el último commit y pushea". Eso regresa el sitio a
-  como estaba antes.
-- Cuando se publica una versión nueva, los visitantes que tengan el sitio
-  abierto ven un aviso de "sitio actualizado" y se les recarga la página.
+Cuando se publica una versión nueva, quien tenga la página abierta ve un aviso
+de "sitio actualizado" y se le recarga sola.

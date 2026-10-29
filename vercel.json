@@ -58,7 +58,7 @@
   ],
   "rewrites": [
     {
-      "source": "/(publicidad|media-kit|quienes-somos|precios|agendar|terminos-y-condiciones|politica-de-privacidad|acceso-eureka|integraciones)",
+      "source": "/(publicidad|media-kit|quienes-somos|precios|agendar|terminos-y-condiciones|politica-de-privacidad|acceso-eureka|integraciones|mcp)",
       "destination": "/index.html"
     }
   ],

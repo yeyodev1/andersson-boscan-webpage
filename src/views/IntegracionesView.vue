@@ -274,26 +274,26 @@ onMounted(() => {
         <p class="subtitle">Gestiona y conecta tus cuentas externas para el flujo de trabajo.</p>
       </header>
 
-      <!-- Guía: editar el sitio con Claude + MCP de GitHub -->
+      <!-- Guía: editar el sitio con Claude Code -->
       <section
         style="background:#1a1a1a;border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:2rem;margin-bottom:2rem;"
       >
         <h2 style="color:#fff;font-size:1.6rem;margin-bottom:0.75rem;">
-          <i class="fa-brands fa-github"></i> Editar el sitio tú mismo
+          <i class="fa-solid fa-terminal"></i> Editar el sitio tú mismo
         </h2>
         <p style="color:#a0a0a0;font-size:1.3rem;line-height:1.6;margin-bottom:1rem;">
-          Este proyecto trae configurado el MCP de GitHub: puedes pedirle los cambios a Claude
-          en lenguaje normal y él los publica.
+          Le pides los cambios a Claude en lenguaje normal: él los hace, revisa que no se rompa
+          nada, los publica y te avisa cuando ya se ven en la web.
         </p>
         <ol style="color:#a0a0a0;font-size:1.3rem;line-height:1.8;padding-left:1.5rem;">
-          <li>Abre la carpeta del proyecto en <strong style="color:#fff;">Claude Code</strong> y escribe <code>/mcp</code> → elige <strong style="color:#fff;">github</strong> → entra con tu cuenta de GitHub.</li>
-          <li>Pide el cambio como un mensaje: <em>"cambia el precio del TikTok patrocinado a…"</em></li>
-          <li>Para publicarlo: <em>"haz commit con un mensaje claro y pushea a main"</em>. El hosting publica solo.</li>
-          <li>Para deshacer: <em>"revierte el último commit y pushea"</em>.</li>
+          <li>En la Terminal: <code>cd ~/andersson-boscan-webpage &amp;&amp; claude</code></li>
+          <li>Pide el cambio como un mensaje: <em>"cambia el precio del TikTok patrocinado a… y publícalo"</em></li>
+          <li>Investigaciones: <em>"sube mi entrega nueva de periodismo, está en Descargas"</em>.</li>
+          <li>Para deshacer: <em>"deshaz lo último que publicaste"</em>.</li>
         </ol>
         <p style="color:#a0a0a0;font-size:1.2rem;margin-top:1rem;">
-          La guía completa está en <code>GUIA-ANDERSSON.md</code>, en la raíz del repositorio.
-          No toques <code>public/periodismo/</code> a mano: esa carpeta es tu entrega y se reemplaza entera.
+          La guía completa (y cómo preparar tu computadora la primera vez) está en
+          <code>GUIA-ANDERSSON.md</code>, en la raíz del proyecto.
         </p>
       </section>
 

@@ -71,8 +71,17 @@ VITE_GHL_WEBHOOK_OPPORTUNITY=<GHL opportunity webhook URL>
   hash SHA-256 de `correo:contraseña` vive en `VITE_ACCESO_DIRECTO_HASH`
   (.env local y variables de entorno del hosting). Aun así es un candado de
   cliente: el panel no debe guardar nada sensible mientras exista.
-- `.claude/settings.json` (del repo) permite git add/commit/push/revert y pnpm
-  sin prompts, para que Andersson publique y revierta desde Claude Code.
+- `.claude/settings.json` (del repo) permite git add/commit/push/revert, pnpm
+  y los dos scripts de `scripts/` sin prompts; bloquea `push --force`,
+  `reset --hard` y editar `public/periodismo/` a mano. Su hook `SessionStart`
+  hace `git pull --ff-only` al abrir Claude, para que Andersson parta siempre
+  de lo publicado.
+- **Skills del proyecto** (`.claude/skills/`): `publicar` (build de control →
+  commit → push → `scripts/esperar-deploy.sh` espera a que cambie el id de
+  `https://boscanymoni.com/version.json`, o revert para deshacer) y
+  `subir-entrega` (aplica una entrega de periodismo con
+  `scripts/actualizar-periodismo.py` y publica). Están escritas para hablarle
+  a Andersson sin jerga.
 - **Aviso de versión nueva**: el build escribe `dist/version.json` (plugin
   `versionJson` en `vite.config.ts`) y `AvisoActualizacion.vue` (montado en
   `App.vue`) lo consulta; si el id no coincide con `__ID_BUILD__`, muestra un
@@ -84,9 +93,21 @@ VITE_GHL_WEBHOOK_OPPORTUNITY=<GHL opportunity webhook URL>
   revert salen por git, sin MCP. `GUIA-ANDERSSON.md` trae los pasos. Si la
   llave se filtra: `gh repo deploy-key list --repo yeyodev1/andersson-boscan-webpage`
   y `gh repo deploy-key delete <id>` la cortan al instante.
-- `.mcp.json` configura el MCP de GitHub con `Authorization: Bearer ${GITHUB_PAT}`
-  (opcional: solo conecta si esa variable existe, p. ej. en la máquina de
-  Diego; Andersson no la necesita).
+- **Conector MCP del sitio** (la vía principal de Andersson, sin terminal):
+  `api/mcp/[clave].ts` es un servidor MCP (streamable HTTP sin estado) que lee,
+  edita y publica vía API de GitHub: cada `publicar_cambios` es **un** commit a
+  `main` → Vercel despliega. Herramientas: ver_archivos, leer_archivo,
+  buscar_texto, publicar_cambios, estado_publicacion (lee el status "Vercel"
+  del commit), deshacer_ultima_publicacion. Bloquea `public/periodismo/`,
+  `api/`, `scripts/`, `.github/`, `.claude/`, `.env*`. La página `/mcp`
+  (noindex) pide un código, lo valida `api/acceso-mcp.ts` y entrega la URL
+  para pegar en claude.ai → Conectores. Variables **solo en Vercel** (el repo
+  es público): `MCP_CODIGO`, `MCP_CLAVE` (la parte secreta de la URL;
+  cambiarla corta el conector al instante) y `GITHUB_TOKEN`.
+- `.mcp.json` configura el MCP de GitHub con `Authorization: Bearer ${GITHUB_PAT}`.
+  Es solo para Diego: Andersson no tiene cuenta de GitHub y no lo usa (sin la
+  variable, ese MCP falla al arrancar con 400 y no pasa nada más). En la Mac de
+  Diego, `~/.zshenv` exporta `GITHUB_PAT` desde `gh auth token` (no caduca).
 
 ## Routes
 
@@ -111,6 +132,12 @@ WebGL en `assets/game/`. Se sube tal cual; no pasa por el build de Vite.
 un fork que se separa en cada corrección suya. Para actualizar: él manda una
 entrega nueva y se reemplaza la carpeta entera.
 
+- **Entrega nueva = `python3 -I scripts/actualizar-periodismo.py <carpeta|zip>`.**
+  Hace todo lo que se describe abajo (reemplazo, URLs, ajustes, `?v=`
+  conservados, llms.txt/llms-full.txt) y se detiene si desaparece un
+  expediente salvo con `--permitir-bajas`. Verificado: con la entrega actual
+  "en crudo" reproduce byte a byte lo publicado. Los expedientes nuevos no se
+  añaden a las carpetas de `PortadaView`.
 - Las rutas internas de la entrega son relativas, así que funciona bajo
   `/periodismo/` sin tocarle nada. Lo único reescrito son las URLs absolutas de
   SEO: `https://boscanymoni.com/` → `https://boscanymoni.com/periodismo/` en

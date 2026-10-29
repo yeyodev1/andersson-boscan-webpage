@@ -90,6 +90,17 @@ const routes: Array<RouteRecordRaw> = [
     },
   },
   {
+    // Entrega la URL del conector MCP del sitio tras un código (api/acceso-mcp.ts).
+    path: '/mcp',
+    name: 'Conector',
+    component: () => import('../views/ConectorView.vue'),
+    meta: {
+      title: `Conector — Boscán & La Moni`,
+      description: 'Acceso privado.',
+      noindex: true,
+    },
+  },
+  {
     path: '/integraciones',
     name: 'Integraciones',
     component: () => import('../views/IntegracionesView.vue'),

@@ -23,6 +23,7 @@ https://andersson-boscan.netlify.app/*  https://boscanymoni.com/:splat  301!
 /terminos-y-condiciones     /index.html  200
 /politica-de-privacidad     /index.html  200
 /acceso-eureka              /index.html  200
+/mcp                        /index.html  200
 /integraciones              /index.html  200
 
 # ── Todo lo demás: 404 con código 404 de verdad ─────────────────────────
