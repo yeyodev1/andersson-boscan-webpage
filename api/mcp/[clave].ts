@@ -70,7 +70,7 @@ const HERRAMIENTAS = [
   },
   {
     name: 'buscar_texto',
-    description: 'Busca un texto en el código del sitio (p. ej. una frase que se ve en la página) y dice en qué archivos está. El índice de GitHub puede tardar unos minutos en ver cambios muy recientes.',
+    description: 'Busca un texto en el código del sitio (p. ej. una frase que se ve en la página), sin distinguir mayúsculas, y devuelve archivo, número de línea y la línea. No busca dentro de public/periodismo/.',
     inputSchema: { type: 'object', properties: { texto: { type: 'string' } }, required: ['texto'] },
     annotations: { readOnlyHint: true },
   },
@@ -206,10 +206,30 @@ async function ejecutar(nombre: string, a: Record<string, any>): Promise<string>
       return t.length > 200_000 ? t.slice(0, 200_000) + '\n…(recortado)' : t
     }
     case 'buscar_texto': {
-      const q = encodeURIComponent(`"${String(a.texto).replace(/"/g, '')}" repo:${REPO}`)
-      const d = await gh(`/search/code?q=${q}&per_page=30`)
-      const rutas = (d.items as any[]).map((i) => i.path).filter((p) => !p.startsWith('public/periodismo/'))
-      return rutas.length ? rutas.join('\n') : 'Sin resultados. Prueba con un fragmento más corto o revisa con ver_archivos.'
+      // GitHub no indexa este repo para su búsqueda de código: se recorre el
+      // árbol y se leen los archivos de texto (~75, <1 MB) desde raw.
+      const texto = String(a.texto ?? '').toLowerCase()
+      if (!texto) throw new ErrorAmable('Falta el texto a buscar.')
+      const ref = await gh(`/repos/${REPO}/git/ref/heads/${RAMA}`)
+      const arbol = await gh(`/repos/${REPO}/git/trees/${ref.object.sha}?recursive=1`)
+      const rutas = (arbol.tree as any[])
+        .filter((x) => x.type === 'blob' && x.size < 300_000)
+        .map((x) => x.path as string)
+        .filter((p) => !p.startsWith('public/periodismo/') && !p.startsWith('pnpm-lock'))
+        .filter((p) => /\.(vue|ts|js|scss|css|html|md|txt|json|xml)$/.test(p))
+      const hallazgos: string[] = []
+      await Promise.all(rutas.map(async (p) => {
+        const r = await fetch(`https://raw.githubusercontent.com/${REPO}/${ref.object.sha}/${rutaApi(p)}`, {
+          headers: { Authorization: `Bearer ${process.env.GITHUB_TOKEN}` },
+        })
+        if (!r.ok) return
+        ;(await r.text()).split('\n').forEach((linea, i) => {
+          if (linea.toLowerCase().includes(texto)) hallazgos.push(`${p}:${i + 1}: ${linea.trim().slice(0, 160)}`)
+        })
+      }))
+      if (!hallazgos.length) return 'Sin resultados. Prueba con un fragmento más corto o revisa con ver_archivos.'
+      hallazgos.sort()
+      return hallazgos.slice(0, 60).join('\n') + (hallazgos.length > 60 ? `\n…y ${hallazgos.length - 60} más` : '')
     }
     case 'publicar_cambios': {
       const mensaje = String(a.mensaje ?? '').trim()
