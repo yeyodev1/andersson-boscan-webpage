@@ -728,3 +728,6 @@ li[data-c="sin-sentencia"] .libro__tag, li[data-c="juicio-pendiente"] .libro__ta
 /* el resumen de cada tarjeta es corto y completo (campo "corto" de investigaciones.json): nada se corta a media frase */
 .mesa__grid > .obj h3, .mesa__grid > .obj .obj__sub, .mesa__grid > .obj p:not(.obj__sub),
 .mesa__grid > .obj--evidencia .obj__cuerpo p:not(.obj__sub), .mesa__grid > .obj--bitacora .obj__cuerpo p:not(.obj__sub), .mesa__grid > .obj--escucha .obj__cuerpo p:not(.obj__sub) { display: block; -webkit-line-clamp: unset; overflow: visible; }
+
+/* portadas hechas para la tarjeta (assets/img/portadas/): ya traen su color y su contraste, el filtro de cada formato no se les aplica */
+.mesa__grid > .obj .obj__img[src*="/portadas/"] { display: block !important; width: 100%; filter: none !important; mix-blend-mode: normal !important; opacity: 1 !important; }
