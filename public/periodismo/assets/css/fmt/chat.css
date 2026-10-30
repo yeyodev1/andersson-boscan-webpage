@@ -43,3 +43,35 @@
 .fmt--chat .fdato b { color: var(--acc); font-family: var(--f-label); font-weight: 800; }
 .fmt--chat .cierre { background: #0B141A; border-radius: 14px; }
 .fmt--chat .cierre__lineas li { background: #202C33; border: 0; border-radius: 10px; padding: 12px 14px; margin-bottom: 8px; }
+
+/* ---------------------------------------------------------------- portada: Villavicencio detrás de su teléfono */
+.hero--chat { position: relative; overflow: hidden; isolation: isolate; }
+.fmt--chat .hero__art { display: none; }
+.chat-cifra { position: absolute; right: 12px; top: 70px; z-index: -1; text-align: right; pointer-events: none; line-height: .8; }
+.chat-cifra b { display: block; font-family: var(--f-label); font-weight: 800; font-size: clamp(120px, 21vw, 340px); letter-spacing: -.05em; color: transparent; -webkit-text-stroke: 1.5px rgba(37,211,102,.28); }
+.chat-cifra span { display: block; margin-top: 10px; font-family: var(--f-label); font-size: 13px; letter-spacing: .3em; text-transform: uppercase; color: rgba(37,211,102,.55); }
+.chat-escena { position: relative; display: grid; justify-items: end; align-items: end; min-height: 560px; }
+.chat-fig { position: absolute; right: 44%; bottom: -40px; width: min(540px, 82%); margin: 0; z-index: 0; animation: chatFig 1.4s var(--ease-out) .2s both; }
+.chat-fig img { display: block; width: 100%; height: auto; filter: grayscale(1) contrast(1.15) brightness(.9) sepia(.25) hue-rotate(80deg) saturate(1.4);
+  -webkit-mask-image: linear-gradient(180deg, #000 62%, transparent 96%), linear-gradient(90deg, transparent, #000 22%); -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(180deg, #000 62%, transparent 96%), linear-gradient(90deg, transparent, #000 22%); mask-composite: intersect; }
+.chat-fig figcaption { position: absolute; left: 4px; bottom: 50px; font-family: var(--f-label); font-size: 12px; color: #8FA3AB; }
+@keyframes chatFig { from { opacity: 0; transform: translateY(50px); } }
+.chat-escena .phone { position: relative; z-index: 2; transform: rotate(4deg); animation: chatPhone 1s var(--ease-out) .6s both; }
+@keyframes chatPhone { from { opacity: 0; transform: translateY(60px) rotate(10deg); } }
+/* los tres puntos de "escribiendo" después del último mensaje */
+.chat-escribe { display: inline-flex; gap: 4px; padding: 10px 12px; width: auto; }
+.chat-escribe i { width: 6px; height: 6px; border-radius: 50%; background: #8FA3AB; animation: chatPunto 1.2s ease-in-out infinite; }
+.chat-escribe i:nth-child(2) { animation-delay: .15s; } .chat-escribe i:nth-child(3) { animation-delay: .3s; }
+@keyframes chatPunto { 0%, 60%, 100% { transform: none; opacity: .4; } 30% { transform: translateY(-4px); opacity: 1; } }
+@media (max-width: 900px) {
+  .chat-escena { min-height: 0; justify-items: center; margin-top: 30px; }
+  .chat-fig { position: relative; right: auto; bottom: auto; width: 82%; margin: 0 auto -180px; }
+  .chat-escena .phone { transform: none; }
+  .chat-cifra { top: auto; bottom: 30%; opacity: .6; }
+}
+@supports (animation-timeline: view()) {
+  .fmt--chat .fmat--silueta img { animation: chatParallax linear both; animation-timeline: view(); animation-range: cover; }
+  @keyframes chatParallax { from { transform: translateY(30px); } to { transform: translateY(-30px); } }
+}
+@media (prefers-reduced-motion: reduce) { .chat-fig, .chat-escena .phone, .chat-escribe i, .fmt--chat .fmat--silueta img { animation: none; } }

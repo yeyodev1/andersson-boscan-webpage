@@ -448,6 +448,11 @@
 .fmat--silueta { shape-outside: var(--silueta); shape-image-threshold: .5; shape-margin: 18px; }
 .fmat--silueta img { filter: drop-shadow(0 16px 20px rgba(0,0,0,.36)); }
 .fmat--silueta .fmat__marco { transform: none; }
+/* el pie va montado sobre el borde inferior de la imagen: así la figura mide lo mismo que la foto
+   y el contorno que sigue el párrafo coincide con la persona, sin que el pie pise el texto */
+.fmat--silueta { position: relative; }
+.fmat--silueta figcaption { position: absolute; left: 0; right: 0; bottom: 0; margin: 0; padding: 0 6px 4px; text-align: center;
+  text-shadow: 0 1px 2px var(--bg, #000), 0 0 10px var(--bg, #000); }
 
 /* Digitalizada: pasada por el escáner, con su franja de registro. */
 .fmat--digital .fmat__marco { background: #e9e6dc; padding: 12px 12px 26px; box-shadow: 0 2px 0 rgba(0,0,0,.14); }
@@ -517,7 +522,7 @@
   .tr__link, .anexos__ver, .vid__meta a, .fmod a[href]:not(:has(*)),
   .xfoot a, .fmat figcaption a { display: inline-block; padding-block: 10px; }
   .fper__cred, .anexos__pie, .hoja-edc__nota, .fmat figcaption,
-  .galeria figcaption, .ffoto figcaption, figcaption { font-size: 12.5px; line-height: 1.45; }
+  .galeria figcaption, .ffoto figcaption, .cierre__fecha, figcaption { font-size: 12.5px; line-height: 1.45; }
   .fmt--acta .fper__cred { font-size: 11.5px; }
   .plano__lugar { font-size: 12px; }
 }
