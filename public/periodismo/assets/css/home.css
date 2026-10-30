@@ -638,3 +638,71 @@ li[data-c="sin-sentencia"] .libro__tag, li[data-c="juicio-pendiente"] .libro__ta
 /* todas las figuras del mismo alto y pequeñas: los recortes tienen proporciones distintas y por ancho quedaban desparejos */
 .obj__figura { width: auto !important; height: 120px; max-width: 46%; object-fit: contain; object-position: left bottom; top: -56px; }
 @media (max-width: 560px) { .obj__figura { height: 90px; top: -40px; } }
+
+/* ==== Armonía de la portada (oct 2026) ====================================================
+   Un solo sistema para todo lo que va debajo del juego: cabecera legible sobre el corcho,
+   el corcho ordenado por años con una barra para saltar entre ellos, la lista de desenlaces
+   plegada, el mismo ritmo vertical en todas las secciones y un pie más compacto. */
+.home { --ritmo: clamp(84px, 9vw, 120px); --pin: #C8102E; }
+.mesa, .libro, .hilo, .tips, .quienes { padding-block: var(--ritmo) calc(var(--ritmo) + 10px); }
+
+/* cabecera del corcho: el velo oscuro cubre todo el bloque de texto, no solo el borde */
+.mesa::before { height: min(820px, 100%); background: linear-gradient(180deg, rgba(26,16,7,.88) 0, rgba(26,16,7,.74) 48%, rgba(26,16,7,.32) 78%, rgba(26,16,7,0) 100%); }
+.mesa__head { margin-bottom: clamp(40px, 5vw, 64px); }
+.mesa__head > div > p, .mesa__head p { color: #FBF6EC; text-shadow: 0 1px 3px rgba(0,0,0,.6); }
+
+/* rótulo del corcho: una etiqueta de papel clavada, no un velo translúcido */
+.corcho__head { background: var(--papel); border: 0; border-left: 6px solid var(--pin); backdrop-filter: none; box-shadow: var(--sombra); transform: rotate(-.4deg); margin-bottom: 26px; }
+.corcho__head::before { content: ""; position: absolute; right: 22px; top: -9px; width: 18px; height: 18px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #ff7b7b, var(--pin) 55%, #6d0612); box-shadow: 0 4px 6px rgba(0,0,0,.4); }
+.corcho__head { position: relative; }
+.corcho__kicker { color: var(--tinta); text-shadow: none; }
+.corcho__deck { color: var(--carbon); text-shadow: none; }
+.corcho__conteo { color: var(--lapiz); text-shadow: none; }
+
+/* barra de años: queda fija bajo la barra superior mientras se recorre el corcho */
+.anios { position: sticky; top: 72px; z-index: 40; display: flex; align-items: center; gap: 2px; width: max-content; max-width: 100%; margin: 0 0 clamp(44px, 5vw, 64px);
+  padding: 6px; border-radius: 999px; background: rgba(22,14,6,.82); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  box-shadow: 0 12px 28px -14px rgba(0,0,0,.7), inset 0 0 0 1px rgba(251,243,230,.12); overflow-x: auto; scrollbar-width: none; }
+.anios::-webkit-scrollbar { display: none; }
+.anios__l { flex: none; padding: 0 10px 0 12px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: rgba(242,231,206,.6); }
+.anios a { flex: none; display: grid; place-items: center; min-height: 40px; min-width: 44px; padding: 0 12px; border-radius: 999px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; font-weight: 500;
+  letter-spacing: .04em; color: #F2E7CE; text-decoration: none; transition: background .25s var(--ease), color .25s var(--ease); }
+.anios a:hover { background: rgba(251,243,230,.12); }
+.anios a.is-on { background: var(--pin); color: #fff; }
+
+/* cada año abre con su número grande y un hilo que cruza el corcho */
+.mesa__anios { display: grid; gap: clamp(72px, 8vw, 112px); }
+.anio { scroll-margin-top: 140px; }
+.anio__head { display: flex; align-items: center; gap: clamp(14px, 2vw, 24px); margin: 0 0 clamp(58px, 5.4vw, 76px); }
+.anio__head b { font-family: var(--cond); font-weight: 900; font-size: clamp(56px, 6.4vw, 100px); line-height: .78; letter-spacing: -.02em; color: #FBF3E6; text-shadow: 0 3px 16px rgba(30,18,6,.6); }
+.anio__head i { flex: 1; height: 2px; background: repeating-linear-gradient(90deg, rgba(251,243,230,.8) 0 12px, transparent 12px 20px); filter: drop-shadow(0 1px 1px rgba(0,0,0,.4)); }
+.anio__head span { position: relative; flex: none; padding: 7px 14px 6px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--tinta); background: var(--papel); box-shadow: var(--sombra); transform: rotate(1.4deg); }
+.anio__head span::before { content: ""; position: absolute; left: 50%; top: -7px; width: 13px; height: 13px; margin-left: -6px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #ff7b7b, var(--pin) 55%, #6d0612); box-shadow: 0 3px 5px rgba(0,0,0,.35); }
+
+/* qué pasó después: diez a la vista, el resto con el botón o al filtrar */
+.libro__list.is-corto:not(.is-filtrado) li:nth-child(n+11) { display: none; }
+.libro__mas { display: flex; align-items: center; gap: 12px; margin: 30px auto 0; min-height: 48px; padding: 0 26px; border: 0; border-radius: 999px; cursor: pointer;
+  background: var(--tinta); color: var(--paper, #F5F0E8); font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; box-shadow: var(--sombra); transition: transform .25s var(--ease); }
+.libro__mas:hover { transform: translateY(-2px); }
+.libro__mas::after { content: ""; width: 8px; height: 8px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: translateY(-2px) rotate(45deg); transition: transform .25s var(--ease); }
+.libro__mas[aria-expanded="true"]::after { transform: translateY(2px) rotate(-135deg); }
+.libro__mas span + span, .libro__mas[aria-expanded="true"] span:first-child { display: none; }
+.libro__mas[aria-expanded="true"] span + span { display: inline; }
+.libro__list.is-filtrado ~ .libro__mas { display: none; }
+
+.footer--mesa .wordmark { white-space: nowrap; font-size: clamp(34px, 3.2vw, 48px); }
+/* pie: la lista de expedientes en columnas, para que el pie no mida lo que una sección */
+@media (min-width: 900px) { .footer__grid { grid-template-columns: 1fr 2fr .7fr; } }
+.footer--mesa .footer__grid > div:nth-child(2) ul { display: block; columns: 2; column-gap: 34px; }
+@media (min-width: 1200px) { .footer--mesa .footer__grid > div:nth-child(2) ul { columns: 3; } }
+.footer--mesa .footer__grid > div:nth-child(2) li { break-inside: avoid; padding-block: 3px; line-height: 1.35; }
+@media (max-width: 560px) { .footer--mesa .footer__grid > div:nth-child(2) ul { columns: 1; } }
+
+@media (max-width: 760px) {
+  .anios { top: 64px; width: auto; margin-inline: -4px; border-radius: 14px; }
+  .anios__l { display: none; }
+  .anio__head b { font-size: clamp(46px, 14vw, 64px); }
+  .anio__head span { font-size: 10.5px; padding: 6px 10px 5px; }
+}
+@media (prefers-reduced-motion: reduce) { .anios a, .libro__mas, .libro__mas::after { transition: none; } }

@@ -136,3 +136,28 @@
     setTimeout(finish, 900);
   }, 780);
 })();
+
+/* Corcho por años: la barra de años marca el año que está en pantalla.
+   Qué pasó después: la lista arranca plegada y se despliega entera al filtrar o con el botón. */
+(function () {
+  const $ = (s, c) => (c || document).querySelector(s), $$ = (s, c) => [...(c || document).querySelectorAll(s)];
+  const links = $$('.anios a'), anios = $$('.anio');
+  if (links.length && anios.length) {
+    const nav = $('.anios');
+    const marca = (a) => links.forEach((l) => {
+      const on = l.dataset.anio === a; l.classList.toggle('is-on', on);
+      if (on && nav.scrollWidth > nav.clientWidth) nav.scrollTo({ left: l.offsetLeft - nav.clientWidth / 2 + l.offsetWidth / 2, behavior: 'smooth' });
+    });
+    const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) marca(e.target.dataset.anio); }), { rootMargin: '-30% 0px -60% 0px' });
+    anios.forEach((s) => io.observe(s));
+  }
+  const lista = $('.libro__list'), mas = $('.libro__mas');
+  if (lista && mas) {
+    mas.addEventListener('click', () => {
+      const abrir = lista.classList.contains('is-corto');
+      lista.classList.toggle('is-corto', !abrir); mas.setAttribute('aria-expanded', abrir ? 'true' : 'false');
+      if (!abrir) $('#consecuencias').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    $$('.libro__chips button').forEach((c) => c.addEventListener('click', () => lista.classList.toggle('is-filtrado', c.dataset.c !== 'todos')));
+  }
+})();
