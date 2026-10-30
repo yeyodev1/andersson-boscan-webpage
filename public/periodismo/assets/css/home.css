@@ -722,4 +722,5 @@ li[data-c="sin-sentencia"] .libro__tag, li[data-c="juicio-pendiente"] .libro__ta
 @media (max-width: 760px) { .mesa__grid > .obj { grid-column: 1 / -1 !important; } }
 @media (min-width: 761px) { .mesa__grid > .obj { min-height: 800px; } }
 .mesa__grid > .obj--evidencia .obj__cuerpo p:not(.obj__sub), .mesa__grid > .obj--bitacora .obj__cuerpo p:not(.obj__sub) { -webkit-line-clamp: 3; }
-@media (max-width: 760px) { .mesa__grid > .obj { min-height: 620px; } .mesa__grid > .obj p:not(.obj__sub) { -webkit-line-clamp: 4; } }
+@media (max-width: 760px) { .mesa__grid > .obj { min-height: 760px; } .mesa__grid > .obj p:not(.obj__sub) { -webkit-line-clamp: 3; } .mesa__grid > .obj h3 { -webkit-line-clamp: 2; }
+  .mesa__grid > .obj--evidencia .obj__cuerpo p:not(.obj__sub), .mesa__grid > .obj--escucha .obj__cuerpo p:not(.obj__sub) { -webkit-line-clamp: 2; } }
