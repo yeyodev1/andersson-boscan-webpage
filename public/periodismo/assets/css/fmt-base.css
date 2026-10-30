@@ -526,3 +526,14 @@
   .fmt--acta .fper__cred { font-size: 11.5px; }
   .plano__lugar { font-size: 12px; }
 }
+
+/* Pies de foto: siempre debajo de la imagen, nunca encima, con la misma voz en todas las notas:
+   serif cursiva del texto, color atenuado y una línea fina arriba. (El contorno de las siluetas reserva
+   su lugar: build_fmt genera <silueta>-pie.png con una franja opaca debajo de la figura.) */
+.fmt .fmat figcaption { position: static !important; inset: auto !important; transform: none !important; margin: 10px 0 0 !important; padding: 8px 2px 0 !important;
+  border-top: 1px solid var(--line-x, rgba(0,0,0,.18)); text-align: left !important; text-shadow: none !important; z-index: auto !important;
+  font-family: var(--f-body) !important; font-style: italic !important; font-weight: 400 !important; font-size: 13.5px !important; line-height: 1.42 !important;
+  letter-spacing: 0 !important; text-transform: none !important; color: var(--mute) !important; }
+.fmt .fmat--polaroid figcaption { margin-top: 12px !important; }
+.fmt .fmat--polaroid .fmat__marco { padding-bottom: 13px; }
+@media (max-width: 650px) { .fmt .fmat figcaption { font-size: 13px !important; } }
