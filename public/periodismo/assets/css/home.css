@@ -724,3 +724,7 @@ li[data-c="sin-sentencia"] .libro__tag, li[data-c="juicio-pendiente"] .libro__ta
 .mesa__grid > .obj--evidencia .obj__cuerpo p:not(.obj__sub), .mesa__grid > .obj--bitacora .obj__cuerpo p:not(.obj__sub) { -webkit-line-clamp: 3; }
 @media (max-width: 760px) { .mesa__grid > .obj { min-height: 760px; } .mesa__grid > .obj p:not(.obj__sub) { -webkit-line-clamp: 3; } .mesa__grid > .obj h3 { -webkit-line-clamp: 2; }
   .mesa__grid > .obj--evidencia .obj__cuerpo p:not(.obj__sub), .mesa__grid > .obj--escucha .obj__cuerpo p:not(.obj__sub) { -webkit-line-clamp: 2; } }
+
+/* el resumen de cada tarjeta es corto y completo (campo "corto" de investigaciones.json): nada se corta a media frase */
+.mesa__grid > .obj h3, .mesa__grid > .obj .obj__sub, .mesa__grid > .obj p:not(.obj__sub),
+.mesa__grid > .obj--evidencia .obj__cuerpo p:not(.obj__sub), .mesa__grid > .obj--bitacora .obj__cuerpo p:not(.obj__sub), .mesa__grid > .obj--escucha .obj__cuerpo p:not(.obj__sub) { display: block; -webkit-line-clamp: unset; overflow: visible; }
