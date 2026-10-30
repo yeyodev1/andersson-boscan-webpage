@@ -1,0 +1,16 @@
+/* escena del crimen (La caída del narcoalcalde): foto del alcalde en blanco y negro, cinta amarilla cruzada, un impacto de bala y su marcador de evidencia */
+.obj--escena { --obg: #121211; --ofg: #EDE8DC; --oacc: #F5D20A; border-radius: 0; box-shadow: 0 22px 44px -26px rgba(0,0,0,.85), 0 0 0 1px rgba(0,0,0,.6); overflow: clip; overflow-clip-margin: 40px; }
+.obj--escena .obj__img { aspect-ratio: 16 / 10; object-fit: cover; object-position: 40% 20%; filter: grayscale(1) contrast(1.35) brightness(.8); }
+/* la cinta cruza la foto de lado a lado y se sale del objeto */
+.obj--escena::before { content: "Escena del crimen · No pasar · Escena del crimen · No pasar · Escena del crimen"; position: absolute; left: -40px; right: -40px; top: 34px; width: auto; height: auto; margin-left: 0; border-radius: 0; z-index: 3; white-space: nowrap; overflow: hidden; text-align: center;
+  font-family: 'Anton', 'Arial Narrow', sans-serif; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: #111; background: var(--oacc); padding: 6px 0 4px; transform: rotate(-7deg); box-shadow: 0 6px 14px -6px rgba(0,0,0,.8); pointer-events: none; }
+/* el impacto en el vidrio, sobre la foto */
+.obj--escena::after { content: ""; position: absolute; left: auto; right: 16%; top: 22%; z-index: 2; width: 92px; height: 92px; transform: none; box-shadow: none; pointer-events: none;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-50 -50 100 100'><g stroke='%23EDE8DC' stroke-linecap='round' fill='none' opacity='.8'><path d='M0 0L44 -9M0 0L31 30M0 0L-6 47M0 0L-38 22M0 0L-45 -12M0 0L-14 -44M0 0L19 -42' stroke-width='.8'/><circle r='13' stroke-width='.9' stroke-dasharray='3 2'/></g><circle r='5.5' fill='%23050505'/><circle r='7.5' fill='none' stroke='%23EDE8DC' stroke-width='1.6'/></svg>") center / contain no-repeat; }
+.obj--escena h3 { font-family: 'Anton', 'Arial Narrow', sans-serif; font-weight: 400; text-transform: uppercase; letter-spacing: .01em; line-height: .95; font-size: clamp(24px, 2vw, 32px); }
+.obj--escena .obj__sub { color: var(--oacc); }
+/* marcador amarillo de evidencia junto al cierre */
+.obj--escena .obj__exp { position: relative; padding-left: 40px; }
+.obj--escena .obj__exp::before { content: "1"; position: absolute; left: 0; top: 50%; translate: 0 -55%; width: 30px; height: 26px; display: grid; place-items: end center; padding-bottom: 3px;
+  font-family: 'Anton', sans-serif; font-size: 14px; color: #111; background: var(--oacc); clip-path: polygon(14% 0, 86% 0, 100% 100%, 0 100%); }
+@media (max-width: 560px) { .obj--escena::before { left: -10px; right: -10px; top: 26px; } .obj--escena::after { width: 70px; height: 70px; } }

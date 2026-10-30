@@ -1,0 +1,193 @@
+/* ESCENA · La caída del narcoalcalde (Naranjal): una escena del crimen acordonada de noche.
+   Asfalto, luz de sodio, cinta amarilla de la Policía, impactos de bala, marcadores numerados de evidencia
+   y un rastro de huellas de lobo que cruza la página. Anton (rótulos, cinta) + Newsreader (texto). */
+.fmt--escena { --bg: #121211; --bg-2: #1C1B19; --bg-3: #0A0A09; --fg: #EDE8DC; --mute: #9C978A; --acc: #F5D20A; --acc-2: #C8231E; --line-x: rgba(237,232,220,.14);
+  --cinta: #F5D20A; --tinta: #111;
+  --f-display: 'Anton', 'Arial Narrow', sans-serif; --f-body: 'Newsreader', Georgia, serif; --f-mono: 'Anton', ui-monospace, monospace; --f-label: 'Newsreader', Georgia, serif; --radius: 0;
+  --huella: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 44'><g fill='%23B7B0A0'><path d='M20 20c7 0 13 7 13 13 0 5-4 8-8 7-2 0-3-1-5-1s-3 1-5 1c-4 1-8-2-8-7 0-6 6-13 13-13z'/><ellipse cx='6' cy='17' rx='4' ry='5.5' transform='rotate(-24 6 17)'/><ellipse cx='14' cy='7' rx='4' ry='6' transform='rotate(-8 14 7)'/><ellipse cx='26' cy='7' rx='4' ry='6' transform='rotate(8 26 7)'/><ellipse cx='34' cy='17' rx='4' ry='5.5' transform='rotate(24 34 17)'/></g></svg>");
+  background-image: radial-gradient(120% 70% at 80% 0%, rgba(245,170,40,.07), transparent 60%), url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .05 0'/></filter><rect width='160' height='160' filter='url(%23n)'/></svg>"); }
+.fmt--escena .kicker, .fmt--escena .hkicker, .fmt--escena .hby, .fmt--escena .hstats span, .fmt--escena .fnav a, .fmt--escena .cap__num, .fmt--escena .fcita cite,
+.fmt--escena .vid__rol, .fmt--escena .fresp b, .fmt--escena .fper .badge, .fmt--escena .tablewrap th, .fmt--escena .sello, .fmt--escena .vid__meta a { font-family: var(--f-display); font-weight: 400; }
+.fmt--escena .estado p, .fmt--escena .fdato span, .fmt--escena .ftl p, .fmt--escena .fper p, .fmt--escena .hito p { font-size: 15px; }
+.fmt--escena ::selection { background: var(--acc); color: var(--tinta); }
+.fmt--escena .topbar { background: rgba(18,18,17,.92); }
+.fmt--escena .footer { background: var(--bg-3); }
+.fmt--escena .htitle, .fmt--escena .cap__title, .fmt--escena .fmod__head h2 { font-weight: 400; letter-spacing: .005em; text-transform: uppercase; line-height: .9; }
+.fmt--escena .htitle em, .fmt--escena .cap__title em, .fmt--escena .fmod__head h2 em { font-style: normal; color: var(--acc); }
+.fmt--escena .kicker, .fmt--escena .hkicker, .fmt--escena .cap__num { font-weight: 400; letter-spacing: .16em; color: var(--acc); }
+.fmt--escena .ftext p { font-size: clamp(19px, 1.35vw, 22px); line-height: 1.6; }
+.fmt--escena .fcita { border-left: 0; position: relative; padding-left: 0; }
+.fmt--escena .fcita p { font-family: var(--f-display); font-style: normal; text-transform: uppercase; font-size: clamp(30px, 3.6vw, 54px); line-height: 1.02; letter-spacing: .005em; }
+.fmt--escena .fcita p::before { content: "“"; color: var(--acc); margin-right: .06em; }
+.fmt--escena .fcita cite { font-family: var(--f-body); font-style: italic; color: var(--mute); }
+.fmt--escena .fdato b, .fmt--escena .fdatos2 b { font-weight: 400; color: var(--acc); }
+
+/* ---------------------------------------------------------------- portada: el retrato acordonado */
+.hero--escena { min-height: 100svh; padding: 120px 0 54px; align-items: end; isolation: isolate; }
+.esc-foto { position: absolute; inset: 0 0 0 auto; width: 60%; margin: 0; z-index: 0; overflow: hidden; }
+.esc-foto > img { width: 100%; height: 100%; object-fit: cover; object-position: 38% 18%; filter: grayscale(1) contrast(1.35) brightness(.78); }
+.esc-foto::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(90deg, var(--bg) 0%, rgba(18,18,17,.5) 18%, rgba(18,18,17,0) 40%), linear-gradient(0deg, var(--bg) 0%, rgba(18,18,17,0) 42%), radial-gradient(70% 60% at 62% 30%, rgba(245,170,40,.16), transparent 70%); }
+.esc-foto figcaption { position: absolute; right: 16px; bottom: 14px; z-index: 5; font-family: var(--f-body); font-style: italic; font-size: 12.5px; color: var(--mute); }
+.esc-noche { position: absolute; inset: 0; z-index: 1; pointer-events: none; background: repeating-linear-gradient(0deg, rgba(0,0,0,.12) 0 1px, transparent 1px 3px); mix-blend-mode: multiply; }
+.hero--escena .hero__in { z-index: 4; }
+.hero--escena .hero__in > * { max-width: min(40rem, 44vw); }
+.hero--escena .htitle { font-size: clamp(64px, 8.4vw, 150px); max-width: 9ch !important; text-shadow: 0 4px 30px rgba(0,0,0,.6); }
+.hero--escena .hdeck { text-shadow: 0 1px 12px rgba(0,0,0,.8); }
+.hero--escena .hstats b { font-family: var(--f-display); font-weight: 400; }
+
+/* la cinta amarilla: una franja que cruza todo el ancho y se mece un poco */
+.esc-cinta { position: absolute; left: 4%; right: -14%; top: var(--top); z-index: 3; transform: rotate(var(--rot)); background: var(--cinta); color: var(--tinta);
+  overflow: hidden; white-space: nowrap; padding: 9px 0 7px; box-shadow: 0 10px 24px -10px rgba(0,0,0,.8), inset 0 1px 0 rgba(255,255,255,.35), inset 0 -2px 0 rgba(0,0,0,.18); pointer-events: none;
+  animation: escCinta 1.2s var(--ease-out) both; }
+.esc-cinta span { display: inline-block; font-family: var(--f-display); font-size: clamp(15px, 1.5vw, 22px); letter-spacing: .1em; text-transform: uppercase; animation: escCorre 60s linear infinite; }
+.esc-cinta--b { animation-delay: .25s; filter: brightness(.94); }
+.esc-cinta--b span { animation-direction: reverse; animation-duration: 75s; }
+@keyframes escCinta { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes escCorre { to { transform: translateX(-50%); } }
+
+/* impacto de bala en el vidrio: hueco, anillo de astillas y grietas */
+.esc-bala { position: absolute; left: var(--x); top: var(--y); z-index: 2; width: calc(150px * var(--s)); aspect-ratio: 1; translate: -50% -50%; pointer-events: none;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-50 -50 100 100'><g stroke='%23EDE8DC' stroke-linecap='round' fill='none' opacity='.75'><path d='M0 0L44 -9M0 0L31 30M0 0L-6 47M0 0L-38 22M0 0L-45 -12M0 0L-14 -44M0 0L19 -42' stroke-width='.7'/><path d='M14 -3l7 6M9 10l4 9M-10 8l-9 4M-11 -6l-8 -6M-3 -13l-1 -9M10 -11l6 -7' stroke-width='.6'/><circle r='13' stroke-width='.8' stroke-dasharray='3 2'/><circle r='22' stroke-width='.4' stroke-dasharray='1 4'/></g><circle r='5.5' fill='%23050505'/><circle r='7.5' fill='none' stroke='%23EDE8DC' stroke-width='1.6' opacity='.9'/></svg>") center / contain no-repeat;
+  animation: escBala .25s steps(2) both; animation-delay: calc(1.3s + var(--s) * .3s); }
+@keyframes escBala { from { opacity: 0; transform: scale(1.6); } }
+
+/* marcador amarillo de Criminalística */
+.esc-marca { position: absolute; left: var(--x); top: var(--y); z-index: 3; width: 44px; height: 40px; display: grid; place-items: end center; padding-bottom: 5px;
+  font-family: var(--f-display); font-weight: 400; font-size: 19px; color: var(--tinta); background: var(--cinta); clip-path: polygon(14% 0, 86% 0, 100% 100%, 0 100%);
+  filter: drop-shadow(0 6px 6px rgba(0,0,0,.6)); animation: escCae .5s var(--ease-out) both; animation-delay: 1.6s; }
+@keyframes escCae { from { opacity: 0; transform: translateY(-14px); } }
+
+/* rastro de huellas de lobo */
+.esc-huellas { position: absolute; pointer-events: none; z-index: 1; }
+.esc-huellas i { position: absolute; width: 26px; height: 29px; background: var(--huella) center / contain no-repeat; opacity: 0; animation: escPaso .4s ease-out forwards; animation-delay: calc(1.8s + var(--i) * .18s); }
+@keyframes escPaso { to { opacity: .55; } }
+.esc-huellas--hero { left: 0; right: 0; bottom: 0; height: 100%; }
+.esc-huellas--hero i { left: calc(96% - var(--i) * 6.5%); top: calc(28% + var(--i) * 4.6%); transform: rotate(-112deg); }
+.esc-huellas--hero i:nth-child(even) { margin-top: 24px; margin-left: 8px; }
+
+/* ---------------------------------------------------------------- capítulos: cada uno abre acordonado */
+.fmt--escena .cap { position: relative; }
+.fmt--escena .cap__head { position: relative; padding-top: 64px; }
+.fmt--escena .cap__head::before { content: "Escena del crimen · No pasar · Escena del crimen · No pasar · Escena del crimen · No pasar · Escena del crimen · No pasar · Escena del crimen · No pasar"; position: absolute; left: -50vw; right: -50vw; top: 0;
+  background: var(--cinta); color: var(--tinta); font-family: var(--f-display); font-size: 15px; letter-spacing: .12em; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-align: center;
+  padding: 7px 0 5px; transform: rotate(-1.4deg); box-shadow: 0 8px 18px -10px rgba(0,0,0,.8); }
+.fmt--escena .cap:nth-of-type(even) .cap__head::before { transform: rotate(1.2deg); }
+.fmt--escena .cap__title { font-size: clamp(44px, 6.4vw, 96px); }
+/* las huellas cruzan el margen izquierdo de cada capítulo, como si alguien hubiera pasado por ahí */
+.fmt--escena .cap::after { content: ""; position: absolute; right: 18px; top: 140px; bottom: 60px; width: 34px; pointer-events: none; opacity: .32;
+  background: var(--huella) 0 0 / 22px 24px repeat-y, var(--huella) 12px 70px / 22px 24px repeat-y; background-size: 22px 140px, 22px 140px; }
+@media (max-width: 1180px) { .fmt--escena .cap::after { display: none; } }
+
+/* ---------------------------------------------------------------- módulo: el sobre de Toledo */
+.esc-sobre { position: relative; max-width: 640px; margin: 10px auto 0; padding: 92px 34px 28px; color: #22180E; transform: rotate(-1.2deg);
+  background: linear-gradient(90deg, rgba(255,255,255,.05) 0 1px, transparent 1px 6px), linear-gradient(165deg, #CDA86F, #BB955C 60%, #A88250);
+  box-shadow: 0 34px 60px -30px rgba(0,0,0,.9); }
+.esc-sobre__solapa { position: absolute; left: 0; right: 0; top: 0; height: 84px; clip-path: polygon(0 0, 100% 0, 50% 100%); background: linear-gradient(180deg, #B48E56, #A07A45); filter: drop-shadow(0 3px 2px rgba(0,0,0,.35)); }
+.esc-sobre__orden { margin: 0 0 18px; font-family: var(--f-display); font-size: clamp(30px, 4vw, 50px); line-height: .95; text-transform: uppercase; color: #8F1410; transform: rotate(-2deg); }
+.esc-sobre__l { list-style: none; margin: 0; padding: 0; border-top: 2px solid #22180E; }
+.esc-sobre__l li { display: grid; grid-template-columns: 64px 1fr; gap: 14px; align-items: baseline; padding: 10px 0; border-bottom: 1px dashed rgba(34,24,14,.45); }
+.esc-sobre__l b { font-family: var(--f-display); font-weight: 400; font-size: 34px; line-height: 1; }
+.esc-sobre__l span { font-family: var(--f-body); font-size: 18px; line-height: 1.35; }
+.esc-sobre__pie { display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; margin-top: 16px; font-family: var(--f-display); font-size: 13px; letter-spacing: .12em; text-transform: uppercase; }
+.esc-sobre__sello { position: absolute; right: -16px; top: 22px; z-index: 2; font-style: normal; font-family: var(--f-display); font-size: 16px; letter-spacing: .16em; text-transform: uppercase; color: var(--acc-2);
+  border: 3px solid var(--acc-2); padding: 8px 14px 6px; transform: rotate(9deg); background: rgba(205,168,111,.6); }
+.esc-sobre__nota { max-width: 640px; margin: 14px auto 0; font-family: var(--f-body); font-style: italic; font-size: 14.5px; color: var(--mute); text-align: center; }
+.esc-sobre__cita { max-width: 640px; margin: 40px auto 0; padding: 0; }
+.esc-sobre__cita p { margin: 0 0 10px; font-family: var(--f-body); font-style: italic; font-size: clamp(21px, 1.8vw, 27px); line-height: 1.4; }
+.esc-sobre__cita cite { font-family: var(--f-display); font-style: normal; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--acc); }
+
+/* ---------------------------------------------------------------- módulo: la grabación, evidencia por evidencia */
+.esc-g { border-top: 3px solid var(--acc); }
+.esc-g__top { display: flex; flex-wrap: wrap; gap: 6px 24px; padding: 12px 0 16px; font-family: var(--f-display); font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--mute); }
+.esc-g__l { list-style: none; margin: 0; padding: 0; }
+.esc-ev { display: grid; grid-template-columns: 58px 1fr; gap: 20px; padding: 20px 0; border-bottom: 1px solid var(--line-x); }
+.esc-ev__n { width: 52px; height: 46px; display: grid; place-items: end center; padding-bottom: 6px; font-family: var(--f-display); font-weight: 400; font-size: 22px; color: var(--tinta);
+  background: var(--cinta); clip-path: polygon(14% 0, 86% 0, 100% 100%, 0 100%); }
+.esc-ev[data-de="santana"] .esc-ev__n { background: #D9D3C4; }
+.esc-ev__who { display: block; font-family: var(--f-display); font-size: 14px; letter-spacing: .12em; text-transform: uppercase; color: var(--acc); }
+.esc-ev[data-de="santana"] .esc-ev__who { color: #D9D3C4; }
+.esc-ev__who i { font-style: normal; color: var(--mute); margin-left: 8px; }
+.esc-ev__q small { display: block; font-family: var(--f-body); font-style: italic; font-size: 15px; color: var(--mute); margin-top: 2px; }
+.esc-ev__q p { margin: 6px 0 0; font-family: var(--f-body); font-size: clamp(19px, 1.4vw, 23px); line-height: 1.45; }
+.esc-ev__q mark { background: var(--acc); color: var(--tinta); padding: 0 4px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.esc-ev[data-de="santana"] mark { background: #D9D3C4; }
+.esc-g__nota { margin: 0; padding: 16px 0 0; font-family: var(--f-body); font-style: italic; font-size: 16px; color: var(--mute); }
+
+/* ---------------------------------------------------------------- módulo: cámaras de seguridad y fotogramas */
+.esc-cams { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 22px; }
+.esc-cam { margin: 0; }
+.esc-cam__v { position: relative; overflow: hidden; background: #000; border: 1px solid rgba(237,232,220,.2); }
+.esc-cam__v img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; filter: grayscale(.35) contrast(1.15) brightness(.92); }
+.esc-cam__v::after { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, rgba(0,0,0,.18) 0 1px, transparent 1px 3px); pointer-events: none; }
+.esc-cam__rec { position: absolute; left: 10px; top: 9px; z-index: 1; font-family: var(--f-display); font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: #FFF; text-shadow: 0 1px 3px #000; }
+.esc-cam__rec::before { content: ""; display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: var(--acc-2); margin-right: 7px; vertical-align: 1px; animation: escRec 1.4s steps(2) infinite; }
+@keyframes escRec { 50% { opacity: 0; } }
+.esc-cam__hora { position: absolute; right: 10px; bottom: 8px; z-index: 1; font-family: var(--f-display); font-size: 13px; letter-spacing: .1em; color: var(--acc); text-shadow: 0 1px 3px #000; }
+.esc-cam figcaption { padding-top: 10px; font-family: var(--f-body); font-size: 16px; line-height: 1.4; }
+.esc-cam figcaption small { display: block; margin-top: 4px; font-style: italic; font-size: 13px; color: var(--mute); }
+
+/* ---------------------------------------------------------------- módulo: el rastro de los lobos */
+.esc-rastro { position: relative; padding: 40px 0 10px; }
+.esc-huellas--rastro { left: 0; right: 0; top: 0; height: 60px; position: relative; display: block; }
+.esc-huellas--rastro i { top: 6px; left: calc(var(--i) * 6.1%); width: 30px; height: 33px; transform: rotate(90deg); animation-delay: calc(var(--i) * .12s); }
+.esc-huellas--rastro i:nth-child(even) { top: 30px; }
+.esc-rastro__l { list-style: none; margin: 18px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 0; counter-reset: r; }
+.esc-rastro__l li { position: relative; padding: 18px 18px 18px 0; border-top: 3px solid var(--acc); counter-increment: r; }
+.esc-rastro__l li::before { content: counter(r, decimal-leading-zero); display: block; font-family: var(--f-display); font-size: 13px; letter-spacing: .14em; color: var(--mute); margin-bottom: 6px; }
+.esc-rastro__l b { display: block; font-family: var(--f-display); font-weight: 400; font-size: clamp(22px, 2vw, 30px); text-transform: uppercase; line-height: 1; }
+.esc-rastro__l span { display: block; margin-top: 8px; font-family: var(--f-body); font-size: 16px; line-height: 1.4; color: var(--mute); }
+.esc-rastro__nota { margin: 18px 0 0; font-family: var(--f-body); font-style: italic; font-size: 15px; color: var(--mute); }
+
+/* ---------------------------------------------------------------- módulo: la grabación completa y el comunicado */
+.esc-vid { margin: 0; display: grid; justify-items: center; gap: 10px; }
+.esc-vid .twitter-tweet, .esc-tuit .twitter-tweet { margin: 0 auto !important; }
+.esc-vid blockquote.twitter-tweet, .esc-tuit blockquote.twitter-tweet { max-width: 560px; background: var(--bg-2); border: 1px solid var(--line-x); padding: 16px 18px; font-family: var(--f-body); font-size: 18px; }
+.esc-vid figcaption { max-width: 640px; text-align: center; font-family: var(--f-body); font-style: italic; font-size: 15.5px; color: var(--mute); }
+.esc-vid figcaption a, .esc-doc a { color: var(--acc); padding-block: 10px; }
+.esc-doc { position: relative; max-width: 620px; margin: 0 auto; background: #F1EEE6; color: #161513; padding: 24px 28px 18px; transform: rotate(.8deg); box-shadow: 0 30px 60px -30px rgba(0,0,0,.9); }
+.esc-doc::before { content: "Evidencia"; position: absolute; left: -14px; top: 18px; font-family: var(--f-display); font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: #FFF; background: var(--acc-2); padding: 6px 12px 4px; transform: rotate(-4deg); }
+.esc-doc__top { display: flex; justify-content: space-between; gap: 12px; font-family: var(--f-display); font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: #6A665D; margin: 18px 0 12px; }
+.esc-doc__top span { color: #161513; }
+.esc-doc__top b { font-weight: 400; }
+.esc-doc__txt p { margin: 0 0 12px; font-family: var(--f-body); font-size: 18px; line-height: 1.5; }
+.esc-doc figcaption { font-family: var(--f-display); font-size: 12.5px; letter-spacing: .12em; text-transform: uppercase; color: #6A665D; padding-top: 6px; border-top: 1px solid rgba(0,0,0,.15); }
+.esc-tuits { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 22px; margin-top: 34px; align-items: start; }
+
+/* fotos dentro del texto: la ficha del retrato con su borde de evidencia */
+.fmt--escena .fmat--ficha .fmat__marco { background: #F1EEE6; }
+.fmt--escena .fmat--ficha img { filter: grayscale(1) contrast(1.2); }
+
+@media (max-width: 1100px) {
+  .hero--escena { padding: 0 0 48px; min-height: auto; display: block; }
+  .esc-foto { position: relative; width: 100%; height: min(72svh, 680px); inset: auto; }
+  .esc-foto::after { background: linear-gradient(0deg, var(--bg) 0%, rgba(18,18,17,0) 42%), radial-gradient(70% 60% at 50% 30%, rgba(245,170,40,.14), transparent 70%); }
+  .esc-cinta { left: -12%; right: -12%; }
+  .hero--escena .hero__in { margin-top: -120px; }
+  .hero--escena .hero__in > * { max-width: 46rem; }
+  .hero--escena .htitle { font-size: clamp(60px, 11vw, 120px); }
+  .esc-huellas--hero { display: none; }
+  .esc-foto figcaption { top: 12px; bottom: auto; left: 16px; text-align: right; text-shadow: 0 1px 4px #000; color: #CFC9BB; }
+  .esc-marca { translate: 0 -40%; }
+}
+@media (max-width: 760px) {
+  .hero--escena .htitle { font-size: clamp(56px, 17vw, 92px); }
+  .esc-bala { width: calc(96px * var(--s)); }
+  .esc-marca { width: 36px; height: 33px; font-size: 16px; }
+  .esc-sobre { padding: 84px 20px 22px; transform: none; }
+  .esc-sobre__sello { right: 6px; top: 16px; font-size: 13px; }
+  .esc-ev { grid-template-columns: 1fr; gap: 10px; }
+  .esc-doc { transform: none; }
+  .esc-doc::before { left: 10px; }
+  .fmt--escena .cap__head::before { font-size: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .esc-cinta, .esc-cinta span, .esc-bala, .esc-marca, .esc-huellas i, .esc-cam__rec::before { animation: none; }
+  .esc-huellas i { opacity: .55; }
+}
+/* la foto ya es la portada: el arte genérico no se repite de fondo */
+.fmt--escena .hero__art { display: none; }
+/* las cintas de los capítulos cruzan de borde a borde sin empujar la página hacia los lados */
+.fmt--escena .cap { overflow-x: clip; }
+/* los fotogramas de la grabación conservan su formato apaisado para que se lea el subtítulo */
+.fmod--fotogramas .esc-cam__v img { aspect-ratio: 16 / 9; object-position: center; }
+.fmt--escena .fdato b { margin-left: 0; }

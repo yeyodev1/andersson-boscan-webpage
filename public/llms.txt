@@ -49,7 +49,7 @@ Programa diario de noticias (lunes a viernes), transmitido en simultáneo por Yo
 - [El último recorrido de Nathaly Mafla](https://boscanymoni.com/periodismo/investigaciones/nathaly-mafla/): la desaparición de una estudiante de la Escuela Politécnica Nacional.
 - [La Mancha Dorada](https://boscanymoni.com/periodismo/investigaciones/la-mancha-dorada/): el mercurio prohibido que seguía envenenando la zona minera del sur del Ecuador.
 - [Ucrania, día a día](https://boscanymoni.com/periodismo/investigaciones/ucrania/): la cobertura diaria de la invasión rusa desde el 24 de febrero de 2022.
-- [El alcalde que no manda](https://boscanymoni.com/periodismo/investigaciones/alcalde-de-naranjal/): El hijo de un hombre asesinado en Naranjal entró al cuarto del alcalde Juan Carlos Rivera con un teléfono grabando en el bolsillo.
+- [La caída del narcoalcalde](https://boscanymoni.com/periodismo/investigaciones/alcalde-de-naranjal/): Leonardo Toledo sabía que lo iban a matar.
 
 Índice completo: https://boscanymoni.com/periodismo/
 Resúmenes completos de cada expediente: https://boscanymoni.com/llms-full.txt
