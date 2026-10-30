@@ -635,3 +635,6 @@ li[data-c="sin-sentencia"] .libro__tag, li[data-c="juicio-pendiente"] .libro__ta
 @media (prefers-reduced-motion: reduce) { .mesa__grid .obj, .obj__figura { animation: none; } }
 /* en el teléfono ningún texto de lectura baja de 12 px */
 @media (max-width: 650px) { .obj__sub, .mesa__leyenda, .tips__nota, .footer__premios, .mesa li, .libro li p { font-size: 12px !important; } }
+/* todas las figuras del mismo alto y pequeñas: los recortes tienen proporciones distintas y por ancho quedaban desparejos */
+.obj__figura { width: auto !important; height: 120px; max-width: 46%; object-fit: contain; object-position: left bottom; top: -56px; }
+@media (max-width: 560px) { .obj__figura { height: 90px; top: -40px; } }
