@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="/ajustes-periodismo/ajustes.css?v=4">
 <link rel="stylesheet" href="/ajustes-periodismo/encaje.css?v=3">
 <script src="/ajustes-periodismo/letra.js?v=4" defer></script>
+<link href="../assets/game/vertical.css?v=a118ab37" rel="stylesheet"/>
 <style id="obj-css">
 /* ACTA (Órdenes desde la Judicatura): foja de oficio con membrete, margen rayado en vino y tinta azul,
    perforaciones de archivador y el sello seco de la balanza abajo a la derecha.
@@ -643,6 +644,12 @@
 <script src="../assets/js/site.js?v=ea292d0d"></script>
 <script src="../assets/js/home.en.js?v=9113d6bb"></script>
 <script src="../assets/game/bm3d.js?v=73b7df8b"></script><script src="../assets/game/physics.js?v=dd804e07"></script><script src="../assets/game/avatars.js?v=1321a997"></script><script src="../assets/game/world.js?v=b831359d"></script><script src="../assets/game/game.en.js?v=2a855d84"></script>
-<script>try { var pj = document.getElementById('portada-jugable'); window.portadaJugable = BMGame.mount(pj, { archiveHref: '#mesa', debug: false }); pj.appendChild(document.getElementById('titulo-juego').content.cloneNode(true)); } catch (e) { console.warn('portada jugable', e); }</script>
+<script src="../assets/game/vertical.en.js?v=265e108a"></script>
+<script>try { var pj = document.getElementById('portada-jugable'), vert = window.BMVertical && BMVertical.usar();
+  // en el celular en vertical va Destape, el juego de disparar hacia arriba; en lo demás, la resortera
+  window.portadaJugable = vert ? BMVertical.mount(pj, { archiveHref: '#mesa', debug: /[?&]debug=1/.test(location.search) }) : BMGame.mount(pj, { archiveHref: '#mesa', debug: false });
+  var tit = document.getElementById('titulo-juego').content.cloneNode(true); pj.appendChild(tit);
+  if (vert) { var ajusta = function () { var t = pj.querySelector('.bmhero__titulo'); if (t) pj.style.setProperty('--tit', t.offsetHeight + 'px'); }; ajusta(); requestAnimationFrame(ajusta); setTimeout(ajusta, 600); }
+} catch (e) { console.warn('portada jugable', e); }</script>
 </body>
 </html>

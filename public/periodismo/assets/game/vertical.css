@@ -1,0 +1,36 @@
+/* DESTAPE · el juego vertical del celular. El título queda arriba, en flujo; debajo, el escenario a lo alto. */
+.bmv { position: relative; display: flex; flex-direction: column; background: #cfc8b6; isolation: isolate; }
+.bmv > .bmhero__titulo { position: relative !important; order: -1; inset: auto !important; left: auto !important; top: auto !important; max-width: none !important; width: 100%; padding: 10px 12px 12px; z-index: 3; }
+.bmv .recorte { transform: rotate(-.6deg); }
+.bmv__stage { position: relative; height: calc(100svh - 60px - var(--tit, 150px)); min-height: 470px; max-height: 820px; overflow: hidden; touch-action: none; user-select: none; -webkit-user-select: none;
+  background: linear-gradient(180deg, rgba(232,226,210,.0) 0%, rgba(232,226,210,.0) 55%, rgba(201,184,148,.85) 100%), url("fondos/nivel1.jpg") center bottom / cover no-repeat, #d9d2bf; }
+.bmv__stage::before { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(40,32,22,.58) 0%, rgba(40,32,22,.28) 40%, rgba(40,32,22,0) 70%); pointer-events: none; }
+.bmv__canvas { position: absolute; inset: 0; display: block; touch-action: none; }
+.bmv__hud { position: absolute; left: 10px; right: 10px; top: 10px; display: flex; justify-content: space-between; align-items: center; gap: 10px; z-index: 2; pointer-events: none; }
+.bmv__docs { display: flex; gap: 5px; padding: 6px 9px; border-radius: 999px; background: rgba(20,16,10,.62); }
+.bmv__docs i { width: 16px; height: 20px; display: block; opacity: .4; transition: opacity .3s, transform .3s; }
+.bmv__docs i.is-on { opacity: 1; transform: scale(1.12); }
+.bmv__docs svg { width: 100%; height: 100%; fill: #FBF6EC; stroke: #B3121C; stroke-width: 1.4; }
+.bmv__docs i:not(.is-on) svg { fill: none; stroke: #FBF6EC; }
+.bmv__tools { display: flex; gap: 6px; pointer-events: auto; }
+.bmv__icon { width: 40px; height: 40px; display: grid; place-items: center; border: 0; border-radius: 50%; background: rgba(251,246,236,.9); color: #1D1D1B; box-shadow: 0 4px 10px -4px rgba(0,0,0,.5); cursor: pointer; }
+.bmv__icon svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.bmv__archive { position: absolute; right: 12px; bottom: 14px; z-index: 2; }
+.bmv__crew { position: absolute; left: 10px; bottom: 12px; display: flex; gap: 6px; z-index: 2; }
+.bmv__who { width: 46px; height: 54px; padding: 3px; border: 2px solid transparent; border-radius: 12px; background: rgba(251,246,236,.82); box-shadow: 0 4px 10px -5px rgba(0,0,0,.5); cursor: pointer; transition: transform .2s, border-color .2s; }
+.bmv__who img { width: 100%; height: 100%; object-fit: contain; object-position: center bottom; pointer-events: none; }
+.bmv__who.is-on { border-color: #B3121C; transform: translateY(-4px); background: #FBF6EC; }
+.bmv__hint { position: absolute; left: 50%; bottom: 23%; width: 54px; height: 54px; margin-left: -27px; z-index: 2; pointer-events: none; opacity: 0; color: #FBF6EC; filter: drop-shadow(0 3px 6px rgba(0,0,0,.6)); }
+.bmv__hint svg { width: 100%; height: 100%; fill: rgba(29,29,27,.35); stroke: currentColor; stroke-width: 1.6; stroke-linejoin: round; }
+.bmv.is-hint .bmv__hint { animation: bmvHint 1.8s ease-in-out infinite; }
+@keyframes bmvHint { 0% { opacity: 0; transform: translateY(-34px); } 20% { opacity: 1; } 70% { opacity: 1; transform: translateY(26px); } 100% { opacity: 0; transform: translateY(26px); } }
+.bmv__sello { position: absolute; inset: 0; z-index: 4; display: none; place-items: center; align-content: center; gap: 18px; background: rgba(24,18,10,.45); }
+.bmv__sello.is-on { display: grid; }
+.bmv__sello b { padding: 10px 22px 8px; font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif; font-weight: 900; font-size: clamp(38px, 12vw, 58px); letter-spacing: .04em; text-transform: uppercase;
+  color: #C8102E; border: 5px solid currentColor; border-radius: 6px; background: rgba(251,246,236,.94); transform: rotate(-8deg); animation: bmvSello .4s cubic-bezier(.3,1.6,.5,1) both; }
+.bmv__sello.is-pierde b { color: #4A4A48; }
+.bmv__otra { width: 64px; height: 64px; border: 0; border-radius: 50%; background: #FBF6EC; color: #1D1D1B; font-size: 28px; font-weight: 700; box-shadow: 0 8px 20px -8px rgba(0,0,0,.6); cursor: pointer; }
+@keyframes bmvSello { from { opacity: 0; transform: rotate(-8deg) scale(2.2); } }
+.bmv.is-paused .bmv__canvas { filter: grayscale(.6) brightness(.85); }
+.bmv__sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+@media (prefers-reduced-motion: reduce) { .bmv.is-hint .bmv__hint { animation: none; opacity: .8; } .bmv__sello b { animation: none; } }
