@@ -45,54 +45,191 @@
           "@type": "NewsMediaOrganization",
           "@id": "https://boscanymoni.com/periodismo/#organizacion",
           "name": "Boscán & La Moni",
+          "alternateName": [
+            "Boscán y La Moni",
+            "Boscán and La Moni",
+            "Boscán & La Moni Investigaciones"
+          ],
           "url": "https://boscanymoni.com/",
+          "logo": "https://boscanymoni.com/periodismo/assets/img/autores/pareja.jpg",
+          "description": "Periodismo de investigación de Andersson Boscán y Mónica Velásquez sobre corrupción, narcopolítica y crimen organizado en Ecuador.",
+          "foundingDate": "2023",
+          "knowsLanguage": [
+            "es-EC",
+            "en"
+          ],
           "founder": [
-            { "@id": "https://boscanymoni.com/#andersson" },
-            { "@id": "https://boscanymoni.com/#monica" }
-          ]
+            {
+              "@id": "https://boscanymoni.com/periodismo/autores/andersson-boscan/#persona"
+            },
+            {
+              "@id": "https://boscanymoni.com/periodismo/autores/monica-velasquez/#persona"
+            }
+          ],
+          "areaServed": {
+            "@type": "Country",
+            "name": "Ecuador"
+          },
+          "sameAs": [
+            "https://www.youtube.com/@anderssonboscan"
+          ],
+          "ethicsPolicy": "https://boscanymoni.com/periodismo/#quienes-somos",
+          "publishingPrinciples": "https://boscanymoni.com/periodismo/#quienes-somos"
         },
         {
           "@type": "Person",
-          "@id": "https://boscanymoni.com/#andersson",
+          "@id": "https://boscanymoni.com/periodismo/autores/andersson-boscan/#persona",
           "name": "Andersson Boscán",
-          "alternateName": "Andersson Boscan",
+          "alternateName": [
+            "Boscán",
+            "Andersson Boscan",
+            "Andersson Boscán Pico"
+          ],
+          "givenName": "Andersson",
+          "familyName": "Boscán",
           "jobTitle": "Periodista de investigación",
-          "description": "Periodista de investigación ecuatoriano radicado en Toronto, Canadá. Autor de El Gran Padrino, la investigación de 34 entregas que llevó al presidente Guillermo Lasso a un juicio político. Premio Rey de España 2024, finalista del Premio Gabo 2023 y Premio Eppy 2019.",
+          "description": "Periodista de investigación ecuatoriano. Cofundó La Posta en 2018 y la dirigió hasta su venta en 2025; dirigió El Gran Padrino, la investigación que llevó al presidente Guillermo Lasso a juicio político. Desde 2023 publica desde el exilio en Toronto, Canadá, y conduce Boscán & La Moni con Mónica Velásquez.",
+          "image": "https://boscanymoni.com/periodismo/assets/img/autores/boscan.png",
+          "url": "https://boscanymoni.com/periodismo/autores/andersson-boscan/",
           "award": [
-            "Premio Rey de España 2024",
+            "Premio Rey de España de Periodismo Narrativo 2024",
             "Finalista Premio Gabo 2023",
-            "Premio Eppy 2019"
+            "EPPY Award 2019",
+            "Mención especial WJP Anthony Lewis Prize 2025"
           ],
-          "knowsAbout": ["Crimen organizado", "Narcotráfico", "Corrupción", "Ecuador", "Periodismo de investigación"],
-          "url": "https://boscanymoni.com/quienes-somos",
-          "image": "https://boscanymoni.com/images/portada-pareja.png",
+          "knowsAbout": [
+            "Periodismo de investigación",
+            "Corrupción",
+            "Narcotráfico",
+            "Crimen organizado",
+            "Narcopolítica",
+            "Ecuador"
+          ],
+          "knowsLanguage": [
+            "es",
+            "en"
+          ],
+          "nationality": {
+            "@type": "Country",
+            "name": "Ecuador"
+          },
+          "worksFor": {
+            "@id": "https://boscanymoni.com/periodismo/#organizacion"
+          },
           "sameAs": [
-            "https://www.tiktok.com/@anderssonboscan",
+            "https://x.com/AnderssonBoscan",
             "https://www.youtube.com/@anderssonboscan",
-            "https://twitter.com/anderssonboscan",
             "https://www.instagram.com/anderssonboscan",
-            "https://www.facebook.com/anderssonboscan"
+            "https://www.tiktok.com/@anderssonboscan",
+            "https://www.facebook.com/anderssonboscan",
+            "https://www.linkedin.com/in/anderssonboscan"
           ],
-          "worksFor": { "@id": "https://boscanymoni.com/periodismo/#organizacion" },
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Toronto",
-            "addressRegion": "Ontario",
-            "addressCountry": "CA"
+          "subjectOf": [
+            {
+              "@type": "WebPage",
+              "name": "Comité para la Protección de los Periodistas (CPJ)",
+              "url": "https://cpj.org/es/2023/07/periodistas-andersson-boscan-y-monica-velasquez-huyen-de-ecuador-tras-amenazas/"
+            },
+            {
+              "@type": "WebPage",
+              "name": "The Globe and Mail",
+              "url": "https://www.theglobeandmail.com/world/article-exiled-in-canada-an-ecuadorean-journalist-savours-freedom-to-work"
+            },
+            {
+              "@type": "WebPage",
+              "name": "Global Voices",
+              "url": "https://globalvoices.org/2024/09/24/ecuador-two-journalists-who-revealed-corruption-and-drug-trafficking-forced-into-exile/"
+            }
+          ],
+          "colleague": {
+            "@id": "https://boscanymoni.com/periodismo/autores/monica-velasquez/#persona"
+          },
+          "spouse": {
+            "@id": "https://boscanymoni.com/periodismo/autores/monica-velasquez/#persona"
+          },
+          "homeLocation": {
+            "@type": "Place",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Toronto",
+              "addressRegion": "Ontario",
+              "addressCountry": "CA"
+            }
           }
         },
         {
           "@type": "Person",
-          "@id": "https://boscanymoni.com/#monica",
+          "@id": "https://boscanymoni.com/periodismo/autores/monica-velasquez/#persona",
           "name": "Mónica Velásquez",
-          "alternateName": "La Moni",
-          "jobTitle": "Periodista, conductora",
-          "url": "https://boscanymoni.com/quienes-somos",
-          "sameAs": [
-            "https://www.tiktok.com/@monivelasquezv",
-            "https://www.youtube.com/@monivelasquezv"
+          "alternateName": [
+            "Mónica Velásquez Villacís",
+            "La Moni",
+            "Moni Velásquez",
+            "Monica Velasquez Villacis",
+            "Mónica Velásquez V."
           ],
-          "worksFor": { "@id": "https://boscanymoni.com/periodismo/#organizacion" }
+          "givenName": "Mónica",
+          "familyName": "Velásquez Villacís",
+          "jobTitle": "Periodista de investigación",
+          "description": "Periodista de investigación ecuatoriana, conocida como La Moni. Premio a la Valentía en el Periodismo 2024 de la International Women's Media Foundation (IWMF). Coautora de El Gran Padrino y de los archivos del teléfono de Fernando Villavicencio; conduce Boscán & La Moni con Andersson Boscán y lidera EUREKA.",
+          "image": "https://boscanymoni.com/periodismo/assets/img/autores/moni.png",
+          "url": "https://boscanymoni.com/periodismo/autores/monica-velasquez/",
+          "award": [
+            "Premio IWMF a la Valentía en el Periodismo 2024",
+            "Premio Rey de España de Periodismo Narrativo 2024",
+            "Finalista Premio Gabo 2023",
+            "Mención IPYS Javier Valdez"
+          ],
+          "knowsAbout": [
+            "Periodismo de investigación",
+            "Corrupción",
+            "Narcotráfico",
+            "Crimen organizado",
+            "Ecuador"
+          ],
+          "knowsLanguage": [
+            "es",
+            "en"
+          ],
+          "nationality": {
+            "@type": "Country",
+            "name": "Ecuador"
+          },
+          "worksFor": {
+            "@id": "https://boscanymoni.com/periodismo/#organizacion"
+          },
+          "sameAs": [
+            "https://x.com/MoniVelasquezV",
+            "https://www.instagram.com/monivelasquezv",
+            "https://www.tiktok.com/@monivelasquezv",
+            "https://www.youtube.com/@monivelasquezv",
+            "https://www.facebook.com/monivelasquezv",
+            "https://www.threads.net/@monivelasquezv",
+            "https://ca.linkedin.com/in/m%C3%B3nica-vel%C3%A1squez-46321585"
+          ],
+          "subjectOf": [
+            {
+              "@type": "WebPage",
+              "name": "International Women's Media Foundation (IWMF)",
+              "url": "https://www.iwmf.org/community/monica-velasquez-villacis/"
+            },
+            {
+              "@type": "WebPage",
+              "name": "LatAm Journalism Review",
+              "url": "https://latamjournalismreview.org/news/ecuadorian-journalist-monica-velasquez-villacis-is-among-the-recipients-of-the-iwmf-35th-courage-in-journalism-awards/"
+            },
+            {
+              "@type": "WebPage",
+              "name": "Comité para la Protección de los Periodistas (CPJ)",
+              "url": "https://cpj.org/es/2023/07/periodistas-andersson-boscan-y-monica-velasquez-huyen-de-ecuador-tras-amenazas/"
+            }
+          ],
+          "colleague": {
+            "@id": "https://boscanymoni.com/periodismo/autores/andersson-boscan/#persona"
+          },
+          "spouse": {
+            "@id": "https://boscanymoni.com/periodismo/autores/andersson-boscan/#persona"
+          }
         },
         {
           "@type": "WebSite",
@@ -101,7 +238,9 @@
           "name": "Boscán & La Moni",
           "description": "Periodismo de investigación de Andersson Boscán y Mónica Velásquez, y publicidad con su audiencia.",
           "inLanguage": "es",
-          "publisher": { "@id": "https://boscanymoni.com/periodismo/#organizacion" }
+          "publisher": {
+            "@id": "https://boscanymoni.com/periodismo/#organizacion"
+          }
         }
       ]
     }
