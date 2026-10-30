@@ -1,0 +1,192 @@
+/* CHEQUERA · El alcalde de Playas y los cheques del narco: papel de seguridad verde agua, guilloché,
+   numeración magnética, talones perforados y un sello rojo; debajo, el mar de Playas y la marea que sube.
+   DM Serif Display (rótulos) + Source Serif 4 (texto) + IBM Plex Mono (cifras, MICR). */
+.fmt--chequera { --bg: #E4EFE9; --bg-2: #D4E6DD; --bg-3: #0E3B44; --fg: #10302B; --mute: #557069; --acc: #C2281E; --acc-2: #0F6C74; --line-x: rgba(16,48,43,.16);
+  --papel: #EEF6F1; --mar: #0F4C5C; --mar-2: #1C6E78; --mar-3: #5FA8A6; --tinta: #10302B; --sello: #C2281E;
+  --f-display: 'DM Serif Display', Georgia, serif; --f-body: 'Source Serif 4', Georgia, serif; --f-mono: 'IBM Plex Mono', ui-monospace, monospace; --f-label: 'IBM Plex Mono', ui-monospace, monospace; --radius: 2px;
+  --guilloche: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='60' viewBox='0 0 120 60'><g fill='none' stroke='%2310302B' stroke-opacity='.07' stroke-width='.7'><path d='M0 30 C 20 0, 40 60, 60 30 S 100 0, 120 30'/><path d='M0 30 C 20 60, 40 0, 60 30 S 100 60, 120 30'/><path d='M0 20 C 30 -5, 30 45, 60 20 S 90 -5, 120 20'/><path d='M0 40 C 30 65, 30 15, 60 40 S 90 65, 120 40'/></g></svg>");
+  background-color: var(--bg); background-image: var(--guilloche); }
+.fmt--chequera .kicker, .fmt--chequera .hkicker, .fmt--chequera .hby, .fmt--chequera .hstats span, .fmt--chequera .fnav a, .fmt--chequera .cap__num,
+.fmt--chequera .vid__rol, .fmt--chequera .fresp b, .fmt--chequera .fper .badge, .fmt--chequera .tablewrap th, .fmt--chequera .sello { font-family: var(--f-mono); letter-spacing: .08em; }
+.fmt--chequera ::selection { background: var(--acc); color: #fff; }
+.fmt--chequera .topbar { background: rgba(228,239,233,.92); }
+.fmt--chequera .footer { background: var(--bg-3); color: #DCEBE4; }
+.fmt--chequera .htitle, .fmt--chequera .cap__title, .fmt--chequera .fmod__head h2 { font-family: var(--f-display); font-weight: 400; letter-spacing: -.01em; line-height: .98; }
+.fmt--chequera .htitle em, .fmt--chequera .cap__title em, .fmt--chequera .fmod__head h2 em { font-style: italic; color: var(--acc); }
+.fmt--chequera .kicker, .fmt--chequera .hkicker, .fmt--chequera .cap__num { color: var(--acc-2); text-transform: uppercase; font-size: 12.5px; }
+.fmt--chequera .ftext p { font-size: clamp(19px, 1.35vw, 21px); line-height: 1.62; }
+.fmt--chequera .fcita { border-left: 3px solid var(--acc); }
+.fmt--chequera .fcita p { font-family: var(--f-display); font-style: italic; font-size: clamp(28px, 3vw, 44px); line-height: 1.1; }
+.fmt--chequera .fcita cite { font-family: var(--f-mono); font-style: normal; font-size: 12.5px; color: var(--mute); }
+.fmt--chequera .fdato b, .fmt--chequera .fdatos2 b { font-family: var(--f-mono); font-weight: 600; color: var(--acc); letter-spacing: -.02em; }
+.fmt--chequera .hero__art { display: none; }
+
+/* ---------------------------------------------------------------- portada: el alcalde junto al cheque, sobre el mar */
+.hero--chequera { min-height: 100svh; padding: 118px 0 0; display: flex; align-items: center; isolation: isolate; overflow: clip; }
+.chq-guilloche { position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: radial-gradient(90% 70% at 75% 35%, rgba(255,255,255,.55), transparent 70%),
+    repeating-radial-gradient(circle at 78% 40%, transparent 0 14px, rgba(15,108,116,.07) 14px 15px); }
+.hero--chequera .hero__in { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(24px, 4vw, 64px); align-items: start; padding-bottom: clamp(120px, 14vw, 190px); z-index: 2; }
+.hero--chequera .htitle { font-size: clamp(54px, 6.6vw, 112px); max-width: 11ch; }
+.hero--chequera .hdeck { max-width: 36rem; }
+.hero--chequera .hstats b { font-family: var(--f-mono); font-weight: 600; color: var(--tinta); }
+.chq-escena { position: sticky; top: 84px; min-height: 0; display: grid; align-content: end; padding-top: 300px; }
+.chq-silueta { position: absolute; right: 6%; top: 0; width: min(400px, 60%); margin: 0; z-index: 1; animation: chqSube 1.1s var(--ease-out) both; }
+.chq-silueta img { width: 100%; height: auto; display: block; filter: grayscale(1) contrast(1.08) sepia(.35) hue-rotate(120deg) saturate(1.3); }
+.chq-silueta figcaption { position: absolute; right: 100%; top: 0; margin-right: 10px; writing-mode: vertical-rl; transform: rotate(180deg); font-family: var(--f-mono); font-size: 11px; color: var(--mute); white-space: nowrap; }
+.chq-escena__nota { position: relative; z-index: 3; margin: 12px 0 0; font-family: var(--f-mono); font-size: 11.5px; color: var(--mute); max-width: 34rem; }
+@keyframes chqSube { from { opacity: 0; transform: translateY(40px); } }
+
+/* el cheque */
+.chq { position: relative; z-index: 2; display: grid; grid-template-columns: 1.4fr 1fr; grid-template-areas: "top top" "orden fecha" "orden monto" "letras letras" "concepto firma" "micr micr";
+  gap: 10px 22px; padding: 22px 26px 16px; color: var(--tinta); border-radius: 6px;
+  background: linear-gradient(135deg, rgba(255,255,255,.55), rgba(255,255,255,0) 60%), var(--guilloche), repeating-linear-gradient(115deg, #D9EDE4 0 6px, #E3F2EB 6px 12px);
+  box-shadow: 0 30px 50px -28px rgba(8,40,44,.65), 0 0 0 1px rgba(16,48,43,.18), inset 0 0 0 7px rgba(255,255,255,.35), inset 0 0 0 8px rgba(15,108,116,.25); }
+.chq--hero { width: min(640px, 100%); transform: rotate(-3deg); animation: chqEntra 1s var(--ease-out) .15s both; }
+@keyframes chqEntra { from { opacity: 0; transform: rotate(-9deg) translate(-30px, 30px); } }
+.chq span { display: block; font-family: var(--f-mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--mute); }
+.chq b { font-weight: 500; }
+.chq__top { grid-area: top; display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid rgba(16,48,43,.2); padding-bottom: 8px; }
+.chq__banco { font-family: var(--f-display); font-weight: 400 !important; font-size: clamp(17px, 1.6vw, 22px); }
+.chq__num { display: inline !important; font-size: 12px !important; color: var(--acc) !important; }
+.chq__fecha { grid-area: fecha; } .chq__fecha b { font-family: var(--f-mono); font-size: 15px; }
+.chq__orden { grid-area: orden; align-self: end; } .chq__orden b { display: block; font-family: var(--f-display); font-weight: 400; font-size: clamp(26px, 2.6vw, 38px); line-height: 1; border-bottom: 1px solid var(--tinta); padding-bottom: 4px; }
+.chq__monto { grid-area: monto; display: flex; align-items: center; gap: 8px; border: 1.5px solid var(--tinta); padding: 6px 10px; background: rgba(255,255,255,.55); }
+.chq__monto b { font-family: var(--f-mono); font-weight: 600; font-size: clamp(20px, 2vw, 28px); letter-spacing: -.02em; }
+.chq__letras { grid-area: letras; } .chq__letras b { display: block; font-family: var(--f-body); font-style: italic; font-size: 17px; border-bottom: 1px dashed rgba(16,48,43,.45); padding-bottom: 3px; }
+.chq__concepto { grid-area: concepto; } .chq__concepto b { font-size: 14px; }
+.chq__firma { grid-area: firma; text-align: center; align-self: end; }
+.chq__firma i { display: block; font-family: var(--f-display); font-style: italic; font-size: 26px; line-height: 1; border-bottom: 1px solid var(--tinta); padding-bottom: 2px; transform: rotate(-4deg); }
+.chq__micr { grid-area: micr; font-family: var(--f-mono); font-size: 15px; letter-spacing: .28em; color: #1d2b29; padding-top: 6px; border-top: 1px dotted rgba(16,48,43,.3); white-space: nowrap; overflow: hidden; }
+/* el sello que cae */
+.chq__sello { position: absolute; left: 40%; top: 55%; z-index: 4; padding: 8px 16px 6px; font-family: var(--f-mono); font-style: normal; font-weight: 600; font-size: clamp(18px, 2vw, 30px); line-height: 1.1;
+  letter-spacing: .14em; text-transform: uppercase; text-align: center; color: var(--sello); border: 3px solid var(--sello); border-radius: 4px; transform: rotate(-14deg);
+  mix-blend-mode: multiply; opacity: .88; -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='90' height='90'><filter id='n'><feTurbulence baseFrequency='.8' numOctaves='2'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.2 1.6'/></filter><rect width='90' height='90' filter='url(%23n)'/></svg>");
+  animation: chqSello .38s cubic-bezier(.3,1.6,.5,1) 1.5s both; }
+.chq__sello small { display: block; font-size: .6em; letter-spacing: .2em; }
+@keyframes chqSello { from { opacity: 0; transform: rotate(-14deg) scale(2.4); } }
+
+/* el mar: tres capas de olas que corren */
+.chq-mar { position: absolute; left: 0; right: 0; bottom: 0; height: clamp(110px, 14vw, 180px); z-index: 1; pointer-events: none; overflow: hidden; }
+.chq-ola { position: absolute; left: 0; bottom: 0; width: 200%; height: 100%; display: block; animation: chqOla 14s linear infinite; }
+.chq-ola svg { width: 100%; height: 100%; display: block; }
+.chq-ola--1 { fill: var(--mar-3); opacity: .55; bottom: 26px; animation-duration: 22s; }
+.chq-ola--2 { fill: var(--mar-2); opacity: .8; bottom: 12px; animation-duration: 16s; animation-direction: reverse; }
+.chq-ola--3 { fill: var(--mar); bottom: -6px; animation-duration: 11s; }
+@keyframes chqOla { to { transform: translateX(-50%); } }
+
+/* ---------------------------------------------------------------- módulo: los cheques hallados con Boris */
+.chq-ev { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: clamp(22px, 4vw, 54px); align-items: center; }
+.chq-ev__foto { position: relative; margin: 0; padding: 12px 12px 44px; background: #fff; box-shadow: 0 24px 40px -24px rgba(8,40,44,.6); transform: rotate(-2deg); }
+.chq-ev__foto img { width: 100%; display: block; aspect-ratio: 900 / 582; object-fit: cover; }
+.chq-ev__foto figcaption { position: absolute; left: 14px; right: 14px; bottom: 10px; font-family: var(--f-mono); font-size: 11.5px; color: #4b5f5a; }
+.chq-ev__clip { position: absolute; left: 26px; top: -18px; width: 22px; height: 58px; border: 3px solid #8E9B98; border-radius: 12px; z-index: 2; }
+.chq-ev__ficha { position: relative; padding: 26px 24px; background: var(--papel); border: 1px solid var(--line-x); }
+.chq-ev__rot { position: absolute; top: -12px; left: 18px; background: var(--acc); color: #fff; font-family: var(--f-mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; padding: 4px 10px; }
+.chq-ev__ficha ul { list-style: none; margin: 0 0 14px; padding: 0; display: grid; gap: 14px; }
+.chq-ev__ficha li b { display: block; font-family: var(--f-mono); font-weight: 600; font-size: clamp(30px, 3.2vw, 44px); letter-spacing: -.03em; color: var(--acc); line-height: 1; }
+.chq-ev__ficha li span { font-size: 15.5px; line-height: 1.45; }
+.chq-ev__ficha p { margin: 0; font-size: 14.5px; color: var(--mute); }
+
+/* ---------------------------------------------------------------- módulo: la cadena familiar */
+.chq-cadena { list-style: none; margin: 0 auto; padding: 0; max-width: 980px; display: grid; gap: 0; counter-reset: esl; }
+.chq-esl { position: relative; display: grid; grid-template-columns: 1fr; width: min(560px, 92%); padding-top: 54px; }
+.chq-esl:first-child { padding-top: 0; }
+.chq-esl:nth-child(odd) { justify-self: start; } .chq-esl:nth-child(even) { justify-self: end; }
+.chq-esl__t { position: relative; padding: 20px 22px 18px 26px; background: var(--papel); border: 1px solid var(--line-x); box-shadow: 0 16px 30px -24px rgba(8,40,44,.6);
+  border-left: 6px solid var(--acc-2); }
+.chq-esl--narco .chq-esl__t { border-left-color: var(--acc); background: #F7ECE8; }
+.chq-esl--alcalde .chq-esl__t { border-left-color: var(--tinta); }
+.chq-esl__t small { font-family: var(--f-mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--mute); }
+.chq-esl__t > b { display: block; font-family: var(--f-display); font-weight: 400; font-size: clamp(24px, 2.3vw, 32px); line-height: 1.05; margin: 2px 0 6px; }
+.chq-esl--narco .chq-esl__t > b { color: var(--acc); }
+.chq-esl__t p { margin: 0; font-size: 15.5px; line-height: 1.5; }
+.chq-esl__emp { list-style: none; margin: 12px 0 0; padding: 10px 0 0; border-top: 1px dashed var(--line-x); display: grid; gap: 6px; }
+.chq-esl__emp li { display: flex; justify-content: space-between; gap: 14px; font-size: 14px; }
+.chq-esl__emp b { font-family: var(--f-mono); font-weight: 600; font-size: 13px; }
+.chq-esl__emp span { text-align: right; color: var(--mute); }
+/* el lazo: una perforación que baja del eslabón anterior, con el parentesco escrito encima */
+.chq-lazo { position: absolute; top: 6px; left: 50%; translate: -50% 0; z-index: 1; font-family: var(--f-mono); font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase;
+  background: var(--tinta); color: #E4EFE9; padding: 5px 12px; white-space: nowrap; border-radius: 30px; }
+.chq-esl:nth-child(odd) .chq-lazo { left: 70%; } .chq-esl:nth-child(even) .chq-lazo { left: 30%; }
+.chq-esl:not(:first-child)::before { content: ""; position: absolute; top: -8px; height: 62px; width: 0; border-left: 2px dashed var(--acc-2); }
+.chq-esl:nth-child(odd):not(:first-child)::before { left: 70%; } .chq-esl:nth-child(even)::before { left: 30%; }
+.chq-esl.reveal { transition-delay: calc(var(--i) * 90ms); }
+.chq-nota { margin: 26px auto 0; max-width: 46rem; font-family: var(--f-mono); font-size: 12.5px; line-height: 1.6; color: var(--mute); }
+
+/* ---------------------------------------------------------------- módulo: el talonario de contratos */
+.chq-talonario { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.chq-talon { display: grid; grid-template-columns: 150px minmax(0, 1fr) 190px; background: var(--papel); background-image: var(--guilloche); border: 1px solid var(--line-x); box-shadow: 0 14px 26px -22px rgba(8,40,44,.6); }
+.chq-talon__l { position: relative; padding: 16px 18px; background: var(--bg-2); display: grid; align-content: center; gap: 4px;
+  -webkit-mask: radial-gradient(circle 5px at 100% 9px, transparent 98%, #000) 0 0 / 100% 18px repeat-y; mask: radial-gradient(circle 5px at 100% 9px, transparent 98%, #000) 0 0 / 100% 18px repeat-y; }
+.chq-talon__l span { font-family: var(--f-mono); font-size: 11px; letter-spacing: .14em; color: var(--acc); }
+.chq-talon__l b { font-family: var(--f-mono); font-weight: 600; font-size: 14px; }
+.chq-talon__r { padding: 14px 20px; border-left: 2px dotted rgba(16,48,43,.3); }
+.chq-talon__r small { font-family: var(--f-mono); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--acc-2); }
+.chq-talon__r > b { display: block; font-family: var(--f-display); font-weight: 400; font-size: 23px; line-height: 1.1; margin: 2px 0 4px; }
+.chq-talon__r p { margin: 0; font-size: 15.5px; line-height: 1.45; }
+.chq-talon__r em { display: block; margin-top: 5px; font-size: 13.5px; color: var(--mute); }
+.chq-talon__m { display: grid; align-content: center; justify-items: end; padding: 14px 20px; border-left: 1px solid var(--line-x); }
+.chq-talon__m b { font-family: var(--f-mono); font-weight: 600; font-size: clamp(20px, 1.9vw, 26px); letter-spacing: -.03em; color: var(--tinta); }
+.chq-talon__m span { font-family: var(--f-mono); font-size: 10.5px; letter-spacing: .14em; color: var(--mute); }
+.chq-total { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; margin-top: 18px; padding: 16px 20px; background: var(--tinta); color: #E4EFE9; }
+.chq-total span { font-family: var(--f-mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; }
+.chq-total b { font-family: var(--f-mono); font-weight: 600; font-size: clamp(24px, 2.6vw, 36px); color: #fff; }
+
+/* ---------------------------------------------------------------- módulo: el día del operativo Marea */
+.fmod--marea { position: relative; padding-bottom: clamp(120px, 12vw, 170px) !important; overflow: clip; }
+.chq-marea { display: grid; grid-template-columns: 54px minmax(0, 1fr) minmax(0, .9fr); gap: clamp(18px, 3vw, 40px); align-items: start; }
+.chq-regla { position: relative; align-self: stretch; min-height: 420px; border: 2px solid var(--tinta); background: repeating-linear-gradient(0deg, transparent 0 19px, var(--tinta) 19px 21px) right / 40% 100% no-repeat, #fff; overflow: hidden; }
+.chq-regla__agua { position: absolute; left: 0; right: 0; bottom: 0; height: 8%; background: linear-gradient(180deg, var(--mar-2), var(--mar)); transition: height 2.6s cubic-bezier(.2,.7,.2,1) .3s; }
+.chq-regla__agua::before { content: ""; position: absolute; left: -50%; right: -50%; top: -8px; height: 12px; background: radial-gradient(10px 7px at 50% 100%, var(--mar-2) 98%, transparent) 0 0 / 20px 12px repeat-x; }
+.chq-marea.in .chq-regla__agua { height: 88%; }
+.chq-marea__l { list-style: none; margin: 0; padding: 0; display: grid; gap: 20px; }
+.chq-marea__l li { padding-left: 18px; border-left: 2px solid var(--mar-2); transition-delay: calc(var(--i) * 120ms); }
+.chq-marea__l b { font-family: var(--f-mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--acc); }
+.chq-marea__l h3 { margin: 2px 0 4px; font-family: var(--f-display); font-weight: 400; font-size: clamp(22px, 2vw, 28px); line-height: 1.1; }
+.chq-marea__l p { margin: 0; font-size: 15.5px; line-height: 1.5; }
+.chq-marea__foto { margin: 0; position: sticky; top: 90px; }
+.chq-marea__foto img { width: 100%; display: block; border: 8px solid #fff; box-shadow: 0 24px 40px -24px rgba(8,40,44,.65); transform: rotate(1.5deg); }
+.chq-marea__foto figcaption { margin-top: 10px; font-family: var(--f-mono); font-size: 11.5px; color: var(--mute); }
+.chq-marea__aviso { margin: 34px 0 0; padding: 18px 22px; border: 2px solid var(--acc); background: rgba(255,255,255,.6); font-size: 16.5px; line-height: 1.55; max-width: 60rem; }
+.chq-mar--mod { height: clamp(90px, 10vw, 140px); }
+
+/* fotos dentro del texto */
+.fmt--chequera .fmat--grapada .fmat__marco, .fmt--chequera .fmat--polaroid .fmat__marco { background: #fff; }
+
+@media (max-width: 1100px) {
+  .hero--chequera { padding-top: 96px; min-height: auto; }
+  .hero--chequera .hero__in { grid-template-columns: 1fr; padding-bottom: 150px; }
+  .hero--chequera .htitle { font-size: clamp(50px, 9vw, 96px); }
+  .chq-escena { position: relative; top: auto; min-height: 0; padding-top: 300px; }
+  .chq-silueta { right: 8%; top: 0; width: min(320px, 56%); }
+  .chq-silueta figcaption { font-size: 12px; }
+  .chq-ev { grid-template-columns: 1fr; }
+  .chq-marea { grid-template-columns: 40px minmax(0, 1fr); }
+  .chq-marea__foto { grid-column: 1 / -1; position: static; }
+}
+@media (max-width: 760px) {
+  .hero--chequera .htitle { font-size: clamp(46px, 13vw, 72px); }
+  .chq-escena { padding-top: 230px; }
+  .chq-silueta { width: 58%; right: 0; }
+  .chq { grid-template-columns: 1fr 1fr; grid-template-areas: "top top" "orden orden" "fecha monto" "letras letras" "concepto concepto" "firma firma" "micr micr"; padding: 18px 16px 12px; gap: 8px 14px; }
+  .chq--hero { transform: rotate(-1.5deg); }
+  .chq__monto { padding: 4px 8px; } .chq__monto b { font-size: 19px; }
+  .chq__micr { font-size: 12px; letter-spacing: .16em; }
+  .chq__sello { left: auto; right: 2%; top: -14px; font-size: 17px; }
+  .chq__banco { font-size: 16px !important; } .chq__num { white-space: nowrap; font-size: 10.5px !important; }
+  .chq__top { gap: 10px; padding-right: 0; }
+  .chq-esl { width: 100%; }
+  .chq-esl:nth-child(n) .chq-lazo { left: 50%; } .chq-esl:nth-child(n):not(:first-child)::before { left: 50%; }
+  .chq-talon { grid-template-columns: 1fr; }
+  .chq-talon__l { -webkit-mask: none; mask: none; grid-auto-flow: column; justify-content: space-between; padding: 10px 16px; }
+  .chq-talon__r { border-left: 0; border-top: 2px dotted rgba(16,48,43,.3); padding: 12px 16px; }
+  .chq-talon__m { justify-items: start; border-left: 0; border-top: 1px solid var(--line-x); padding: 10px 16px; grid-auto-flow: column; justify-content: space-between; align-items: baseline; }
+  .chq-regla { min-height: 300px; }
+  .chq-total { flex-direction: column; gap: 4px; }
+  .chq-silueta figcaption, .chq-escena__nota, .chq-ev__foto figcaption, .chq-marea__foto figcaption { font-size: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .chq-ola, .chq--hero, .chq-silueta, .chq__sello { animation: none; }
+  .chq-regla__agua { transition: none; height: 88%; }
+}
