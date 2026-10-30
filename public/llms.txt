@@ -31,7 +31,7 @@ Boscán & La Moni (también "Boscán y La Moni") es el medio de dos periodistas 
 
 Programa diario de noticias (lunes a viernes), transmitido en simultáneo por YouTube, Facebook, Instagram, TikTok y Spotify.
 
-## Investigaciones (36 expedientes)
+## Investigaciones (37 expedientes)
 
 - [El Gran Padrino](https://boscanymoni.com/periodismo/investigaciones/el-gran-padrino/): la investigación que llevó al presidente Guillermo Lasso a juicio político. 34 entregas, 1.500 contratos.
 - [Las empresas de la mafia albanesa](https://boscanymoni.com/periodismo/investigaciones/mafia-albanesa/): Dritan Gjika y el rastro de 71 empresas en Ecuador.
@@ -69,6 +69,7 @@ Programa diario de noticias (lunes a viernes), transmitido en simultáneo por Yo
 - [La Mancha Dorada](https://boscanymoni.com/periodismo/investigaciones/la-mancha-dorada/): el mercurio prohibido que seguía envenenando la zona minera del sur del Ecuador.
 - [Ucrania, día a día](https://boscanymoni.com/periodismo/investigaciones/ucrania/): la cobertura diaria de la invasión rusa desde el 24 de febrero de 2022.
 - [La caída del narcoalcalde](https://boscanymoni.com/periodismo/investigaciones/alcalde-de-naranjal/): Leonardo Toledo sabía que lo iban a matar.
+- [El alcalde de Playas y los cheques del narco](https://boscanymoni.com/periodismo/investigaciones/alcalde-de-playas/): en enero de 2026 Boscán y La Moni mostraron que el alcalde de Playas, Gabriel Balladares, contrató millones con la familia de su pareja y que el padrastro de ella era socio de alias Boris, de Los Choneros; el 30 de octubre de 2026 la Fiscalía allanó su casa por presunto peculado.
 
 Índice completo: https://boscanymoni.com/periodismo/
 Resúmenes completos de cada expediente: https://boscanymoni.com/llms-full.txt
@@ -84,7 +85,7 @@ El trabajo periodístico se financia con pauta de marcas que no condicionan la c
 
 ## Páginas
 
-- [Investigaciones](https://boscanymoni.com/periodismo/): índice de los 36 expedientes.
+- [Investigaciones](https://boscanymoni.com/periodismo/): índice de los 37 expedientes.
 - [Publicidad](https://boscanymoni.com/publicidad): formatos de pauta y configurador de campaña.
 - [Media kit](https://boscanymoni.com/media-kit): audiencia y plataformas.
 - [Quiénes somos](https://boscanymoni.com/quienes-somos): trayectoria de Andersson Boscán y Mónica Velásquez.
