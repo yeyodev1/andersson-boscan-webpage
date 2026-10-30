@@ -100,13 +100,33 @@ VITE_GHL_WEBHOOK_OPPORTUNITY=<GHL opportunity webhook URL>
   buscar_texto (recorre los archivos: GitHub no indexa el repo), publicar_cambios,
   habilitar_pagina (añade una ruta validada a `vercel.json` y `_redirects` sin
   abrir el archivo), estado_publicacion (lee el status "Vercel" del commit),
-  deshacer_ultima_publicacion. **Andersson empuja directo a `main`: hacer
-  `git pull` antes de trabajar en local.** Bloquea `public/periodismo/`,
-  `api/`, `scripts/`, `.github/`, `.claude/`, `.env*`. La página `/mcp`
-  (noindex) pide un código, lo valida `api/acceso-mcp.ts` y entrega la URL
-  para pegar en claude.ai → Conectores. Variables **solo en Vercel** (el repo
-  es público): `MCP_CODIGO`, `MCP_CLAVE` (la parte secreta de la URL;
-  cambiarla corta el conector al instante) y `GITHUB_TOKEN`.
+  deshacer_ultima_publicacion, ver_subidas, enlace_de_subida. **Andersson
+  empuja directo a `main`: hacer `git pull` antes de trabajar en local.**
+  Bloquea `api/`, `scripts/`, `.github/`, `.claude/`, `.env*`, config de build
+  y la clave de IndexNow. La página `/mcp` (noindex) pide un código, lo valida
+  `api/acceso-mcp.ts` y entrega la URL para pegar en claude.ai → Conectores.
+  Variables **solo en Vercel** (el repo es público): `MCP_CODIGO`, `MCP_CLAVE`
+  (la parte secreta de la URL; cambiarla corta el conector al instante) y
+  `GITHUB_TOKEN`.
+- **El conector sí edita `public/periodismo/`** (desde 2026-10-29: Andersson
+  quiere publicar notas con su diseño y multimedia). Cada página de periodismo
+  que entra se pasa por `ajustarPeriodismo()` (port idempotente de los pasos 2
+  y 3 de `actualizar-periodismo.py`: URLs a `/periodismo/` y enlaces de
+  `/ajustes-periodismo/` con los `?v=` de la portada). Si cambia esa lógica en
+  el script, cambiarla también ahí. La identidad visual de cada nota es su
+  `assets/css/fmt/<formato>.css`; las instrucciones del conector piden no
+  tocar las hojas comunes por una sola nota.
+- **Multimedia por el conector** (sin almacenamiento externo, decisión de
+  Diego): los binarios van al repo, máx. 25 MB c/u; los videos, a YouTube
+  embebido. Entran por `publicar_cambios` como `{ruta, subida|desde_url|blob|base64}`.
+  `subida` sale de la página `/mcp` (tras el código, sección "Subir"): el
+  navegador abre .zip/carpetas, achica fotos > 4 MB (límite de Vercel por
+  petición) y las manda a `api/subir.ts`, que crea blobs de git y los anota en
+  la ref oculta `refs/subidas/pendientes` (no es rama: no despliega ni sale en
+  GitHub). Al publicarlas, el conector las quita de ahí. `blob` es para el
+  sandbox de Claude: `enlace_de_subida` firma un token de 1 h con `MCP_CLAVE`.
+- ⚠ Los ~212 `.mp4`/`.m4a` que referencian las notas de periodismo no están
+  en el repo y dan 404 en producción (pendiente: pasarlos a YouTube embebido).
 - `.mcp.json` configura el MCP de GitHub con `Authorization: Bearer ${GITHUB_PAT}`.
   Es solo para Diego: Andersson no tiene cuenta de GitHub y no lo usa (sin la
   variable, ese MCP falla al arrancar con 400 y no pasa nada más). En la Mac de
