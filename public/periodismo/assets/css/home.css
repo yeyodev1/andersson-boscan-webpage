@@ -731,3 +731,14 @@ li[data-c="sin-sentencia"] .libro__tag, li[data-c="juicio-pendiente"] .libro__ta
 
 /* portadas hechas para la tarjeta (assets/img/portadas/): ya traen su color y su contraste, el filtro de cada formato no se les aplica */
 .mesa__grid > .obj .obj__img[src*="/portadas/"] { display: block !important; width: 100%; filter: none !important; mix-blend-mode: normal !important; opacity: 1 !important; }
+
+/* la nota adhesiva vive dentro de la tarjeta, entre el resumen y el cierre: no tapa fotos ni caras */
+.mesa__grid > .obj .postit { position: relative !important; inset: auto !important; top: auto !important; right: auto !important; left: auto !important; display: block; align-self: flex-start;
+  width: fit-content; max-width: 92% !important; margin: 6px 0 4px 2px; padding: 10px 14px 12px; font-size: 18px; transform: rotate(calc(var(--pr) * .6)) !important; z-index: 2; }
+@media (max-width: 760px) { .mesa__grid > .obj .postit { margin: 6px 0 4px; font-size: 17px; } }
+/* algunas tarjetas desplazan su foto (márgenes de acta, foto suelta de la cinta): la portada llena el espacio que queda, sin salirse */
+.mesa__grid > .obj .obj__img[src*="/portadas/"] { position: relative !important; inset: auto !important; width: -moz-available !important; width: -webkit-fill-available !important; width: stretch !important; max-width: 100%; }
+.mesa__grid > .obj .obj__img[src*="/portadas/"] { height: auto !important; aspect-ratio: 16 / 10 !important; border-radius: 0 !important; box-shadow: none !important; object-fit: cover; }
+/* la caja de cinta dibujaba un carrete alrededor de una foto chica: con la portada a todo lo ancho, el carrete y la etiqueta sobran */
+.mesa__grid > .obj--cinta::before, .mesa__grid > .obj--cinta::after { display: none; }
+.mesa__grid > .obj--cinta .obj__cuerpo { padding-top: 24px; }

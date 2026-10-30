@@ -3,7 +3,7 @@
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='60' viewBox='0 0 120 60'><g fill='none' stroke='%2310302B' stroke-opacity='.08' stroke-width='.7'><path d='M0 30 C 20 0, 40 60, 60 30 S 100 0, 120 30'/><path d='M0 30 C 20 60, 40 0, 60 30 S 100 60, 120 30'/></g></svg>"), repeating-linear-gradient(115deg, #D6EAE1 0 6px, #E0F0E8 6px 12px);
   box-shadow: 0 22px 40px -26px rgba(8,40,44,.6), 0 0 0 1px rgba(16,48,43,.2), inset 0 0 0 6px rgba(255,255,255,.35); }
 .obj--chequera .obj__img { aspect-ratio: 16 / 10; object-fit: cover; object-position: 50% 30%; filter: grayscale(1) sepia(.4) hue-rotate(120deg) saturate(1.3) contrast(1.05); }
-.obj--chequera::before { content: "Allanado · 30 oct 2026"; position: absolute; right: 12px; top: 112px; z-index: 3; width: auto; height: auto; margin: 0; padding: 6px 10px 4px;
+.obj--chequera::before { content: "Allanado · 30 oct 2026"; position: absolute; right: 14px; top: auto; bottom: 18px; z-index: 3; width: auto; height: auto; margin: 0; padding: 6px 10px 4px;
   font-family: 'IBM Plex Mono', ui-monospace, monospace; font-weight: 600; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: #C2281E; background: rgba(238,246,241,.8);
   border: 2.5px solid #C2281E; border-radius: 3px; transform: rotate(-6deg); box-shadow: none; pointer-events: none; }
 .obj--chequera::after { content: "⑈ 2024 ⑈ ⑆ PLAYAS ⑆ 18"; position: absolute; left: 16px; right: 16px; bottom: 8px; top: auto; z-index: 1; width: auto; height: auto; transform: none; box-shadow: none; background: none;
