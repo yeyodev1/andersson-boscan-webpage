@@ -12,7 +12,7 @@
 
 Programa diario de noticias (lunes a viernes), transmitido en simultáneo por YouTube, Facebook, Instagram, TikTok y Spotify.
 
-## Investigaciones (35 expedientes)
+## Investigaciones (36 expedientes)
 
 - [El Gran Padrino](https://boscanymoni.com/periodismo/investigaciones/el-gran-padrino/): la investigación que llevó al presidente Guillermo Lasso a juicio político. 34 entregas, 1.500 contratos.
 - [Las empresas de la mafia albanesa](https://boscanymoni.com/periodismo/investigaciones/mafia-albanesa/): Dritan Gjika y el rastro de 71 empresas en Ecuador.
@@ -49,6 +49,7 @@ Programa diario de noticias (lunes a viernes), transmitido en simultáneo por Yo
 - [El último recorrido de Nathaly Mafla](https://boscanymoni.com/periodismo/investigaciones/nathaly-mafla/): la desaparición de una estudiante de la Escuela Politécnica Nacional.
 - [La Mancha Dorada](https://boscanymoni.com/periodismo/investigaciones/la-mancha-dorada/): el mercurio prohibido que seguía envenenando la zona minera del sur del Ecuador.
 - [Ucrania, día a día](https://boscanymoni.com/periodismo/investigaciones/ucrania/): la cobertura diaria de la invasión rusa desde el 24 de febrero de 2022.
+- [El alcalde que no manda](https://boscanymoni.com/periodismo/investigaciones/alcalde-de-naranjal/): El hijo de un hombre asesinado en Naranjal entró al cuarto del alcalde Juan Carlos Rivera con un teléfono grabando en el bolsillo.
 
 Índice completo: https://boscanymoni.com/periodismo/
 Resúmenes completos de cada expediente: https://boscanymoni.com/llms-full.txt
@@ -64,7 +65,7 @@ El trabajo periodístico se financia con pauta de marcas que no condicionan la c
 
 ## Páginas
 
-- [Investigaciones](https://boscanymoni.com/periodismo/): índice de los 35 expedientes.
+- [Investigaciones](https://boscanymoni.com/periodismo/): índice de los 36 expedientes.
 - [Publicidad](https://boscanymoni.com/publicidad): formatos de pauta y configurador de campaña.
 - [Media kit](https://boscanymoni.com/media-kit): audiencia y plataformas.
 - [Quiénes somos](https://boscanymoni.com/quienes-somos): trayectoria de Andersson Boscán y Mónica Velásquez.

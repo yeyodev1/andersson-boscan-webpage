@@ -1,0 +1,91 @@
+/* CATASTRO · El alcalde que no manda (Naranjal): ficha catastral municipal con su plano de lotes.
+   Papel verde de topografía, tinta de plano verde oscuro y un solo magenta para el predio observado. Bricolage Grotesque (rótulos) + Crimson Pro (texto). */
+.fmt--catastro { --bg: #E4E8DD; --bg-2: #D8DED0; --bg-3: #1E2721; --fg: #1E2721; --mute: #5E6B60; --acc: #B4235A; --acc-2: #2F5D46; --line-x: rgba(30,39,33,.16);
+  --papel: #F3F4EC; --reticula: rgba(47,93,70,.10);
+  --f-display: 'Bricolage Grotesque', 'Arial Narrow', sans-serif; --f-body: 'Crimson Pro', Georgia, serif; --f-mono: 'Bricolage Grotesque', ui-monospace, monospace; --f-label: 'Bricolage Grotesque', system-ui, sans-serif; --radius: 2px;
+  background-image: linear-gradient(var(--reticula) 1px, transparent 1px), linear-gradient(90deg, var(--reticula) 1px, transparent 1px); background-size: 28px 28px; }
+.fmt--catastro ::selection { background: var(--acc); color: #FFF; }
+.fmt--catastro .topbar { background: rgba(228,232,221,.94); }
+.fmt--catastro .footer { background: var(--bg-3); color: #E4E8DD; }
+.fmt--catastro .htitle, .fmt--catastro .cap__title, .fmt--catastro .fmod__head h2 { font-weight: 800; letter-spacing: -.03em; }
+.fmt--catastro .htitle em, .fmt--catastro .cap__title em, .fmt--catastro .fmod__head h2 em { font-style: normal; color: var(--acc); }
+.fmt--catastro .kicker, .fmt--catastro .hkicker, .fmt--catastro .cap__num { font-weight: 600; letter-spacing: .18em; color: var(--acc-2); }
+.fmt--catastro .mono { font-variant-numeric: tabular-nums lining-nums; letter-spacing: .06em; }
+.fmt--catastro .ftext p { font-size: clamp(19px, 1.35vw, 22px); line-height: 1.55; }
+.fmt--catastro .fcita { border-left: 3px solid var(--acc); }
+.fmt--catastro .fcita p { font-family: var(--f-body); font-style: italic; }
+
+/* ---------------------------------------------------------------- portada: la ficha del predio */
+.hero--catastro { padding: 96px 0 48px; min-height: auto; align-items: start; }
+.hero--catastro .hero__in { max-width: 48rem; margin-top: clamp(34px, 4vw, 56px); }
+.hero--catastro .htitle { font-size: clamp(46px, 7.4vw, 112px); line-height: .92; }
+.hero--catastro .hstats { border-top: 1px solid var(--line-x); }
+.hero--catastro .hstats b { font-family: var(--f-display); font-weight: 800; color: var(--acc-2); }
+
+.cat-ficha { position: relative; background: var(--papel); border: 1px solid rgba(30,39,33,.35); box-shadow: 0 30px 60px -36px rgba(30,39,33,.55), 0 0 0 6px rgba(243,244,236,.6);
+  animation: catIn 1s var(--ease-out) both; }
+@keyframes catIn { from { opacity: 0; transform: translateY(-12px); } }
+.cat-ficha__top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 12px 18px; border-bottom: 2px solid var(--fg);
+  font-family: var(--f-label); text-transform: uppercase; letter-spacing: .16em; font-size: 11.5px; }
+.cat-ficha__top b { font-weight: 800; letter-spacing: .08em; }
+.cat-ficha__cuerpo { display: grid; grid-template-columns: minmax(220px, 1fr) 2fr; }
+.cat-campos { display: grid; align-content: start; border-right: 1px solid var(--line-x); }
+.cat-campo { padding: 10px 18px; border-bottom: 1px solid var(--line-x); display: grid; gap: 2px; }
+.cat-campo small { font-family: var(--f-label); font-size: 10.5px; text-transform: uppercase; letter-spacing: .16em; color: var(--mute); }
+.cat-campo b { font-family: var(--f-display); font-weight: 600; font-size: 16px; line-height: 1.2; }
+.cat-plano { display: block; width: 100%; height: auto; padding: 14px; }
+.cat-lote { fill: rgba(47,93,70,.05); stroke: var(--acc-2); stroke-width: 1.4; animation: catLote .7s var(--ease-out) both; animation-delay: calc(var(--i) * 60ms); }
+@keyframes catLote { from { opacity: 0; } }
+.cat-lote--sel { fill: none; stroke: var(--acc); stroke-width: 3; }
+.cat-hatch { fill: url(#cat-raya); stroke: none; animation: catLote 1.2s .9s var(--ease-out) both; }
+.cat-raya { stroke: var(--acc); stroke-width: 2.4; opacity: .55; }
+.cat-num { font-family: var(--f-label); font-size: 11px; fill: var(--mute); letter-spacing: .08em; }
+.cat-rot { font-family: var(--f-display); font-weight: 800; font-size: 15px; fill: var(--acc); text-anchor: middle; paint-order: stroke; stroke: var(--papel); stroke-width: 5px; text-transform: uppercase; letter-spacing: .06em; }
+.cat-rio { fill: none; stroke: rgba(47,93,70,.45); stroke-width: 6; stroke-linecap: round; }
+.cat-norte path { fill: var(--fg); }
+.cat-norte text { font-family: var(--f-label); font-size: 12px; font-weight: 800; text-anchor: middle; fill: var(--fg); }
+.cat-ficha__pie { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 12px 18px; border-top: 1px solid var(--line-x);
+  font-family: var(--f-body); font-style: italic; font-size: 15px; color: var(--mute); }
+/* el gesto: el sello magenta de predio observado, estampado de lado */
+.cat-sello { flex: none; font-style: normal; font-family: var(--f-display); font-weight: 800; font-size: 13px; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--acc); border: 2.5px solid var(--acc); padding: 6px 12px 5px; transform: rotate(-6deg); opacity: .9; }
+
+/* ---------------------------------------------------------------- módulo: la grabación */
+.cat-g { background: var(--papel); border: 1px solid rgba(30,39,33,.3); }
+.cat-g__top { display: flex; flex-wrap: wrap; gap: 8px 24px; padding: 12px 18px; border-bottom: 2px solid var(--fg); font-family: var(--f-label); font-size: 11.5px; text-transform: uppercase; letter-spacing: .14em; }
+.cat-g__l { list-style: none; margin: 0; padding: 0; }
+.cat-g__parte { display: flex; gap: 14px; align-items: baseline; padding: 14px 18px 8px; background: var(--bg-2); font-family: var(--f-label); text-transform: uppercase; letter-spacing: .14em; font-size: 11.5px; }
+.cat-g__parte b { font-weight: 800; letter-spacing: .04em; font-size: 14px; text-transform: none; }
+.cat-g__f { display: grid; grid-template-columns: 70px 1fr; gap: 16px; padding: 14px 18px; border-bottom: 1px solid var(--line-x); }
+.cat-g__min { font-family: var(--f-label); font-weight: 600; font-size: 13px; color: var(--mute); font-variant-numeric: tabular-nums; padding-top: 3px; }
+.cat-g__who { display: block; font-family: var(--f-label); font-weight: 800; font-size: 12.5px; text-transform: uppercase; letter-spacing: .12em; color: var(--acc-2); }
+.cat-g__f[data-de="alcalde"] .cat-g__who { color: var(--acc); }
+.cat-g__q small { display: block; font-family: var(--f-label); font-size: 12.5px; color: var(--mute); margin-top: 2px; }
+.cat-g__q p { margin: 6px 0 0; font-family: var(--f-body); font-size: clamp(18px, 1.3vw, 21px); line-height: 1.45; }
+.cat-g__q mark { background: linear-gradient(transparent 55%, rgba(180,35,90,.22) 55%); color: inherit; padding: 0 2px; }
+.cat-g__nota { margin: 0; padding: 14px 18px; font-family: var(--f-body); font-style: italic; font-size: 15.5px; color: var(--mute); }
+
+/* ---------------------------------------------------------------- módulo: la grabación completa y el comunicado */
+.cat-vid { margin: 0; display: grid; justify-items: center; gap: 10px; }
+.cat-vid .twitter-tweet, .cat-tuit .twitter-tweet { margin: 0 auto !important; }
+.cat-vid blockquote.twitter-tweet, .cat-tuit blockquote.twitter-tweet { max-width: 560px; background: var(--papel); border: 1px solid rgba(30,39,33,.3); padding: 16px 18px; font-family: var(--f-body); font-size: 18px; }
+.cat-vid figcaption { max-width: 640px; text-align: center; font-family: var(--f-body); font-style: italic; font-size: 15.5px; color: var(--mute); }
+.cat-vid figcaption a, .cat-doc a { color: var(--acc); padding-block: 10px; }
+.cat-doc { max-width: 620px; margin: 0 auto; background: #FFF; border: 1px solid rgba(30,39,33,.3); border-top: 6px solid var(--acc); padding: 22px 26px 18px; transform: rotate(.6deg); box-shadow: 0 24px 50px -34px rgba(30,39,33,.6); }
+.cat-doc__top { display: flex; justify-content: space-between; gap: 12px; font-family: var(--f-label); font-size: 12px; text-transform: uppercase; letter-spacing: .16em; color: var(--mute); margin-bottom: 12px; }
+.cat-doc__top span { font-weight: 800; color: var(--fg); }
+.cat-doc__txt p { margin: 0 0 12px; font-family: var(--f-body); font-size: 18px; line-height: 1.5; }
+.cat-doc__txt p:last-child { font-weight: 500; }
+.cat-doc figcaption { font-family: var(--f-label); font-size: 12.5px; text-transform: uppercase; letter-spacing: .12em; color: var(--mute); padding-top: 6px; border-top: 1px solid var(--line-x); }
+.cat-tuits { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 22px; margin-top: 30px; align-items: start; }
+
+@media (max-width: 760px) {
+  .cat-ficha__cuerpo { grid-template-columns: 1fr; }
+  .cat-campos { border-right: 0; grid-template-columns: 1fr 1fr; }
+  .cat-plano { padding: 8px; }
+  .cat-g__f { grid-template-columns: 1fr; gap: 4px; }
+  .cat-doc { transform: none; }
+}
+@media (prefers-reduced-motion: reduce) { .cat-ficha, .cat-lote, .cat-hatch { animation: none; } }
+/* la ficha ya es la portada: el plano no se repite de fondo */
+.fmt--catastro .hero__art { display: none; }
