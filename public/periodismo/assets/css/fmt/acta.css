@@ -443,3 +443,33 @@
   .sello-razon, .acta .sello-razon { opacity: 1 !important; transform: rotate(-8deg) !important; }
   .reel { transform: none !important; }
 }
+
+/* ---------------------------------------------------------------- portada: el vocal en el despacho
+   Morillo, recortado en tinta azul, entra bajo la lámpara con las manos abiertas; la grabadora del testigo
+   queda delante de él, sobre el escritorio. */
+.fmt--acta .hero__art { display: none; }
+.visita { position: relative; margin: -6px -4% -190px; z-index: 0; pointer-events: none; animation: actaVisita 1.5s var(--ease-out) .5s both; }
+.visita img { display: block; width: 100%; height: auto;
+  filter: grayscale(1) contrast(1.2) brightness(1.05) sepia(.5) hue-rotate(185deg) saturate(1.6);
+  -webkit-mask-image: linear-gradient(180deg, #000 52%, transparent 92%); mask-image: linear-gradient(180deg, #000 52%, transparent 92%); }
+/* el cono de la lámpara pasa por encima y se mueve apenas */
+.visita__foco { position: absolute; left: 10%; right: 10%; top: -30%; height: 120%; pointer-events: none; mix-blend-mode: screen;
+  background: radial-gradient(ellipse 50% 60% at 50% 10%, rgba(242,237,222,.22), transparent 70%); animation: actaFoco 7s ease-in-out 2s infinite alternate; }
+@keyframes actaFoco { from { transform: translateX(-6%); opacity: .7; } to { transform: translateX(6%); opacity: 1; } }
+@keyframes actaVisita { from { opacity: 0; transform: translateY(30px) scale(.97); filter: blur(4px); } }
+.visita figcaption { position: absolute; right: 2%; top: 8%; display: grid; justify-items: end; gap: 3px; text-align: right; }
+.visita figcaption b { font-family: var(--f-mono); font-weight: 700; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--crema); }
+.visita figcaption span { font-size: 12.5px; color: #AEB7CC; max-width: 19ch; }
+.escritorio .graba { z-index: 2; }
+.escritorio .graba__cuerpo { box-shadow: 0 -30px 60px -10px rgba(12,17,29,.9), 0 24px 50px -24px rgba(0,0,0,.7); }
+@media (max-width: 640px) { .visita { margin: 0 -6% -120px; } .visita figcaption { top: 2%; } }
+
+/* siluetas en el texto: en tinta azul de oficio, con un paralaje leve */
+.fmt--acta .fmat--silueta img { filter: grayscale(.5) sepia(.3) hue-rotate(185deg) saturate(1.2) drop-shadow(0 14px 18px rgba(22,26,36,.35)); }
+@supports (animation-timeline: view()) {
+  .fmt--acta .fmat--silueta .fmat__marco { animation: actaParallax linear both; animation-timeline: view(); animation-range: cover; }
+  @keyframes actaParallax { from { transform: translateY(30px); } to { transform: translateY(-30px); } }
+}
+@media (prefers-reduced-motion: reduce) { .visita, .visita__foco, .fmt--acta .fmat--silueta .fmat__marco { animation: none !important; } }
+/* letra de lectura que bajaba de 12 px */
+.acta__aviso, .acta__nota, .fmt--acta .fper__cred { font-size: 12px; }

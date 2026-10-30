@@ -39,3 +39,45 @@
 .fmt--terminal .cierre { background: #050807; border-color: rgba(57,255,136,.3); font-family: var(--f-mono); }
 .fmt--terminal .cierre::before { content: "> case_status --ecuador"; display: block; font-family: var(--f-mono); color: var(--acc-2); margin-bottom: 12px; }
 .fmt--terminal .cierre__lineas li { border-bottom: 1px dashed rgba(57,255,136,.25); font-family: var(--f-mono); } .fmt--terminal .cierre__lineas b { font-family: var(--f-mono); color: var(--acc); }
+
+/* ---------------------------------------------------------------- portada: la terminal renderiza al equipo
+   Después del libro mayor, un segundo panel dibuja en fósforo verde, línea por línea, a los tres periodistas
+   que abrieron los archivos de Drousys. */
+.fmt--terminal .hero__art { display: none; }
+.hero--terminal { position: relative; overflow: hidden; }
+.term--render .term__body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .9fr); gap: 26px; align-items: start; }
+.tm-col { min-width: 0; }
+.tm-render { margin: 0; min-width: 0; border-left: 1px dashed rgba(57,255,136,.25); padding-left: 22px; }
+.tm-render__cmd { color: var(--acc-2); font-size: 13px; margin-bottom: 10px; opacity: 0; animation: tmIn .01s linear 4.4s forwards; }
+.tm-render__cmd span { color: var(--acc); }
+@keyframes tmIn { to { opacity: 1; } }
+.tm-render__pant { position: relative; background: radial-gradient(ellipse at 50% 60%, rgba(57,255,136,.10), transparent 70%); }
+.tm-render__pant img { display: block; width: 100%; height: auto;
+  filter: grayscale(1) contrast(1.45) brightness(1.05) sepia(1) hue-rotate(78deg) saturate(3.2) drop-shadow(0 0 6px rgba(57,255,136,.45));
+  clip-path: inset(0 0 100% 0); animation: tmRender 2.6s steps(26, end) 4.8s forwards, tmParpadeo 6s linear 8s infinite; }
+@keyframes tmRender { to { clip-path: inset(0 0 0 0); } }
+@keyframes tmParpadeo { 0%, 96%, 100% { opacity: 1; } 97% { opacity: .55; } 98% { opacity: 1; } 99% { opacity: .7; } }
+/* la línea de barrido que baja mientras se dibuja la imagen */
+.tm-render__barrido { position: absolute; left: -6px; right: -6px; top: 0; height: 2px; background: var(--acc); box-shadow: 0 0 14px 3px rgba(57,255,136,.6);
+  opacity: 0; animation: tmBarrido 2.6s steps(26, end) 4.8s forwards; }
+@keyframes tmBarrido { 0% { top: 0; opacity: 1; } 99% { opacity: 1; } 100% { top: 100%; opacity: 0; } }
+.tm-render figcaption { margin-top: 8px; font-size: 12px; color: var(--mute); opacity: 0; animation: tmIn .01s linear 7.5s forwards; }
+.tm-render figcaption::before { content: "> "; color: var(--acc); }
+@media (max-width: 820px) {
+  .term--render .term__body { grid-template-columns: 1fr; }
+  .tm-render { border-left: 0; padding-left: 0; border-top: 1px dashed rgba(57,255,136,.25); padding-top: 16px; }
+}
+@media (max-width: 560px) { .term__line { grid-template-columns: 78px 1fr; row-gap: 0; } .term__line .term__m { grid-column: 2; } .hero--terminal .term__out { gap: 12px; } }
+
+/* silueta del capítulo: impresa en verde fósforo apagado, y sube al pasar */
+.fmt--terminal .fmat--silueta img { filter: grayscale(.85) sepia(.4) hue-rotate(70deg) saturate(1.6) drop-shadow(0 0 18px rgba(57,255,136,.18)); }
+@supports (animation-timeline: view()) {
+  .fmt--terminal .fmat--silueta .fmat__marco { animation: tmParallax linear both; animation-timeline: view(); animation-range: cover; }
+  @keyframes tmParallax { from { transform: translateY(30px); } to { transform: translateY(-30px); } }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tm-render__pant img, .tm-render__barrido, .tm-render__cmd, .tm-render figcaption, .fmt--terminal .fmat--silueta .fmat__marco { animation: none !important; opacity: 1; clip-path: none; }
+  .tm-render__barrido { display: none; }
+}
+/* el enlace del kicker necesita alto de dedo en el teléfono */
+.hero--terminal .hkicker a.ref { display: inline-block; padding-block: 12px; margin-block: -12px; }

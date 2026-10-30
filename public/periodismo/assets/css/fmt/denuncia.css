@@ -258,3 +258,64 @@
 .exp__fila[data-tono="rojo"] .casilla--grande b { color: var(--rojo); }
 .exp__fila[data-tono="gris"] .casilla--grande { border-color: var(--mute); }
 .exp__fila[data-tono="gris"] .casilla--grande b { color: var(--mute); }
+
+/* ---------------------------------------------------------------- portada v2: el formulario se llena solo
+   La letra de bolígrafo entra campo por campo, las casillas se marcan una a una y, abajo a la izquierda,
+   la foto del denunciado queda sujeta con un clip: la cabeza se sale del marco y el bolígrafo la encierra. */
+.hero--denuncia .form__campo .boli { clip-path: inset(0 100% 0 0); animation: boliEscribe .9s steps(22, end) forwards; }
+.hero--denuncia .form__campo:nth-of-type(2) .boli { animation-delay: .9s; }
+.hero--denuncia .form__campo:nth-of-type(3) .boli { animation-delay: 1.25s; }
+.hero--denuncia .form__campo:nth-of-type(4) .boli { animation-delay: 1.6s; }
+.hero--denuncia .form__campo:nth-of-type(5) .boli { animation-delay: 1.9s; }
+.hero--denuncia .form__campo--area .boli { clip-path: inset(0 0 100% 0); animation: boliArea 2.2s steps(4, end) 2.2s forwards; }
+@keyframes boliEscribe { to { clip-path: inset(0 0 0 0); } }
+@keyframes boliArea { to { clip-path: inset(0 0 0 0); } }
+.hero--denuncia .casilla--on i { color: transparent; animation: marca .3s ease-out forwards; }
+.hero--denuncia .casilla:nth-child(1) i { animation-delay: 4.1s; } .hero--denuncia .casilla:nth-child(2) i { animation-delay: 4.4s; }
+.hero--denuncia .casilla:nth-child(3) i { animation-delay: 4.7s; } .hero--denuncia .casilla:nth-child(4) i { animation-delay: 5s; }
+@keyframes marca { 0% { color: transparent; transform: scale(1.6); } 100% { color: var(--acc); transform: none; } }
+.hero--denuncia .recibido { animation-delay: 5.3s; }
+
+.form--anexo .form__campo--casillas { grid-column: 1; grid-row: 6; }
+.form--anexo .form__casillas { grid-template-columns: 1fr; gap: 9px; }
+.form--anexo .cedula { grid-column: 1; grid-row: 7; justify-self: start; margin: 4px 0 -40px -2px; transform: rotate(-3deg); width: min(100%, 220px); }
+.anexo { grid-column: 2; grid-row: 6 / span 2; align-self: start; position: relative; margin: 30px -40px -70px 0; width: calc(100% + 20px); transform: rotate(4deg); z-index: 2; animation: anexoIn .9s var(--ease-out) 1.1s both; }
+@keyframes anexoIn { from { opacity: 0; transform: translate(30px, 40px) rotate(14deg); } }
+.anexo__marco { position: relative; display: block; aspect-ratio: 4 / 4.4; background: linear-gradient(180deg, #DCE3F1, #B9C6E2); border: 9px solid #fff; border-bottom-width: 16px; box-shadow: 0 2px 3px rgba(30,34,41,.14), 0 22px 30px -18px rgba(30,34,41,.6); overflow: visible; }
+.anexo__marco img { position: absolute; left: 50%; bottom: 0; width: 104%; height: auto; transform: translateX(-50%); filter: grayscale(1) contrast(1.15) brightness(1.04) drop-shadow(0 10px 10px rgba(14,30,80,.35));
+  -webkit-mask-image: linear-gradient(180deg, #000 0, #000 100%); }
+/* la cabeza rompe el borde superior del marco: la foto crece hacia arriba */
+.anexo__marco img { max-height: 128%; }
+.anexo__marco::after { content: ""; position: absolute; inset: 0; background: var(--acc); mix-blend-mode: screen; opacity: .55; pointer-events: none; }
+.anexo__clip { position: absolute; left: 22px; top: -26px; z-index: 3; width: 22px; height: 64px; border: 3px solid #8E949C; border-radius: 11px; border-bottom-color: transparent; transform: rotate(8deg); box-shadow: 1px 1px 0 rgba(0,0,0,.08); }
+.anexo__clip::after { content: ""; position: absolute; left: 3px; right: 3px; top: 8px; height: 40px; border: 3px solid #A1A7AE; border-radius: 8px; border-top-color: transparent; }
+.anexo__circulo { position: absolute; left: 6%; top: -9%; width: 92%; height: auto; z-index: 2; overflow: visible; pointer-events: none; }
+.anexo__circulo path { fill: none; stroke: var(--acc); stroke-width: 3.4; stroke-linecap: round; stroke-dasharray: 560; stroke-dashoffset: 560; animation: circulo 1.1s cubic-bezier(.6,.1,.3,1) 3s forwards; }
+@keyframes circulo { to { stroke-dashoffset: 0; } }
+.anexo figcaption { display: grid; gap: 2px; margin-top: 10px; padding-left: 4px; }
+.anexo figcaption label { font-size: 9px; }
+.anexo figcaption .boli { font-size: 18px; line-height: 1.1; }
+@media (max-width: 1180px) { .anexo { margin-right: -8px; width: 100%; } }
+@media (max-width: 480px) { .anexo { margin: 40px 0 -40px 0; width: 100%; } .anexo figcaption .boli { font-size: 15px; } .form--anexo .cedula { width: 100%; margin-bottom: -24px; } .form--anexo .form__casillas { grid-template-columns: 1fr; } }
+
+/* el texto: la línea de bolígrafo se dibuja bajo el énfasis del titular al llegar */
+.fmt--denuncia .cap__title em { background: linear-gradient(var(--acc), var(--acc)) 0 96% / 0 2px no-repeat; transition: background-size 1.2s var(--ease-out) .2s; }
+.fmt--denuncia .cap.is-in .cap__title em, .fmt--denuncia .cap__head.is-in .cap__title em { background-size: 100% 2px; }
+.fmt--denuncia .fmat--silueta img { filter: grayscale(1) contrast(1.12) drop-shadow(0 16px 18px rgba(14,30,80,.28)); }
+.fmt--denuncia .fmat--silueta figcaption { font-family: var(--f-body); font-style: italic; font-size: 13px; color: var(--acc); }
+@supports (animation-timeline: view()) {
+  .fmt--denuncia .cap__title em { background-size: 0 2px; transition: none; animation: subraya linear both; animation-timeline: view(); animation-range: entry 20% cover 40%; }
+  @keyframes subraya { to { background-size: 100% 2px; } }
+  /* la silueta sube y se asienta al entrar; cuando el párrafo la rodea ya está en su sitio exacto */
+  .fmt--denuncia .fmat--silueta .fmat__marco { animation: denEntra linear both; animation-timeline: view(); animation-range: entry 0% entry 90%; }
+  @keyframes denEntra { from { transform: translateY(40px) scale(.96); } to { transform: none; } }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero--denuncia .form__campo .boli, .hero--denuncia .casilla--on i, .anexo, .anexo__circulo path, .fmt--denuncia .cap__title em, .fmt--denuncia .fmat--silueta .fmat__marco { animation: none !important; clip-path: none !important; }
+  .hero--denuncia .casilla--on i { color: var(--acc); }
+  .anexo__circulo path { stroke-dashoffset: 0; }
+  .fmt--denuncia .cap__title em { background-size: 100% 2px; }
+}
+@media (max-width: 650px) { .fmt--denuncia .cedula__nota { font-size: 12.5px; } .fmt--denuncia .cierre__fecha { font-size: 12.5px; } }
+.fmt--denuncia .fmat--silueta { shape-margin: 20px; }
+.fmt--denuncia .fmat--silueta.fmat--izquierda figcaption { text-align: left; right: 28%; } .fmt--denuncia .fmat--silueta.fmat--derecha figcaption { text-align: right; left: 28%; }

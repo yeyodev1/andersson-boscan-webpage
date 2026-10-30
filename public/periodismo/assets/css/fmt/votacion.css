@@ -273,7 +273,7 @@
 .fmt--votacion .ftl--reloj li { align-items: start; }
 .fmt--votacion .ftl--reloj li::before { left: 20px; top: 21px; width: 10px; height: 10px; border-radius: 2px; }
 .fmt--votacion .ftl--reloj .ftl__f { justify-self: start; align-self: start; padding: 4px 9px 3px; border: 1px solid var(--metal-2); border-radius: 3px; background: #08090B; font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; text-shadow: var(--glow); }
-.cronobar__pie { margin: 14px 0 0; font-family: var(--f-label); font-size: 11.5px; letter-spacing: .04em; color: var(--mute); }
+.cronobar__pie { margin: 14px 0 0; font-family: var(--f-label); font-size: 12.5px; letter-spacing: .04em; color: var(--mute); }
 @media (max-width: 640px) { .ftl--reloj li { grid-template-columns: minmax(0, 1fr); gap: 8px; padding: 14px 16px 14px 34px; } .ftl--reloj li::before { left: 16px; top: 19px; } .cronobar { font-size: 9.5px; gap: 8px 12px; padding: 12px 14px; } .cronobar .reloj { margin-left: 0; font-size: 15px; } }
 
 /* --- Cierre: la tarjeta de votación del asambleísta --- */
@@ -312,3 +312,24 @@
 /* --- Correcciones de rejilla --- */
 .fases { gap: 46px 18px; }
 @media (prefers-reduced-motion: reduce) { .marcador__matriz i { background: var(--led-off); } .casilla--si.is-on i { background: var(--acc); } }
+
+/* ---------------------------------------------------------------- el interpelado se apaga
+   Godoy, recortado, asoma por encima del tablero. Mientras se encienden las curules pasa a gris, pierde
+   brillo como una pantalla que se corta y cae el sello de la destitución. */
+.vt-lado { position: relative; padding-top: clamp(200px, 21vw, 300px); }
+.vt-fig { position: absolute; left: 50%; top: -30px; width: min(104%, 520px); translate: -50% 0; margin: 0; z-index: 0; pointer-events: none; }
+.vt-fig img { display: block; width: 100%; height: auto; animation: vtApaga 3.2s ease-in .8s both;
+  -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent 80%); mask-image: linear-gradient(180deg, #000 55%, transparent 80%); }
+@keyframes vtApaga { from { filter: none; } 70% { filter: grayscale(.6) brightness(.8); } to { filter: grayscale(1) brightness(.42) contrast(1.15); } }
+
+.vt-fig__sello { position: absolute; left: 50%; top: 32%; translate: -50% 0; white-space: nowrap; font-family: var(--f-display); font-weight: 800; font-size: clamp(15px, 1.4vw, 20px); letter-spacing: .14em; text-transform: uppercase;
+  color: #FF5A5A; border: 3px solid #FF5A5A; padding: 8px 14px 6px; background: rgba(10,12,14,.72); transform: rotate(-8deg); animation: vtSello .4s steps(2) 3.9s both; }
+@keyframes vtSello { from { opacity: 0; transform: rotate(-8deg) scale(2); } }
+.vt-fig figcaption { position: absolute; right: 0; top: 6px; max-width: 46%; text-align: right; font-family: var(--f-label); font-size: 12px; color: var(--mute); }
+.vt-lado .tablero { position: relative; z-index: 1; }
+@media (max-width: 900px) { .vt-lado { padding-top: 48vw; } .vt-fig { width: 86%; } }
+@supports (animation-timeline: view()) {
+  .fmt--votacion .fdato b, .fmt--votacion .fdatos2 b { animation: vtNum linear both; animation-timeline: view(); animation-range: entry 0% cover 30%; }
+  @keyframes vtNum { from { opacity: 0; letter-spacing: .3em; } }
+}
+@media (prefers-reduced-motion: reduce) { .vt-fig img, .vt-fig__sello, .fmt--votacion .fdato b, .fmt--votacion .fdatos2 b { animation: none; } .vt-fig img { filter: grayscale(1) brightness(.5); } }

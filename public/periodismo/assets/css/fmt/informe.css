@@ -228,3 +228,47 @@
   .esq__ant i { width: var(--w) !important; } .esq__items i { width: var(--w) !important; }
   .esq__capas i { transform: none !important; opacity: 1 !important; }
 }
+
+/* ---------------------------------------------------------------- portada: el chaleco abierto por capas
+   Bajo la ficha del denunciado, las veinte láminas que declaró la prueba de Defensa se separan una a una
+   como en un despiece técnico; la segunda, donde según Defensa quedaron las balas de 9 mm, va marcada. */
+.cp { float: right; width: 290px; margin: -150px 0 18px 28px; position: relative; z-index: 1; padding: 14px 14px 16px; border: 1px dashed rgba(31,27,20,.35); background: color-mix(in srgb, var(--bg) 70%, #fff); }
+.cp-cab { display: grid; gap: 2px; font-family: var(--f-label); margin-bottom: 10px; }
+.cp-cab span { font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--acc); font-weight: 700; }
+.cp-cab b { font-family: var(--f-mono); font-weight: 400; font-size: 16px; }
+.cp-pila { position: relative; height: 150px; margin: 4px 0 8px; }
+.cp-pila i { position: absolute; left: 0; bottom: 0; width: 46%; height: 112px; z-index: calc(40 - var(--k));
+  clip-path: polygon(20% 0, 80% 0, 80% 12%, 100% 26%, 100% 100%, 0 100%, 0 26%, 20% 12%);
+  background: #D9C49A; box-shadow: inset 0 0 0 1px rgba(31,27,20,.35);
+  transform: translate(0, 0); animation: cpAbre 1.1s cubic-bezier(.2,.8,.2,1) both; animation-delay: calc(1.2s + var(--k) * 45ms); }
+.cp-pila i:nth-child(odd) { background: repeating-linear-gradient(90deg, #C9AE7C 0 3px, #B89663 3px 5px); }
+.cp-pila i::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(31,27,20,.18), transparent 30%); }
+.cp-pila i.cp-l--tiro { background: #EFE3C8; box-shadow: inset 0 0 0 2px var(--acc); }
+@keyframes cpAbre { from { transform: translate(0, 0); } to { transform: translate(calc(var(--k) * 6.4px), calc(var(--k) * -1.6px)); } }
+.cp-pila i { transform: translate(calc(var(--k) * 6.4px), calc(var(--k) * -1.6px)); }
+.cp-bala { position: absolute; left: calc(2 * 6.4px + 23%); bottom: calc(56px + 3.2px); width: 12px; height: 12px; margin: -6px; border-radius: 50%; z-index: 38;
+  background: var(--acc); box-shadow: 0 0 0 4px color-mix(in srgb, var(--acc) 25%, transparent); opacity: 0; animation: cpBala .35s ease-out 2.8s forwards; }
+@keyframes cpBala { from { opacity: 0; transform: scale(2.6); } to { opacity: 1; transform: none; } }
+.cp-nota { margin: 0; font-family: var(--f-label); font-size: 12.5px; line-height: 1.45; color: var(--fg); }
+.cp-nota b { display: block; font-family: var(--f-mono); font-weight: 400; color: var(--acc); font-size: 13px; margin-bottom: 2px; }
+@media (max-width: 760px) { .cp { float: none; width: auto; margin: 0 0 22px; } }
+
+/* silueta del capítulo: tinta de máquina sobre kraft, y paralaje leve */
+.fmt--informe .fmat--silueta img { filter: grayscale(.9) sepia(.35) contrast(1.08) drop-shadow(0 14px 18px rgba(31,27,20,.35)); }
+@supports (animation-timeline: view()) {
+  .fmt--informe .fmat--silueta .fmat__marco { animation: cpParallax linear both; animation-timeline: view(); animation-range: cover; }
+  @keyframes cpParallax { from { transform: translateY(28px); } to { transform: translateY(-28px); } }
+}
+@media (prefers-reduced-motion: reduce) { .cp-pila i, .cp-bala, .fmt--informe .fmat--silueta .fmat__marco { animation: none !important; opacity: 1; } }
+.ficha-den__foto--recorte { position: relative; background: linear-gradient(180deg, #CFC6B2, #B9AE96); }
+.ficha-den__foto--recorte { overflow: visible; }
+.ficha-den__foto--recorte img { position: relative; z-index: 1; object-fit: cover; object-position: 50% 0; mix-blend-mode: normal; filter: grayscale(1) contrast(1.2) brightness(1.04) sepia(.18); }
+.ficha-den__scan { position: absolute; left: 0; right: 0; top: 0; height: 3px; background: var(--acc); box-shadow: 0 0 10px 2px color-mix(in srgb, var(--acc) 50%, transparent); opacity: 0;
+  animation: fdScan 1.6s ease-in-out .9s 1 forwards; }
+@keyframes fdScan { 0% { top: 0; opacity: .9; } 90% { opacity: .9; } 100% { top: 100%; opacity: 0; } }
+.esq__leg { font-size: 12px; }
+@media (prefers-reduced-motion: reduce) { .ficha-den__scan { display: none; } }
+@media (max-width: 999px) { .cp { margin-top: 0; } }
+.cp-pila i:first-child { opacity: .5; }
+/* en el teléfono el sello ya baja a su propia línea: el membrete recupera el ancho completo */
+@media (max-width: 640px) { .portada-doc__cab { max-width: 100%; } .portada-doc__cab b { font-size: 13.5px; } .portada-doc__cab span { font-size: 12px; } }

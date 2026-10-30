@@ -350,3 +350,37 @@
 }
 
 @media (prefers-reduced-motion: reduce) { .fmt--parte .topbar::after { opacity: .85; } }
+
+/* ---------------------------------------------------------------- portada v2: el anexo fotográfico del parte
+   Grapado arriba del parte, en duotono azul: la lancha de noche. Un reflector la barre como si buscara
+   los dieciocho sacos que el parte no cuenta. Es ilustración y el pie lo dice. */
+.fmt--parte .hero__art { display: none; }
+.adj { position: absolute; z-index: 3; left: 18px; bottom: calc(100% - 4px); width: min(76%, 380px); margin: 0; transform: rotate(-3.5deg); animation: adjIn 1s var(--ease-out) .6s both; }
+@keyframes adjIn { from { opacity: 0; transform: translateY(-50px) rotate(-10deg); } }
+.adj__marco { position: relative; display: block; overflow: hidden; background: #0B1F3A; border: 8px solid #F4F7FB; box-shadow: 0 22px 40px -22px rgba(0,0,0,.8); }
+.adj__marco img { display: block; width: 100%; height: auto; filter: grayscale(1) brightness(2.1) contrast(1.15); }
+.adj__marco::after { content: ""; position: absolute; inset: 0; background: #1B4F9C; mix-blend-mode: color; opacity: .85; pointer-events: none; }
+.adj__luz { position: absolute; z-index: 2; top: 0; left: -40%; width: 46%; height: 100%; pointer-events: none; 
+  background: radial-gradient(ellipse 50% 40% at 50% 62%, rgba(255,214,90,.55), rgba(255,214,90,.12) 55%, transparent 72%); animation: reflector 7s ease-in-out 1.6s infinite; }
+@keyframes reflector { 0% { left: -40%; } 50% { left: 90%; } 100% { left: -40%; } }
+.adj__sello { position: absolute; z-index: 3; left: 16px; top: 16px; padding: 3px 7px 2px; background: #FFC72C; color: #0B1F3A; font-family: var(--f-display); font-weight: 400; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; }
+.adj__grapa { position: absolute; z-index: 4; left: 50%; bottom: -14px; width: 34px; height: 10px; margin-left: -17px; border: 2.5px solid #9AA6B5; border-top: 0; border-radius: 0 0 3px 3px; }
+.adj figcaption { position: absolute; z-index: 3; left: 0; right: 0; bottom: 0; padding: 26px 10px 7px; background: linear-gradient(transparent, rgba(5,14,28,.85)); font-family: var(--f-body); font-style: italic; font-size: 12.5px; line-height: 1.35; color: #F4F7FB; }
+@media (max-width: 999px) {
+  .adj { position: relative; left: auto; bottom: auto; width: min(100%, 420px); margin: -10px auto 26px; transform: rotate(-1.5deg); }
+}
+@media (prefers-reduced-motion: reduce) { .adj, .adj__luz { animation: none !important; } .adj__luz { left: 30%; } }
+
+/* el texto: la silueta del informe y una regla de señales que se tiende al pasar */
+.fmt--parte .fmat--silueta { shape-margin: 20px; }
+.fmt--parte .fmat--silueta img { filter: grayscale(1) contrast(1.1) drop-shadow(0 16px 20px rgba(11,31,58,.3)); }
+.fmt--parte .fmat--silueta figcaption { font-family: var(--f-display); font-size: 11px; letter-spacing: .08em; color: #FFC72C; text-shadow: 0 1px 2px #06121F, 0 0 10px #06121F; }
+.fmt--parte .fmat--silueta.fmat--izquierda figcaption { text-align: left; right: 28%; } .fmt--parte .fmat--silueta.fmat--derecha figcaption { text-align: right; left: 28%; }
+@media (max-width: 650px) { .fmt--parte .fmat--silueta figcaption { font-size: 12.5px; } }
+@supports (animation-timeline: view()) {
+  .fmt--parte .cap__head { background: linear-gradient(90deg, #FFC72C 0 12%, #1B4F9C 12% 24%, #F4F7FB 24% 36%, #0B1F3A 36% 48%, transparent 48%) 0 100% / 0 4px no-repeat; padding-bottom: 14px;
+    animation: senales linear both; animation-timeline: view(); animation-range: entry 10% cover 35%; }
+  @keyframes senales { to { background-size: 220px 4px; } }
+}
+@media (prefers-reduced-motion: reduce) { .fmt--parte .cap__head { animation: none !important; background-size: 220px 4px; } }
+@media (max-width: 650px) { .fmt--parte .cierre__fecha, .fmt--parte .anexos__pie { font-size: 12.5px; } }

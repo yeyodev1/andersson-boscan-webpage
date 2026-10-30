@@ -226,3 +226,55 @@
 .fmt--escaleta .cierre__panel li b, .fmt--escaleta .cierre__lineas b { text-align: left; }
 .fmt--escaleta .cierre__panel li span, .fmt--escaleta .cierre__lineas span { color: var(--mute); }
 .fmt--escaleta .retrato--medio .retrato__img img { object-position: center 12%; }
+
+/* ================================================================
+   Portada 2: el monitor de programa. El invitado recortado en el set,
+   el cintillo que entra, el prompter corriendo como zócalo y la
+   marca de zona segura del encuadre
+   ================================================================ */
+.pgm { border-radius: 6px; overflow: hidden; background: #050506; box-shadow: 0 40px 80px -50px #000, inset 0 0 0 1px rgba(255,255,255,.07); animation: pgm-on .9s var(--ease-out) .1s both; }
+@keyframes pgm-on { 0% { opacity: 0; filter: brightness(3) saturate(0); transform: scaleY(.02); } 40% { opacity: 1; transform: scaleY(.04); } 100% { transform: none; filter: none; } }
+.pgm__screen { position: relative; aspect-ratio: 16 / 9.6; overflow: hidden;
+  background: radial-gradient(ellipse 60% 70% at 64% 40%, #3A3C42 0%, #1B1C20 55%, #0B0B0D 100%); }
+/* hexágonos del set, como en la escenografía de Café la Posta */
+.pgm__screen::before { content: ""; position: absolute; inset: 0; opacity: .16;
+  background: conic-gradient(from 30deg at 30% 30%, #C9A46B 0 60deg, transparent 60deg 360deg), conic-gradient(from 210deg at 14% 60%, #C9A46B 0 60deg, transparent 60deg 360deg); }
+.pgm__fig { position: absolute; z-index: 1; right: 8%; bottom: 0; height: 96%; width: auto; filter: contrast(1.08) saturate(.9) drop-shadow(0 20px 30px rgba(0,0,0,.6));
+  animation: pgm-zoom 14s ease-in-out 1s infinite alternate; transform-origin: 60% 30%; }
+@keyframes pgm-zoom { to { transform: scale(1.06) translateX(-2%); } }
+/* marco de zona segura */
+.pgm__seg { position: absolute; z-index: 3; inset: 7% 6%; border: 1px dashed rgba(255,255,255,.22); pointer-events: none; }
+.pgm__seg::before, .pgm__seg::after { content: ""; position: absolute; left: 50%; top: 50%; width: 22px; height: 22px; margin: -11px 0 0 -11px;
+  background: linear-gradient(rgba(255,255,255,.3), rgba(255,255,255,.3)) center / 1px 100% no-repeat, linear-gradient(rgba(255,255,255,.3), rgba(255,255,255,.3)) center / 100% 1px no-repeat; }
+.pgm__seg::after { display: none; }
+/* cintillo (lower third) que entra desde la izquierda */
+.pgm__cint { position: absolute; z-index: 4; left: 6%; bottom: 24%; display: grid; max-width: 70%; animation: pgm-cint .8s var(--ease-out) 1.6s both; }
+@keyframes pgm-cint { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+.pgm__cint span { justify-self: start; background: var(--acc); color: #fff; font-family: var(--f-label); font-weight: 800; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; padding: 4px 10px 2px; }
+.pgm__cint b { background: #F4F4F2; color: #141414; font-family: var(--f-display); font-weight: 800; font-size: clamp(22px, 2.6vw, 36px); line-height: 1; padding: 10px 14px 6px; text-transform: uppercase; letter-spacing: -.01em; }
+.pgm__cint small { justify-self: start; background: #141414; color: #F4F4F2; font-family: var(--f-label); font-size: 12.5px; letter-spacing: .06em; padding: 6px 14px 5px; }
+/* zócalo: el texto del prompter corre abajo */
+.pgm__zocalo { position: absolute; z-index: 4; left: 0; right: 0; bottom: 0; height: 15%; min-height: 36px; display: flex; align-items: center; overflow: hidden; background: rgba(5,5,6,.86); border-top: 2px solid var(--acc-2); }
+.pgm__zocalo > div { display: flex; gap: 48px; white-space: nowrap; animation: pgm-corre 70s linear infinite; padding-left: 100%; }
+.pgm__zocalo span { font-family: var(--f-label); font-weight: 600; font-size: 13.5px; color: #E9E8E4; }
+.pgm__zocalo b { color: var(--acc-2); font-weight: 800; text-transform: uppercase; font-size: 11px; letter-spacing: .14em; margin-right: 6px; }
+@keyframes pgm-corre { to { transform: translateX(-100%); } }
+.pgm__scan { position: absolute; z-index: 5; inset: 0; pointer-events: none; background: repeating-linear-gradient(0deg, rgba(0,0,0,.18) 0 1px, transparent 1px 3px); mix-blend-mode: multiply; }
+.pgm__pie { margin: 0; padding: 8px 14px 10px; font-family: var(--f-label); font-size: 12.5px; color: var(--mute); background: #1D1E22; }
+@media (max-width: 640px) {
+  .pgm__screen { aspect-ratio: 4 / 3.6; }
+  .pgm__fig { right: -6%; height: 88%; }
+  .pgm__cint { bottom: 20%; left: 4%; }
+  .pgm__cint small { font-size: 12.5px; }
+}
+/* siluetas del texto y movimiento al bajar */
+@supports (animation-timeline: view()) {
+  .fmt--escaleta .fmat--silueta img { animation: esc-par linear both; animation-timeline: view(); animation-range: cover; }
+  @keyframes esc-par { from { transform: translateY(28px); } to { transform: translateY(-28px); } }
+  .fmt--escaleta .esc__row { animation: esc-entra linear both; animation-timeline: view(); animation-range: entry 0% cover 25%; }
+  @keyframes esc-entra { from { opacity: .15; transform: translateX(-18px); } }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pgm, .pgm__fig, .pgm__cint, .pgm__zocalo > div, .fmt--escaleta .fmat--silueta img, .fmt--escaleta .esc__row { animation: none !important; }
+  .pgm__zocalo > div { padding-left: 14px; }
+}

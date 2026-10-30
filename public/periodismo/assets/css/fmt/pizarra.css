@@ -95,3 +95,77 @@
   font-family: var(--f-display); font-weight: 800; font-size: 15px; text-transform: uppercase; }
 
 @media (max-width: 900px) { .hero--pizarra { padding-top: 80px; } .cancha { aspect-ratio: 3 / 4; } .cancha__p { width: 92px; } }
+
+/* ================================================================
+   Portada 2: la jugada. Flechas de tiza que se dibujan, el balón que
+   recorre la jugada principal, la ilustración sujeta con imán y el
+   borrador que pasa al entrar
+   ================================================================ */
+.pizarra { position: relative; animation: piz-entra .9s var(--ease-out) both; }
+@keyframes piz-entra { from { opacity: 0; transform: translateY(26px) rotate(-.6deg); } }
+.jug { position: absolute; inset: 14px; width: calc(100% - 28px); height: calc(100% - 28px); overflow: visible; pointer-events: none; z-index: 0; }
+.cancha__p { z-index: 1; }
+.jug path[class^="jug__t"] { fill: none; stroke: var(--tiza); stroke-width: 2.2; stroke-linecap: round; vector-effect: non-scaling-stroke;
+  stroke-dasharray: 3 3; marker-end: url(#jugflecha); opacity: .8; filter: url(#none); }
+.jug .jug__t--main { stroke: var(--acc); stroke-width: 3; stroke-dasharray: 100; stroke-dashoffset: 100; opacity: 1;
+  animation: jug-traza 1.6s var(--ease-out) 1.4s forwards; }
+.jug path[class^="jug__t"]:not(.jug__t--main) { clip-path: inset(0 100% 0 0); animation: jug-asoma .9s var(--ease-out) forwards; animation-delay: calc(1.1s + var(--i) * .35s); }
+@keyframes jug-traza { to { stroke-dashoffset: 0; } }
+@keyframes jug-asoma { to { clip-path: inset(0 0 0 0); } }
+.jug__punta { fill: none; stroke: var(--tiza); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.jug__balon { fill: #fff; stroke: #14231A; stroke-width: .5; vector-effect: non-scaling-stroke; opacity: 0; animation: jug-balon .2s linear 2.6s forwards; }
+@keyframes jug-balon { to { opacity: 1; } }
+/* la frase en tiza, escrita a mano sobre la pizarra */
+.pizarra__tiza { margin: 0; padding: 10px 18px 14px; border-top: 1px dashed var(--line-x); font-family: var(--f-display); font-style: italic; font-weight: 500;
+  font-size: clamp(22px, 3vw, 40px); letter-spacing: .01em; color: var(--tiza); text-shadow: 0 0 1px rgba(242,245,238,.6);
+  clip-path: inset(0 100% 0 0); animation: piz-escribe 1.8s steps(28, end) 2.8s forwards; }
+@keyframes piz-escribe { to { clip-path: inset(0 0 0 0); } }
+/* borrador de fieltro que barre la pizarra al cargar */
+.borrador { position: absolute; z-index: 4; top: 40%; left: -140px; width: 120px; height: 46px; border-radius: 6px; pointer-events: none;
+  background: linear-gradient(180deg, #8C6239 0 46%, #3B3B3B 46% 100%); box-shadow: 0 12px 20px -8px rgba(0,0,0,.6);
+  animation: piz-borra 1.3s cubic-bezier(.5,0,.4,1) .3s both; }
+@keyframes piz-borra { 0% { transform: translate(0, 0) rotate(-8deg); opacity: 1; } 85% { opacity: 1; } 100% { transform: translate(calc(100vw + 160px), -40px) rotate(6deg); opacity: 0; } }
+/* la ilustración con imán en la columna del marcador */
+.iman { position: relative; margin: 18px 18px 22px; padding: 7px 7px 10px; background: #F3F1E8; transform: rotate(-2.6deg); box-shadow: 0 16px 28px -14px #000;
+  animation: piz-iman .7s var(--ease-out) 1.9s both; }
+@keyframes piz-iman { from { opacity: 0; transform: translateY(-30px) rotate(-10deg); } }
+.iman img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; filter: saturate(.8) contrast(1.05); }
+.iman figcaption { margin-top: 6px; font-family: var(--f-label); font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: #3B4A40; }
+.iman__pin { position: absolute; z-index: 2; top: -11px; left: 50%; width: 24px; height: 24px; margin-left: -12px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #FF7A55, var(--acc-2) 55%, #8A2A10); box-shadow: 0 4px 6px rgba(0,0,0,.5); }
+@media (max-width: 999px) { .iman { grid-column: 1 / -1; max-width: 360px; justify-self: center; margin: 22px auto; } }
+.marcador__c { animation: piz-num .5s var(--ease-out) both; animation-delay: calc(.6s + var(--i) * .15s); }
+@keyframes piz-num { from { opacity: 0; transform: translateX(18px); } }
+@media (max-width: 640px) {
+  .cancha { aspect-ratio: 3 / 4; }
+  .cancha__p { width: 84px; }
+  .cancha__p small { display: none; }
+  .cancha__p span { font-size: 10.5px; }
+}
+/* presentadores recortados y movimiento al bajar */
+@supports (animation-timeline: view()) {
+  .fmt--pizarra .fmat--silueta img { animation: piz-par linear both; animation-timeline: view(); animation-range: cover; }
+  @keyframes piz-par { from { transform: translateY(30px); } to { transform: translateY(-24px); } }
+  .fmt--pizarra .planilla__f, .fmt--pizarra .libro2 { animation: piz-sube linear both; animation-timeline: view(); animation-range: entry 0% cover 30%; }
+  @keyframes piz-sube { from { opacity: .2; transform: translateY(24px); } }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pizarra, .marcador__c, .iman, .jug .jug__t--main, .jug path, .pizarra__tiza, .fmt--pizarra .fmat--silueta img, .fmt--pizarra .planilla__f, .fmt--pizarra .libro2 { animation: none !important; clip-path: none !important; stroke-dashoffset: 0 !important; }
+  .borrador, .jug__balon { display: none; }
+}
+.iman figcaption { font-size: 12.5px; letter-spacing: .06em; }
+@media (max-width: 700px) { .cancha__p .ref { display: inline-block; padding-block: 12px; margin-block: -12px; min-width: 30px; } }
+@media (min-width: 1000px) {
+  .pizarra__set { grid-template-columns: minmax(0, 1.4fr) minmax(0, .6fr); }
+  .cancha { aspect-ratio: 16 / 9.4; }
+  .hero--pizarra { padding-top: 78px; }
+  .marcador__c { padding: 12px 18px; }
+  .iman { max-width: 230px; }
+}
+.jug path.jug__t--main { stroke: var(--acc); stroke-width: 3.4; stroke-dasharray: 100; stroke-dashoffset: 100; opacity: 1; vector-effect: none; stroke-width: .9; }
+.jug path[class^="jug__t"] { stroke-width: 2.6; opacity: .9; }
+.jug path[class^="jug__t"] { marker-end: none; vector-effect: non-scaling-stroke; }
+.jug path.jug__t--main { vector-effect: non-scaling-stroke; stroke-width: 4px; stroke-dasharray: none; stroke-dashoffset: 0; clip-path: inset(0 0 100% 0);
+  animation: jug-baja 1.4s var(--ease-out) 1.4s forwards; filter: drop-shadow(0 0 6px rgba(242,208,36,.45)); }
+@keyframes jug-baja { to { clip-path: inset(-5% -5% -5% -5%); } }
+@media (min-width: 1000px) { .iman { max-width: 200px; margin: 16px auto 18px; } .cancha { aspect-ratio: 16 / 10.4; } }

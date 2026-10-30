@@ -305,3 +305,39 @@
   .fmt--bitacora .fmain::before { font-size: 14px; letter-spacing: .16em; padding-left: 38px; background-size: 26px 30px, 100% 8px; }
   .fmt--bitacora .estado::after { font-size: 11.5px; letter-spacing: .14em; }
 }
+
+/* ================================================================
+   Portada 2: la foto de quien entró sin registro, grapada sobre los
+   renglones vacíos; el círculo de marcador rojo que se dibuja
+   ================================================================ */
+.hero--bitacora .htitle { font-size: clamp(56px, 7.4vw, 118px); max-width: 12ch; overflow-wrap: anywhere; }
+.lg--hero { overflow: visible; }
+.lg-foto { position: absolute; z-index: 3; right: -26px; top: 64px; width: 46%; margin: 0; padding: 8px 8px 10px; background: #F4EDD6;
+  box-shadow: 0 2px 2px rgba(0,0,0,.2), 0 20px 30px -16px rgba(0,0,0,.6); transform: rotate(4deg); animation: lg-foto .9s var(--ease-out) 1.4s both; }
+@keyframes lg-foto { from { opacity: 0; transform: translate(30px, -40px) rotate(14deg); } }
+.lg-foto img { display: block; width: 100%; height: auto; background: linear-gradient(180deg, #D8CFAF, #BDB18A);
+  filter: grayscale(.55) sepia(.35) contrast(1.08); }
+.lg-foto__grapa { position: absolute; z-index: 2; top: -6px; left: 22%; width: 46px; height: 7px; border: 2px solid #8F8F8F; border-bottom: 0; border-radius: 2px; transform: rotate(-6deg); }
+.lg-foto__circ { position: absolute; z-index: 2; left: 14%; top: -6%; width: 62%; overflow: visible; pointer-events: none; }
+.lg-foto__circ path { fill: none; stroke: var(--sello); stroke-width: 2.6; stroke-linecap: round; stroke-dasharray: 300; stroke-dashoffset: 300; animation: lg-circ 1s ease-out 2.4s forwards; }
+@keyframes lg-circ { to { stroke-dashoffset: 0; } }
+.lg-foto figcaption { margin-top: 6px; font-family: var(--f-display); font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--tinta); }
+@media (max-width: 999px) { .lg-foto { width: 42%; right: -8px; top: 56px; } .lg-foto figcaption { font-size: 12.5px; } }
+/* siluetas de los generales y movimiento al bajar */
+@supports (animation-timeline: view()) {
+  .fmt--bitacora .fmat--silueta img { animation: lg-par linear both; animation-timeline: view(); animation-range: cover; }
+  @keyframes lg-par { from { transform: translateY(28px); } to { transform: translateY(-28px); } }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lg-foto, .fmt--bitacora .fmat--silueta img { animation: none !important; }
+  .lg-foto__circ path { animation: none; stroke-dashoffset: 0; }
+}
+.hero--bitacora .htitle { font-size: clamp(46px, 6vw, 94px); overflow-wrap: normal; max-width: none; }
+.lg-foto { top: 138px; width: 40%; }
+@media (max-width: 999px) { .lg-foto { top: 120px; width: 38%; } }
+@media (max-width: 700px) { .hero--bitacora .htitle { font-size: clamp(40px, 11.4vw, 64px); } }
+@media (max-width: 700px) { .fmt--bitacora .fdato span .ref { padding-block: 7px; } }
+.lg-foto { top: auto; right: auto; left: -56px; bottom: -96px; width: 38%; transform: rotate(-4deg); }
+@keyframes lg-foto { from { opacity: 0; transform: translate(-30px, 40px) rotate(-14deg); } }
+.lg--hero { margin-bottom: 90px; }
+@media (max-width: 999px) { .lg-foto { left: -6px; bottom: -80px; width: 40%; top: auto; right: auto; } }

@@ -223,3 +223,35 @@
   .tarjeta, .hoja-edc, .etiq { animation: none !important; opacity: 1 !important; transform: none !important; }
   .rng i { transition: none; width: max(2px, var(--w)); }
 }
+
+/* ---------------------------------------------------------------- portada v2: el titular detrás de su tarjeta
+   Bryan Soria recortado en duotono oro sobre el mármol, la tarjeta delante de su pecho como en un anuncio
+   de banca privada; un brillo holográfico cruza el plástico cada pocos segundos. */
+.edc { position: relative; padding-top: 150px; }
+.edc-fig { position: absolute; z-index: 1; top: -40px; right: -36px; width: min(92%, 400px); margin: 0; pointer-events: none; animation: edcFig 1.4s var(--ease-out) .1s both; }
+.edc-fig img { display: block; width: 100%; height: auto; filter: grayscale(1) contrast(1.25) brightness(1.02) sepia(.7) saturate(1.3) hue-rotate(-8deg);
+  -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent 88%); mask-image: linear-gradient(180deg, #000 55%, transparent 88%); }
+.edc-fig figcaption { position: absolute; right: 0; top: 14px; writing-mode: vertical-rl; transform: rotate(180deg); font-family: var(--f-label); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--mute); }
+@keyframes edcFig { from { opacity: 0; transform: translateY(30px) scale(.97); filter: blur(6px); } }
+.tarjeta { overflow: hidden; }
+.tarjeta::before { content: ""; position: absolute; inset: -40% -60%; pointer-events: none; z-index: 3;
+  background: linear-gradient(105deg, transparent 40%, rgba(255,240,200,.0) 42%, rgba(255,236,190,.38) 47%, rgba(190,230,255,.22) 50%, rgba(255,210,240,.2) 53%, transparent 58%);
+  transform: translateX(-60%); animation: holo 6s ease-in-out 1.6s infinite; }
+@keyframes holo { 0% { transform: translateX(-60%); } 30%, 100% { transform: translateX(60%); } }
+@media (max-width: 999px) { .edc { padding-top: 190px; margin-right: auto; } .edc-fig { right: 0; width: min(78%, 380px); top: -10px; } }
+@media (max-width: 640px) { .edc { padding-top: 46vw; } .edc-fig { width: 74%; right: -8px; top: 0; } .edc-fig figcaption { font-size: 11px; } }
+@media (prefers-reduced-motion: reduce) { .edc-fig, .tarjeta::before { animation: none !important; } .tarjeta::before { display: none; } }
+
+/* el texto: siluetas en oro viejo; el párrafo las rodea */
+.fmt--extracto .fmat--silueta { shape-margin: 20px; }
+.fmt--extracto .fmat--silueta img { filter: drop-shadow(0 20px 22px rgba(23,24,27,.25)); }
+.fmt--extracto .fmat--silueta figcaption { font-family: var(--f-label); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--acc); }
+@media (max-width: 650px) { .fmt--extracto .fmat--silueta figcaption { font-size: 12.5px; } }
+@supports (animation-timeline: view()) {
+  .fmt--extracto .cap__title em { background: linear-gradient(90deg, #6E5520, #D9B864 45%, #8C6B26 55%, #C9A657) 0 0 / 300% 100%; -webkit-background-clip: text; background-clip: text; color: transparent;
+    animation: oroBarre linear both; animation-timeline: view(); animation-range: entry 0% exit 0%; }
+  @keyframes oroBarre { from { background-position: 100% 0; } to { background-position: 0 0; } }
+}
+@media (prefers-reduced-motion: reduce) { .fmt--extracto .cap__title em { animation: none !important; } }
+@media (max-width: 650px) { .edc-fig figcaption, .fmt--extracto .hoja-edc__nota { font-size: 12.5px; } }
+.fmt--extracto .fmat--silueta.fmat--izquierda figcaption { text-align: left; right: 28%; } .fmt--extracto .fmat--silueta.fmat--derecha figcaption { text-align: right; left: 28%; }

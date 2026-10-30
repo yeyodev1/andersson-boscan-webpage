@@ -110,3 +110,45 @@ a.pod__play:hover { background: var(--acc); color: var(--bg); }
   .masthead b { font-size: 19px; line-height: 1.15; }
   .masthead span:last-child { text-align: left; }
 }
+
+/* ---------------------------------------------------------------- primera plana: la foto que no cabe en su recuadro
+   Impresa en semitono dentro del filete, con Boscán y La Moni recortados saliendo por arriba.
+   Una cinta azul y amarilla (la única tinta de color del diario) cruza la esquina. */
+@media (min-width: 1000px) {
+  .hero--diario .plana { grid-column: 1; grid-row: 5; }
+  .hero--diario .pod--hero { grid-row: 3 / span 3; }
+}
+.plana { position: relative; margin: 6px 0 0; }
+.plana__marco { position: relative; }
+.plana__foto, .plana__pop { display: block; width: 100%; height: auto; }
+.plana__foto { clip-path: inset(26% 0 0 0); filter: grayscale(1) contrast(1.25) brightness(1.04); animation: planaImprime 1.4s cubic-bezier(.7,0,.2,1) .4s both; }
+@keyframes planaImprime { from { clip-path: inset(26% 0 100% 0); } }
+.plana__trama { position: absolute; left: 0; right: 0; top: 26%; bottom: 0; pointer-events: none; border: 1px solid var(--fg); box-shadow: 0 0 0 5px var(--bg), 0 0 0 6px var(--fg);
+  background-image: radial-gradient(rgba(20,22,26,.55) 32%, transparent 34%); background-size: 4px 4px; mix-blend-mode: multiply; opacity: .35; animation: planaTrama 1.4s cubic-bezier(.7,0,.2,1) .4s both; }
+@keyframes planaTrama { from { clip-path: inset(0 0 100% 0); } }
+.plana__pop { position: absolute; inset: 0; filter: grayscale(1) contrast(1.25) brightness(1.04) drop-shadow(0 -2px 0 var(--bg)) drop-shadow(0 10px 14px rgba(20,22,26,.25));
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 9%); mask-image: linear-gradient(180deg, transparent 0, #000 9%);
+  animation: planaSale 1s var(--ease-out) 1.7s both; }
+@keyframes planaSale { from { opacity: 0; transform: translateY(9%); clip-path: inset(26% 0 0 0); } to { clip-path: inset(0 0 0 0); } }
+.plana__cinta { position: absolute; right: -14px; top: calc(26% + 10px); width: 120px; height: 18px; display: grid; transform: rotate(38deg) translateX(30px); transform-origin: left top; z-index: 2; animation: planaCinta .5s var(--ease-out) 2.5s both; }
+.plana__cinta i { display: block; } .plana__cinta i:first-child { background: var(--acc); } .plana__cinta i:last-child { background: var(--acc-2); }
+@keyframes planaCinta { from { opacity: 0; transform: rotate(38deg) translateX(80px); } }
+.plana figcaption { margin-top: 12px; padding-top: 8px; border-top: 1px solid var(--line-x); font-family: var(--f-body); font-size: 14px; line-height: 1.45; color: var(--fg); }
+.plana figcaption b { font-family: var(--f-display); font-style: italic; }
+.plana figcaption small { display: block; margin-top: 3px; font-family: var(--f-label); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--mute); }
+.hero--diario .hero__art { display: none; }
+
+/* ---------------------------------------------------------------- dentro del texto: siluetas en tinta de periódico */
+.fmt--diario .fmat--silueta img { filter: grayscale(.35) contrast(1.08) drop-shadow(0 14px 16px rgba(20,22,26,.28)); }
+.fmt--diario .fmat--silueta::after { content: ""; position: absolute; left: 10%; right: 10%; bottom: 0; height: 6px; background: linear-gradient(90deg, var(--acc) 50%, var(--acc-2) 50%); z-index: -1; transform: scaleX(0); transform-origin: left; transition: transform .9s var(--ease-out) .3s; }
+.fmt--diario .fmat--silueta.in::after { transform: scaleX(1); }
+.fmt--diario .fmat--silueta:has(img[src$="lviv-silueta.webp"]) { shape-outside: url(../../media/ucrania/lviv-silueta-forma.png); }
+.fmt--diario .fmat--silueta:has(img[src$="campo-silueta.webp"]) { shape-outside: url(../../media/ucrania/campo-silueta-forma.png); }
+@supports (animation-timeline: view()) {
+  .fmt--diario .fmat--silueta img { animation: diaParallax linear both; animation-timeline: view(); animation-range: cover; }
+  @keyframes diaParallax { from { transform: translateY(10px); } to { transform: translateY(-10px); } }
+}
+@media (prefers-reduced-motion: reduce) {
+  .plana__foto, .plana__trama, .plana__pop, .plana__cinta, .fmt--diario .fmat--silueta img { animation: none; }
+  .fmt--diario .fmat--silueta::after { transition: none; transform: scaleX(1); }
+}

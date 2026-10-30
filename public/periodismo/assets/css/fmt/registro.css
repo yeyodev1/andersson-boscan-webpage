@@ -206,3 +206,42 @@
 .fmt--registro .ffuentes a { text-decoration-color: var(--acc-2); }
 .fmt--registro .topbar { border-bottom: 3px solid var(--carton-2); }
 .fmt--registro .footer { background: var(--fg); color: #EDEAE0; border-top: 8px solid var(--carton); }
+
+/* ================================================================
+   Portada 2: la foto del beneficiario final grapada al cartón, el
+   sello verde que cae encima y la caja que aterriza en la paleta
+   ================================================================ */
+.hero--registro .caja { animation: reg-aterriza 1s cubic-bezier(.3,1.4,.5,1) .15s both; }
+@keyframes reg-aterriza { 0% { opacity: 0; transform: translateY(-80px) rotate(-3deg); } 70% { opacity: 1; } }
+.caja__fila { display: grid; grid-template-columns: minmax(0, 1fr) clamp(110px, 11vw, 140px); gap: 18px; align-items: start; }
+.caja__fila .caja__campos { grid-template-columns: minmax(0, 1fr); margin-bottom: 14px; }
+.caja__foto { position: relative; margin: 10px 0 14px; padding: 6px 6px 8px; background: #F2EFE6; transform: rotate(3.5deg);
+  box-shadow: 0 1px 1px rgba(0,0,0,.2), 0 14px 22px -12px rgba(27,29,23,.55); animation: reg-foto .7s var(--ease-out) 1s both; }
+@keyframes reg-foto { from { opacity: 0; transform: translate(20px, -24px) rotate(12deg); } }
+.caja__print { display: block; aspect-ratio: 4 / 4.6; overflow: hidden; background: linear-gradient(180deg, #C9CBC4, #9EA39A); }
+.caja__print img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 18%; filter: grayscale(1) contrast(1.12); mix-blend-mode: multiply; }
+.caja__grapa { position: absolute; z-index: 2; top: -5px; left: 50%; width: 38px; height: 6px; margin-left: -19px; border: 2px solid #8A8C86; border-bottom: 0; }
+.caja__sellofoto { position: absolute; z-index: 3; left: -18%; bottom: 26%; padding: 4px 7px 3px; border: 2.5px solid var(--acc); color: var(--acc);
+  font-family: var(--f-label); font-weight: 700; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; line-height: 1;
+  background: rgba(242,239,230,.25); mix-blend-mode: multiply; transform: rotate(-12deg); opacity: 0; animation: reg-sella .45s var(--ease-out) 2.2s forwards; }
+@keyframes reg-sella { 0% { opacity: 0; transform: rotate(-12deg) scale(2.2); } 100% { opacity: .92; transform: rotate(-12deg) scale(1); } }
+.caja__foto figcaption { margin-top: 5px; font-family: var(--f-mono); font-size: 9.5px; letter-spacing: .04em; line-height: 1.25; color: #4A4B40; }
+@media (max-width: 700px) { .caja__foto figcaption { font-size: 12.5px; } .caja__fila { grid-template-columns: minmax(0, 1fr) 112px; } .caja__sellofoto { left: -30%; } }
+/* silueta del texto y movimiento al bajar */
+@supports (animation-timeline: view()) {
+  .fmt--registro .fmat--silueta img { animation: reg-par linear both; animation-timeline: view(); animation-range: cover; }
+  @keyframes reg-par { from { transform: translateY(26px); } to { transform: translateY(-26px); } }
+  .fmt--registro .cajita { animation: reg-apila linear both; animation-timeline: view(); animation-range: entry 0% cover 28%; }
+  @keyframes reg-apila { from { opacity: .1; transform: translateY(-36px) rotate(-2deg); } }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero--registro .caja, .caja__foto, .fmt--registro .fmat--silueta img, .fmt--registro .cajita { animation: none !important; }
+  .caja__sellofoto { animation: none; opacity: .92; }
+}
+@media (max-width: 700px) { .fmt--registro .cajita__giro { font-size: 12.5px; } }
+.caja__fila { grid-template-columns: minmax(0, 1fr) clamp(130px, 14vw, 178px); }
+.caja__fila .caja__campos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.caja__foto { margin-top: -6px; }
+.caja__sellofoto { left: -16%; bottom: 50px; font-size: 12px; }
+.caja__print img { object-position: 50% 10%; }
+@media (max-width: 700px) { .caja__fila .caja__campos { grid-template-columns: minmax(0, 1fr); } .caja__fila { grid-template-columns: minmax(0, 1fr) 120px; } .caja__sellofoto { font-size: 10.5px; left: -24%; } }

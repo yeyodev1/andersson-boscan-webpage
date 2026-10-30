@@ -278,3 +278,34 @@
 /* El rótulo de las tarjetas de video vive sobre negro: el marrón de cinta no se lee ahí */
 .fmt--cinta .vid__rol { color: #D9AE84; }
 .fmt--cinta .vid__meta { border-top-color: var(--acc); }
+
+/* ================================================================
+   Portada 2: el magnetófono sobre la mesa y, detrás, la foto del
+   mural de Javier, Paúl y Efraín pegada con cinta en la pared
+   ================================================================ */
+.cin-mesa { position: relative; display: grid; padding-top: clamp(120px, 14vw, 190px); }
+.cin-mesa .deck { position: relative; z-index: 2; }
+.cin-mural { position: absolute; z-index: 1; top: 0; left: 4%; right: 6%; margin: 0; padding: 10px 10px 12px; background: #EDE4CF;
+  transform: rotate(-2.4deg); box-shadow: 0 2px 3px rgba(0,0,0,.3), 0 30px 50px -26px rgba(0,0,0,.8); animation: cin-pega 1.1s var(--ease-out) .2s both; }
+@keyframes cin-pega { from { opacity: 0; transform: translateY(-40px) rotate(-7deg); } }
+.cin-mural__foto { display: block; aspect-ratio: 684 / 448; background-size: cover; background-position: 50% 40%;
+  filter: sepia(.55) saturate(.8) contrast(1.05) brightness(.92); animation: cin-lento 22s ease-in-out 1s infinite alternate; }
+@keyframes cin-lento { to { background-position: 50% 60%; } }
+.cin-mural__cinta { position: absolute; width: 92px; height: 26px; background: linear-gradient(180deg, rgba(233,222,190,.88), rgba(214,200,163,.8)); box-shadow: 0 1px 2px rgba(0,0,0,.2); }
+.cin-mural__cinta--a { left: -22px; top: -8px; transform: rotate(-24deg); }
+.cin-mural__cinta--b { right: -22px; top: -6px; transform: rotate(22deg); }
+.cin-mural figcaption { margin-top: 8px; font-family: var(--f-label, 'Syne'); font-size: 12.5px; letter-spacing: .04em; color: #4A4436; }
+@media (max-width: 999px) { .cin-mesa { padding-top: 46vw; } .cin-mural { left: 2%; right: 2%; } }
+@media (max-width: 600px) { .cin-mesa { padding-top: 52vw; } }
+/* fotos del texto: un leve desplazamiento al bajar */
+@supports (animation-timeline: view()) {
+  .fmt--cinta .fmat .fmat__marco { animation: cin-par linear both; animation-timeline: view(); animation-range: cover; }
+  @keyframes cin-par { from { transform: translateY(18px) rotate(var(--giro, 0deg)); } to { transform: translateY(-18px) rotate(var(--giro, 0deg)); } }
+}
+@media (prefers-reduced-motion: reduce) { .cin-mural, .cin-mural__foto, .fmt--cinta .fmat .fmat__marco { animation: none !important; } }
+@media (max-width: 700px) { .fmt--cinta .tape__meta { font-size: 12.5px; } }
+@media (min-width: 1000px) { .cin-mesa { padding-top: 0; } .cin-mural { position: relative; left: auto; right: auto; width: 86%; justify-self: center; margin-bottom: -38px; } .hero--cinta .hero__grid--cinta { align-items: center; } }
+@media (max-width: 999px) { .cin-mesa { padding-top: 0; } .cin-mural { position: relative; left: auto; right: auto; width: 88%; justify-self: center; margin-bottom: -26px; } }
+.cin-mural figcaption { position: relative; z-index: 3; }
+.cin-mural { margin-bottom: -14px !important; padding-bottom: 30px; }
+.cin-mural figcaption { margin-top: 6px; }

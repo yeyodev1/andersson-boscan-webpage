@@ -515,6 +515,10 @@ li[data-c="sin-sentencia"] .libro__tag, li[data-c="juicio-pendiente"] .libro__ta
 
 /* Quiénes somos: silueta flotando y texto alrededor */
 .quienes__grid { grid-template-columns: 1fr 1fr; gap: 54px 64px; }
+/* Esta regla va después de la del bloque de arriba y la gana, así que el paso a
+   una columna hay que repetirlo aquí: sin esto la ficha de la Moni se sale 72 px
+   de la pantalla del teléfono y queda cortada. */
+@media (max-width: 980px) { .quienes__grid { grid-template-columns: 1fr; gap: 40px; } }
 .bio { display: block; padding: 34px 34px 30px; }
 .bio::before { display: none; }
 .bio__fig { float: right; width: clamp(120px, 13vw, 190px); height: auto; max-height: none; margin: 0 0 12px 20px;
@@ -612,3 +616,22 @@ li[data-c="sin-sentencia"] .libro__tag, li[data-c="juicio-pendiente"] .libro__ta
 @media (max-width: 650px) {
   .pie a, .obj__abrir, .hilo__lista a, .libro__lista a { display: inline-block; padding-block: 8px; }
 }
+
+/* ---------------------------------------------------------------- el protagonista se sale de la tarjeta
+   Un recorte de la persona central del caso asoma por arriba del objeto. Al pasar el cursor sube un poco
+   más, y al hacer scroll entra con un leve retraso respecto de la tarjeta. */
+.obj__figura { position: absolute; left: -18px; top: -70px; width: 46%; max-width: 220px; height: auto; z-index: 6; pointer-events: none;
+  filter: drop-shadow(0 14px 14px rgba(20,18,14,.45)); transform: translateY(6px) rotate(calc(var(--r, 0deg) * -2)); transition: transform .6s var(--ease-out);
+  -webkit-mask-image: linear-gradient(180deg, #000 70%, transparent 100%); mask-image: linear-gradient(180deg, #000 70%, transparent 100%); }
+.obj:hover .obj__figura { transform: translateY(-10px) scale(1.05); }
+.obj:has(.obj__figura) { overflow: visible !important; }
+@supports (animation-timeline: view()) {
+  .mesa__grid .obj { animation: objEntra linear both; animation-timeline: view(); animation-range: entry 0% entry 70%; }
+  @keyframes objEntra { from { opacity: 0; translate: 0 50px; scale: .96; } }
+  .obj__figura { animation: figEntra linear both; animation-timeline: view(); animation-range: entry 10% cover 40%; }
+  @keyframes figEntra { from { translate: 0 40px; opacity: 0; } }
+}
+@media (max-width: 560px) { .obj__figura { width: 38%; top: -44px; left: 2px; } }
+@media (prefers-reduced-motion: reduce) { .mesa__grid .obj, .obj__figura { animation: none; } }
+/* en el teléfono ningún texto de lectura baja de 12 px */
+@media (max-width: 650px) { .obj__sub, .mesa__leyenda, .tips__nota, .footer__premios, .mesa li, .libro li p { font-size: 12px !important; } }

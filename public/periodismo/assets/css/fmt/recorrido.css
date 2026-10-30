@@ -277,3 +277,40 @@
 .fmt--recorrido .creditos { border-top: 1px solid var(--line-x); }
 @media (max-width: 640px) { .fmt--recorrido .fdato { grid-template-columns: 1fr; } .fmt--recorrido .fdato span { margin-top: 6px; } }
 @media (prefers-reduced-motion: reduce) { .plano__rec i, .paso--cam .paso__ts::before, .cinta__n::before { animation: none; } }
+
+/* ---------------------------------------------------------------- portada v2: la cámara de la escalinata
+   Una tesela de videovigilancia con el fotograma real que mostró el programa se sale por la esquina del monitor;
+   su recuadro de seguimiento parpadea. En la barra, un reloj corre los ochenta minutos del trayecto. */
+.plano { overflow: visible; }
+.rc-cam { position: absolute; z-index: 4; right: -34px; top: 66px; width: min(50%, 300px); margin: 0; background: #07060A; border: 1px solid rgba(231,166,63,.55);
+  box-shadow: 0 24px 40px -18px rgba(0,0,0,.9), 0 0 0 4px rgba(24,21,32,.9); transform: rotate(2.2deg); animation: rcCam .9s var(--ease-out) 2.2s both; }
+@keyframes rcCam { 0% { opacity: 0; transform: rotate(2.2deg) scale(.92); filter: brightness(3); } 30% { opacity: 1; filter: brightness(2) contrast(2); } 100% { filter: none; } }
+.rc-cam__bar { display: flex; align-items: center; gap: 7px; padding: 5px 8px; font-family: var(--f-label); font-size: 10px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: #E9BBB0; background: rgba(0,0,0,.6); }
+.rc-cam__bar i { width: 7px; height: 7px; border-radius: 50%; background: var(--rec, #D9503F); animation: recPulso 2s steps(1) infinite; }
+.rc-cam img { display: block; width: 100%; height: auto; filter: grayscale(.5) contrast(1.1) brightness(.92) sepia(.2); }
+.rc-cam::after { content: ""; position: absolute; inset: 24px 0 0; pointer-events: none; background: repeating-linear-gradient(0deg, transparent 0 2px, rgba(0,0,0,.22) 2px 3px); animation: rcRuido .18s steps(2) infinite; }
+@keyframes rcRuido { 50% { background-position: 0 1px; } }
+.rc-cam__caja { position: absolute; left: 83%; top: 30%; width: 9%; height: 26%; border: 1.5px solid #FF4A3D; box-shadow: 0 0 8px rgba(255,74,61,.8); animation: rcCaja 1.1s steps(1) infinite; }
+@keyframes rcCaja { 50% { opacity: .2; } }
+.rc-cam figcaption { padding: 6px 8px 7px; font-family: var(--f-label); font-size: 11px; line-height: 1.35; color: #CFC8D8; background: #0E0C13; }
+@property --rcmin { syntax: '<integer>'; inherits: false; initial-value: 0; }
+.rc-reloj { font-variant-numeric: tabular-nums; color: var(--acc); font-weight: 700; --rcmin: 0; animation: rcReloj 3.4s steps(80, end) 1s forwards; counter-reset: rcm var(--rcmin); }
+.rc-reloj::after { content: "+" counter(rcm) " min"; }
+@keyframes rcReloj { to { --rcmin: var(--fin); } }
+@media (max-width: 999px) { .rc-cam { right: 10px; top: 58px; width: min(46%, 260px); } }
+@media (max-width: 560px) { .rc-cam { position: relative; right: auto; top: auto; width: auto; margin: 10px 12px 0; transform: none; } .rc-cam figcaption { font-size: 12.5px; } }
+@media (prefers-reduced-motion: reduce) { .rc-cam, .rc-cam::after, .rc-cam__caja, .rc-reloj { animation: none !important; } .rc-reloj { --rcmin: var(--fin); } }
+
+/* el texto: siluetas bajo luz de sodio */
+.fmt--recorrido .fmat--silueta { shape-margin: 20px; }
+.fmt--recorrido .fmat--silueta img { filter: drop-shadow(0 18px 24px rgba(0,0,0,.6)) drop-shadow(0 0 30px rgba(231,166,63,.12)); }
+.fmt--recorrido .fmat--silueta figcaption { font-family: var(--f-label); font-size: 11px; letter-spacing: .04em; color: #E7C38A; }
+.fmt--recorrido .fmat--silueta.fmat--izquierda figcaption { text-align: left; right: 28%; } .fmt--recorrido .fmat--silueta.fmat--derecha figcaption { text-align: right; left: 28%; }
+@media (max-width: 650px) { .fmt--recorrido .fmat--silueta figcaption { font-size: 12.5px; } }
+@supports (animation-timeline: view()) {
+  .fmt--recorrido .cap__head { animation: sodio linear both; animation-timeline: view(); animation-range: entry 0% cover 30%; }
+  @keyframes sodio { from { filter: brightness(.35); } to { filter: none; } }
+}
+@media (prefers-reduced-motion: reduce) { .fmt--recorrido .cap__head { animation: none !important; } }
+.rc-cam__caja { display: none; }
+@media (max-width: 650px) { .fmt--recorrido .plano__head { font-size: 12.5px; letter-spacing: .08em; } }
