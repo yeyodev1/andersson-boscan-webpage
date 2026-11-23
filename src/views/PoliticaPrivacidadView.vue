@@ -30,7 +30,9 @@
         </p>
         <p class="description">
           Los permisos de acceso se guardan cifrados en nuestros servidores privados y los videos se
-          conservan en almacenamiento privado solo para publicarlos. Puede pedir que se borren escribiendo a
+          conservan en almacenamiento privado solo para publicarlos. En su navegador la herramienta solo
+          guarda la clave del equipo, para no pedírsela cada vez; no usa cookies de seguimiento ni guarda
+          otros datos en su dispositivo. Puede pedir que se borren escribiendo a
           <a href="mailto:anderssonboscan@gmail.com">anderssonboscan@gmail.com</a>.
         </p>
         <p class="description">
