@@ -14,6 +14,14 @@
         <p class="description">
           El uso no autorizado, reproducción o distribución de cualquier contenido está estrictamente prohibido.
         </p>
+        <p class="description">
+          Nuestra herramienta interna "Andersson Publicador" usa los Servicios de la API de YouTube para
+          publicar en nuestros propios canales. Al usarla, usted acepta los
+          <a href="https://www.youtube.com/t/terms" target="_blank" rel="noopener">Términos de Servicio de YouTube</a>
+          y la <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Política de Privacidad de Google</a>.
+          El tratamiento de datos se explica en nuestra
+          <a href="/politica-de-privacidad">Política de Privacidad</a>.
+        </p>
       </div>
     </div>
   </main>
@@ -64,6 +72,11 @@
   strong {
     color: var(--color-text-primary, #ffffff);
     font-weight: 600;
+  }
+
+  a {
+    color: var(--color-text-primary, #ffffff);
+    text-decoration: underline;
   }
 }
 </style>
