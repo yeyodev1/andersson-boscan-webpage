@@ -1,7 +1,7 @@
 // POST /api/tiktok/token  { code, redirect_uri }
 // Intercambia el code del OAuth de TikTok y guarda la cuenta (con refresh_token).
 // Solo recibe el code: el client_secret vive en el backend, nunca en el navegador.
-import { exchangeCode, parseBody, type VReq, type VRes } from './_lib'
+import { exchangeCode, parseBody, type VReq, type VRes } from './_lib.js'
 
 export default async function handler(req: VReq, res: VRes) {
   res.setHeader('Cache-Control', 'no-store')

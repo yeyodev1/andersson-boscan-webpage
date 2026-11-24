@@ -1,7 +1,7 @@
 // GET /api/tiktok/accounts  → cuentas vinculadas (SOLO metadata, nunca el token).
 // Abierto a propósito: no revela secretos. El token para automatizar sale de
 // access-token.ts, que exige TIKTOK_API_SECRET.
-import { tiktokColl, type VReq, type VRes } from './_lib'
+import { tiktokColl, type VReq, type VRes } from './_lib.js'
 
 export default async function handler(req: VReq, res: VRes) {
   res.setHeader('Cache-Control', 'no-store')

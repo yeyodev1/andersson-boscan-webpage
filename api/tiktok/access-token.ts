@@ -3,7 +3,7 @@
 //
 // ESTE es el endpoint que usa la automatización: devuelve un access_token
 // siempre fresco (lo refresca solo si venció). Sin open_id, usa la única cuenta.
-import { authorized, freshAccessToken, tiktokColl, type VReq, type VRes } from './_lib'
+import { authorized, freshAccessToken, tiktokColl, type VReq, type VRes } from './_lib.js'
 
 export default async function handler(req: VReq, res: VRes) {
   res.setHeader('Cache-Control', 'no-store')

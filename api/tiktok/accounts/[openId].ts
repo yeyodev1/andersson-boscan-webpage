@@ -1,6 +1,6 @@
 // DELETE /api/tiktok/accounts/:openId  → desvincula una cuenta del panel.
 // Solo borra la fila local (no revoca en TikTok); volver a vincular es inmediato.
-import { tiktokColl, type VReq, type VRes } from '../_lib'
+import { tiktokColl, type VReq, type VRes } from '../_lib.js'
 
 export default async function handler(req: VReq, res: VRes) {
   res.setHeader('Cache-Control', 'no-store')
