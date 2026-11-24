@@ -6,7 +6,9 @@ export interface TiktokAccount {
   avatar_url?: string;
   display_name?: string;
   username?: string;
-  access_token: string;
+  connected?: boolean;
+  access_expires_at?: number;
+  refresh_expires_at?: number;
 }
 
 class TiktokService extends APIBase {
@@ -15,10 +17,9 @@ class TiktokService extends APIBase {
     return response.data.data
   }
 
-  public async exchangeToken(code: string, clientKey: string, clientSecret: string, redirectUri: string): Promise<any> {
+  // Solo manda el code: el client_secret vive en el backend (el repo es público).
+  public async exchangeToken(code: string, redirectUri: string): Promise<any> {
     const response = await this.post<any>('tiktok/token', {
-      client_key: clientKey,
-      client_secret: clientSecret,
       code,
       redirect_uri: redirectUri
     })

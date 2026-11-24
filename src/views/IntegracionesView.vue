@@ -7,17 +7,14 @@ import { instagramService, type InstagramAccount } from '../services/InstagramSe
 const route = useRoute()
 const router = useRouter()
 
-// Credenciales de la app de TikTok: fuera del repo. Se definen en el .env
-// local y en las variables de entorno del hosting.
+// Client key de la app de TikTok: es público por diseño (va en la URL de
+// autorización). El client_secret NO vive aquí: lo guarda el backend.
 const CLIENT_KEY = (import.meta.env.VITE_TIKTOK_CLIENT_KEY as string | undefined) ?? ''
-const CLIENT_SECRET = (import.meta.env.VITE_TIKTOK_CLIENT_SECRET as string | undefined) ?? ''
 
 const loading = ref(false)
 const loadingAccounts = ref(true) // Inicialmente en true para cargar en mount
 const errorMsg = ref<string | null>(null)
-const accessToken = ref<string | null>(null)
 const showLogoutModal = ref(false)
-const rawResponse = ref<any>(null)
 const savedAccounts = ref<any[]>([])
 
 // Estado para Instagram
@@ -137,14 +134,12 @@ const exchangeCodeForToken = async (code: string) => {
   
   try {
     const redirectUri = `${window.location.origin}/integraciones`
-    
-    const data = await tiktokService.exchangeToken(code, CLIENT_KEY, CLIENT_SECRET, redirectUri)
-    rawResponse.value = data
+
+    const data = await tiktokService.exchangeToken(code, redirectUri)
 
     if (data.error) {
       errorMsg.value = data.error_description || data.error
     } else {
-      accessToken.value = data.access_token
       await loadSavedAccounts() // Recargar cuentas después de conectar
       showToastNotification('✅ Cuenta conectada con éxito')
     }
@@ -345,9 +340,9 @@ onMounted(() => {
                     </div>
                   </div>
                   <div class="account-actions">
-                    <button @click="copyToClipboard(account.access_token)" class="copy-btn copy-btn-primary" title="Copiar Token">
-                      <i class="fa-regular fa-copy"></i> <span>Copiar Token</span>
-                    </button>
+                    <span class="token-pill" title="El token se renueva solo en el servidor; la automatización lo usa de forma segura.">
+                      <i class="fa-solid fa-shield-halved"></i> <span>Token automático</span>
+                    </span>
                     <button @click="confirmDeleteAccount(account.open_id)" class="delete-btn" title="Eliminar cuenta">
                       <i class="fa-solid fa-trash"></i>
                     </button>
@@ -948,6 +943,25 @@ onMounted(() => {
         }
       }
     }
+  }
+}
+
+.token-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+  background-color: rgba(34, 197, 94, 0.12);
+  color: #22c55e;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  border-radius: 8px;
+  padding: 0.6rem 1rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+
+  @media (max-width: 480px) {
+    padding: 0.6rem;
+    span { display: none; }
   }
 }
 
